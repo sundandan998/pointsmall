@@ -2,25 +2,23 @@
   <div class="index">
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <div class="index-body">
-        <!-- <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
-          :error.sync="error" error-text="请求失败，点击重新加载"> -->
-        <div class="line">
+        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+          :error.sync="error" error-text="请求失败，点击重新加载">
           <router-link to="product">
-            <div class="index-title">
+            <div class="index-title" v-for="item in goodsData">
               <div class="index-img fl">
-                <img src="../../assets/images/1.jpg" alt="">
+                <img :src="item.default_image" alt="">
               </div>
               <div class="index-text">
-                <p>生物质石墨烯乳胶健康枕</p>
-                <p>120 积分</p>
+                <p>{{item.name}}</p>
+                <p>{{item.price}} 积分</p>
               </div>
               <div class="index-right fr">
                 <img src="../../assets/images/r.png" alt="">
               </div>
             </div>
           </router-link>
-        </div>
-        <!-- </van-list> -->
+        </van-list>
       </div>
     </van-pull-refresh>
     <!-- 底部tabber -->
@@ -32,16 +30,13 @@
 <script>
   import Tabber from '../../assets/tabber/Tabber.vue'
   // 接口请求
-  import api from '@/api/goods/Goods.js'
+  import api from '@/api/user/User.js'
   export default {
     data() {
       return {
         selected: 'index',
         message: 'index',
-        readonly: true,
-        show: false,
-        submitBtnDisabled: true,
-        dataList: [],
+        goodsData: [],
         info: {
           'id_card': null
         },
@@ -60,20 +55,12 @@
     },
     created() {
       document.title = '首页'
-      // this.information()
       this.openId()
-      this.goods()
     },
     components: {
       Tabber,
     },
     methods: {
-      // 商品列表
-      goods(){
-        api.goods().then(res=>{
-          console.log(res)
-        }).catch(err=>{})
-      },
       openId() {
         var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
         var r = window.location.href.split('?')
@@ -94,8 +81,6 @@
               this.information()
             }
           }).catch(err => {
-            console.log(err)
-            // debugger
             if (err.code === 4003) {
               window.sessionStorage.setItem('access_token', err.access_token)
             }
@@ -107,7 +92,7 @@
         setTimeout(() => {
           api.goods({ 'page': this.pageNum }).then(res => {
             if (res.code == 0) {
-              this.dataList.push.apply(this.dataList, res.data)
+              this.goodsData.push.apply(this.goodsData, res.data)
               this.loading = false
               if (res.has_next == true) {
                 // this.loading = true
@@ -135,14 +120,10 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-
-  .line {
-    border-bottom: 2px solid #f2f2f2;
-  }
-
   .index-title {
     height: 90px;
-    margin: 10px 10px 0 15px;
+    padding: 10px 10px 0 15px;
+    border-bottom: 2px solid #f2f2f2;
 
     .index-img img {
       height: 80px;

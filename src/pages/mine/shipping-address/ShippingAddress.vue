@@ -1,43 +1,75 @@
 <template>
   <div class="address">
-    <div class="address-list">
-      <!-- <van-address-list :list="list" /> -->
-    </div>
-    <div>
-     
-    </div>
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+      :error.sync="error" error-text="请求失败，点击重新加载">
+      <div class="address-list" v-for="item in addressData">
+        <div class="address-content fl">
+          <p>张三 135656565</p>
+          <p>河北省xxx</p>
+        </div>
+        <div class="line"></div>
+        <div class="address-edit fr">
+          <img src="../../../assets/images/edit.svg" alt="">
+        </div>
+      </div>
+    </van-list>
   </div>
 </template>
 <script>
+  import api from '@/api/user/User.js'
   export default {
     data() {
       return {
-        list: [
-          {
-            id: '1',
-            name: '张三',
-            tel: '13000000000',
-            address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
-          },
-          {
-            id: '2',
-            name: '李四',
-            tel: '1310000000',
-            address: '浙江省杭州市拱墅区莫干山路 50 号'
-          }
-        ],
+        addressData: [],
+        // 上拉加载
+        loading: false,
+        finished: false,
+        error: false,
+        pageNum: 1,
       }
     },
     created() {
       document.title = '收货地址'
+    },
+    methods: {
+      // 上拉加载
+      onLoad() {
+        setTimeout(() => {
+          api.address({ 'page': this.pageNum }).then(res => {
+            if (res.code == 0) {
+              this.addressData.push.apply(this.addressData, res.data)
+              this.loading = false
+              if (res.has_next == true) {
+                // this.loading = true
+                this.pageNum++
+              }
+              if (res.has_next == false) {
+                this.finished = true
+                this.loading = false
+              }
+            }
+          }).catch(err => {
+            this.error = true
+          })
+        }, 100)
+      },
     }
   }
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-  .van-button--danger {
-    background-color: #09BB07;
-    border: 1px solid #09BB07;
+  .address-list {
+    height: 50px;
+    padding: 10px 15px 5px 15px;
+    border-bottom: 2px solid #f2f2f2;
+
+    .line {
+      width: 1px;
+      height: 30px;
+      position: absolute;
+      right: 60px;
+      background-color: #ccc;
+    }
   }
 </style>
