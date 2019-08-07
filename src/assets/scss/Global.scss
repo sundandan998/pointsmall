@@ -1,0 +1,353 @@
+body {
+  background-color: #fff;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+li{
+  list-style: none;
+}
+
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}
+.mint-field {
+  margin-bottom: 8px;
+}
+.mint-cell {
+  margin-bottom: 10px;
+}
+input{
+  border:none;
+  width: 50%;
+}
+.mint-button--default {
+  // background-color: #09bb07 !important;
+  color: #fff !important;
+  // width: 30%;
+}
+.mint-cell-wrapper {
+  background-image: none !important;
+}
+#disbtn {
+  background-color: #ccc;
+}
+.mint-cell:last-child{
+  background-image:none !important;
+}
+.mint-cell-value span{
+  color: #333;
+}
+// 修改手机号页面的toast显示在遮罩层上方
+.zZindex{
+  z-index: 3000 !important;
+}
+// 去掉预约时间的灰色背景
+.mint-field-core{
+  background-color: #fff;
+}
+input.mint-field-core {
+  width: 110px;
+}
+.null-data{
+  text-align: center;
+  margin: 200px auto;
+  font-size: 20px;
+  color: #999;
+}
+// 首页
+
+// 我的
+.health-score {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  display: block;
+  text-align: center;
+  margin: 20px 0 20px 0;
+  padding: 10px 0 10px 0;
+  a {
+    display: block;
+    color: red;
+    font-size: 0.78rem;
+    margin-top: 10px;
+  }
+}
+.health-score-btn button{
+  // background-color: #09bb07 !important;
+   width: 35%;
+  }
+.health-score-bot {
+  height: 170px;
+  background-color: #fff;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  width: 95%;
+  margin: 10px auto;
+  border-radius: 5px;
+  span{
+    display: inline-block;
+    margin-top: 20px;
+    font-size:12px;
+  }
+  p{
+    margin-top: 10px;
+    font-size:22px;
+  }
+  a {
+    margin-bottom: -10px;
+  }
+  b{
+    font-weight: 400;
+    font-size: 14px;
+    height: 20px;
+    color: #82BFF4;
+    margin-right: 15px;
+    margin-top: 10px;
+  }
+}
+.health-score-details {
+  width: 100%;
+  height: 30px;
+}
+.health-score-btn {
+  margin-left: 10px;
+  margin-top: 20px;
+  .turn-out {
+    background-color: #09bb07;
+  }
+  .turn-into{
+    border: 1px solid #09bb07 !important;
+    color:#09bb07 !important;
+    background-color: #fff;
+  }
+}
+.health-information {
+  margin-top: 18px;
+}
+// 预约信息
+.reservation-title{
+  .mint-cell-value{
+    display: block;
+    width: 50%;
+    position: absolute;
+    right: 3px;
+  }
+}
+.reservation-btn {
+    width: 96%;
+    position: fixed;
+    bottom: 0;
+    margin-left: 9px;
+  .sure {  
+    background-color: #09bb07 !important;
+  }
+  .cancel{
+    margin-top: 10px;
+    color:#fff;
+    background-color: #fff;
+    color: #09bb07 !important;
+    border: 1px solid #09bb07 !important;
+  }
+}
+.reservation-body {
+  margin-bottom: 10px;
+  .mint-cell {
+  margin-bottom: 1px;
+  }
+}
+.reservation-body-price{
+  margin-bottom: 10px;
+  .mint-cell {
+  margin-bottom: 1px;
+  }
+}
+// 转出
+.transfer-out{
+  height: 100%;
+}
+.transfer-out-body-cell {
+  a {
+    margin-bottom: -16px !important;
+  }
+}
+.transfer-out-body-field {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  .mint-cell{
+    margin-bottom: 1px;
+  }
+}
+.transfer-out-button {
+  width: 96%;
+  position: fixed;
+  bottom: 0;
+  margin-left: 9px;
+.sure {  
+  background-color: #09bb07 !important;
+}
+.cancel{
+  margin-top: 10px;
+  color:#fff;
+  background-color: #fff;
+  color: #09bb07 !important;
+  border: 1px solid #09bb07 !important;
+}
+}
+.van-number-keyboard.van-number-keyboard--default {
+  z-index: 9999 !important;
+}
+// 个人信息
+.information-body-top {
+  a {
+    margin-bottom: -10px !important;
+  }
+}
+.information-body-bot {
+  margin-top: 20px;
+  margin-bottom: 10px;  
+}
+.information-body-pwd .mint-cell {
+   margin-bottom: 1px;
+   color: #333;
+}
+.mint-popup.mobile-modal{
+  height: 250px;
+}
+.mint-popup.modal-pwd{
+  height: 465px;
+  p{
+    margin:8px 0px 8px 18px;
+  }
+  b{
+    font-weight: 400;
+    display: block;
+    margin: 10px 0 0 15px;
+  }
+}
+.pwd-keyword.van-number-keyboard.van-number-keyboard--default{
+  z-index: 9999 !important;
+}
+// 我的
+.mint-popup.resevation-modal{
+  height: 210px;
+  span{
+    display: block;
+    margin: 15px auto;
+    text-align: center;
+  }
+  p{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  img{
+    margin: 10px 10px 0 0;
+  }
+}
+.my-appointment-body {
+  height: 100px;
+  a {
+    margin-bottom: -6px;
+  }
+  .cancel {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .order-list {
+    margin-bottom: 10px;
+  }
+  span {
+    color: #333;
+  }
+  button{
+    margin-top: -75px;
+    margin-right: 10px;
+  } 
+}
+span.integral {
+  margin-right: 50px;
+}
+// 遮罩层
+.mint-popup {
+  width: 80%;
+  border-radius: 5px;
+  height: 410px;
+  .mint-cell-wrapper {
+    border-bottom: 1px solid #f6f6f6;
+  }
+}
+.modal {
+  span {
+    text-align: center;
+    display: block;
+    margin: 20px 0 20px 0;
+  }
+  button {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #09bb07 !important;
+  }
+  img {
+    position: relative;
+    top: -45px;
+    right: 10px;
+  }
+}
+ul{
+  // margin: 0 auto;
+  display:inline;
+  // width: 100%;
+}
+// 预约详情
+.my-appointment-body-top {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  a {
+    width: 100%;
+  }
+  .mint-cell {
+    margin-bottom: 1px;
+  }
+}
+.my-appointment-body-phone{
+  margin-bottom: 15px;
+  .mint-cell {
+    margin-bottom: 1px;
+  }
+}
+// 明细  
+.details-list{
+  .mint-cell{
+    margin-bottom: 1px;
+    color:#333;
+  }
+}
+// 明细详情
+.details-list-detail-title {
+  height: 120px;
+  background-color: #fff;
+  margin-bottom: 3px;
+  text-align: center;
+  span{
+    margin-top: 30px;
+    margin:30px 0 10px 0;
+    display: inline-block;
+    font-size: 14px;
+  }
+  p{
+    font-size: 22px;
+  }
+}
+.details-list-detail-information{
+  .mint-cell{
+    margin-bottom: -1px;
+  }
+}
