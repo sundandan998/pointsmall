@@ -17,6 +17,16 @@
   </div>
 </template>
 <script>
+  export default {
+    data() {
+      return {
+
+      }
+    },
+    created() {
+      document.title = '明细详情'
+    },
+  }
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';

@@ -62,8 +62,38 @@ input.mint-field-core {
   font-size: 20px;
   color: #999;
 }
-// 首页
+// 按钮部分
+.van-sku-actions {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
 
+.van-button--warning {
+  color: #09BB07;
+  background-color: #fff;
+  border: 1px solid #09BB07;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.van-button--danger {
+  color: #fff;
+  background-color: #09BB07;
+  border: 1px solid #09BB07;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.van-sku-actions {
+  position: fixed;
+  bottom: 3px;
+  width: 100%;
+}
 // 我的
 .health-score {
   width: 100%;

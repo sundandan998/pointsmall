@@ -24,15 +24,15 @@
       <p><span>订单编号:</span><span class="fr">xxx</span></p>
       <p><span>交易时间:</span><span class="fr">xxx</span></p>
     </div>
-    <router-link to="myorder">
+    <!-- <router-link to="myorder">
       <div class="detail-button">
-        <!-- <mt-button size="large">返回</mt-button> -->
-        <goods-action-button
-        type="danger"
-        text="立即购买"
-      />
+        <mt-button size="large">返回</mt-button>
       </div>
-    </router-link>
+    </router-link> -->
+    <div class="van-sku-actions">
+      <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
+      <van-button square size="large" type="danger">确认收货</van-button>
+    </div>
   </div>
 </template>
 <script>
@@ -42,6 +42,14 @@
 
       }
     },
+
+    methods: {
+      cancel(){
+        this.$router.push({
+          name:'MyOrder'
+        })
+      }
+    },
     created() {
       document.title = '订单详情'
     }
@@ -49,8 +57,6 @@
 </script>
 <style lang="scss">
   @import "../../../assets/scss/Global.scss";
-
-  .detail {}
 
   .detail-address {
     border-bottom: 2px solid #f2f2f2;
@@ -73,7 +79,7 @@
   }
 
   .van-card__thumb {
-    height:40px;
+    height: 40px;
     width: 40px;
     margin-right: -5px;
   }

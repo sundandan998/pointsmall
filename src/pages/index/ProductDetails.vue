@@ -1,11 +1,9 @@
 <template>
-  <div>
-    <!-- <div class="button"> -->
-      <van-goods-action>
-        <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
-        <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
-      </van-goods-action>
-    <!-- </div> -->
+  <div class="product-detail">
+    <div class="van-sku-actions">
+      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
+      <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
+    </div>
   </div>
 </template>
 <script>
@@ -19,11 +17,15 @@
       document.title = '商品详情'
     },
     methods: {
-      onClickIcon() {
-        Toast('点击图标');
+      cancel() {
+        this.$router.push({
+          name: 'Index'
+        })
       },
-      onClickButton() {
-        Toast('点击按钮');
+      buy() {
+        this.$router.push({
+          name: 'Index'
+        })
       }
     }
   }

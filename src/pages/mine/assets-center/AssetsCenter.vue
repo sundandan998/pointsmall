@@ -28,6 +28,7 @@
   export default {
     data() {
       return {
+        BScroll:'',
         assetsData: [],
         // 上拉加载
         loading: false,
@@ -66,7 +67,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
   .assets-center-list {
     height: 72px;
     padding: 5px 10px 5px 15px;

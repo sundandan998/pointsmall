@@ -79,7 +79,7 @@ export default new Router({
     // 收货地址
     {
       path:'/address',
-      name:'address',
+      name:'Address',
       component: () => import('@/pages/mine/shipping-address/ShippingAddress')
     },
      // 新建地址
@@ -87,6 +87,12 @@ export default new Router({
       path:'/newaddress',
       name:'NewAddress',
       component: () => import('@/pages/mine/shipping-address/NewAddress')
+    },
+     // 地址详情
+     {
+      path:'/addressdetail',
+      name:'AddressDetail',
+      component: () => import('@/pages/mine/shipping-address/AddressDetail')
     },
     // 安全中心
     {

@@ -1,46 +1,31 @@
 <template>
   <div class="newaddress">
-    <div>
+    <div class="edit-address">
       <van-address-edit :area-list="areaList" show-delete show-set-default show-search-result
-        :search-result="searchResult" @change-detail="onChangeDetail" />
+         @change-detail="onChangeDetail" />
     </div>
+
     <!-- 按钮部分 -->
+    <mt-button size="large" class="save-address">保存</mt-button>
     <div class="van-sku-actions">
-      <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
-      <van-button square size="large" type="danger" @click="add">保存</van-button>
+      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
+      <van-button square size="large" type="danger">删除</van-button>
     </div>
   </div>
 </template>
 <script>
   import areaList from '@/assets/js/area'
-  import api from '@/api/user/User.js'
   export default {
     data() {
       return {
         areaList,
-        searchResult: [],
-        address:{
-          province:111,
-          city:222,
-          district:333,
-          address:'xx',
-          receiver:'xx',
-          mobile:'xxx'
-        }
+        searchResult: []
       }
     },
     created() {
-      document.title = '新建地址'
+      document.title = '地址详情'
     },
     methods: {
-      // 增加地址
-      add(){
-        api.addAddress(this.address).then(res=>{
-
-        }).catch(err=>{
-
-        })
-      },
       cancel() {
         this.$router.push({
           name: 'Address'
@@ -67,6 +52,18 @@
     width: 100%;
   }
 
+  .save-address {
+    position: fixed;
+    bottom: 50px;
+    border-radius: 25px;
+    background-color: #09BB07;
+    color: #fff;
+  }
+
+  .van-address-edit__buttons {
+    padding: 30px 15px;
+    display: none;
+  }
   .van-button--warning {
     color: #09BB07;
     background-color: #fff;
@@ -76,19 +73,13 @@
     height: 40px;
     line-height: 40px;
   }
-
   .van-button--danger {
     color: #fff;
-    background-color: #09BB07;
-    border: 1px solid #09BB07;
+    background-color: #E51C23;
+    border: 1px solid #E51C23;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     height: 40px;
     line-height: 40px;
-  }
-
-  .van-address-edit__buttons {
-    padding: 30px 15px;
-    display: none;
   }
 </style>

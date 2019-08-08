@@ -89,6 +89,14 @@ export default {
       params: params
     })
   },
+  //增加地址
+  addAddress(params = {}) {
+    return request({
+      url: '/user/address/add/',
+      method: 'post',
+      data: params
+    })
+  },
   // -----------------xxxxxx--------------------
   // 个人信息
   information(params = {}) {

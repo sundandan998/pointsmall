@@ -13,6 +13,11 @@
         </div>
       </div>
     </van-list>
+    <!-- 按钮部分 -->
+    <div class="van-sku-actions">
+      <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
+      <van-button square size="large" type="danger" @click="address">新建地址</van-button>
+    </div>
   </div>
 </template>
 <script>
@@ -53,6 +58,17 @@
           })
         }, 100)
       },
+      cancel() {
+        this.$router.push({
+          name: 'Mine'
+        })
+      },
+      // 新建地址
+      address(){
+        this.$router.push({
+          name:'NewAddress'
+        })
+      }
     }
   }
 </script>
