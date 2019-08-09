@@ -1,17 +1,12 @@
 <template>
   <div class="newaddress">
     <div>
-      <van-address-edit :area-list="areaList" show-delete show-set-default show-search-result
-        :search-result="searchResult" @change-detail="onChangeDetail" />
-    </div>
-    <!-- 按钮部分 -->
-    <div class="van-sku-actions">
-      <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
-      <van-button square size="large" type="danger" @click="add">保存</van-button>
+      <van-address-edit :area-list="areaList" show-set-default show-search-result @save="onSave"/>
     </div>
   </div>
 </template>
 <script>
+  import { Toast } from 'mint-ui'
   import areaList from '@/assets/js/area'
   import api from '@/api/user/User.js'
   export default {
@@ -19,13 +14,14 @@
       return {
         areaList,
         searchResult: [],
-        address:{
-          province:111,
-          city:222,
-          district:333,
-          address:'xx',
-          receiver:'xx',
-          mobile:'xxx'
+        address: {
+          province: '',
+          city: '',
+          district: '',
+          address: '',
+          receiver: '',
+          mobile: '',
+          is_default:false
         }
       }
     },
@@ -34,61 +30,94 @@
     },
     methods: {
       // 增加地址
-      add(){
-        api.addAddress(this.address).then(res=>{
-
-        }).catch(err=>{
-
+      onSave(val) {
+        console.log(val)
+        this.address.province = val.province
+        this.address.city = val.city
+        this.address.district = val.county
+        this.address.address = val.addressDetail
+        this.address.receiver = val.name
+        this.address.mobile = val.tel
+        this.address.is_default =val.isDefault==false?0:1
+        api.addAddress(this.address).then(res => {
+          if (res.code == 0) {
+            this.$router.push({
+              name: 'ShippingAddress'
+            })
+            Toast({
+              message: res.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          }
+        }).catch(err => {
+          if (err.code != 0) {
+            Toast({
+              message: err.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          }
         })
       },
-      cancel() {
-        this.$router.push({
-          name: 'Address'
-        })
-      },
-      onChangeDetail(val) {
-        if (val) {
-          this.searchResult = [{
-            name: '黄龙万科中心',
-            address: '杭州市西湖区'
-          }];
-        } else {
-          this.searchResult = [];
-        }
-      }
     }
   }
 </script>
-<style lang="scss">
+<style>
+  .van-address-edit__buttons {
+    padding: 0px 0px;
+  }
+
+  .van-button--block {
+    width: 100%;
+    /* display: block; */
+    position: fixed;
+    bottom: 0px;
+  }
+  .van-button--danger{
+    color: #fff;
+    background-color: #09BB07;
+    border: 1px solid #09BB07;
+    border-radius: 25px;
+    height: 40px;
+    line-height: 40px;
+  }
   /* @import '../../../assets/scss/Global.scss'; */
-  .van-sku-actions {
+  /* .van-sku-actions {
     position: absolute;
     bottom: 0px;
     width: 100%;
   }
+  .van-address-edit__buttons {
+    position: fixed;
+    bottom: 0px;
+    width: 90%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
 
-  .van-button--warning {
-    color: #09BB07;
+.van-button--default {
+  color: #09BB07;
     background-color: #fff;
-    border: 1px solid #09BB07;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    height: 40px;
-    line-height: 40px;
-  }
-
-  .van-button--danger {
-    color: #fff;
-    background-color: #09BB07;
     border: 1px solid #09BB07;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     height: 40px;
     line-height: 40px;
-  }
+}
+  .van-button--danger {
+    color: #fff;
+    background-color: #09BB07;
+    border: 1px solid #09BB07;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    height: 40px;
+    line-height: 40px;
+  }  */
 
-  .van-address-edit__buttons {
+  /* .van-address-edit__buttons {
     padding: 30px 15px;
     display: none;
-  }
+  } */
 </style>

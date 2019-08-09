@@ -1,22 +1,19 @@
 <template>
   <div class="address">
-    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
-      :error.sync="error" error-text="请求失败，点击重新加载">
-      <div class="address-list" v-for="item in addressData">
-        <div class="address-content fl">
-          <p>张三 135656565</p>
-          <p>河北省xxx</p>
-        </div>
-        <div class="line"></div>
-        <div class="address-edit fr">
-          <img src="../../../assets/images/edit.svg" alt="">
-        </div>
+    <div class="address-list" v-for="item in addressData">
+      <div class="address-content fl">
+        <p>{{item.receiver}} {{item.mobile}}</p>
+        <p>{{item.province}}{{item.city}}{{item.district}}{{item.address}}</p>
       </div>
-    </van-list>
+      <div class="line"></div>
+      <div class="address-edit fr">
+        <img src="../../../assets/images/edit.svg" alt="">
+      </div>
+    </div>
     <!-- 按钮部分 -->
     <div class="van-sku-actions">
       <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
-      <van-button square size="large" type="danger" @click="address">新建地址</van-button>
+      <van-button square size="large" type="danger" @click="newAddress">新建地址</van-button>
     </div>
   </div>
 </template>
@@ -26,47 +23,30 @@
     data() {
       return {
         addressData: [],
-        // 上拉加载
-        loading: false,
-        finished: false,
-        error: false,
-        pageNum: 1,
       }
     },
     created() {
       document.title = '收货地址'
+      this.address()
     },
     methods: {
-      // 上拉加载
-      onLoad() {
-        setTimeout(() => {
-          api.address({ 'page': this.pageNum }).then(res => {
-            if (res.code == 0) {
-              this.addressData.push.apply(this.addressData, res.data)
-              this.loading = false
-              if (res.has_next == true) {
-                // this.loading = true
-                this.pageNum++
-              }
-              if (res.has_next == false) {
-                this.finished = true
-                this.loading = false
-              }
-            }
-          }).catch(err => {
-            this.error = true
-          })
-        }, 100)
+      // 地址列表
+      address() {
+        api.address().then(res => {
+          this.addressData = res.data
+        }).catch(err => {
+
+        })
       },
       cancel() {
         this.$router.push({
           name: 'Mine'
         })
       },
-      // 新建地址
-      address(){
+      // // 新建地址
+      newAddress() {
         this.$router.push({
-          name:'NewAddress'
+          name: 'NewAddress'
         })
       }
     }

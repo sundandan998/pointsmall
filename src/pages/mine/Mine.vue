@@ -12,7 +12,7 @@
         <mt-cell title="我的订单" to="myorder" is-link>
           <img slot="icon" src="../../assets/images/reservation.svg">
         </mt-cell>
-        <mt-cell title="收货地址" is-link to="address">
+        <mt-cell title="收货地址"  to="address" is-link>
           <img slot="icon" src="../../assets/images/address.svg">
         </mt-cell>
         <!-- to="safety" -->

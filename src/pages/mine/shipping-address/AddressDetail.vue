@@ -6,11 +6,11 @@
     </div>
 
     <!-- 按钮部分 -->
-    <mt-button size="large" class="save-address">保存</mt-button>
+    <!-- <mt-button size="large" class="save-address">保存</mt-button>
     <div class="van-sku-actions">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger">删除</van-button>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -60,10 +60,6 @@
     color: #fff;
   }
 
-  .van-address-edit__buttons {
-    padding: 30px 15px;
-    display: none;
-  }
   .van-button--warning {
     color: #09BB07;
     background-color: #fff;
