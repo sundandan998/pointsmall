@@ -105,6 +105,14 @@ export default {
       data: params
     })
   },
+  // 删除地址
+  delAddress(params = {}) {
+    return request({
+      url: '/user/address/'+ params.id +'/destroy/',
+      method: 'post',
+      data: params
+    })
+  },
   // -----------------xxxxxx--------------------
   // 个人信息
   information(params = {}) {

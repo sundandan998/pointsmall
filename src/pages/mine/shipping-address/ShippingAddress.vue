@@ -31,9 +31,10 @@
       onEdit(item, index) {
         this.$router.push({
           name: 'AddressDetail',
-          params:{index:index,item:item}
+          params: { index: index, item: item }
         })
       },
+   
       onAdd() {
         this.$router.push({
           name: 'NewAddress'

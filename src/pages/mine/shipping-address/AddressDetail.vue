@@ -1,7 +1,8 @@
 <template>
   <div class="newaddress">
     <div class="edit-address">
-      <van-address-edit :address-info="AddressInfo" :area-list="areaList" show-delete show-set-default @save="onSave" />
+      <van-address-edit :address-info="AddressInfo" :area-list="areaList" show-delete show-set-default 
+      @save="onSave" @delete="onDelete"/>
     </div>
   </div>
 </template>
@@ -14,14 +15,14 @@
       return {
         areaList,
         searchResult: [],
-        AddressInfo:{
-          id:this.$route.params.item.id,
-          name:this.$route.params.item.name,
-          tel:this.$route.params.item.tel,
-          province:this.$route.params.item.province,
-          city:this.$route.params.item.city,
-          county:this.$route.params.item.county,
-          addressDetail:this.$route.params.item.address,
+        AddressInfo: {
+          id: this.$route.params.item.id,
+          name: this.$route.params.item.name,
+          tel: this.$route.params.item.tel,
+          province: this.$route.params.item.province,
+          city: this.$route.params.item.city,
+          county: this.$route.params.item.county,
+          addressDetail: this.$route.params.item.address,
         }
       }
     },
@@ -29,6 +30,7 @@
       document.title = '地址详情'
     },
     methods: {
+      // 保存地址
       onSave(val) {
         api.editAddress(val).then(res => {
           if (res.code == 0) {
@@ -51,6 +53,29 @@
           }
         })
       },
+      // 删除地址
+      onDelete(val) {
+        api.delAddress(val).then(res => {
+          if (res.code == 0) {
+            this.$router.push({
+              name: 'ShippingAddress'
+            })
+            Toast({
+              message: res.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          }
+        }).catch(err => {
+          if (err.code != 0) {
+            Toast({
+              message: err.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          }
+        })
+      }
     }
   }
 </script>
@@ -70,7 +95,7 @@
     color: #fff;
   }
 
-  .van-button--warning {
+  .van-button--warning  {
     color: #09BB07;
     background-color: #fff;
     border: 1px solid #09BB07;
@@ -79,7 +104,12 @@
     height: 40px;
     line-height: 40px;
   }
-
+  .van-button--default {
+    color: #fff;
+    background-color: #E51C23;
+    border: 1px solid #E51C23;
+    border-radius: 25px;
+}
   .van-button--danger {
     color: #fff;
     background-color: #E51C23;
