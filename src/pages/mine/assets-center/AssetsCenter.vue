@@ -6,13 +6,14 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
-        <div class="assets-center-list-left">
+        <div class="assets-center-list-left fl">
           <img :src="item.token.icon" alt="">
           <span>{{item.token.code}}</span>
-          <span>{{item.token.name}}</span>
+          <p>{{item.token.subject}}</p>
         </div>
-        <span class="assets-center-list-right fr">{{item.balance}}</span>
-        <div class=" fr integral"><img src="../../../assets/images/wait.png" alt=""> {{item.integral}}(超级积分)</div>
+        <span class="assets-center-list-right fr">{{item.balance|keepTwoNum}}</span>
+        <div class=" fr integral"><img src="../../../assets/images/wait.png" alt=""> {{item.integral|keepTwoNum}}(超级积分)
+        </div>
       </div>
     </van-list>
     <router-link to="mine">
@@ -28,7 +29,7 @@
   export default {
     data() {
       return {
-        BScroll:'',
+        BScroll: '',
         assetsData: [],
         // 上拉加载
         loading: false,
@@ -39,6 +40,13 @@
     },
     created() {
       document.title = '资产中心'
+    },
+    // 保留两位小数
+    filters: {
+      keepTwoNum(value) {
+        value = Number(value)
+        return value.toFixed(2)
+      }
     },
     methods: {
       // 上拉加载
@@ -67,22 +75,22 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+
   .assets-center-list {
     height: 72px;
     padding: 5px 10px 5px 15px;
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
-
-
     .integral {
       margin-top: 10px;
+      position: relative;
+      left: 80px;
     }
   }
 
   .assets-center-list-left {
-    width: 50%;
-    float: left;
-    overflow: hidden;
+    /* border-bottom: 1px solid #f2f2f2; */
+    width: 100%;
 
     img {
       float: left;
@@ -94,8 +102,6 @@
     }
   }
 
-  .integral {
-  }
 
   .assets-center-button {
     button {
@@ -106,5 +112,10 @@
       color: #fff;
     }
 
+  }
+
+  .assets-center-list-right {
+    position: relative;
+    top: -40px;
   }
 </style>

@@ -14,15 +14,6 @@
       return {
         areaList,
         searchResult: [],
-        address: {
-          province: '',
-          city: '',
-          district: '',
-          address: '',
-          receiver: '',
-          mobile: '',
-          is_default:false
-        }
       }
     },
     created() {
@@ -31,15 +22,7 @@
     methods: {
       // 增加地址
       onSave(val) {
-        console.log(val)
-        this.address.province = val.province
-        this.address.city = val.city
-        this.address.district = val.county
-        this.address.address = val.addressDetail
-        this.address.receiver = val.name
-        this.address.mobile = val.tel
-        this.address.is_default =val.isDefault==false?0:1
-        api.addAddress(this.address).then(res => {
+        api.addAddress(val).then(res => {
           if (res.code == 0) {
             this.$router.push({
               name: 'ShippingAddress'

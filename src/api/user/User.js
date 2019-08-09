@@ -97,6 +97,14 @@ export default {
       data: params
     })
   },
+  // 修改地址
+  editAddress(params = {}) {
+    return request({
+      url: '/user/address/'+ params.id +'/modify/',
+      method: 'post',
+      data: params
+    })
+  },
   // -----------------xxxxxx--------------------
   // 个人信息
   information(params = {}) {
