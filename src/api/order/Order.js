@@ -56,4 +56,20 @@ export default {
       params: params
     })
   },
+  // 商家发货
+  ship(params = {}) {
+    return request({
+      url: '/order/shop/'+params.id+'/deliver/',
+      method: 'post',
+      data: params
+    })
+  },
+  // 用户收货
+  receipt(params = {}) {
+    return request({
+      url: '/order/'+params.id+'/receive/',
+      method: 'post',
+      data: params
+    })
+  },
 }

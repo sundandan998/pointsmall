@@ -3,56 +3,86 @@
     <div class="detail-address">
       <img src="../../../assets/images/address.svg" alt="">
       <span>
-        <p>收件人：xxxxx</p>
-        <p>收获地址：dxxxxxx</p>
+        <p>收件人：{{detailAddress.name}} {{detailAddress.tel}}</p>
+        <p>
+          收获地址：{{detailAddress.province}}{{detailAddress.city}}{{detailAddress.county}}{{detailAddress.addressDetail}}
+        </p>
       </span>
     </div>
     <div class="detail-product">
-      <van-card num="2" price="120积分" title="华为运动智能手环" thumb="https://img.yzcdn.cn/vant/t-thirt.jpg" />
-      <!-- <img src="../../../assets/images/1.jpg" alt="">
-      <span>
-        <p>华为运动智能手环</p>
-        <p>120积分</p>
-      </span>
-      <span class="fr">2</span> -->
+      <van-card :num="detailData.count" :price="detailData.price+'积分'" :title="detailData.sku_name"
+        :thumb="detailData.sku_image" />
     </div>
-    <p class="detail-num"><span>积分总额:</span><span class="fr">1(LIFE+)</span></p>
-    <p class="detail-num"><span>实付通证数量:</span><span class="fr">1(LIFE+)</span></p>
-    <p class="detail-num"><span>物流单号:</span><span class="fr">xxxxxx</span></p>
+    <p class="detail-num"><span>积分总额:</span><span
+        class="fr">{{detailData.total_integral|keepTwoNum}}({{detailData.token}})</span></p>
+    <p class="detail-num"><span>实付通证数量:</span><span
+        class="fr">{{detailData.total_amount|keepTwoNum}}({{detailData.token}})</span></p>
+    <p class="detail-num" v-if="detailData.status!=1"><span>物流单号:</span><span class="fr">{{detailData.wl_number}}</span>
+    </p>
     <div class="detail-status">
-      <p><span>订单状态:</span><span class="fr">xxx</span></p>
-      <p><span>订单编号:</span><span class="fr">xxx</span></p>
-      <p><span>交易时间:</span><span class="fr">xxx</span></p>
+      <p><span>订单状态:</span><span class="fr">{{detailData.status==1?'待发货':detailData.status==2?'待收货':'已完成'}}</span></p>
+      <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
+      <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
     </div>
-    <!-- <router-link to="myorder">
+    <router-link to="/myorder">
       <div class="detail-button">
         <mt-button size="large">返回</mt-button>
       </div>
-    </router-link> -->
-    <div class="van-sku-actions">
+    </router-link>
+    <div class="van-sku-actions" v-if="detailData.status==2">
       <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
-      <van-button square size="large" type="danger">确认收货</van-button>
+      <van-button square size="large" type="danger" @click=receipt>确认收货</van-button>
     </div>
   </div>
 </template>
 <script>
+  import api from '@/api/order/order.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
-
-      }
-    },
-
-    methods: {
-      cancel(){
-        this.$router.push({
-          name:'MyOrder'
-        })
+        detailData: {},
+        detailAddress: {},
       }
     },
     created() {
       document.title = '订单详情'
-    }
+      this.detailId = this.$route.params
+      this.detail()
+    },
+    methods: {
+      // 订单详情
+      detail() {
+        api.merchantDetail(this.$route.params).then(res => {
+          this.detailData = res.data
+          this.detailAddress = res.data.address
+        }).catch(err => {
+
+        })
+      },
+      cancel() {
+        this.$router.push({
+          name: 'MyOrder'
+        })
+      },
+      //  确认收货
+      receipt() {
+        api.receipt(this.$route.params).then(res => {
+          if (res.code == 0) {
+            window.location.reload()
+          }
+        }).catch(err => {
+          if (err.code != 0) {
+            Toast({
+              message: err.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          }
+        })
+      }
+    },
+
   }
 </script>
 <style lang="scss">
@@ -65,7 +95,7 @@
     img {
       display: inline-block;
       float: left;
-      margin-right: 30px;
+      margin-right: 10px;
       height: 30px;
     }
   }

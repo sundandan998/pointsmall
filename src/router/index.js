@@ -72,7 +72,7 @@ export default new Router({
     },
     // 订单详情
     {
-      path:'/orderdetail',
+      path:'/orderdetail/:id',
       name:'OrderDetail',
       component: () => import('@/pages/mine/order/OrderDetail')
     },

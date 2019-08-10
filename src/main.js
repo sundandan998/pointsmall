@@ -23,9 +23,18 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 // 全局过滤去掉小数点后数字
+// Vue.filter('keepTwoNum', function (value) {
+//   value = Number(value)
+//   return value.toFixed(0)
+// })
 Vue.filter('keepTwoNum', function (value) {
-  value = Number(value)
-  return value.toFixed(0)
+  if (value == 0.00) {
+    value = Number(value)
+    return value.toFixed(2)
+  } else {
+    value = Number(value)
+    return value
+  }
 })
 new Vue({
   el: '#app',

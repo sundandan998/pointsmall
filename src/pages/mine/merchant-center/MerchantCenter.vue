@@ -73,10 +73,7 @@
     data() {
       return {
         active: 0,
-        orderList:[],
-        listParams: {
-          status: ''
-        },
+        orderList: [],
         // 上拉加载
         loading: false,
         finished: false,
@@ -85,10 +82,7 @@
       }
     },
     created() {
-      document.title = '用户订单'
-    },
-    mounted() {
-      this.index(0, 'All')
+      document.title = '我的订单'
     },
     methods: {
       // 上拉加载
@@ -115,6 +109,10 @@
       // tab栏展示列表
       index(index, title) {
         if (index == 0) {
+          api.merchantOrder().then(res => {
+            this.orderList = res.data
+          }).catch(err => {
+          })
         } else {
           if (index == 1) {
             this.orderList.status = 1
