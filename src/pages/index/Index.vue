@@ -4,8 +4,10 @@
       <div class="index-body">
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
           :error.sync="error" error-text="请求失败，点击重新加载">
-          <router-link to="product">
-            <div class="index-title" v-for="item in goodsData">
+          <!-- <router-link to="product"> -->
+          <div class="index-title" v-for="item in goodsData">
+            <!-- <router-link :to="{name:'Product',params:{id:item.id}}"> -->
+            <router-link :to="/product/+item.id">
               <div class="index-img fl">
                 <img :src="item.default_image" alt="">
               </div>
@@ -16,8 +18,8 @@
               <div class="index-right fr">
                 <img src="../../assets/images/r.png" alt="">
               </div>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
         </van-list>
       </div>
     </van-pull-refresh>
@@ -120,6 +122,7 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
+
   .index-title {
     height: 90px;
     padding: 10px 10px 0 15px;

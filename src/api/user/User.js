@@ -100,7 +100,7 @@ export default {
   // 修改地址
   editAddress(params = {}) {
     return request({
-      url: '/user/address/'+ params.id +'/modify/',
+      url: '/user/address/' + params.id + '/modify/',
       method: 'post',
       data: params
     })
@@ -108,9 +108,17 @@ export default {
   // 删除地址
   delAddress(params = {}) {
     return request({
-      url: '/user/address/'+ params.id +'/destroy/',
+      url: '/user/address/' + params.id + '/destroy/',
       method: 'post',
       data: params
+    })
+  },
+  // 商家订单
+  merchantOrder(params = {}) {
+    return request({
+      url: '/order/list/',
+      method: 'get',
+      params: params
     })
   },
   // -----------------xxxxxx--------------------

@@ -30,13 +30,13 @@ export default new Router({
     },
     // 商品详情
     {
-      path: '/product',
+      path: '/product/:id',
       name: 'Product',
       component: () => import('@/pages/index/ProductDetails')
     },
     // 填写订单
     {
-      path: '/order',
+      path: '/order/:id',
       name: 'Order',
       component: () => import('@/pages/index/FillOrder')
     },
@@ -99,6 +99,18 @@ export default new Router({
       path: '/safety',
       name: 'SafetyCenter',
       component: () => import('@/pages/mine/safety-center/SafetyCenter')
+    },
+     // 商家中心
+     {
+      path: '/merchant',
+      name: 'MerchantCenter',
+      component: () => import('@/pages/mine/merchant-center/MerchantCenter')
+    },
+     // 商家中心详情
+     {
+      path: '/merchantdetail/:id',
+      name: 'MerchantCenterDetail',
+      component: () => import('@/pages/mine/merchant-center/MerchantCenterDetail')
     },
     // 修改手机号
     {

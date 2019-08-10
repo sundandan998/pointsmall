@@ -26,6 +26,7 @@
   </div>
 </template>
 <script>
+  import api from '@/api/goods/Goods.js'
   export default {
     data() {
       return {
@@ -96,13 +97,21 @@
 
       }
     },
-    methods: {
-
-
-    },
     created() {
       document.title = '填写订单'
-    }
+      this.detailId = this.$route.params
+      this.order()
+    },
+    methods: {
+      // 商品信息
+      order() {
+        api.orderDetail(this.$route.params).then(res => {
+        }).catch(err => {
+
+        })
+      },
+    },
+    
   }
 </script>
 <style lang="scss">

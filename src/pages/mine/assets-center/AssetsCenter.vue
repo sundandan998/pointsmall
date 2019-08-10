@@ -41,13 +41,6 @@
     created() {
       document.title = '资产中心'
     },
-    // 保留两位小数
-    filters: {
-      keepTwoNum(value) {
-        value = Number(value)
-        return value.toFixed(2)
-      }
-    },
     methods: {
       // 上拉加载
       onLoad() {

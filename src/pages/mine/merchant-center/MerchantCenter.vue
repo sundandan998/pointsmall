@@ -5,32 +5,32 @@
         :error.sync="error" error-text="请求失败，点击重新加载">
         <van-tabs v-model="active" color="#1890FF" title-active-color="#1890FF">
           <van-tab title="全部">
-            <router-link to="orderdetail">
-              <div class="product">
-                <p>2019-07-06 12:09</p>
-                <img src="../../../assets/images/1.jpg" alt="" class="fl">
-                <div class="product-text">
-                  <p>华为运动智能手环</p>
-                  <p>1(LIFE+)</p>
-                </div>
-                <span class="fr status">待发货</span>
+            <div class="product"  v-for="item in orderList">
+              <router-link :to="/merchantdetail/+item.id">
+              <p>{{item.transaction_time}}</p>
+              <img :src="item.sku_image" alt="" class="fl">
+              <div class="product-text">
+                <p>{{item.sku_name}}</p>
+                <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
               </div>
-            </router-link>
+              <span class="fr status">{{item.status==1?'待发货':item.status==2?'待收货':'已完成'}}</span>
+              </router-link>
+            </div>
           </van-tab>
           <van-tab title="待发货">
-            <router-link to="orderdetail">
-              <div class="product">
-                <p>2019-07-06 12:09</p>
-                <img src="../../../assets/images/1.jpg" alt="" class="fl">
+            <div class="product" v-for="item in orderList">
+              <router-link :to="/merchantdetail/+item.id">
+                <p>{{item.transaction_time}}</p>
+                <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
-                  <p>华为运动智能手环</p>
-                  <p>1(LIFE+)</p>
+                  <p>{{item.sku_name}}</p>
+                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
                 </div>
-                <span class="fr status">待发货</span>
-              </div>
-            </router-link>
+                <span class="fr status">{{item.status==1?'待发货':item.status==2?'待收货':'已完成'}}</span>
+              </router-link>
+            </div>
           </van-tab>
-          <van-tab title="待收获">
+          <van-tab title="待收货">
             <div class="product">
               <p>2019-07-06 12:09</p>
               <img src="../../../assets/images/1.jpg" alt="" class="fl">
@@ -65,7 +65,6 @@
 <script>
   // 接口请求
   import api from '@/api/order/order.js'
-  // import api from '@/api/user/User.js'
   export default {
     data() {
       return {
@@ -79,7 +78,7 @@
       }
     },
     created() {
-      document.title = '我的订单'
+      document.title = '用户订单'
     },
     methods: {
       // 上拉加载
@@ -113,7 +112,14 @@
   .product {
     margin: 10px 15px 0 15px;
     height: 106px;
-    color: #333;
+
+    p {
+      color: #333;
+    }
+
+    span {
+      color: #333;
+    }
 
     img {
       width: 60px;

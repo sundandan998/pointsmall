@@ -112,8 +112,8 @@
 }
   .van-button--danger {
     color: #fff;
-    background-color: #E51C23;
-    border: 1px solid #E51C23;
+    background-color: #09BB07;
+    border: 1px solid #09BB07;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     height: 40px;

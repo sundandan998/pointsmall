@@ -22,6 +22,11 @@ Vue.prototype.$Indicator = Indicator
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
+// 全局过滤去掉小数点后数字
+Vue.filter('keepTwoNum', function (value) {
+  value = Number(value)
+  return value.toFixed(0)
+})
 new Vue({
   el: '#app',
   router,
