@@ -13,27 +13,33 @@
       <van-card :num="detailData.count" :price="detailData.price+'积分'" :title="detailData.sku_name"
         :thumb="detailData.sku_image" />
     </div>
-    <div class="detail-num">
+    <!-- <div class="detail-num">
       <div class="integral-num"><span>积分总额:</span><span class="fr">{{detailData.total_integral|keepTwoNum}}(超级积分)</span>
       </div>
       <div class="token-num">
         <span>实付通证数量:</span><span class="fr">{{detailData.total_amount|keepTwoNum}}({{detailData.token}})</span></div>
       <p class="wl-num" v-if="detailData.status!==1"><span>物流单号</span><span class="fr">{{detailData.wl_number}}</span></p>
-    </div>
+    </div> -->
     <div class="detail-status">
       <p><span>订单状态:</span><span class="fr">{{detailData.status==1?'待发货':detailData.status==2?'待收货':'已完成'}}</span></p>
       <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
       <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
     </div>
+    <div class="detail-num" v-if="detailData.status==1">
+      <mt-field label="物流单号" placeholder="请输入物流单号" type="number" ></mt-field>
+    </div>
+    <div class="detail-num" v-if="detailData.status!=1">
+      <p class="wl-num"><span>物流单号</span><span class="fr">{{detailData.wl_number}}</span></p>
+      </div>
     <router-link to="/merchant">
       <div class="merchant-button">
-        <mt-button size="large" v-if="detailData.status==1">返回</mt-button>
+        <mt-button size="large" v-if="detailData.status!=1">返回</mt-button>
       </div>
     </router-link>
-    <!-- <div class="van-sku-actions">
+    <div class="van-sku-actions" v-if="detailData.status==1">
       <van-button square size="large" type="warning" @click="cancel" > 返回</van-button>
       <van-button square size="large" type="danger">发货</van-button>
-    </div> -->
+    </div>
   </div>
 </template>
 <script>
@@ -112,17 +118,9 @@
   .detail-num {
     border-top: 1px solid #f2f2f2;
     border-bottom: 2px solid #f2f2f2;
-
-    .token-num {
-      border-top: 2px solid #f2f2f2;
-      border-bottom: 2px solid #f2f2f2;
-      padding: 10px 10px 10px 15px;
-    }
     .wl-num{
       padding: 10px 10px 10px 15px;
-    }
-    .integral-num {
-      padding: 10px 10px 10px 15px;
+
     }
   }
 
