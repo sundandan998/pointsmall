@@ -94,14 +94,13 @@
       information() {
         api.information().then(res => {
           this.orderInformation = res.data.default_address
-          console.log(this.orderAddress)
+          // console.log(this.orderAddress)
         }).catch(err => {
           console.log(err)
         })
       },
       // 提交订单
       submit() {
-        // debugger
         if (this.orderAddress.id == '') {
           this.address_id = this.orderInformation.id
           this.$router.push({
@@ -124,6 +123,7 @@
       }
     },
     watch: {
+      // 监听来的路径，并且替换内容
       orderInformation(val) {
         let refpath = window.sessionStorage.getItem('refpath')
         if (refpath == '/address') {

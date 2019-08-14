@@ -1,8 +1,13 @@
 <template>
   <div class="newaddress">
     <div>
-      <van-address-edit :area-list="areaList" show-set-default show-search-result @save="onSave"/>
+      <van-address-edit :area-list="areaList" show-set-default show-search-result @save="onSave" />
     </div>
+    <router-link to="/address">
+      <div class="address-btn ">
+        <van-button square size="large" type="warning">返回</van-button>
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
@@ -47,60 +52,18 @@
   }
 </script>
 <style>
-  .van-address-edit__buttons {
-    padding: 0px 0px;
-  }
-
+  @import '../../../assets/scss/Global.scss';
   .van-button--block {
-    width: 100%;
-    /* display: block; */
+    width: 50%;
+    right: 0;
     position: fixed;
-    bottom: 0px;
+    bottom: -15px;
   }
-  .van-button--danger{
-    color: #fff;
-    background-color: #09BB07;
-    border: 1px solid #09BB07;
-    border-radius: 25px;
-    height: 40px;
-    line-height: 40px;
-  }
-  /* @import '../../../assets/scss/Global.scss'; */
-  /* .van-sku-actions {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-  }
-  .van-address-edit__buttons {
+  .van-button--large {
+    width: 50%;
     position: fixed;
+    height: 40px;
+    line-height: 40px;
     bottom: 0px;
-    width: 90%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-.van-button--default {
-  color: #09BB07;
-    background-color: #fff;
-    border: 1px solid #09BB07;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    height: 40px;
-    line-height: 40px;
-}
-  .van-button--danger {
-    color: #fff;
-    background-color: #09BB07;
-    border: 1px solid #09BB07;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    height: 40px;
-    line-height: 40px;
-  }  */
-
-  /* .van-address-edit__buttons {
-    padding: 30px 15px;
-    display: none;
-  } */
+  }
 </style>

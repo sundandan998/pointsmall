@@ -107,7 +107,7 @@
       success() {
         if (this.radio == '') {
           Toast({
-            message: '请先设置支付通证',
+            message: '请先选择支付通证',
             position: 'top',
             className: 'zZindex'
           })
@@ -226,10 +226,11 @@
     background-image: none !important;
     border-bottom: 1px solid #f2f2f2;
   }
-
-  .van-radio {
-    position: relative;
-    top: -30px;
-    right: 10px;
+  .pay-list {
+    .van-radio {
+      position: relative;
+      top: -30px;
+      right: 10px;
+    }
   }
 </style>

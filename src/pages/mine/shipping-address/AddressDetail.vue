@@ -4,6 +4,11 @@
       <van-address-edit :address-info="this.AddressInfo" :area-list="areaList" show-delete show-set-default
         @save="onSave" @delete="onDelete" />
     </div>
+    <router-link to="/address">
+      <div class="address-detail-btn">
+        <van-button square size="large" type="primary">返回</van-button>
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
@@ -80,7 +85,20 @@
   }
 </script>
 <style lang="scss">
-  /* @import '../../../assets/scss/Global.scss'; */
+  @import '../../../assets/scss/Global.scss';
+
+  .van-button--primary{
+    color: #09BB07;
+    background-color: #fff;
+    border: 1px solid #09BB07;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 25px;
+    width: 90%;
+    margin: 0 auto;
+    display: block;
+  }
+
   .edit-address {
     .van-sku-actions {
       position: absolute;
@@ -92,6 +110,7 @@
       position: fixed;
       bottom: 50px;
       border-radius: 25px;
+    
       background-color: #09BB07;
       color: #fff;
     }
@@ -100,8 +119,8 @@
       color: #09BB07;
       background-color: #fff;
       border: 1px solid #09BB07;
-      border-top-left-radius: 25px;
-      border-bottom-left-radius: 25px;
+      border-radius: 25px;
+    
       height: 40px;
       line-height: 40px;
     }
