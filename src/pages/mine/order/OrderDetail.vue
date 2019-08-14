@@ -89,8 +89,8 @@
   @import "../../../assets/scss/Global.scss";
 
   .detail-address {
-    border-bottom: 2px solid #f2f2f2;
-    padding: 10px 10px 10px 15px;
+    /* border-bottom: 2px solid #f2f2f2;
+    padding: 10px 10px 10px 15px; */
 
     img {
       display: inline-block;

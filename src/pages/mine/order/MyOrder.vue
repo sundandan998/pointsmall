@@ -82,7 +82,7 @@
       }
     },
     created() {
-      document.title = '用户订单'
+      document.title = '我的订单'
     },
     methods: {
       // 上拉加载

@@ -1,8 +1,8 @@
 <template>
   <div class="newaddress">
     <div class="edit-address">
-      <van-address-edit :address-info="AddressInfo" :area-list="areaList" show-delete show-set-default 
-      @save="onSave" @delete="onDelete"/>
+      <van-address-edit :address-info="this.AddressInfo" :area-list="areaList" show-delete show-set-default
+        @save="onSave" @delete="onDelete" />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
           province: this.$route.params.item.province,
           city: this.$route.params.item.city,
           county: this.$route.params.item.county,
-          addressDetail: this.$route.params.item.address,
+          addressDetail: this.$route.params.item.addressDetail,
         }
       }
     },
@@ -81,42 +81,45 @@
 </script>
 <style lang="scss">
   /* @import '../../../assets/scss/Global.scss'; */
-  .van-sku-actions {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-  }
+  .edit-address {
+    .van-sku-actions {
+      position: absolute;
+      bottom: 0px;
+      width: 100%;
+    }
 
-  .save-address {
-    position: fixed;
-    bottom: 50px;
-    border-radius: 25px;
-    background-color: #09BB07;
-    color: #fff;
-  }
+    .save-address {
+      position: fixed;
+      bottom: 50px;
+      border-radius: 25px;
+      background-color: #09BB07;
+      color: #fff;
+    }
 
-  .van-button--warning  {
-    color: #09BB07;
-    background-color: #fff;
-    border: 1px solid #09BB07;
-    border-top-left-radius: 25px;
-    border-bottom-left-radius: 25px;
-    height: 40px;
-    line-height: 40px;
-  }
-  .van-button--default {
-    color: #fff;
-    background-color: #E51C23;
-    border: 1px solid #E51C23;
-    border-radius: 25px;
-}
-  .van-button--danger {
-    color: #fff;
-    background-color: #09BB07;
-    border: 1px solid #09BB07;
-    border-top-right-radius: 25px;
-    border-bottom-right-radius: 25px;
-    height: 40px;
-    line-height: 40px;
+    .van-button--warning {
+      color: #09BB07;
+      background-color: #fff;
+      border: 1px solid #09BB07;
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .van-button--default {
+      color: #fff;
+      background-color: #E51C23;
+      border: 1px solid #E51C23;
+      border-radius: 25px;
+    }
+
+    .van-button--danger {
+      color: #fff;
+      background-color: #09BB07;
+      border: 1px solid #09BB07;
+      border-radius: 25px;
+      height: 40px;
+      line-height: 40px;
+    }
   }
 </style>

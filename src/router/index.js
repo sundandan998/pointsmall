@@ -40,6 +40,12 @@ export default new Router({
       name: 'Order',
       component: () => import('@/pages/index/FillOrder')
     },
+    // 去支付
+    {
+      path: '/pay/:id',
+      name: 'ToPay',
+      component: () => import('@/pages/index/ToPay')
+    },
     // 我的
     {
       path: '/mine',

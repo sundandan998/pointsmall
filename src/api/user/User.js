@@ -48,7 +48,7 @@ export default {
       data: params
     })
   },
-  // --------------xxxxxxxxxxxxxxx-------
+  // --------------xxxxxxxx开始xxxxxxx-------
   // 获取用户openid
   openId(params = {}) {
     return request({
@@ -121,7 +121,14 @@ export default {
       params: params
     })
   },
-  // -----------------xxxxxx--------------------
+  // 添加订单
+  addOrder(params = {}) {
+    return request({
+      url: '/order/add/',
+      method: 'post',
+      data: params
+    })
+  },
   // 个人信息
   information(params = {}) {
     return request({
@@ -130,6 +137,16 @@ export default {
       params: params
     })
   },
+  // 积分兑换通证
+  exchange(params = {}) {
+    return request({
+      url: '/token/integral2token/',
+      method: 'post',
+      data: params
+    })
+  },
+  // -----------------xxx结束xxx--------------------
+
   // 获取用户积分
   userIntegral(params = {}) {
     return request({

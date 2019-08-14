@@ -1,28 +1,50 @@
 <template>
   <div class="order">
-    <van-sku v-model="show" stepper-title="我要买" :sku="sku" :goods="goods"
-       :hide-stock="sku.hide_stock" show-add-cart-btn reset-stepper-on-hide
-      :initial-sku="initialSku" >
-      <!-- 自定义 sku-header-price -->
-      <template slot="sku-header-price" slot-scope="props">
-        <div class="van-sku__goods-price">
-          <span class="van-sku__price-symbol">￥</span><span class="van-sku__price-num">{{ props.price }}</span>
+    <div class="order-product">
+      <van-card :price="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" />
+    </div>
+    <!-- <div class="order-detail">
+      <div v-for="item in orderColor">
+        <p>{{item.name}}</p>
+        <div v-for="items in item.options" class="order-color">
+          <p>{{items.value}}</p>
         </div>
-      </template>
-
-      <!-- 自定义 sku actions -->
-      <template slot="sku-actions" slot-scope="props">
-        <div class="van-sku-actions">
-          <van-button square size="large" type="warning">
-            积分兑换
-          </van-button>
-          <!-- 直接触发 sku 内部事件，通过内部事件执行 onBuyClicked 回调 -->
-          <van-button square size="large" type="danger" @click="props.skuEventBus.$emit('sku:buy')">
-            买买买
-          </van-button>
-        </div>
-      </template>
-    </van-sku>
+      </div>
+    </div> -->
+    <!-- 数量 -->
+    <div class="order-detail">
+      <span>数量</span> <span class="fr">
+        <van-stepper v-model="value" /></span>
+      <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}}</span></p>
+    </div>
+    <!-- 收货地址 -->
+    <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
+      <!-- <div class="order-address" v-if="refpath=='/address'">
+        <img src="../../assets/images/address.svg" alt="" class="fl">
+        <span>
+          <p><span>收件人:{{this.$route.params.item.name}}</span> <span>{{this.$route.params.item.tel}}</span></p>
+          <p class="detail-address">
+            {{this.$route.params.item.province}}{{this.$route.params.item.city}}
+            {{this.$route.params.item.county}}{{this.$route.params.item.addressDetail}}</p>
+        </span>
+        <img src="../../assets/images/r.png" alt="" class="fr ">
+      </div> -->
+      <div class="order-address">
+        <img src="../../assets/images/address.svg" alt="" class="fl">
+        <span>
+          <p><span>收件人:{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
+          <p class="detail-address">
+            {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderAddress.addressDetail}}
+          </p>
+        </span>
+        <img src="../../assets/images/r.png" alt="" class="fr ">
+      </div>
+    </router-link>
+    <div class="van-sku-actions">
+      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
+      <!--  -->
+      <van-button square size="large" type="danger" @click="submit">提交订单</van-button>
+    </div>
   </div>
 </template>
 <script>
@@ -30,90 +52,154 @@
   export default {
     data() {
       return {
-        show: true,
-        goods: {
-          // 商品标题
-          title: '测试商品',
-          // 默认商品 sku 缩略图
-          // picture: 'https://img.yzcdn.cn/1.jpg'
+        value: 1,
+        orderData: {},
+        orderInformation: {},
+        orderAddress: {
+          id: '',
+          addressDetail: '',
+          city: '',
+          county: '',
+          tel: '',
+          name: ''
         },
-        initialSku: {
-          // 键：skuKeyStr（sku 组合列表中当前类目对应的 key 值）
-          // 值：skuValueId（规格值 id）
-          s1: '30349',
-          s2: '1193',
-          // 初始选中数量
-          selectedNum: 3
-        },
-        sku: {
-          // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
-          // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
-          tree: [
-            {
-              k: '颜色', // skuKeyName：规格类目名称
-              v: [
-                {
-                  id: '30349', // skuValueId：规格值 id
-                  name: '红色', // skuValueName：规格值名称
-                  // imgUrl: 'https://img.yzcdn.cn/1.jpg' // 规格类目图片，只有第一个规格类目可以定义图片
-                },
-                {
-                  id: '1215',
-                  name: '蓝色',
-                  // imgUrl: 'https://img.yzcdn.cn/2.jpg'
-                }
-              ],
-              k_s: 's1' // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
-            }
-          ],
-          // 所有 sku 的组合列表，比如红色、M 码为一个 sku 组合，红色、S 码为另一个组合
-          list: [
-            {
-              id: 2259, // skuId，下单时后端需要
-              price: 100, // 价格（单位分）
-              s1: '1215', // 规格类目 k_s 为 s1 的对应规格值 id
-              s2: '1193', // 规格类目 k_s 为 s2 的对应规格值 id
-              s3: '0', // 最多包含3个规格值，为0表示不存在该规格
-              stock_num: 110 // 当前 sku 组合对应的库存
-            }
-          ],
-          price: '1.00', // 默认价格（单位元）
-          stock_num: 227, // 商品总库存
-          collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
-          none_sku: false, // 是否无规格商品
-          messages: [
-            {
-              // 商品留言
-              datetime: '0', // 留言类型为 time 时，是否含日期。'1' 表示包含
-              multiple: '0', // 留言类型为 text 时，是否多行文本。'1' 表示多行
-              name: '留言', // 留言名称
-              type: 'text', // 留言类型，可选: id_no（身份证）, text, tel, date, time, email
-              required: '1', // 是否必填 '1' 表示必填
-              placeholder: '' // 可选值，占位文本
-            }
-          ],
-          hide_stock: false // 是否隐藏剩余库存
-        },
-
       }
     },
     created() {
       document.title = '填写订单'
-      this.detailId = this.$route.params
+      // this.detailId = this.$route.params
       this.order()
+      this.information()
+      // console.log(this.$route.params.item)
+    },
+    beforeRouteEnter(to, from, next) {
+      next(vm => {
+        window.sessionStorage.setItem('refpath', from.path)
+      })
     },
     methods: {
       // 商品信息
       order() {
         api.orderDetail(this.$route.params).then(res => {
+          this.orderData = res.data.sku
         }).catch(err => {
-
         })
       },
+      cancel() {
+        this.$router.push({
+          name: 'Product'
+        })
+      },
+      // 个人信息
+      information() {
+        api.information().then(res => {
+          this.orderInformation = res.data.default_address
+          console.log(this.orderAddress)
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      // 提交订单
+      submit() {
+        // debugger
+        if (this.orderAddress.id == '') {
+          this.address_id = this.orderInformation.id
+          this.$router.push({
+            name: 'ToPay',
+            params: {
+              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+              address_id: this.address_id
+            }
+          })
+        } else {
+          this.address_id = this.$route.params.item.id
+          this.$router.push({
+            name: 'ToPay',
+            params: {
+              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+              address_id: this.address_id
+            }
+          })
+        }
+      }
     },
-    
+    watch: {
+      orderInformation(val) {
+        let refpath = window.sessionStorage.getItem('refpath')
+        if (refpath == '/address') {
+          val.id = this.$route.params.item.id,
+          val.addressDetail = this.$route.params.item.addressDetail,
+          val.city = this.$route.params.item.city,
+          val.county = this.$route.params.item.county,
+          val.tel = this.$route.params.item.tel,
+          val.name = this.$route.params.item.name
+        }
+      }
+    }
   }
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
+
+  .van-card {
+    border-bottom: 2px solid #f2f2f2;
+    background-color: #fff;
+  }
+
+  .van-overlay {
+    position: unset;
+  }
+
+  .van-popup--bottom {
+    width: 100%;
+    top: 24px;
+    -webkit-transform: translate3d(-50%, 0, 0);
+  }
+
+  .order-detail {
+    margin: 10px 10px 10px 15px;
+  }
+
+  .order-color {
+    display: inline-block;
+    margin-right: 20px;
+    background-color: #ccc;
+    color: #333;
+    padding: 3px;
+    border-radius: 5px;
+    width: 40px;
+    text-align: center;
+    font-size: 0.86rem;
+    margin: 10px 20px 10px 0;
+  }
+
+  .order-total {
+    margin: 16px 10px 10px 0px;
+  }
+
+  .order-address {
+    padding-top: 10px;
+    border-top: 2px solid #f2f2f2;
+
+    span {
+      color: #333;
+    }
+
+    .detail-address {
+      width: 80%;
+      word-wrap: break-word;
+      word-break: break-all;
+      overflow: hidden
+    }
+  }
+
+  .order-address img:last-child {
+    margin-top: -25px;
+    margin-right: 10px;
+  }
+
+  .order-address img:first-child {
+    margin: 10px 10px 0 15px;
+    height: 25px;
+  }
 </style>
