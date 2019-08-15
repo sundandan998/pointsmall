@@ -95,7 +95,7 @@
         // 判断是否选择收货地址
         if (this.orderInformation == null) {
           Toast({
-            message:'请选择收货地址',
+            message: '请选择收货地址',
             className: 'zZindex'
           })
         }
@@ -105,12 +105,12 @@
           this.address_id = this.$route.params.item.id
         }
         this.$router.push({
-            name: 'ToPay',
-            params: {
-              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-              address_id: this.address_id
-            }
-          })
+          name: 'ToPay',
+          params: {
+            total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+            address_id: this.address_id
+          }
+        })
       }
     },
     watch: {
@@ -129,11 +129,11 @@
             }
           }
           this.orderInformation.id = this.$route.params.item.id,
-          this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
-          this.orderInformation.city = this.$route.params.item.city,
-          this.orderInformation.county = this.$route.params.item.county,
-          this.orderInformation.tel = this.$route.params.item.tel,
-          this.orderInformation.name = this.$route.params.item.name
+            this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
+            this.orderInformation.city = this.$route.params.item.city,
+            this.orderInformation.county = this.$route.params.item.county,
+            this.orderInformation.tel = this.$route.params.item.tel,
+            this.orderInformation.name = this.$route.params.item.name
         }
       }
     }
@@ -181,7 +181,7 @@
   .order-address {
     padding-top: 10px;
     border-top: 2px solid #f2f2f2;
-    height: 75px;
+    height: auto;
     border-bottom: 2px solid #f2f2f2;
 
     .select-address {
@@ -203,7 +203,8 @@
     }
 
     .detail-address {
-      width: 80%;
+      width: 75%;
+      height: auto;
       word-wrap: break-word;
       word-break: break-all;
       overflow: hidden

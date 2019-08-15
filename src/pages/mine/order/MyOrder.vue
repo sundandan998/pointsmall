@@ -79,6 +79,9 @@
         finished: false,
         error: false,
         pageNum: 1,
+        order:{
+          page:''
+        }
       }
     },
     created() {
@@ -88,7 +91,8 @@
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          api.merchantOrder(this.orderList).then(res => {
+          this.order.page = this.pageNum
+          api.merchantOrder(this.order).then(res => {
             if (res.code == 0) {
               this.orderList.push.apply(this.orderList, res.data)
               this.loading = false
@@ -108,37 +112,31 @@
       },
       // tab栏展示列表
       index(index, title) {
+        this.pageNum = 1
+        this.orderList = []
         if (index === 0) {
-          api.merchantOrder().then(res => {
-            this.orderList = res.data
-          }).catch(err => {
-          })
+          if (this.order.status != undefined){
+            delete this.order.status
+          }
+          this.onLoad()
         } else {
+          this.order.status = index
           if (index === 1) {
-            this.orderList.status = 1
-            this.list()
+            this.onLoad()
           } else {
             if (index === 2) {
               this.orderList.status = 2
-              this.list()
+              this.onLoad()
             } else {
               if (index === 3) {
                 this.orderList.status = 3
-                this.list()
+                this.onLoad()
               }
             }
           }
         }
       },
-      // 列表
-      list() {
-        api.merchantOrder(this.orderList).then(res => {
-          this.orderList = res.data
-        }).catch(err => {
-        })
-      }
     }
-
   }
 </script>
 <style lang="scss">

@@ -34,6 +34,7 @@
     },
     created() {
       document.title = '地址详情'
+      console.log(this.$route.params.id)
     },
     mounted () {
       // this.areaList()

@@ -22,6 +22,7 @@
     created() {
       document.title = '收货地址'
       this.address()
+      // console.log(this.$route.params.id)
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -40,7 +41,7 @@
       onEdit(item, index) {
         this.$router.push({
           name: 'AddressDetail',
-          params: { index: index, item: item }
+          params: { index: index, item: item,id:this.$route.params.id }
         })
       },
       onAdd(item, index) {
@@ -60,7 +61,7 @@
         } else {
           this.$router.push({
             name: 'Order',
-            params: { index: index, item: item}
+            params: { index: index, item: item,}
           })
         }
       }
