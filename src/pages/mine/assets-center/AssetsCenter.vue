@@ -78,6 +78,7 @@
       margin-top: 10px;
       position: relative;
       left: 80px;
+      margin-right: 10px;
     }
   }
 

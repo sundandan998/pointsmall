@@ -21,10 +21,13 @@
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
       <div class="order-address">
         <img src="../../assets/images/address.svg" alt="" class="fl">
-        <div>
+        <div v-if="orderInformation==null" class="select-address">
+          <p>请选择收货地址</p>
+        </div>
+        <div v-else>
           <p><span>收件人:{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
           <p class="detail-address">
-            收货地址:{{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderAddress.addressDetail}}
+            收货地址:{{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
           </p>
         </div>
         <img src="../../assets/images/r.png" alt="" class="fr ">
@@ -38,12 +41,13 @@
 </template>
 <script>
   import api from '@/api/goods/Goods.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
         value: 1,
         orderData: {},
-        orderInformation: {},
+        orderInformation: '',
         orderAddress: {
           id: '',
           addressDetail: '',
@@ -59,7 +63,6 @@
       // this.detailId = this.$route.params
       this.order()
       this.information()
-      // console.log(this.$route.params.item)
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -89,25 +92,25 @@
       },
       // 提交订单
       submit() {
-        if (this.orderAddress.id == '') {
-          this.address_id = this.orderInformation.id
-          this.$router.push({
-            name: 'ToPay',
-            params: {
-              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-              address_id: this.address_id
-            }
-          })
-        } else {
-          this.address_id = this.$route.params.item.id
-          this.$router.push({
-            name: 'ToPay',
-            params: {
-              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-              address_id: this.address_id
-            }
+        // 判断是否选择收货地址
+        if (this.orderInformation == null) {
+          Toast({
+            message:'请选择收货地址',
+            className: 'zZindex'
           })
         }
+        if (this.orderAddress.id == '') {
+          this.address_id = this.orderInformation.id
+        } else {
+          this.address_id = this.$route.params.item.id
+        }
+        this.$router.push({
+            name: 'ToPay',
+            params: {
+              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+              address_id: this.address_id
+            }
+          })
       }
     },
     watch: {
@@ -115,12 +118,22 @@
       orderInformation(val) {
         let refpath = window.sessionStorage.getItem('refpath')
         if (refpath == '/address') {
-          val.id = this.$route.params.item.id,
-            val.addressDetail = this.$route.params.item.addressDetail,
-            val.city = this.$route.params.item.city,
-            val.county = this.$route.params.item.county,
-            val.tel = this.$route.params.item.tel,
-            val.name = this.$route.params.item.name
+          if (this.orderInformation == null) {
+            this.orderInformation = {
+              city: '',
+              county: '',
+              tel: '',
+              name: '',
+              addressDetail: '',
+              id: ''
+            }
+          }
+          this.orderInformation.id = this.$route.params.item.id,
+          this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
+          this.orderInformation.city = this.$route.params.item.city,
+          this.orderInformation.county = this.$route.params.item.county,
+          this.orderInformation.tel = this.$route.params.item.tel,
+          this.orderInformation.name = this.$route.params.item.name
         }
       }
     }
@@ -170,6 +183,14 @@
     border-top: 2px solid #f2f2f2;
     height: 75px;
     border-bottom: 2px solid #f2f2f2;
+
+    .select-address {
+      height: 60px;
+
+      p {
+        margin-top: 15px;
+      }
+    }
 
     p {
       color: #333;

@@ -66,26 +66,21 @@
 
 
 </script>
-<!-- <script>
-detail_img = function(){
-  
-        let detailImg = document.getElementsByTagName('img')
-        // let img = document.getElementsByName('img')
-        // console.log(img)
-        console.log(detailImg)
-        for (var i = 0; i <= detailImg.length; i++) {
-          // debugger
-          detailImg[i].src = 'http://111.230.221.200:10001' + detailImg[i].src
-        }
-}
-
-</script> -->
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
 
+  
   .produce-title {
+    position: fixed;
+    top: 0px;
+    /* margin-bottom: 51px; */
+    background-color: #fff;
+    width: 100%;
     p {
       margin: 10px 0 10px 15px;
     }
+  }
+  .detail-img{
+    margin-top: 60px;
   }
 </style>

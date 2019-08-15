@@ -29,11 +29,14 @@
           county: this.$route.params.item.county,
           addressDetail: this.$route.params.item.addressDetail,
           isDefault:this.$route.params.item.isDefault,
-        }
+        },
       }
     },
     created() {
       document.title = '地址详情'
+    },
+    mounted () {
+      // this.areaList()
     },
     methods: {
       // 保存地址

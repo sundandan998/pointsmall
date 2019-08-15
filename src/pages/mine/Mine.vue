@@ -54,9 +54,8 @@
       this.userInfo()
     },
     methods: {
-      
       setpwd() {
-        if (this.info.pay_pwd_active == true) {
+        if (this.shops.pay_pwd_active == true) {
           this.$router.push({
             name: 'SafetyCenter'
           })
@@ -72,7 +71,6 @@
               params: { id: 'mine' }
             })
           }).catch(() => {
-            // on cancel
           })
         }
       },
