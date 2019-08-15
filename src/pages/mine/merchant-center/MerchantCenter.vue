@@ -79,6 +79,10 @@
         finished: false,
         error: false,
         pageNum: 1,
+        shops:{
+          page:'',
+          is_shops:'1'
+        }
       }
     },
     created() {
@@ -88,12 +92,12 @@
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          api.merchantOrder({ 'page': this.pageNum }).then(res => {
+          this.shops.page = this.pageNum
+          api.merchantOrder(this.shops).then(res => {
             if (res.code == 0) {
               this.orderList.push.apply(this.orderList, res.data)
               this.loading = false
               if (res.has_next == true) {
-                // this.loading = true
                 this.pageNum++
               }
               if (res.has_next == false) {
@@ -108,35 +112,28 @@
       },
       // tab栏展示列表
       index(index, title) {
+        this.pageNum = 1
+        this.orderList = []
         if (index == 0) {
-          api.merchantOrder().then(res => {
-            this.orderList = res.data
-          }).catch(err => {
-          })
+          if (this.shops.status != undefined){
+            delete this.shops.status
+          }
+          this.onLoad()
         } else {
+          this.shops.status = index
           if (index == 1) {
-            this.orderList.status = 1
-            this.list()
+            this.onLoad()
           } else {
             if (index == 2) {
-              this.orderList.status = 2
-              this.list()
+              this.onLoad()
             } else {
               if (index == 3) {
-                this.orderList.status = 3
-                this.list()
+                this.onLoad()
               }
             }
           }
         }
       },
-      // 列表
-      list() {
-        api.merchantOrder(this.orderList).then(res => {
-          this.orderList = res.data
-        }).catch(err => {
-        })
-      }
     }
 
   }

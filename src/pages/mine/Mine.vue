@@ -3,7 +3,7 @@
     <!-- 中间部分 -->
     <div class="home-body">
       <div class="health-information">
-        <mt-cell title="商家中心" to="merchant" is-link>
+        <mt-cell title="商家中心" to="merchant" is-link v-if="shops.is_shops==true">
           <img slot="icon" src="../../assets/images/merchant.svg">
         </mt-cell>
         <mt-cell title="资产中心" to="assets" is-link>
@@ -39,6 +39,8 @@
         message: 'mine',
         show: true,
         info: {},
+        // 商家中心
+        shops:{},
         integral: {
           'available': '--'
         }
@@ -49,8 +51,10 @@
     },
     created() {
       document.title = '我的'
+      this.userInfo()
     },
     methods: {
+      
       setpwd() {
         if (this.info.pay_pwd_active == true) {
           this.$router.push({
@@ -71,6 +75,13 @@
             // on cancel
           })
         }
+      },
+      // 个人信息
+      userInfo(){
+        api.information().then(res=>{
+          this.shops = res.data
+        }).catch(err=>{
+        })
       }
     }
   }

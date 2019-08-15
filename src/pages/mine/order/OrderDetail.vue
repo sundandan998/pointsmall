@@ -10,7 +10,7 @@
       </span>
     </div>
     <div class="detail-product">
-      <van-card :num="detailData.count" :price="detailData.price+'积分'" :title="detailData.sku_name"
+      <van-card :num="detailData.count" :desc="detailData.price+'积分'" :title="detailData.sku_name"
         :thumb="detailData.sku_image" />
     </div>
     <p class="detail-num"><span>积分总额:</span><span
@@ -117,8 +117,12 @@
   .detail-product {
     height: 70px;
     padding: 10px 10px 0 15px;
-
+    .van-card__desc {
+      color: red;
+      max-height: 20px;
+    }
     img {
+ 
       width: 60px;
       position: relative;
       left: -18px;

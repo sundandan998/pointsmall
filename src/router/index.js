@@ -66,7 +66,7 @@ export default new Router({
     },
      // 明细详情
      {
-      path: '/assetsdetails',
+      path: '/assetsdetails/:id',
       name: 'AssetsDetails',
       component: () => import('@/pages/mine/order/AssetsDetails')
     },

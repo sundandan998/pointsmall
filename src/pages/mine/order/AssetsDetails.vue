@@ -1,15 +1,15 @@
 <template>
   <div class="details">
     <div class="details-title">
-      <span>xx</span>
-      <p>-20 (LIFE+)</p>
+      <span>{{detailsData.detail_type==1?'转入':detailsData.detail_type==100?'转出':detailsData.detail_type==200?'赠送':detailsData.detail_type==300?'消费':'退款'}}</span>
+      <p>{{detailsData.amount}} ({{detailsData.token}})</p>
     </div>
     <div class="details-information">
-      <p>流 水 号 <span>xxx</span></p>
-      <p>订单编号 <span>xxx</span></p>
-      <p>时 间 <span>xxx</span></p>
+      <p>流 水 号 <span>{{detailsData.serial_number}}</span></p>
+      <p>订单编号 <span>{{detailsData.order_id}}</span></p>
+      <p>时 间 <span>{{detailsData.transaction_time}}</span></p>
     </div>
-    <router-link to="detail">
+    <router-link to="/detail/+id">
       <div class="details-button">
         <mt-button size="large">返回</mt-button>
       </div>
@@ -17,15 +17,26 @@
   </div>
 </template>
 <script>
+  import api from '@/api/user/User.js'
   export default {
     data() {
       return {
-
+        detailsData: {}
       }
     },
     created() {
       document.title = '明细详情'
+      this.detail()
     },
+    methods: {
+      detail() {
+        api.details(this.$route.params).then(res => {
+          this.detailsData = res.data
+        }).catch(err => {
+
+        })
+      }
+    }
   }
 </script>
 <style lang="scss">
@@ -36,6 +47,10 @@
     text-align: center;
     margin-top: 10px;
     border-bottom: 1px solid #f2f2f2;
+    span {
+      margin:10px 0;
+      display: block;
+    }
   }
 
   .details-information {
@@ -43,7 +58,7 @@
 
     p {
       margin-bottom: 5px;
-      color: #f2f2f2;
+      color: #333;
 
       span {
         color: #333;

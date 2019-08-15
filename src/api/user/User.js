@@ -81,6 +81,14 @@ export default {
       params: params
     })
   },
+  // // 明细详情
+  details(params = {}) {
+    return request({
+      url: '/user/flow/' + params.id + '/detail/',
+      method: 'get',
+      params: params
+    })
+  },
   // 地址列表
   address(params = {}) {
     return request({
@@ -172,21 +180,14 @@ export default {
     })
   },
   // 明细
-  details(params = {}) {
-    return request({
-      url: '/user/flow/list/',
-      method: 'get',
-      params: params
-    })
-  },
-  // // 明细详情
-  // detail(params = {}) {
+  // details(params = {}) {
   //   return request({
-  //     url: '/user/flow/' + params.id + '/detail/',
+  //     url: '/user/flow/list/',
   //     method: 'get',
   //     params: params
   //   })
   // },
+
   // 扫一扫接口
   scan(params = {}) {
     return request({

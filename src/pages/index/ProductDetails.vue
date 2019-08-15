@@ -1,7 +1,9 @@
 <template>
   <div class="product-detail">
-    <p>{{detail.name}}</p>
-    <p>{{detail.price}}积分</p>
+    <div class="produce-title">
+      <p>{{detail.name}}</p>
+      <p>{{detail.price}}积分</p>
+    </div>
     <div class="detail-img">
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
@@ -24,10 +26,10 @@
       document.title = '商品详情'
       this.detailId = this.$route.params
       this.goods()
-      
+
     },
     mounted() {
-      
+
     },
     methods: {
       // 商品详情
@@ -49,15 +51,20 @@
         })
       },
       buy() {
-        this.$router.push({
-          name: 'Order',
-        })
-      }
-      
+        if (this.$store.getters.token !== '') {
+          this.$router.push({
+            name: 'Order',
+          })
+        } else {
+          this.$router.push({
+            name: 'Register'
+          })
+        }
       }
     }
-  
-    
+  }
+
+
 </script>
 <!-- <script>
 detail_img = function(){
@@ -75,4 +82,10 @@ detail_img = function(){
 </script> -->
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
+
+  .produce-title {
+    p {
+      margin: 10px 0 10px 15px;
+    }
+  }
 </style>

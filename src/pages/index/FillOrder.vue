@@ -19,30 +19,19 @@
     </div>
     <!-- 收货地址 -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
-      <!-- <div class="order-address" v-if="refpath=='/address'">
-        <img src="../../assets/images/address.svg" alt="" class="fl">
-        <span>
-          <p><span>收件人:{{this.$route.params.item.name}}</span> <span>{{this.$route.params.item.tel}}</span></p>
-          <p class="detail-address">
-            {{this.$route.params.item.province}}{{this.$route.params.item.city}}
-            {{this.$route.params.item.county}}{{this.$route.params.item.addressDetail}}</p>
-        </span>
-        <img src="../../assets/images/r.png" alt="" class="fr ">
-      </div> -->
       <div class="order-address">
         <img src="../../assets/images/address.svg" alt="" class="fl">
-        <span>
+        <div>
           <p><span>收件人:{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
           <p class="detail-address">
-            {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderAddress.addressDetail}}
+            收货地址:{{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderAddress.addressDetail}}
           </p>
-        </span>
+        </div>
         <img src="../../assets/images/r.png" alt="" class="fr ">
       </div>
     </router-link>
     <div class="van-sku-actions">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <!--  -->
       <van-button square size="large" type="danger" @click="submit">提交订单</van-button>
     </div>
   </div>
@@ -94,7 +83,6 @@
       information() {
         api.information().then(res => {
           this.orderInformation = res.data.default_address
-          // console.log(this.orderAddress)
         }).catch(err => {
           console.log(err)
         })
@@ -128,11 +116,11 @@
         let refpath = window.sessionStorage.getItem('refpath')
         if (refpath == '/address') {
           val.id = this.$route.params.item.id,
-          val.addressDetail = this.$route.params.item.addressDetail,
-          val.city = this.$route.params.item.city,
-          val.county = this.$route.params.item.county,
-          val.tel = this.$route.params.item.tel,
-          val.name = this.$route.params.item.name
+            val.addressDetail = this.$route.params.item.addressDetail,
+            val.city = this.$route.params.item.city,
+            val.county = this.$route.params.item.county,
+            val.tel = this.$route.params.item.tel,
+            val.name = this.$route.params.item.name
         }
       }
     }
@@ -180,6 +168,14 @@
   .order-address {
     padding-top: 10px;
     border-top: 2px solid #f2f2f2;
+    height: 75px;
+    border-bottom: 2px solid #f2f2f2;
+
+    p {
+      color: #333;
+      height: 40px;
+      line-height: 30px;
+    }
 
     span {
       color: #333;
@@ -194,12 +190,13 @@
   }
 
   .order-address img:last-child {
-    margin-top: -25px;
-    margin-right: 10px;
+    position: relative;
+    top: -50px;
+    right: 10px;
   }
 
   .order-address img:first-child {
     margin: 10px 10px 0 15px;
-    height: 25px;
+    height: 31px;
   }
 </style>

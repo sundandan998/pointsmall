@@ -61,7 +61,7 @@
     methods: {
       // 订单详情
       detail() {
-        api.merchantDetail(this.$route.params).then(res => {
+        api.merchantDetail({'id':this.$route.params.id,'is_shops':'1'}).then(res => {
           this.detailData = res.data
           this.detailAddress= res.data.address
         }).catch(err => {

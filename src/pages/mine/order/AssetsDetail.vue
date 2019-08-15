@@ -2,11 +2,15 @@
   <div class="detail">
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
-      <!-- v-for="item in detailData" -->
-      <div class="detail-list">
-        <mt-cell title="购物" label="描述信息" to="assetsdetails" is-link>
-          <span>-1(LIFE+)</span>
-        </mt-cell>
+      <div class="detail-list" v-for="item in detailData">
+        <router-link :to="/assetsdetails/+item.id">
+          <mt-cell
+            :title="item.detail_type==1?'转入':item.detail_type==100?'转出':item.detail_type==200?'赠送':item.detail_type==300?'消费':'退款'"
+            :label="item.transaction_time" is-link>
+            <span>{{item.amount}}({{item.token}})</span>
+            <!-- <p>{{flowData.payment_type===1?'+'+flowData.amount :'-'+flowData.amount}}</p> -->
+          </mt-cell>
+        </router-link>
       </div>
     </van-list>
     <router-link to="/assets">
@@ -21,13 +25,13 @@
   export default {
     data() {
       return {
-        detailData:[],
+        detailData: [],
         // 上拉加载
         loading: false,
         finished: false,
         error: false,
         pageNum: 1,
-        
+
       }
     },
     created() {
@@ -60,6 +64,12 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+
+  .detail-list {
+    a.mint-cell {
+      color: #333;
+    }
+  }
 
   .assets-center-button {
     button {

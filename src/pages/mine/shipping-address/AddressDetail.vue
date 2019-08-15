@@ -28,6 +28,7 @@
           city: this.$route.params.item.city,
           county: this.$route.params.item.county,
           addressDetail: this.$route.params.item.addressDetail,
+          isDefault:this.$route.params.item.isDefault,
         }
       }
     },
