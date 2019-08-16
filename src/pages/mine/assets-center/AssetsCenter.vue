@@ -6,13 +6,15 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
+          <span class="assets-center-list-right fr">{{item.balance}}</span>
+
         <div class="assets-center-list-left fl">
           <img :src="item.token.icon" alt="">
           <span>{{item.token.code}}</span>
           <p>{{item.token.subject}}</p>
         </div>
-        <span class="assets-center-list-right fr">{{item.balance|keepTwoNum}}</span>
-        <div class=" fr integral"><img src="../../../assets/images/wait.png" alt=""> {{item.integral|keepTwoNum}}(超级积分)
+        <!-- <span class="assets-center-list-right fr">{{item.balance}}</span> -->
+        <div class=" fr integral"><img src="../../../assets/images/wait.png" alt=""> {{item.integral}}(超级积分)
         </div>
       </div>
     </van-list>
@@ -70,14 +72,14 @@
   @import '../../../assets/scss/Global.scss';
 
   .assets-center-list {
-    height: 72px;
+    height: 100px;
     padding: 5px 10px 5px 15px;
     border-top: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
     .integral {
       margin-top: 10px;
       position: relative;
-      left: 80px;
+      /* left: 80px; */
       margin-right: 10px;
     }
   }
@@ -106,10 +108,5 @@
       color: #fff;
     }
 
-  }
-
-  .assets-center-list-right {
-    position: relative;
-    top: -40px;
   }
 </style>

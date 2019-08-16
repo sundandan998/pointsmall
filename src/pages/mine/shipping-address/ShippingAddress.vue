@@ -6,6 +6,7 @@
         <van-button square size="large" type="warning">返回</van-button>
       </div>
     </router-link>
+   
   </div>
 
 </template>
@@ -22,7 +23,6 @@
     created() {
       document.title = '收货地址'
       this.address()
-      // console.log(this.$route.params.id)
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -41,12 +41,14 @@
       onEdit(item, index) {
         this.$router.push({
           name: 'AddressDetail',
-          params: { index: index, item: item,id:this.$route.params.id }
+          params: { index: index, item: item, id: this.$route.params.id }
         })
       },
       onAdd(item, index) {
         this.$router.push({
-          name: 'NewAddress'
+          name: 'NewAddress',
+          params: { index: index, item: item, id: this.$route.params.id }
+
         })
       },
       selectAddress(item, index) {
@@ -61,7 +63,7 @@
         } else {
           this.$router.push({
             name: 'Order',
-            params: { index: index, item: item,}
+            params: { index: index, item: item, }
           })
         }
       }
@@ -72,36 +74,34 @@
   @import '../../../assets/scss/Global.scss';
 
   .van-address-list__add {
-    left: unset;
+    left: unset !important;
 
   }
 
   .address {
     .van-address-item .van-radio__icon {
-      display: none;
+      display: none !important;
     }
 
     .van-address-list__add {
       position: fixed;
       right: 0px !important;
-      bottom: 0;
-      z-index: 9999;
-      width: 50%;
-      border-top-right-radius: 25px;
-      border-bottom-right-radius: 25px;
+      bottom: 0 !important;
+      z-index: 9999 !important;
+      width: 50% !important;
+      border-top-right-radius: 25px !important;
+      border-bottom-right-radius: 25px !important;
     }
 
     .van-button--warning {
-      color: #09BB07;
-      background-color: #fff;
-      border: 1px solid #09BB07;
-      border-top-left-radius: 25px;
-      border-bottom-left-radius: 25px;
-      height: 40px;
-      line-height: 40px;
-      position: fixed;
-      bottom: 0;
-      width: 50%;
+      color: #09BB07 !important;
+      background-color: #fff !important;
+      border: 1px solid #09BB07 !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      position: fixed !important;
+      bottom: 0 !important;
+      width: 50% !important; 
     }
   }
 </style>

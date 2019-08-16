@@ -1,7 +1,7 @@
 <template>
   <div class="order">
     <div class="order-product">
-      <van-card :price="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" />
+      <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" />
     </div>
     <!-- <div class="order-detail">
       <div v-for="item in orderColor">
@@ -25,9 +25,9 @@
           <p>请选择收货地址</p>
         </div>
         <div v-else>
-          <p><span>收件人:{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
+          <p><span>{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
           <p class="detail-address">
-            收货地址:{{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
+          {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
           </p>
         </div>
         <img src="../../assets/images/r.png" alt="" class="fr ">

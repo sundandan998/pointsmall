@@ -11,6 +11,10 @@
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
     </div>
+    <!-- <van-goods-action>
+      <van-goods-action-button type="warning" text="加入购物车"  />
+      <van-goods-action-button type="danger" text="立即购买"  />
+    </van-goods-action> -->
   </div>
 
 </template>
@@ -69,18 +73,18 @@
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
 
-  
   .produce-title {
     position: fixed;
     top: 0px;
-    /* margin-bottom: 51px; */
     background-color: #fff;
     width: 100%;
+
     p {
       margin: 10px 0 10px 15px;
     }
   }
-  .detail-img{
+
+  .detail-img {
     margin-top: 60px;
   }
 </style>

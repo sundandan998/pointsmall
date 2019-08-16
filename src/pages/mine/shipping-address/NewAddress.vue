@@ -4,7 +4,7 @@
       <van-address-edit :area-list="areaList" show-set-default show-search-result @save="onSave" />
     </div>
     <router-link to="/address">
-      <div class="address-btn ">
+      <div class="address-btn">
         <van-button square size="large" type="warning">返回</van-button>
       </div>
     </router-link>
@@ -54,16 +54,16 @@
 <style>
   @import '../../../assets/scss/Global.scss';
   .van-button--block {
-    width: 50%;
-    right: 0;
-    position: fixed;
-    bottom: -15px;
+    width: 50% !important;
+    right: 0 !important;
+    position: fixed !important;
+    bottom: -15px !important;
   }
   .van-button--large {
-    width: 50%;
-    position: fixed;
-    height: 40px;
-    line-height: 40px;
-    bottom: 0px;
+    width: 50% !important;
+    position: fixed !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    bottom: 0px !important;
   }
 </style>

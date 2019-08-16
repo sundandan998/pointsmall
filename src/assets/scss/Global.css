@@ -75,30 +75,24 @@ input.mint-field-core {
   color: #999;
 }
 
-.van-sku-actions {
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-}
-
 .van-button--warning {
-  color: #09BB07;
-  background-color: #fff;
-  border: 1px solid #09BB07;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  height: 40px;
-  line-height: 40px;
+  color: #09BB07 !important;
+  background-color: #fff !important;
+  border: 1px solid #09BB07 !important;
+  border-top-left-radius: 25px !important;
+  border-bottom-left-radius: 25px !important;
+  height: 40px !important;
+  line-height: 40px !important;
 }
 
 .van-button--danger {
-  color: #fff;
-  background-color: #09BB07;
-  border: 1px solid #09BB07;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-  height: 40px;
-  line-height: 40px;
+  color: #fff !important;
+  background-color: #09BB07 !important;
+  border: 1px solid #09BB07 !important;
+  border-top-right-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
+  height: 40px !important;
+  line-height: 40px !important;
 }
 
 .van-sku-actions {

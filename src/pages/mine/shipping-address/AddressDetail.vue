@@ -4,9 +4,9 @@
       <van-address-edit :address-info="this.AddressInfo" :area-list="areaList" show-delete show-set-default
         @save="onSave" @delete="onDelete" />
     </div>
-    <router-link to="/address">
-      <div class="address-detail-btn">
-        <van-button square size="large" type="primary">返回</van-button>
+    <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
+      <div>
+        <van-button square size="large" type="warning">返回</van-button>
       </div>
     </router-link>
   </div>
@@ -28,15 +28,14 @@
           city: this.$route.params.item.city,
           county: this.$route.params.item.county,
           addressDetail: this.$route.params.item.addressDetail,
-          isDefault:this.$route.params.item.isDefault,
+          isDefault: this.$route.params.item.isDefault,
         },
       }
     },
     created() {
       document.title = '地址详情'
-      console.log(this.$route.params.id)
     },
-    mounted () {
+    mounted() {
       // this.areaList()
     },
     methods: {
@@ -45,7 +44,8 @@
         api.editAddress(val).then(res => {
           if (res.code == 0) {
             this.$router.push({
-              name: 'ShippingAddress'
+              name: 'ShippingAddress',
+              params: { id: this.$route.params.id }
             })
             Toast({
               message: res.msg,
@@ -91,59 +91,25 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
-  .van-button--primary{
-    color: #09BB07;
-    background-color: #fff;
-    border: 1px solid #09BB07;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 25px;
-    width: 90%;
-    margin: 0 auto;
-    display: block;
+  .newaddress {
+    .van-button--warning {
+      border-radius: 25px !important;
+      width: 90% !important;
+      display: block !important;
+      margin: 0 auto !important;
+    }
   }
 
   .edit-address {
-    .van-sku-actions {
-      position: absolute;
-      bottom: 0px;
-      width: 100%;
-    }
-
-    .save-address {
-      position: fixed;
-      bottom: 50px;
-      border-radius: 25px;
-    
-      background-color: #09BB07;
-      color: #fff;
-    }
-
-    .van-button--warning {
-      color: #09BB07;
-      background-color: #fff;
-      border: 1px solid #09BB07;
-      border-radius: 25px;
-    
-      height: 40px;
-      line-height: 40px;
-    }
-
     .van-button--default {
-      color: #fff;
-      background-color: #E51C23;
-      border: 1px solid #E51C23;
-      border-radius: 25px;
+      color: #fff !important;
+      background-color: #E51C23 !important;
+      border: 1px solid #E51C23 !important;
+      border-radius: 25px !important;
     }
 
     .van-button--danger {
-      color: #fff;
-      background-color: #09BB07;
-      border: 1px solid #09BB07;
-      border-radius: 25px;
-      height: 40px;
-      line-height: 40px;
+      border-radius: 25px !important;
     }
   }
 </style>
