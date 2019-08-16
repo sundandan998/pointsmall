@@ -27,15 +27,15 @@
         <div v-else>
           <p><span>{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
           <p class="detail-address">
-          {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
+            {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
           </p>
         </div>
         <img src="../../assets/images/r.png" alt="" class="fr ">
       </div>
     </router-link>
-    <div class="van-sku-actions">
+    <div class="order-btn">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <van-button square size="large" type="danger" @click="submit">提交订单</van-button>
+      <van-button square size="large" type="danger" @click="submit" class="submit-btn">提交订单</van-button>
     </div>
   </div>
 </template>
@@ -142,6 +142,11 @@
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
 
+  .order {
+    .van-address-item .van-radio__icon {
+      display: none !important;
+    }
+  }
   .van-card {
     border-bottom: 2px solid #f2f2f2;
     background-color: #fff;

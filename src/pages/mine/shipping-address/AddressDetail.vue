@@ -1,12 +1,12 @@
 <template>
-  <div class="newaddress">
+  <div class="address-detail">
     <div class="edit-address">
       <van-address-edit :address-info="this.AddressInfo" :area-list="areaList" show-delete show-set-default
         @save="onSave" @delete="onDelete" />
     </div>
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
       <div>
-        <van-button square size="large" type="warning">返回</van-button>
+        <van-button square size="large" type="warning">取消</van-button>
       </div>
     </router-link>
   </div>
@@ -91,25 +91,41 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-  .newaddress {
+
+  .address-detail {
     .van-button--warning {
-      border-radius: 25px !important;
-      width: 90% !important;
-      display: block !important;
-      margin: 0 auto !important;
-    }
-  }
-
-  .edit-address {
-    .van-button--default {
-      color: #fff !important;
-      background-color: #E51C23 !important;
-      border: 1px solid #E51C23 !important;
-      border-radius: 25px !important;
+      width: 50%;
     }
 
-    .van-button--danger {
-      border-radius: 25px !important;
+    .van-address-edit__buttons .van-button {
+      margin-bottom: 0px !important;
+    }
+
+    .edit-address {
+      .van-button--default {
+        color: #fff !important;
+        background-color: #E51C23 !important;
+        border: 1px solid #E51C23 !important;
+        width: 50% !important;
+        position: fixed !important;
+        left: 50% !important;
+        bottom: 0px !important;
+        height: 40px !important;
+        border-top-right-radius: 25px !important;
+        border-bottom-right-radius: 25px !important;
+      }
+      .van-button--danger {
+        color: #fff !important;
+        background-color: #09BB07 !important;
+        height: 40px !important;
+        line-height: 40px !important;
+        width: 100% !important;
+        position: fixed !important;
+        margin: 0 auto !important;
+        bottom: 70px !important;
+        border-radius: 25px !important;
+        left: 0 !important;
+      }
     }
   }
 </style>

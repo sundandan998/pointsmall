@@ -11,8 +11,8 @@
   </div>
 </template>
 <script>
+  import areaList from '@/assets/js/area.js'
   import { Toast } from 'mint-ui'
-  import areaList from '@/assets/js/area'
   import api from '@/api/user/User.js'
   export default {
     data() {
@@ -53,17 +53,33 @@
 </script>
 <style>
   @import '../../../assets/scss/Global.scss';
-  .van-button--block {
-    width: 50% !important;
-    right: 0 !important;
-    position: fixed !important;
-    bottom: -15px !important;
-  }
-  .van-button--large {
-    width: 50% !important;
-    position: fixed !important;
-    height: 40px !important;
-    line-height: 40px !important;
-    bottom: 0px !important;
+  .van-address-edit__buttons .van-button {
+    margin-bottom: 0 !important;
+}
+  .newaddress {
+    .address-btn {
+      .van-button--warning {
+        width: 50% !important;
+        position: fixed !important;
+        height: 40px !important;
+        line-height: 40px !important;
+        bottom: 0px !important;
+      }
+    }
+
+    .van-button--block {
+      width: 50% !important;
+      right: 0 !important;
+      position: fixed !important;
+      bottom: 0px !important;
+    }
+
+    .van-button--large {
+      width: 50% !important;
+      position: fixed !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      bottom: 0px !important;
+    }
   }
 </style>

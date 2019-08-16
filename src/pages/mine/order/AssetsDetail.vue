@@ -4,11 +4,8 @@
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="detail-list" v-for="item in detailData">
         <router-link :to="/assetsdetails/+item.id">
-          <mt-cell
-            :title="item.detail_type==1?'转入':item.detail_type==100?'转出':item.detail_type==200?'赠送':item.detail_type==300?'消费':'退款'"
-            :label="item.transaction_time" is-link>
-            <span>{{item.amount}}({{item.token}})</span>
-            <!-- <p>{{flowData.payment_type===1?'+'+flowData.amount :'-'+flowData.amount}}</p> -->
+          <mt-cell :title="item.detail_type|type" :label="item.transaction_time" is-link>
+            <span>{{item.amount|keepTwoNum}}({{item.token}})</span>
           </mt-cell>
         </router-link>
       </div>
@@ -36,6 +33,15 @@
     },
     created() {
       document.title = '明细'
+    },
+    filters: {
+      // 类型文字转换
+      type: function (value) {
+        return value == 1 ? '转入' : value == 100 ? '转出' : value == 200 ? '赠送' : value == 300 ? '消费' : '退款'
+      },
+      num: function (value) {
+        return
+      }
     },
     methods: {
       // 上拉加载
@@ -70,15 +76,13 @@
       color: #333;
     }
   }
-
   .assets-center-button {
     button {
       position: fixed;
-      bottom: 0;
+      width: 100%;
       border-radius: 20px;
       background-color: #09BB07;
-      color: #fff;
+      margin:10px auto;
     }
-
   }
 </style>

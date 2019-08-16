@@ -1,15 +1,15 @@
 <template>
   <div class="details">
     <div class="details-title">
-      <span>{{detailsData.detail_type==1?'转入':detailsData.detail_type==100?'转出':detailsData.detail_type==200?'赠送':detailsData.detail_type==300?'消费':'退款'}}</span>
-      <p>{{detailsData.amount}} ({{detailsData.token}})</p>
+      <span>{{detailsData.detail_type|type}}</span>
+      <p>{{detailsData.amount|keepTwoNum}} ({{detailsData.token}})</p>
     </div>
     <div class="details-information">
-      <p>流 水 号 <span>{{detailsData.serial_number}}</span></p>
-      <p>订单编号 <span>{{detailsData.order_id}}</span></p>
-      <p>时 间 <span>{{detailsData.transaction_time}}</span></p>
+      <mt-cell title="流 水 号" :value="detailsData.serial_number"></mt-cell>
+      <mt-cell title="订单编号" :value="detailsData.order_id"></mt-cell>
+      <mt-cell title="时 间" :value="detailsData.transaction_time"></mt-cell>
     </div>
-    <router-link to="/detail/+id">
+    <router-link to="/assetsdetail">
       <div class="details-button">
         <mt-button size="large">返回</mt-button>
       </div>
@@ -27,6 +27,16 @@
     created() {
       document.title = '明细详情'
       this.detail()
+    },
+    filters: {
+      // 类型文字转换
+      type:function(value){
+        return value==1?'转入':value==100?'转出':value==200?'赠送':value==300?'消费':'退款'
+      },
+    //  数字带+-符号
+      num:function(value){
+      // return value==
+      }
     },
     methods: {
       detail() {
@@ -47,8 +57,9 @@
     text-align: center;
     margin-top: 10px;
     border-bottom: 1px solid #f2f2f2;
+
     span {
-      margin:10px 0;
+      margin: 10px 0;
       display: block;
     }
   }

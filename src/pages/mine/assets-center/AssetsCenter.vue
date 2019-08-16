@@ -6,7 +6,7 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
-          <span class="assets-center-list-right fr">{{item.balance}}</span>
+          <span class="assets-center-list-right fr">{{item.balance|keepTwoNum}}</span>
 
         <div class="assets-center-list-left fl">
           <img :src="item.token.icon" alt="">
@@ -14,7 +14,7 @@
           <p>{{item.token.subject}}</p>
         </div>
         <!-- <span class="assets-center-list-right fr">{{item.balance}}</span> -->
-        <div class=" fr integral"><img src="../../../assets/images/wait.png" alt=""> {{item.integral}}(超级积分)
+        <div class=" fr integral"><img src="../../../assets/images/wait.png" alt=""> {{item.integral|keepTwoNum}}(超级积分)
         </div>
       </div>
     </van-list>
@@ -74,7 +74,7 @@
   .assets-center-list {
     height: 100px;
     padding: 5px 10px 5px 15px;
-    border-top: 1px solid #f2f2f2;
+    /* border-top: 1px solid #f2f2f2; */
     border-bottom: 1px solid #f2f2f2;
     .integral {
       margin-top: 10px;
@@ -97,8 +97,6 @@
       display: block;
     }
   }
-
-
   .assets-center-button {
     button {
       position: fixed;

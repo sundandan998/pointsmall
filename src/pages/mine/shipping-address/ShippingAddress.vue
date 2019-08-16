@@ -13,7 +13,6 @@
 <script>
   import api from '@/api/user/User.js'
   import { Toast } from 'mint-ui'
-
   export default {
     data() {
       return {
@@ -92,7 +91,6 @@
       border-top-right-radius: 25px !important;
       border-bottom-right-radius: 25px !important;
     }
-
     .van-button--warning {
       color: #09BB07 !important;
       background-color: #fff !important;
