@@ -7,7 +7,7 @@
     <div class="detail-img">
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
-    <div class="van-sku-actions">
+    <div class="bottom-button">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
     </div>
@@ -87,4 +87,5 @@
   .detail-img {
     margin-top: 60px;
   }
+
 </style>

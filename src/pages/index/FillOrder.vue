@@ -33,7 +33,7 @@
         <img src="../../assets/images/r.png" alt="" class="fr ">
       </div>
     </router-link>
-    <div class="order-btn">
+    <div class="bottom-button">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click="submit" class="submit-btn">提交订单</van-button>
     </div>

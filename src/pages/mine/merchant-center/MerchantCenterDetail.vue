@@ -29,7 +29,7 @@
         <mt-button size="large" v-if="detailData.status!=1">返回</mt-button>
       </div>
     </router-link>
-    <div class="van-sku-actions" v-if="detailData.status==1">
+    <div class="bottom-button" v-if="detailData.status==1">
       <van-button square size="large" type="warning" @click="cancel" > 返回</van-button>
       <van-button square size="large" type="danger" @click="ship">发货</van-button>
     </div>

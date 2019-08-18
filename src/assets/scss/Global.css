@@ -79,9 +79,10 @@ input.mint-field-core {
   border-bottom-left-radius: 25px !important;
   height: 40px !important;
   line-height: 40px !important;
-  width: 50% !important;
+  width: 48% !important;
   position: fixed !important;
-  bottom: 0px !important;
+  bottom: 10px !important;
+  right: 50%;
 }
 
 .van-button--danger {
@@ -92,17 +93,33 @@ input.mint-field-core {
   border-bottom-right-radius: 25px !important;
   height: 40px !important;
   line-height: 40px !important;
-  width: 50% !important;
+  width: 48% !important;
   position: fixed !important;
-  bottom: 0px !important;
+  bottom: 10px !important;
   left: 50% !important;
 }
 
-.van-sku-actions {
+.bottom-button {
   position: fixed;
-  bottom: 0px;
-  height: 40px;
-  padding-top: 2px;
+  width: 100%;
+  bottom: 10px;
+  text-align: center;
+}
+
+.order-button {
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  bottom: 10px;
+}
+
+.order-button button {
+  border-radius: 20px;
+  background-color: #F9F9F9;
+  width: 96%;
+  display: inline-block;
+  color: #4ECD4D !important;
+  border: 1px solid #4ECD4D !important;
 }
 
 .health-score {

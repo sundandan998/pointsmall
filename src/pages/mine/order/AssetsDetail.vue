@@ -11,7 +11,7 @@
       </div>
     </van-list>
     <router-link to="/assets">
-      <div class="assets-center-button">
+      <div class="order-button">
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
@@ -76,13 +76,5 @@
       color: #333;
     }
   }
-  .assets-center-button {
-    button {
-      position: fixed;
-      width: 100%;
-      border-radius: 20px;
-      background-color: #09BB07;
-      margin:10px auto;
-    }
-  }
+ 
 </style>

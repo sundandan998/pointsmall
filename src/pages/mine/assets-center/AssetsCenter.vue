@@ -19,7 +19,7 @@
       </div>
     </van-list>
     <router-link to="mine">
-      <div class="assets-center-button">
+      <div class="order-button">
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
@@ -96,15 +96,5 @@
     span {
       display: block;
     }
-  }
-  .assets-center-button {
-    button {
-      position: fixed;
-      bottom: 0;
-      border-radius: 20px;
-      background-color: #09BB07;
-      color: #fff;
-    }
-
   }
 </style>

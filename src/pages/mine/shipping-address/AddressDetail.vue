@@ -96,11 +96,21 @@
     .van-button--warning {
       width: 50%;
     }
-
     .van-address-edit__buttons .van-button {
       margin-bottom: 0px !important;
     }
-
+    .van-button--warning {
+      color: #09BB07 !important;
+      background-color: #fff !important;
+      border: 1px solid #09BB07 !important;
+      border-top-left-radius: 25px !important;
+      border-bottom-left-radius: 25px !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      width: 50% !important;
+      bottom: 0px !important;
+      position: fixed !important;
+    }
     .edit-address {
       .van-button--default {
         color: #fff !important;
@@ -114,6 +124,7 @@
         border-top-right-radius: 25px !important;
         border-bottom-right-radius: 25px !important;
       }
+
       .van-button--danger {
         color: #fff !important;
         background-color: #09BB07 !important;

@@ -25,11 +25,11 @@
       <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
     </div>
     <router-link to="/myorder">
-      <div class="detail-button">
+      <div class="order-button">
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
-    <div class="van-sku-actions" v-if="detailData.status==2">
+    <div class="bottom-button" v-if="detailData.status==2">
       <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
       <van-button square size="large" type="danger" @click=receipt>确认收货</van-button>
     </div>
@@ -89,14 +89,14 @@
   @import "../../../assets/scss/Global.scss";
 
   .detail-address {
-    /* border-bottom: 2px solid #f2f2f2;
-    padding: 10px 10px 10px 15px; */
+    /* border-bottom: 2px solid #f2f2f2; */
+    padding: 10px 10px 10px 15px;
 
     img {
       display: inline-block;
       float: left;
       margin-right: 10px;
-      height: 30px;
+      height: 45px;
     }
   }
 

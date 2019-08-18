@@ -175,15 +175,4 @@
       top: -24px;
     }
   }
-
-  .order-button {
-    button {
-      border-radius: 20px;
-      background-color: #F9F9F9;
-      color: #4ECD4D !important;
-      border: 1px solid #4ECD4D !important;
-      position: fixed;
-      bottom: 10px;
-    }
-  }
 </style>

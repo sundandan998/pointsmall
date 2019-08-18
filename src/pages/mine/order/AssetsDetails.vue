@@ -10,7 +10,7 @@
       <mt-cell title="时 间" :value="detailsData.transaction_time"></mt-cell>
     </div>
     <router-link to="/assetsdetail">
-      <div class="details-button">
+      <div class="order-button">
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
@@ -75,16 +75,6 @@
         color: #333;
         margin-left: 30px;
       }
-    }
-  }
-
-  .details-button {
-    button {
-      position: fixed;
-      bottom: 0;
-      border-radius: 20px;
-      background-color: #09BB07;
-      color: #fff;
     }
   }
 </style>
