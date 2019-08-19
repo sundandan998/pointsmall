@@ -6,7 +6,7 @@
         <van-button square size="large" type="warning">返回</van-button>
       </div>
     </router-link>
-   
+
   </div>
 
 </template>
@@ -54,7 +54,7 @@
         // 判断来的路径，如果是从我的页面跳转过来，点击空白不跳转
         // 如果是在填写订单页面跳转过来，跳回到填写订单页面
         let refpath = window.sessionStorage.getItem('refpath')
-        if (refpath == '/mine'||refpath == '/addressdetail') {
+        if (refpath == '/mine') {
           this.$router.push({
             name: 'ShippingAddress',
             params: { index: index, item: item, id: this.$route.params.id }
@@ -92,6 +92,7 @@
       border-bottom-right-radius: 25px !important;
       left: 50% !important;
     }
+
     .van-button--warning {
       color: #09BB07 !important;
       background-color: #fff !important;
@@ -100,7 +101,7 @@
       line-height: 40px !important;
       position: fixed !important;
       bottom: 0 !important;
-      width: 50% !important; 
+      width: 50% !important;
     }
   }
 </style>

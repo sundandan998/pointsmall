@@ -52,7 +52,6 @@
               this.assetsData.push.apply(this.assetsData, res.data)
               this.loading = false
               if (res.has_next == true) {
-                // this.loading = true
                 this.pageNum++
               }
               if (res.has_next == false) {

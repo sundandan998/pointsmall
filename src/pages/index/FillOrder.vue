@@ -196,10 +196,8 @@
         margin-top: 15px;
       }
     }
-
     p {
       color: #333;
-      height: 40px;
       line-height: 30px;
     }
 

@@ -1,8 +1,8 @@
 <template>
   <div class="address-detail">
     <div class="edit-address">
-      <van-address-edit :address-info="this.AddressInfo" :area-list="areaList" show-delete show-set-default
-        @save="onSave" @delete="onDelete" />
+      <van-address-edit :address-info="AddressInfo" :area-list="areaList" show-delete show-set-default
+        @save="onSave" @delete="onDelete" id="text"/>
     </div>
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
       <div>
@@ -19,7 +19,6 @@
     data() {
       return {
         areaList,
-        searchResult: [],
         AddressInfo: {
           id: this.$route.params.item.id,
           name: this.$route.params.item.name,
@@ -34,9 +33,6 @@
     },
     created() {
       document.title = '地址详情'
-    },
-    mounted() {
-      // this.areaList()
     },
     methods: {
       // 保存地址
@@ -85,7 +81,7 @@
             })
           }
         })
-      }
+      },
     }
   }
 </script>

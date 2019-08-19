@@ -30,7 +30,8 @@
         api.addAddress(val).then(res => {
           if (res.code == 0) {
             this.$router.push({
-              name: 'ShippingAddress'
+              name: 'ShippingAddress',
+              params: { id: this.$route.params.id }
             })
             Toast({
               message: res.msg,
@@ -63,7 +64,7 @@
     color: #4ECD4D !important;
     border: 1px solid #4ECD4D !important;
     position: fixed !important;
-    bottom: 0px !important;
+    bottom: 10px !important;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
     width: 50%!important;
@@ -81,6 +82,6 @@
       width: 50% !important;
       position: fixed !important;
       left: 50% !important;
-      bottom: 0px !important;
+      bottom: 10px !important;
     }
 </style>

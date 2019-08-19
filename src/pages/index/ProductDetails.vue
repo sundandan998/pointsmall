@@ -32,9 +32,6 @@
       this.goods()
 
     },
-    mounted() {
-
-    },
     methods: {
       // 商品详情
       goods() {
@@ -51,7 +48,7 @@
       },
       cancel() {
         this.$router.push({
-          name: 'Index'
+          name: 'Index' 
         })
       },
       buy() {
