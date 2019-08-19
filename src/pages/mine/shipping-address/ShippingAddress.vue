@@ -71,37 +71,9 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
-  .van-address-list__add {
-    left: unset !important;
-
-  }
-
   .address {
     .van-address-item .van-radio__icon {
       display: none !important;
-    }
-
-    .van-address-list__add {
-      position: fixed;
-      right: 0px !important;
-      bottom: 0 !important;
-      z-index: 9999 !important;
-      width: 50% !important;
-      border-top-right-radius: 25px !important;
-      border-bottom-right-radius: 25px !important;
-      left: 50% !important;
-    }
-
-    .van-button--warning {
-      color: #09BB07 !important;
-      background-color: #fff !important;
-      border: 1px solid #09BB07 !important;
-      height: 40px !important;
-      line-height: 40px !important;
-      position: fixed !important;
-      bottom: 0 !important;
-      width: 50% !important;
     }
   }
 </style>
