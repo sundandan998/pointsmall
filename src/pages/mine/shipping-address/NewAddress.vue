@@ -5,7 +5,7 @@
     </div>
     <router-link to="/address">
       <div class="address-btn">
-        <van-button square size="large" type="warning">返回</van-button>
+        <van-button square size="large" type="warning" >返回</van-button>
       </div>
     </router-link>
   </div>
@@ -54,11 +54,8 @@
 </script>
 <style>
   @import '../../../assets/scss/Global.scss';
+
   .van-address-edit__buttons .van-button {
     margin-bottom: 0px !important;
   }
-  /* .van-button--warning {
-    position: unset !important;
-    margin-bottom: 10px !important;
-  } */
 </style>

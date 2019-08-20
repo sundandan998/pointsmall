@@ -19,18 +19,18 @@
       <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
     </div>
     <div class="detail-num" v-if="detailData.status==1">
-      <mt-field label="物流单号" placeholder="请输入物流单号" type="number" v-model="shipParams.wl_number" ></mt-field>
+      <mt-field label="物流单号" placeholder="请输入物流单号" type="number" v-model="shipParams.wl_number"></mt-field>
     </div>
     <div class="detail-num" v-if="detailData.status!=1">
       <p class="wl-num"><span>物流单号</span><span class="fr">{{detailData.wl_number}}</span></p>
-      </div>
+    </div>
     <router-link to="/merchant">
       <div class="merchant-button">
         <mt-button size="large" v-if="detailData.status!=1">返回</mt-button>
       </div>
     </router-link>
-    <div class="bottom-button" v-if="detailData.status==1">
-      <van-button square size="large" type="warning" @click="cancel" > 返回</van-button>
+    <div class="bottom-button" v-if="detailData.status==1" v-show="showBtn">
+      <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
       <van-button square size="large" type="danger" @click="ship">发货</van-button>
     </div>
   </div>
@@ -42,14 +42,27 @@
     data() {
       return {
         detailData: {},
-        detailAddress:{},
-        id:'',
+        detailAddress: {},
+        id: '',
         detailParams: {
           is_shops: 1
         },
-        shipParams:{
-          wl_number:'',
-          id:this.$route.params.id
+        shipParams: {
+          wl_number: '',
+          id: this.$route.params.id
+        },
+         // 解决底部按钮被弹起问题
+        clientHeight:document.documentElement.clientHeight,
+        showBtn: true,  // 控制按钮盒子显示隐藏
+      }
+    },
+    // 解决底部按钮被弹起问题
+    mounted() {
+      window.onresize= ()=>{
+        if(this.clientHeight>document.documentElement.clientHeight) {
+          this.showBtn =false
+        }else{
+          this.showBtn = true
         }
       }
     },
@@ -61,9 +74,9 @@
     methods: {
       // 订单详情
       detail() {
-        api.merchantDetail({'id':this.$route.params.id,'is_shops':'1'}).then(res => {
+        api.merchantDetail({ 'id': this.$route.params.id, 'is_shops': '1' }).then(res => {
           this.detailData = res.data
-          this.detailAddress= res.data.address
+          this.detailAddress = res.data.address
         }).catch(err => {
 
         })
@@ -75,13 +88,13 @@
         })
       },
       // 发货
-      ship(){
-        api.ship(this.shipParams).then(res=>{
-          if(res.code==0){
+      ship() {
+        api.ship(this.shipParams).then(res => {
+          if (res.code == 0) {
             window.location.reload()
           }
-        }).catch(err=>{
-          if(err.code !=0){
+        }).catch(err => {
+          if (err.code != 0) {
             Toast({
               message: err.msg,
               position: 'top',
@@ -90,7 +103,7 @@
           }
         })
       }
-    }
+    },
   }
 </script>
 <style lang="scss">
@@ -136,7 +149,8 @@
   .detail-num {
     border-top: 1px solid #f2f2f2;
     border-bottom: 2px solid #f2f2f2;
-    .wl-num{
+
+    .wl-num {
       padding: 10px 10px 10px 15px;
 
     }

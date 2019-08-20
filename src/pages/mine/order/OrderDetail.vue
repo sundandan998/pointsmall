@@ -29,7 +29,7 @@
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
-    <div class="bottom-button" v-if="detailData.status==2">
+    <div class="bottom-button" v-if="detailData.status==2" v-show="showBtn">
       <van-button square size="large" type="warning" @click="cancel"> 返回</van-button>
       <van-button square size="large" type="danger" @click=receipt>确认收货</van-button>
     </div>
@@ -43,12 +43,25 @@
       return {
         detailData: {},
         detailAddress: {},
+        // 解决底部按钮被弹起问题
+        clientHeight: document.documentElement.clientHeight,
+        showBtn: true,  // 控制按钮盒子显示隐藏
       }
     },
     created() {
       document.title = '订单详情'
       this.detailId = this.$route.params
       this.detail()
+    },
+    // 解决底部按钮被弹起问题
+    mounted() {
+      window.onresize = () => {
+        if (this.clientHeight > document.documentElement.clientHeight) {
+          this.showBtn = false
+        } else {
+          this.showBtn = true
+        }
+      }
     },
     methods: {
       // 订单详情
@@ -60,6 +73,7 @@
 
         })
       },
+      // 取消
       cancel() {
         this.$router.push({
           name: 'MyOrder'
@@ -82,7 +96,6 @@
         })
       }
     },
-
   }
 </script>
 <style lang="scss">
@@ -117,12 +130,14 @@
   .detail-product {
     height: 70px;
     padding: 10px 10px 0 15px;
+
     .van-card__desc {
       color: red;
       max-height: 20px;
     }
+
     img {
- 
+
       width: 60px;
       position: relative;
       left: -18px;

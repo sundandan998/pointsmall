@@ -148,7 +148,6 @@
     }
   }
   .van-card {
-    border-bottom: 2px solid #f2f2f2;
     background-color: #fff;
   }
 

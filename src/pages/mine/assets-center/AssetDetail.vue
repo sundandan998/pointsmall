@@ -1,5 +1,8 @@
 <template>
   <div class="asset-detail">
+    <div class="assets-center-title">
+      <mt-cell title="资产详情" value="明细" to="assetsdetail" is-link></mt-cell>
+    </div>
     <div class="asset-detail-code">
       <div class="asset-detail-code-top">
         <div class="asset-detail-token fl">
@@ -15,18 +18,12 @@
         <span><img src="../../../assets/images/wait.png" alt="">1200(超级积分)</span>
       </div>
     </div>
-    <!-- 列表头部 -->
-    <div class="asset-list-title">
-      <span>交易时间 <img src="../../../assets/images/down.svg" alt=""></span>
-      <span>到期日 <img src="../../../assets/images/down.svg" alt=""></span>
-      <span class="fr">全部 <img src="../../../assets/images/all.svg" alt=""></span>
-    </div>
     <div class="asset-list">
       <div class="asset-list-top">
         <span>2,000</span><span class="fr">还剩30天解冻</span>
       </div>
       <div class="asset-list-bot">
-        <mt-progress :value="20" ></mt-progress>
+        <mt-progress :value="20"></mt-progress>
         <!-- <van-progress pivot-text="" show-pivot="false" color="#f2826a" :percentage="25" /> -->
       </div>
     </div>
@@ -78,25 +75,6 @@
         height: 50px;
       }
     }
-  }
-
-  /* 列表部分 */
-  .asset-list-title {
-    padding: 10px 10px 10px 15px;
-    border-bottom: 1px solid #f2f2f2;
-
-    span {
-      margin-right: 25px;
-      font-size: 0.78rem;
-    }
-
-    img {
-      width: 14px;
-    }
-  }
-
-  .asset-list-title span:last-child {
-    margin-right: 0px;
   }
 
   .asset-list {

@@ -5,19 +5,6 @@
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
-      <!-- <div class="assets-center-list" v-for="item in assetsData">
-        <router-link to="/assetdetail">
-          <span class="assets-center-list-right fr">{{item.balance|keepTwoNum}}</span>
-          <div class="assets-center-list-left fl">
-            <img :src="item.token.icon" alt="">
-            <span>{{item.token.code}}</span>
-            <p>{{item.token.subject}}</p>
-          </div>
-          <div class=" fr integral"><img src="../../../assets/images/wait.png" alt="">
-            {{item.integral|keepTwoNum}}(超级积分)
-          </div>
-        </router-link>
-      </div> -->
       <div class="assets-center-list" v-for="item in assetsData">
         <router-link to="/assetdetail">
           <div class="assets-center-list-top">
