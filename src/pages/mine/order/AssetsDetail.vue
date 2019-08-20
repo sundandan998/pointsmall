@@ -40,7 +40,6 @@
         return value == 1 ? '转入' : value == 100 ? '转出' : value == 200 ? '赠送' : value == 300 ? '消费' : '退款'
       },
       num: function (value) {
-        return
       }
     },
     methods: {

@@ -58,6 +58,12 @@ export default new Router({
       name: 'Assets',
       component: () => import('@/pages/mine/assets-center/AssetsCenter')
     },
+    // 资产详情
+    {
+      path: '/assetdetail',
+      name: 'AssetDetail',
+      component: () => import('@/pages/mine/assets-center/AssetDetail')
+    },
     // 明细
     {
       path: '/assetsdetail',
