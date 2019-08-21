@@ -115,7 +115,6 @@
       p {
         margin-top: 5px;
       }
-
       img {
         margin: -30px 10px 0 0;
       }

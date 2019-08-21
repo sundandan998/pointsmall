@@ -107,9 +107,10 @@
               this.detail = item
             }
           })
-        } else {
-          this.$router.go(-1)
         }
+        // }else {
+        //   this.$router.go(-1)
+        // }
       },
       // 个人信息
       information() {

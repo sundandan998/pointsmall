@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="bottom-button" v-show="showBtn">
-      <van-button square size="large" type="warning"> 返回</van-button>
+      <van-button square size="large" type="warning" @click="back"> 返回</van-button>
       <van-button square size="large" type="danger" @click="transfer">转让</van-button>
     </div>
   </div>
@@ -50,6 +50,13 @@
       }
     },
     methods: {
+      // 返回
+      back() {
+        this.$router.push({
+          name: 'AssetDetail'
+        })
+      },
+      // 转让
       transfer() {
         this.$router.push({
           name: 'ConfirmTransfer'
@@ -64,9 +71,10 @@
   .transfer-title {
     padding: 10px 0 10px 15px;
     border-bottom: 1px solid #f2f2f2;
-    .fee{
-      font-size:0.76rem;
-      color:#409EFF;
+
+    .fee {
+      font-size: 0.76rem;
+      color: #409EFF;
     }
   }
 
