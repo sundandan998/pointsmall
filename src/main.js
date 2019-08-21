@@ -12,6 +12,8 @@ import 'mint-ui/lib/style.css'
 import { Indicator } from 'mint-ui'
 //vant框架样式
 import 'vant/lib/index.css'
+//element框架样式
+import 'element-ui/lib/theme-chalk/index.css'
 // 各种组件集合
 import external from './external-components/index'
 Vue.use(MintUI)

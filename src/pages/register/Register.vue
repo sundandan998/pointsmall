@@ -1,7 +1,7 @@
 <template>
   <div class="register">
     <div class="register-title">
-      <span>注册</span>
+      <span>注册 / 登录</span>
     </div>
     <div class="register-tel">
       <!-- type="number" -->
@@ -18,9 +18,9 @@
       </mt-field> -->
     </div>
     <div class="register-button">
-        <p>点击注册即表示同意 <span>《斯帕尔克注册协议》</span> </p>
+        <p>点击注册即表示同意 <span>《用户协议》</span> </p>
       <!-- <router-link to=""> -->
-        <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">注册</mt-button>
+        <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">注册 / 登录</mt-button>
       <!-- </router-link> -->
       <router-link to="/">
         <mt-button size="large" class="register-btn-cancel">取消</mt-button>
@@ -52,7 +52,7 @@
       }
     },
     created() {
-      document.title = 'HV'
+      document.title = '千企商城'
     },
     methods: {
       // 注册

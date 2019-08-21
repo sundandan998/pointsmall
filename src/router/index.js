@@ -64,6 +64,24 @@ export default new Router({
       name: 'AssetDetail',
       component: () => import('@/pages/mine/assets-center/AssetDetail')
     },
+    // 转让
+    {
+      path: '/transfer',
+      name: 'Transfer',
+      component: () => import('@/pages/mine/assets-center/Transfer')
+    },
+    // 确认转让
+    {
+      path: '/confirm',
+      name: 'ConfirmTransfer',
+      component: () => import('@/pages/mine/assets-center/ConfirmTransfer')
+    },
+    // 转让--订单详情
+    {
+      path: '/transferdetail',
+      name: 'TransferDetail',
+      component: () => import('@/pages/mine/assets-center/TransferDetail')
+    },
     // 明细
     {
       path: '/assetsdetail',

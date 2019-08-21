@@ -7,19 +7,17 @@
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
         <router-link to="/assetdetail">
-          <div class="assets-center-list-top">
-            <div class="assets-center-list-token fl">
-              <img :src="item.token.icon" alt="">
-              <p>{{item.token.code}}</p>
-              <p>{{item.token.subject}}</p>
-            </div>
-            <div class="assets-center-list-num fr">
-              <span>{{item.balance|keepTwoNum}}</span>
-            </div>
+        <div class="assets-center-list-left fl">
+          <img :src="item.token.icon" alt="">
+          <div class="assets-center-name">
+            <span>{{item.token.code}}</span>
+            <p>{{item.token.subject}}</p>
           </div>
-          <div class="assets-center-list-bot">
-            <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
-          </div>
+        </div>
+        <div class="assets-center-list-right fr">
+          <span>{{item.balance|keepTwoNum}}</span>
+          <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
+        </div>
         </router-link>
       </div>
     </van-list>
@@ -74,38 +72,27 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
-  .assets-center-list-top {
-    height: 40px;
-    margin: 10px 10px 10px 15px;
+  .assets-center-name {
+    display: inline-block;
   }
-
-  .assets-center-list-bot {
-    margin: 10px 10px;
-    height: 20px;
-    float: right;
-  }
-
   .assets-center-list {
-    height: 90px;
+    height: 50px;
     border-bottom: 1px solid #f2f2f2;
-    a{
-      color:#333;
+    font-size:0.80rem;
+   a{
+    color:#000;
+   }
+}
+  .assets-center-list-left {
+    margin-left: 15px;
+    img {
+      margin-right: 10px;
     }
-    .assets-center-list-token {
-      display: -webkit-box;
-
-      p {
-        display: table-row;
-      }
-
-      img {
-        margin-right: 15px;
-      }
-
-      .integral {
-        height: 50px;
-      }
+  }
+  .assets-center-list-right {
+    margin-right: 10px;
+    span{
+      margin-left: 80px;
     }
   }
 </style>

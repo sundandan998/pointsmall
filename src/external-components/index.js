@@ -1,7 +1,8 @@
 // vant框架
 import {
-  PasswordInput, NumberKeyboard, Popup, List, PullRefresh, Dialog, GoodsAction, Tab, Tabs, AddressList, 
-  } from 'vant'
+  PasswordInput, NumberKeyboard, Popup, List, PullRefresh, Dialog, GoodsAction, Tab, Tabs, AddressList,
+} from 'vant'
+import { Slider } from 'element-ui'
 const external = {
   install: function (Vue) {
     Vue.use(PasswordInput).use(NumberKeyboard)
@@ -13,8 +14,7 @@ const external = {
     Vue.use(Tab)
     Vue.use(Tabs)
     Vue.use(AddressList)
-    // van-goods-action-button
-    // Vue.use(GoodsActionButton)
+    Vue.use(Slider)
   }
 }
 export default external
