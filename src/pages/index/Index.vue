@@ -106,6 +106,11 @@
               }
             }
           }).catch(err => {
+            // if (err.code == 401 || err.code == 403) {
+            //   // let token = localStorage.getItem("token")
+            //   window.localStorage.removeItem('token')
+            //   window.location.reload()
+            // }
             this.error = true
           })
         }, 100)
@@ -122,7 +127,6 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-
   .index-title {
     height: 90px;
     padding: 10px 10px 0 15px;

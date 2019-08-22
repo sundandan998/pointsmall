@@ -57,11 +57,8 @@
     methods: {
       // 注册
       register() {
-        // debugger
         this.registerParams.access_token = sessionStorage.getItem('access_token')
         this.$store.dispatch('loginByCode', this.registerParams).then(res => {
-          console.log(this.$store.getters.token)
-          // debugger
           if (this.$store.getters.token !== '') {
             this.$store.commit('detail', res.data)
             // window.sessionStorage.setItem('info', info)
@@ -71,7 +68,6 @@
               })
             }
           }
-
         }).catch(err => {
           Toast({
             message: err.msg,

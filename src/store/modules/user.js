@@ -10,7 +10,8 @@ const user = {
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
-      window.sessionStorage.setItem('token', token)
+      // window.sessionStorage.setItem('token', token)
+      window.localStorage.setItem('token', token)
     },
     // SET_ACCESSTOKEN: (state, token) => {
     //   state.token = token
@@ -44,9 +45,7 @@ const user = {
     // },
     loginByCode ({ dispatch, commit }, userInfo) {
       return new Promise((resolve, reject) => {
-        api
-          .loginByCode(userInfo)
-          .then(response => {
+        api.loginByCode(userInfo).then(response => {
             // let nowTime = new Date().getTime()
             commit('SET_TOKEN', response.token)
             // commit('SET_TOKENEXPIREDTIME', nowTime + webTokenExpiredTime)
