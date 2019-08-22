@@ -83,7 +83,7 @@
       receipt() {
         api.receipt(this.$route.params).then(res => {
           if (res.code == 0) {
-            window.location.reload()
+            this.detailData.status='已完成'
           }
         }).catch(err => {
           if (err.code != 0) {
@@ -100,11 +100,9 @@
 </script>
 <style lang="scss">
   @import "../../../assets/scss/Global.scss";
-
   .detail-address {
     /* border-bottom: 2px solid #f2f2f2; */
     padding: 10px 10px 10px 15px;
-
     img {
       display: inline-block;
       float: left;

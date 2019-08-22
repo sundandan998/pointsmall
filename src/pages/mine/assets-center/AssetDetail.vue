@@ -43,15 +43,27 @@
   </div>
 </template>
 <script>
+  // 接口请求
+  import api from '@/api/order/order.js'
   export default {
     data() {
       return {
-        value:10
+        value: 10
       }
     },
     created() {
       document.title = '资产详情'
+      this.list()
     },
+    methods: {
+      list() {
+        api.freeze().then(res => {
+          console.log(res)
+        }).catch(err => {
+
+        })
+      }
+    }
   }
 </script>
 <style lang="scss">
@@ -96,9 +108,11 @@
       margin: 0 30px 0 15px;
       font-size: 0.78rem;
     }
+
     .asset-list-freeze-num {
       border-top: 1px solid #f2f2f2;
       margin-top: 5px;
+
       p {
         margin-top: 5px;
       }
@@ -107,6 +121,7 @@
         margin: -30px 10px 0 0;
       }
     }
+
     .asset-list-freeze-num span:last-child {
       display: block;
       margin-bottom: 5px;
@@ -115,10 +130,11 @@
     .progress {
       width: 85%;
       margin-left: 15px;
+
       .el-slider__runway {
         background-color: #409EFF;
       }
-    
+
     }
   }
 </style>

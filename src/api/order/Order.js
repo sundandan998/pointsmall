@@ -72,4 +72,12 @@ export default {
       data: params
     })
   },
+  // 冻结订单列表
+  freeze(params = {}) {
+    return request({
+      url: '/order/freeze/list/',
+      method: 'get',
+      params: params
+    })
+  },
 }
