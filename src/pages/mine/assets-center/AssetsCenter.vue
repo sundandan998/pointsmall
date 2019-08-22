@@ -6,19 +6,19 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
-          <router-link :to="{name:'AssetDetail',params:{item:item}}">
-        <div class="assets-center-list-left fl">
-          <img :src="item.token.icon" alt="">
-          <div class="assets-center-name">
-            <span>{{item.token.code}}</span>
-            <p>{{item.token.subject}}</p>
+        <!-- <router-link :to="{name:'AssetDetail',params:{item:item}}"> -->
+          <div class="assets-center-list-left fl">
+            <img :src="item.token.icon" alt="">
+            <div class="assets-center-name">
+              <span>{{item.token.code}}</span>
+              <p>{{item.token.subject}}</p>
+            </div>
           </div>
-        </div>
-        <div class="assets-center-list-right fr">
-          <span>{{item.balance|keepTwoNum}}</span>
-          <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
-        </div>
-        </router-link>
+          <div class="assets-center-list-right fr">
+            <span>{{item.balance|keepTwoNum}}</span>
+            <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
+          </div>
+        <!-- </router-link> -->
       </div>
     </van-list>
     <router-link to="mine">
@@ -72,29 +72,37 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+
   .assets-center-name {
     display: inline-block;
   }
+
   .assets-center-list {
     height: 50px;
     border-bottom: 1px solid #f2f2f2;
-    font-size:0.80rem;
-   a{
-    color:#000;
-   }
-}
+    font-size: 0.80rem;
+
+    a {
+      color: #000;
+    }
+  }
+
   .assets-center-list-left {
     margin-left: 15px;
+
     img {
       margin-right: 10px;
     }
   }
+
   .assets-center-list-right {
     margin-right: 10px;
-    span{
+
+    span {
       margin-left: 80px;
     }
-    img{
+
+    img {
       width: 10px;
     }
   }

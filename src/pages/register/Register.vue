@@ -6,8 +6,7 @@
     <div class="register-tel">
       <!-- type="number" -->
       <!-- :state="CodeStatus"  -->
-      <mt-field label="手机号"
-        class="tel-input" @blur.native.capture="sendCode" placeholder="请输入手机号"
+      <mt-field label="手机号" class="tel-input" @blur.native.capture="sendCode" placeholder="请输入手机号"
         v-model="registerParams.mobile">
       </mt-field>
       <mt-field label="验证码" placeholder="请输入验证码" type="number" v-model="registerParams.code">
@@ -18,9 +17,10 @@
       </mt-field> -->
     </div>
     <div class="register-button">
-        <p>点击注册即表示同意 <span>《用户协议》</span> </p>
+      <p>如果该手机号未曾注册过,将为您自动注册</p>
+      <p>点击注册即表示同意 <span>《用户协议》</span> </p>
       <!-- <router-link to=""> -->
-        <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">注册 / 登录</mt-button>
+      <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">登录</mt-button>
       <!-- </router-link> -->
       <router-link to="/">
         <mt-button size="large" class="register-btn-cancel">取消</mt-button>
@@ -71,7 +71,7 @@
               })
             }
           }
-          
+
         }).catch(err => {
           Toast({
             message: err.msg,
@@ -140,7 +140,7 @@
   }
 </script>
 <style lang="scss">
-   .tel-input {
+  .tel-input {
     input.mint-field-core {
       width: 170px !important;
     }
@@ -191,14 +191,16 @@
   }
 
   .register-button {
-    p{
-      margin-top: 50px;
-      margin-left: 15px;
-      font-size:0.78rem;
-      span{
-        color:red;
+    p {
+      margin-top: 10px;
+      margin-left: 20px;
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+      span {
+        color: red;
       }
     }
+
     .register-btn {
       width: 95%;
       background-color: #09bb07 !important;
