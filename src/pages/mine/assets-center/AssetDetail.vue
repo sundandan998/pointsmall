@@ -5,37 +5,40 @@
     </div>
     <div class="asset-detail-code">
       <div class="asset-detail-code-left fl">
-        <img src="../../../assets/images/ld.png" alt="">
+        <img :src="this.$route.params.item.token.icon" alt="">
         <div class="asset-detail-name">
-          <span>life</span>
-          <p>斯帕尔克</p>
+          <span>{{this.$route.params.item.token.code}}</span>
+          <p>{{this.$route.params.item.token.subject}}</p>
         </div>
       </div>
       <div class="asset-detail-code-right fr">
-        <span>500</span>
-        <p><img src="../../../assets/images/wait.png" alt="">1200(超级积分)</p>
+        <span>{{this.$route.params.item.balance|keepTwoNum}}</span>
+        <p><img src="../../../assets/images/wait.png" alt="">{{this.$route.params.item.integral|keepTwoNum}}(超级积分)</p>
       </div>
     </div>
-    <div class="asset-list">
-      <router-link to="transfer">
-        <div class="asset-list-available">
-          <mt-cell title="可用" label="描述信息" is-link></mt-cell>
-        </div>
-        <div class="asset-list-freeze">
-          <span>冻结</span>
-          <div class="asset-list-freeze-num">
-            <p><span>2000</span><span class="fr">还剩30天解冻</span></p>
-            <div class="progress">
-              <el-slider v-model="value" disabled></el-slider>
-            </div>
-            <img src="../../../assets/images/r.png" alt="" class="fr">
-            <span>到期日 2019-1-12</span>
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
+      :error.sync="error" error-text="请求失败，点击重新加载">
+      <div class="asset-list" v-for="item in listData">
+        <router-link to="transfer">
+          <div class="asset-list-available">
+            <mt-cell title="可用" label="描述信息" is-link></mt-cell>
           </div>
-        </div>
-      </router-link>
-    </div>
+          <div class="asset-list-freeze">
+            <span>冻结</span>
+            <div class="asset-list-freeze-num">
+              <p><span>2000</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
+              <div class="progress">
+                <el-slider v-model="value" disabled></el-slider>
+              </div>
+              <img src="../../../assets/images/r.png" alt="" class="fr">
+              <span>到期日 {{item.unfreeze_date}}</span>
+            </div>
+          </div>
+        </router-link>
+      </div>
+    </van-list>
     <!-- 底部按钮 -->
-    <router-link to="mine">
+    <router-link to="assets">
       <div class="order-button">
         <mt-button size="large">取消</mt-button>
       </div>
@@ -48,21 +51,39 @@
   export default {
     data() {
       return {
-        value: 10
+        value: 10,
+        listData:[],
+        // 上拉加载
+        loading: false,
+        finished: false,
+        error: false,
+        pageNum: 1,
       }
     },
     created() {
       document.title = '资产详情'
-      this.list()
     },
     methods: {
-      list() {
-        api.freeze().then(res => {
-          console.log(res)
-        }).catch(err => {
-
-        })
-      }
+      // 上拉加载
+      onLoad() {
+        setTimeout(() => {
+          api.freeze({ 'page': this.pageNum,'code':this.$route.params.item.token.code}).then(res => {
+            if (res.code == 0) {
+              this.listData.push.apply(this.listData, res.data)
+              this.loading = false
+              if (res.has_next == true) {
+                this.pageNum++
+              }
+              if (res.has_next == false) {
+                this.finished = true
+                this.loading = false
+              }
+            }
+          }).catch(err => {
+            this.error = true
+          })
+        }, 100)
+      },
     }
   }
 </script>
@@ -76,6 +97,7 @@
 
   .asset-detail-name {
     display: inline-block;
+    font-size: 0.78rem;
   }
 
   .asset-detail-code-left {
@@ -88,9 +110,12 @@
 
   .asset-detail-code-right {
     margin-right: 10px;
-
+    font-size: 0.78rem;
     span {
       margin-left: 80px;
+    }
+    img{
+      width: 10px;
     }
   }
 
