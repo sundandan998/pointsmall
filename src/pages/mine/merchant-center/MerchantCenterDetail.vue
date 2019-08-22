@@ -91,7 +91,9 @@
       ship() {
         api.ship(this.shipParams).then(res => {
           if (res.code == 0) {
-            window.location.reload()
+            // console.log(this.detailData.status==)
+            this.detailData.status='已完成'
+            // window.location.reload()
           }
         }).catch(err => {
           if (err.code != 0) {

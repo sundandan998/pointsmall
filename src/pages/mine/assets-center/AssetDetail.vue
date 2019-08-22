@@ -18,17 +18,17 @@
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
-      <div class="asset-list" v-for="item in listData">
+      <div class="asset-list" >
         <router-link to="transfer">
           <div class="asset-list-available">
             <mt-cell title="可用" label="描述信息" is-link></mt-cell>
           </div>
-          <div class="asset-list-freeze">
+          <div class="asset-list-freeze" >
             <span>冻结</span>
-            <div class="asset-list-freeze-num">
+            <div class="asset-list-freeze-num" v-for="item in listData">
               <p><span>2000</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
               <div class="progress">
-                <el-slider v-model="value" disabled></el-slider>
+                <el-slider v-model="item.remain_days" disabled max="180"></el-slider>
               </div>
               <img src="../../../assets/images/r.png" alt="" class="fr">
               <span>到期日 {{item.unfreeze_date}}</span>
@@ -51,7 +51,6 @@
   export default {
     data() {
       return {
-        value: 10,
         listData:[],
         // 上拉加载
         loading: false,
