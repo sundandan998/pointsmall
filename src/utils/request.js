@@ -4,7 +4,8 @@ import qs from 'qs'
 import store from '@/store/index'
 import baseURL from './baseURL'
 import router from '@/router/index.js'
-
+import Vue from 'vue'
+Vue.use(router)
 const service = axios.create({
   baseURL: baseURL,
   timeout: 30000,
@@ -46,13 +47,19 @@ service.interceptors.request.use(
     Promise.reject(error)
   }
 )
-
 service.interceptors.response.use(
   response => {
     if (response.config.loading) {
       store.dispatch('setLoading', false)
     }
     let data = JSON.parse(response.data)
+    if (data.code == 401 || data.code == 403) {
+      // let token = localStorage.getItem("token")
+      window.localStorage.removeItem('token')
+      router.push({
+        path: 'register'
+      })
+    }
     if (data.code === 0) {
       return data
     } else {

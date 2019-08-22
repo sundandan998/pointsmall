@@ -9,7 +9,8 @@ const getters = {
   refpath: state => state.app.refpath,
   version: state => state.app.version,
   token: state => {
-    let stroageToken = window.sessionStorage.getItem('token')
+    // let stroageToken = window.sessionStorage.getItem('token')
+    let stroageToken = window.localStorage.getItem('token')
     if ((!state.user.token || state.user.token === '') && stroageToken) {
       store.dispatch('setToken', stroageToken)
     }

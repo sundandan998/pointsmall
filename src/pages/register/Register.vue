@@ -6,8 +6,7 @@
     <div class="register-tel">
       <!-- type="number" -->
       <!-- :state="CodeStatus"  -->
-      <mt-field label="手机号"
-        class="tel-input" @blur.native.capture="sendCode" placeholder="请输入手机号"
+      <mt-field label="手机号" class="tel-input" @blur.native.capture="sendCode" placeholder="请输入手机号"
         v-model="registerParams.mobile">
       </mt-field>
       <mt-field label="验证码" placeholder="请输入验证码" type="number" v-model="registerParams.code">
@@ -18,9 +17,9 @@
       </mt-field> -->
     </div>
     <div class="register-button">
-        <p>点击注册即表示同意 <span>《用户协议》</span> </p>
+      <p>点击注册即表示同意 <span>《用户协议》</span> </p>
       <!-- <router-link to=""> -->
-        <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">注册 / 登录</mt-button>
+      <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">注册 / 登录</mt-button>
       <!-- </router-link> -->
       <router-link to="/">
         <mt-button size="large" class="register-btn-cancel">取消</mt-button>
@@ -57,11 +56,8 @@
     methods: {
       // 注册
       register() {
-        // debugger
         this.registerParams.access_token = sessionStorage.getItem('access_token')
         this.$store.dispatch('loginByCode', this.registerParams).then(res => {
-          console.log(this.$store.getters.token)
-          // debugger
           if (this.$store.getters.token !== '') {
             this.$store.commit('detail', res.data)
             // window.sessionStorage.setItem('info', info)
@@ -71,7 +67,6 @@
               })
             }
           }
-          
         }).catch(err => {
           Toast({
             message: err.msg,
@@ -140,7 +135,7 @@
   }
 </script>
 <style lang="scss">
-   .tel-input {
+  .tel-input {
     input.mint-field-core {
       width: 170px !important;
     }
@@ -191,14 +186,16 @@
   }
 
   .register-button {
-    p{
+    p {
       margin-top: 50px;
       margin-left: 15px;
-      font-size:0.78rem;
-      span{
-        color:red;
+      font-size: 0.78rem;
+
+      span {
+        color: red;
       }
     }
+
     .register-btn {
       width: 95%;
       background-color: #09bb07 !important;

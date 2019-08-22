@@ -154,7 +154,6 @@ export default {
     })
   },
   // -----------------xxx结束xxx--------------------
-
   // 获取用户积分
   userIntegral(params = {}) {
     return request({
