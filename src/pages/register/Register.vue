@@ -88,9 +88,9 @@
       },
       // 发送验证码
       sendSmsCode() {
+        this.time = 60
+        this.timer()
         api.sendCode({ mobile: this.registerParams.mobile }).then(res => {
-          this.time = 60
-          this.timer()
           if (res.code === 0) {
             Toast({
               message: res.msg,
