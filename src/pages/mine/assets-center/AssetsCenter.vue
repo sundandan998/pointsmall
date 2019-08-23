@@ -6,7 +6,7 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
-        <!-- <router-link :to="{name:'AssetDetail',params:{item:item}}"> -->
+        <router-link :to="{name:'AssetDetail',params:{item:item}}">
           <div class="assets-center-list-left fl">
             <img :src="item.token.icon" alt="">
             <div class="assets-center-name">
@@ -18,7 +18,7 @@
             <span>{{item.balance|keepTwoNum}}</span>
             <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
           </div>
-        <!-- </router-link> -->
+        </router-link>
       </div>
     </van-list>
     <router-link to="mine">

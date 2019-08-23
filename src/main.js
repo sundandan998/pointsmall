@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
-import Vant from 'vant'
+// import Vant from 'vant'
 // import axios from 'axios'
 import store from './store'
 import 'mint-ui/lib/style.css'
@@ -18,8 +18,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import external from './external-components/index'
 Vue.use(MintUI)
 // Vue.use(axios)
-Vue.use(external)
-Vue.use(Vant)
+Vue.use(external) 
+// Vue.use(Vant)
 Vue.prototype.$Indicator = Indicator
 Vue.config.productionTip = false
 

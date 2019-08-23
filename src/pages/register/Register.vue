@@ -141,7 +141,6 @@
       width: 170px !important;
     }
   }
-
   body {
     background-color: #fff;
   }

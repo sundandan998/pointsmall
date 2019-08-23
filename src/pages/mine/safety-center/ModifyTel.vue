@@ -75,10 +75,10 @@
       },
       // 发送验证码
       sendSmsCode() {
+        this.time = 60
+        this.timer()
         api.sendCode({ mobile: this.tel.mobile }).then(res => {
           if (res.code === 0) {
-            this.time = 60
-            this.timer()
             Toast({
               message: res.msg,
               position: 'top',

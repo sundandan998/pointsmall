@@ -123,12 +123,12 @@
       // },
       // 发送验证码
       sendSmsCode() {
+        this.time = 60
+        this.timer()
         var userInfo = sessionStorage.getItem('userInfo')
         userInfo = JSON.parse(userInfo)
         api.sendCode({ mobile: userInfo.data.mobile }).then(res => {
           if (res.code === 0) {
-            this.time = 60
-            this.timer()
             Toast({
               message: res.msg,
               position: 'top',

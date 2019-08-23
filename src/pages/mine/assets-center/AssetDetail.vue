@@ -18,17 +18,17 @@
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
-      <div class="asset-list" >
+      <div class="asset-list">
         <router-link to="transfer">
           <div class="asset-list-available">
-            <mt-cell title="可用" label="描述信息" is-link></mt-cell>
+            <mt-cell title="可用" :label="this.$route.params.item.available_amount|keepTwoNum" is-link></mt-cell>
           </div>
-          <div class="asset-list-freeze" >
+          <div class="asset-list-freeze">
             <span>冻结</span>
             <div class="asset-list-freeze-num" v-for="item in listData">
-              <p><span>2000</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
+              <p><span>{{item.amount|keepTwoNum}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
               <div class="progress">
-                <el-slider v-model="item.remain_days" disabled :max="180"></el-slider>
+                <el-slider v-model="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
               </div>
               <img src="../../../assets/images/r.png" alt="" class="fr">
               <span>到期日 {{item.unfreeze_date}}</span>
@@ -51,7 +51,8 @@
   export default {
     data() {
       return {
-        listData:[],
+        value: 15,
+        listData: [],
         // 上拉加载
         loading: false,
         finished: false,
@@ -66,7 +67,7 @@
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          api.freeze({ 'page': this.pageNum,'code':this.$route.params.item.token.code}).then(res => {
+          api.freeze({ 'page': this.pageNum, 'code': this.$route.params.item.token.code }).then(res => {
             if (res.code == 0) {
               this.listData.push.apply(this.listData, res.data)
               this.loading = false
@@ -110,12 +111,22 @@
   .asset-detail-code-right {
     margin-right: 10px;
     font-size: 0.78rem;
+
     span {
       margin-left: 80px;
     }
-    img{
+
+    img {
       width: 10px;
     }
+  }
+
+  .asset-list-available {
+    span {
+      font-size: 0.78rem;
+      color: #333;
+    }
+
   }
 
   .asset-list {
