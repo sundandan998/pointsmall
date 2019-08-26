@@ -2,13 +2,13 @@
   <div class="transfer">
     <div class="transfer-progress-name">
       <span>接收人</span>
-      <mt-field placeholder="接收人手机号" type="tel"></mt-field>
+      <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile"></mt-field>
     </div>
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
     </div>
     <div class="transfer-num">
-      <mt-field placeholder="最少100" type="number">LIEF+</mt-field>
+      <mt-field placeholder="请输入转出数量" type="number" v-model="transferParams.amount">{{detailData.token}}</mt-field>
     </div>
     <div class="transfer-progress">
       <div class="block">
@@ -17,27 +17,35 @@
       </div>
     </div>
     <div class="bottom-button" v-show="showBtn">
-      <van-button square size="large" type="warning" @click="back"> 返回</van-button>
+      <van-button square size="large" type="warning"  v-on:click="$router.go(-1)"> 返回</van-button>
       <van-button square size="large" type="danger" @click="transfer">转让</van-button>
     </div>
   </div>
 </template>
 <script>
+  // 接口请求
+  import api from '@/api/order/order.js'
   export default {
     data() {
       return {
         value: 20,
+        detailData: {},
         marks: {
           0: '0',
-          100: '100'
+          100: ''
         },
         // 解决底部按钮被弹起问题
         clientHeight: document.documentElement.clientHeight,
         showBtn: true,  // 控制按钮盒子显示隐藏
+        transferParams: {
+          mobile: '',
+          amount: '',
+        }
       }
     },
     created() {
       document.title = '转让'
+      this.assetDetail()
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -50,16 +58,21 @@
       }
     },
     methods: {
-      // 返回
-      back() {
-        this.$router.push({
-          name: 'AssetDetail'
+      // 详情接口
+      assetDetail() {
+        api.assetsDetail({ order_id: this.$route.params.order_id }).then(res => {
+          if (res.code == 0) {
+            this.detailData = res.data
+            this.marks[100] = res.data.amount
+s          }
+        }).catch(err => {
         })
       },
-      // 转让
+      // 转让按钮
       transfer() {
         this.$router.push({
-          name: 'ConfirmTransfer'
+          name: 'ConfirmTransfer',
+          params: { 'transferParams': this.transferParams,'code':this.detailData.token,'order_id':this.detailData.order_id,'action':this.$route.params.action}
         })
       }
     }

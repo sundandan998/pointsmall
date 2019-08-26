@@ -51,7 +51,7 @@ export default {
   // 商家订单详情
   merchantDetail(params = {}) {
     return request({
-      url: '/order/'+params.id+'/detail/',
+      url: '/order/' + params.id + '/detail/',
       method: 'get',
       params: params
     })
@@ -59,7 +59,7 @@ export default {
   // 商家发货
   ship(params = {}) {
     return request({
-      url: '/order/shop/'+params.id+'/deliver/',
+      url: '/order/shop/' + params.id + '/deliver/',
       method: 'post',
       data: params
     })
@@ -67,7 +67,7 @@ export default {
   // 用户收货
   receipt(params = {}) {
     return request({
-      url: '/order/'+params.id+'/receive/',
+      url: '/order/' + params.id + '/receive/',
       method: 'post',
       data: params
     })
@@ -80,4 +80,29 @@ export default {
       params: params
     })
   },
+  // 转让
+  transfer(params = {}) {
+    return request({
+      url: '/order/transfer/',
+      method: 'post',
+      data: params
+    })
+  },
+  // 资产详情
+  assetsDetail(params = {}) {
+    return request({
+      url: '/order/asset/' + params.order_id + '/detail/',
+      method: 'get',
+      params: params
+    })
+  },
+  // 获取个人资产详情--用户模块里的
+  personalAssets(params = {}) {
+    return request({
+      url: '/user/asset/'+ params.code+'/detail/',
+      method: 'get',
+      params: params
+    })
+  },
+
 }

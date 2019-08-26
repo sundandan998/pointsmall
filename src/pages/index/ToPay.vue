@@ -172,7 +172,6 @@
     },
     watch: {
       pay_pwd() {
-
         if (this.pay_pwd.length == 6) {
           // 确认支付
           this.payParams.address_id = this.$route.params.address_id

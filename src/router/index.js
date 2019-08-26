@@ -60,15 +60,21 @@ export default new Router({
     },
     // 资产详情
     {
-      path: '/assetdetail',
+      path: '/assetdetail/:code',
       name: 'AssetDetail',
       component: () => import('@/pages/mine/assets-center/AssetDetail')
     },
-    // 转让
+    // 冻结转让
     {
-      path: '/transfer',
-      name: 'Transfer',
-      component: () => import('@/pages/mine/assets-center/Transfer')
+      path: '/freezetransfer/:order_id',
+      name: 'FreezeTransfer',
+      component: () => import('@/pages/mine/assets-center/FreezeTransfer')
+    },
+    // 可用转让
+    {
+      path: '/availabletransfer',
+      name: 'AvailableTransfer',
+      component: () => import('@/pages/mine/assets-center/AvailableTransfer')
     },
     // 确认转让
     {

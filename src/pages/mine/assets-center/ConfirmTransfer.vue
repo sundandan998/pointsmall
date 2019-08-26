@@ -6,9 +6,9 @@
       </van-notice-bar>
     </div>
     <div class="confirm-transfer-content">
-      <mt-cell title="标题文字" value="说明文字"></mt-cell>
-      <mt-cell title="标题文字" value="说明文字"></mt-cell>
-      <mt-cell title="标题文字" value="说明文字"></mt-cell>
+      <mt-cell title="接收方" :value="this.$route.params.transferParams.mobile"></mt-cell>
+      <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
+      <mt-cell title="手续费" :value="this.$route.params.token"></mt-cell>
     </div>
     <div class="confirm-transfer-progress">
       <div class="confirm-transfer-num">
@@ -25,7 +25,7 @@
         <img class="fr" @click="modalHide" src="../../../assets/images/cancel.svg" alt="" />
         <span>输入支付密码</span>
         <p>服务预约</p>
-        <p>(积分)</p>
+        <p>{{this.$route.params.transferParams.amount}}({{this.$route.params.code}})</p>
         <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
       </mt-popup>
     </div>
@@ -39,6 +39,8 @@
   </div>
 </template>
 <script>
+  import api from '@/api/order/order.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
@@ -49,10 +51,20 @@
         pay_pwd: '',
         showKeyboard: false,
         resevationModelModel: false,
+        // 转让参数
+        transferParams: {
+          action: '',
+          mobile: '',
+          amount: '',
+          code: '',
+          pay_pwd: '',
+          order_id: ''
+        }
       }
     },
     created() {
       document.title = '转让确认'
+      console.log(this.$route.params.code)
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -74,9 +86,76 @@
       modalHide() {
         this.resevationModelModel = false
       },
+      // 转让
       transfer() {
         this.resevationModelModel = true
-
+      }
+    },
+    watch: {
+      pay_pwd() {
+        if (this.pay_pwd.length == 6) {
+          // 确认支付
+          this.transferParams.action = this.$route.params.action
+          this.transferParams.mobile = this.$route.params.transferParams.mobile
+          this.transferParams.amount = this.$route.params.transferParams.amount
+          this.transferParams.code = this.$route.params.code
+          this.transferParams.pay_pwd = this.pay_pwd
+          this.transferParams.order_id = this.$route.params.order_id
+          if (this.$route.params.action == 'freeze') {
+            api.transfer(this.transferParams).then(res => {
+              if (res.code === 0) {
+                Toast({
+                  message: res.msg,
+                  position: 'top',
+                  className: 'zZindex'
+                })
+                this.$router.push({
+                  name: 'TransferDetail',
+                  params: { order_id: res.order_id }
+                })
+              }
+            }).catch(err => {
+              if (err.code !== 0) {
+                Toast({
+                  message: err.msg,
+                  position: 'top',
+                  className: 'zZindex'
+                })
+              }
+              this.pay_pwd = ''
+              this.resevationModelModel = false
+              this.showKeyboard = false
+            })
+          } else {
+            if (this.$route.params.action == 'available') {
+              // 确认支付
+              api.transfer(this.transferParams).then(res => {
+                if (res.code === 0) {
+                  Toast({
+                    message: res.msg,
+                    position: 'top',
+                    className: 'zZindex'
+                  })
+                  this.$router.push({
+                    name: 'TransferDetail',
+                    params: { order_id: res.order_id }
+                  })
+                }
+              }).catch(err => {
+                if (err.code !== 0) {
+                  Toast({
+                    message: err.msg,
+                    position: 'top',
+                    className: 'zZindex'
+                  })
+                }
+                this.pay_pwd = ''
+                this.resevationModelModel = false
+                this.showKeyboard = false
+              })
+            }
+          }
+        }
       }
     }
   }
@@ -115,6 +194,7 @@
       p {
         margin-top: 5px;
       }
+
       img {
         margin: -30px 10px 0 0;
       }

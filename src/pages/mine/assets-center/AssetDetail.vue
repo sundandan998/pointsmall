@@ -5,36 +5,40 @@
     </div>
     <div class="asset-detail-code">
       <div class="asset-detail-code-left fl">
-        <img :src="this.$route.params.item.token.icon" alt="">
+        <img :src="assetDataToken.icon" alt="">
         <div class="asset-detail-name">
-          <span>{{this.$route.params.item.token.code}}</span>
-          <p>{{this.$route.params.item.token.subject}}</p>
+          <span>{{assetDataToken.code}}</span>
+          <p>{{assetDataToken.subject}}</p>
         </div>
       </div>
       <div class="asset-detail-code-right fr">
-        <span>{{this.$route.params.item.balance|keepTwoNum}}</span>
-        <p><img src="../../../assets/images/wait.png" alt="">{{this.$route.params.item.integral|keepTwoNum}}(超级积分)</p>
+        <span>{{assetData.balance|keepTwoNum}}</span>
+        <p><img src="../../../assets/images/wait.png" alt="">{{assetData.integral|keepTwoNum}}(超级积分)</p>
       </div>
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="asset-list">
-        <router-link to="transfer">
+        <router-link :to="{name:'AvailableTransfer',params:{amount:assetData.available_amount,action:'available',code:this.assetDataToken.code}}">
           <div class="asset-list-available">
-            <mt-cell title="可用" :label="this.$route.params.item.available_amount|keepTwoNum" is-link></mt-cell>
+            <span>可用</span>
+            <p>{{assetData.available_amount|keepTwoNum}}</p>
+            <img src="../../../assets/images/r.png" alt="" class="fr">
           </div>
-          <div class="asset-list-freeze">
-            <span>冻结</span>
-            <div class="asset-list-freeze-num" v-for="item in listData">
+        </router-link>
+        <div class="asset-list-freeze">
+          <span>冻结</span>
+          <div class="asset-list-freeze-num" v-for="item in listData">
+            <router-link :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze'}}">
               <p><span>{{item.amount|keepTwoNum}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
               <div class="progress">
-                <el-slider v-model="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
+                <el-slider :value="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
               </div>
               <img src="../../../assets/images/r.png" alt="" class="fr">
               <span>到期日 {{item.unfreeze_date}}</span>
-            </div>
+            </router-link>
           </div>
-        </router-link>
+        </div>
       </div>
     </van-list>
     <!-- 底部按钮 -->
@@ -51,8 +55,11 @@
   export default {
     data() {
       return {
-        value: 15,
+        // 冻结列表
         listData: [],
+        // 资产详情数据
+        assetData: {},
+        assetDataToken: {},
         // 上拉加载
         loading: false,
         finished: false,
@@ -62,12 +69,13 @@
     },
     created() {
       document.title = '资产详情'
+      this.assetDetail()
     },
     methods: {
       // 上拉加载
       onLoad() {
         setTimeout(() => {
-          api.freeze({ 'page': this.pageNum, 'code': this.$route.params.item.token.code }).then(res => {
+          api.freeze({ 'page': this.pageNum }).then(res => {
             if (res.code == 0) {
               this.listData.push.apply(this.listData, res.data)
               this.loading = false
@@ -84,6 +92,15 @@
           })
         }, 100)
       },
+      // 资产详情
+      assetDetail() {
+        api.personalAssets({ 'code': this.$route.params.code }).then(res => {
+          if (res.code == 0) {
+            this.assetData = res.data
+            this.assetDataToken = res.data.token
+          }
+        }).catch()
+      }
     }
   }
 </script>
@@ -122,9 +139,24 @@
   }
 
   .asset-list-available {
+    border-bottom: 4px solid #f2f2f2;
+
     span {
       font-size: 0.78rem;
       color: #333;
+      padding: 5px 15px;
+      display: block;
+    }
+
+    P {
+      padding: 10px 15px;
+      border-top: 1px solid #f2f2f2;
+    }
+
+    img {
+      position: relative;
+      top: -30px;
+      right: 10px;
     }
 
   }
@@ -145,7 +177,7 @@
     }
 
     .asset-list-freeze-num {
-      border-top: 1px solid #f2f2f2;
+      border-top: 2px solid #f2f2f2;
       margin-top: 5px;
 
       p {
