@@ -4,7 +4,7 @@
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="detail-list" v-for="item in detailData">
         <router-link :to="/assetsdetails/+item.id">
-          <mt-cell :title="item.detail_type|type" :label="item.transaction_time" is-link>
+          <mt-cell :title="item.detail_type" :label="item.transaction_time" is-link>
             <span>{{item.amount|keepTwoNum}}({{item.token}})</span>
           </mt-cell>
         </router-link>
@@ -33,14 +33,6 @@
     },
     created() {
       document.title = '明细'
-    },
-    filters: {
-      // 类型文字转换
-      type: function (value) {
-        return value == 1 ? '转入' : value == 100 ? '转出' : value == 200 ? '赠送' : value == 300 ? '消费' : '退款'
-      },
-      num: function (value) {
-      }
     },
     methods: {
       // 上拉加载

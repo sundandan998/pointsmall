@@ -84,7 +84,7 @@ export default new Router({
     },
     // 转让--订单详情
     {
-      path: '/transferdetail',
+      path: '/transferdetail/:code',
       name: 'TransferDetail',
       component: () => import('@/pages/mine/assets-center/TransferDetail')
     },

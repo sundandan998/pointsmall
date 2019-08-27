@@ -7,7 +7,6 @@
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="assets-center-list" v-for="item in assetsData">
         <router-link :to="{name:'AssetDetail',params:{code:item.token.code}}">
-            <!-- <router-link :to="{name:'AssetDetail',params:{item:item}}"> -->
           <div class="assets-center-list-left fl">
             <img :src="item.token.icon" alt="">
             <div class="assets-center-name">

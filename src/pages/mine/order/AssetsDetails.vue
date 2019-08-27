@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <div class="details-title">
-      <span>{{detailsData.detail_type|type}}</span>
+      <span>{{detailsData.detail_type}}</span>
       <p>{{detailsData.amount|keepTwoNum}} ({{detailsData.token}})</p>
     </div>
     <div class="details-information">
@@ -27,16 +27,6 @@
     created() {
       document.title = '明细详情'
       this.detail()
-    },
-    filters: {
-      // 类型文字转换
-      type:function(value){
-        return value==1?'转入':value==100?'转出':value==200?'赠送':value==300?'消费':'退款'
-      },
-    //  数字带+-符号
-      num:function(value){
-      // return value==
-      }
     },
     methods: {
       detail() {

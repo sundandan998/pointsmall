@@ -12,9 +12,9 @@
       <mt-cell title="到期日" :value="transferData.unfreeze_date"></mt-cell>
     </div>
     <div class="bottom-button">
-      <van-button square size="large" type="warning"> 返回</van-button>
+      <van-button square size="large" type="warning" v-on:click="$router.go(-3)"> 返回</van-button>
       <!-- @click="transfer" -->
-      <van-button square size="large" type="danger" >再转一笔</van-button>
+      <van-button square size="large" type="danger" v-on:click="$router.go(-3)">再转一笔</van-button>
     </div>
   </div>
 </template>

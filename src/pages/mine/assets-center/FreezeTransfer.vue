@@ -12,12 +12,12 @@
     </div>
     <div class="transfer-progress">
       <div class="block">
-        <el-slider v-model="value" :step="25" show-stops :marks="marks">
+        <el-slider v-model="value" :step="25" show-stops :marks.keepTwoNum="marks">
         </el-slider>
       </div>
     </div>
     <div class="bottom-button" v-show="showBtn">
-      <van-button square size="large" type="warning"  v-on:click="$router.go(-1)"> 返回</van-button>
+      <van-button square size="large" type="warning" v-on:click="$router.go(-1)"> 返回</van-button>
       <van-button square size="large" type="danger" @click="transfer">转让</van-button>
     </div>
   </div>
@@ -25,10 +25,11 @@
 <script>
   // 接口请求
   import api from '@/api/order/order.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
-        value: 20,
+        value: 10,
         detailData: {},
         marks: {
           0: '0',
@@ -57,6 +58,17 @@
         }
       }
     },
+    filters: {
+      amount: function (marks) {
+        if (marks == 0.00) {
+          marks = Number(marks)
+          return marks.toFixed(2)
+        } else {
+          marks = Number(marks)
+          return marks
+        }
+      }
+    },
     methods: {
       // 详情接口
       assetDetail() {
@@ -64,16 +76,28 @@
           if (res.code == 0) {
             this.detailData = res.data
             this.marks[100] = res.data.amount
-s          }
+          }
         }).catch(err => {
         })
       },
       // 转让按钮
       transfer() {
-        this.$router.push({
-          name: 'ConfirmTransfer',
-          params: { 'transferParams': this.transferParams,'code':this.detailData.token,'order_id':this.detailData.order_id,'action':this.$route.params.action}
-        })
+        if (this.transferParams.amount == '' || this.transferParams.mobile == "") {
+          Toast({
+            message: '接收人和转出数量不能为空',
+            className: 'zZindex'
+          })
+        } else {
+          this.$router.push({
+            name: 'ConfirmTransfer',
+            params: {
+              'transferParams': this.transferParams, 'order_id': this.detailData.order_id,
+              'action': this.$route.params.action, 'detailData': this.detailData,
+              'code': this.detailData.token, 'date': this.detailData.unfreeze_date,
+              'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay
+            }
+          })
+        }
       }
     }
   }

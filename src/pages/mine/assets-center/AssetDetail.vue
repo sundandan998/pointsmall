@@ -29,7 +29,7 @@
         <div class="asset-list-freeze">
           <span>冻结</span>
           <div class="asset-list-freeze-num" v-for="item in listData">
-            <router-link :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze'}}">
+            <router-link :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze','day':item.remain_days,'freezeDay':item.freeze_days}}">
               <p><span>{{item.amount|keepTwoNum}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
               <div class="progress">
                 <el-slider :value="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
@@ -42,7 +42,7 @@
       </div>
     </van-list>
     <!-- 底部按钮 -->
-    <router-link to="assets">
+    <router-link to="/assets">
       <div class="order-button">
         <mt-button size="large">取消</mt-button>
       </div>
@@ -131,6 +131,7 @@
 
     span {
       margin-left: 80px;
+      font-size: 1.2rem;
     }
 
     img {
