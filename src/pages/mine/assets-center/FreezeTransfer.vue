@@ -7,13 +7,12 @@
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
     </div>
-    <div class="transfer-num">
-      <mt-field placeholder="请输入转出数量" type="number" v-model="transferParams.amount">{{detailData.token}}</mt-field>
-    </div>
+    <span class=" transfer-num fr">{{detailData.token}}</span>
+    <!-- <mt-field placeholder="请输入转出数量" type="number">{{detailData.token}}</mt-field> -->
     <div class="transfer-progress">
       <div class="block">
-        <el-slider v-model="value" :step="25" show-stops :marks.keepTwoNum="marks">
-        </el-slider>
+        <el-slider  v-model="transferParams.amount" :step="100" show-stops :marks="marks" show-input :max="detailData.amount|keepTwoNum">
+          </el-slider>
       </div>
     </div>
     <div class="bottom-button" v-show="showBtn">
@@ -29,7 +28,6 @@
   export default {
     data() {
       return {
-        value: 10,
         detailData: {},
         marks: {
           0: '0',
@@ -58,24 +56,14 @@
         }
       }
     },
-    filters: {
-      amount: function (marks) {
-        if (marks == 0.00) {
-          marks = Number(marks)
-          return marks.toFixed(2)
-        } else {
-          marks = Number(marks)
-          return marks
-        }
-      }
-    },
     methods: {
       // 详情接口
       assetDetail() {
         api.assetsDetail({ order_id: this.$route.params.order_id }).then(res => {
           if (res.code == 0) {
             this.detailData = res.data
-            this.marks[100] = res.data.amount
+            this.amount = this.keepTwoNum | res.data.amount
+            this.marks[100] = this.amount + ''
           }
         }).catch(err => {
         })
@@ -98,7 +86,7 @@
             }
           })
         }
-      }
+      },
     }
   }
 </script>
@@ -116,7 +104,7 @@
   }
 
   .transfer-progress {
-    height: 60px;
+    height: 110px;
     border-bottom: 2px solid #f2f2f2;
 
     .block {
@@ -133,5 +121,27 @@
       display: block;
       margin-left: 15px;
     }
+  }
+
+  .transfer-progress {
+    .el-slider__runway.show-input {
+      margin-right: 0;
+    }
+
+    .el-slider__input {
+      float: unset;
+      margin-top: 16px;
+      margin-bottom: 10px;
+      width: 130px;
+    }
+    .el-slider__marks .el-slider__marks-text:last-child{
+      left: 100% !important;
+    }
+   
+  }
+
+  .transfer-num {
+    margin-top: 20px;
+    margin-right: 10px;
   }
 </style>

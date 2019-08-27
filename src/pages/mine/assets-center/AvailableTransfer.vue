@@ -8,11 +8,13 @@
       <p>数量 <span class="fee">(暂免手续费)</span></p>
     </div>
     <div class="transfer-num">
-      <mt-field placeholder="请输入转出数量" type="number" v-model="transferParams.amount">{{detailData.token}}</mt-field>
+      <span class=" transfer-code fr">{{this.$route.params.code}}</span>
     </div>
     <div class="transfer-progress">
       <div class="block">
-        <el-slider v-model="value" :step="25" show-stops :marks="marks">
+          <!-- v-model=""  -->
+        <el-slider v-model="transferParams.amount" :step="100" show-stops :marks="marks" show-input
+          :max="this.$route.params.amount|keepTwoNum">
         </el-slider>
       </div>
     </div>
@@ -25,14 +27,14 @@
 <script>
   // 接口请求
   import api from '@/api/order/order.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
-        value: 20,
         detailData: {},
         marks: {
           0: '0',
-          100: this.$route.params.amount
+          100: ''
         },
         // 解决底部按钮被弹起问题
         clientHeight: document.documentElement.clientHeight,
@@ -45,6 +47,8 @@
     },
     created() {
       document.title = '转让'
+      let amount = this.keepTwoNum | this.$route.params.amount
+      this.marks[100] = amount + ''
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -59,11 +63,18 @@
     methods: {
       // 转让按钮
       transfer() {
-        this.$router.push({
-          name: 'ConfirmTransfer',
-          params: { 'transferParams': this.transferParams, 'token': this.detailData.token, 'code':this.$route.params.code,'action':this.$route.params.action}
-        })
-      }
+        if (this.transferParams.amount == '' || this.transferParams.mobile == "") {
+          Toast({
+            message: '接收人和转出数量不能为空',
+            className: 'zZindex'
+          })
+        } else {
+          this.$router.push({
+            name: 'ConfirmTransfer',
+            params: { 'transferParams': this.transferParams, 'token': this.detailData.token, 'code': this.$route.params.code, 'action': this.$route.params.action }
+          })
+        }
+      },
     }
   }
 </script>
@@ -81,12 +92,27 @@
   }
 
   .transfer-progress {
-    height: 60px;
+    height: 120px;
     border-bottom: 2px solid #f2f2f2;
 
     .block {
       width: 85%;
       margin: 0 auto;
+    }
+
+    .el-slider__runway.show-input {
+      margin-right: 0;
+    }
+
+    .el-slider__input {
+      float: unset;
+      margin-top: 16px;
+      margin-bottom: 10px;
+      width: 130px;
+    }
+
+    .el-slider__marks .el-slider__marks-text:last-child {
+      left: 100% !important;
     }
   }
 
@@ -98,5 +124,10 @@
       display: block;
       margin-left: 15px;
     }
+  }
+
+  .transfer-code {
+    margin-top: 20px;
+    margin-right: 10px;
   }
 </style>
