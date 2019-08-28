@@ -13,7 +13,7 @@
     <div class="transfer-progress">
       <div class="block">
           <!-- v-model=""  -->
-        <el-slider v-model="transferParams.amount" :step="this.$route.params.amount/5" show-stops :marks="marks" show-input
+        <el-slider v-model="transferParams.amount" :step="this.$route.params.amount/5"  :marks="marks" show-input
           :max="this.$route.params.amount|keepTwoNum">
         </el-slider>
       </div>
@@ -114,6 +114,9 @@
     }
 
     .el-slider__marks .el-slider__marks-text:last-child {
+      left: 100% !important;
+    }
+    .el-slider__stop.el-slider__marks-stop {
       left: 100% !important;
     }
   }

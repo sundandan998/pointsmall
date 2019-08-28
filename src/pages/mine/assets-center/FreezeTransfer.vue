@@ -11,7 +11,7 @@
     <!-- <mt-field placeholder="请输入转出数量" type="number">{{detailData.token}}</mt-field> -->
     <div class="transfer-progress">
       <div class="block">
-        <el-slider v-model="transferParams.amount" :step="detailData.amount/4" show-stops :marks="marks" show-input
+        <el-slider v-model="transferParams.amount" :step="detailData.amount/4" :marks="marks" show-input
           :max="detailData.amount|keepTwoNum">
         </el-slider>
       </div>
@@ -46,6 +46,8 @@
     created() {
       document.title = '转让'
       this.assetDetail()
+      // console.log(this.$route.params.amount)
+     
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -63,6 +65,7 @@
         api.assetsDetail({ order_id: this.$route.params.order_id }).then(res => {
           if (res.code == 0) {
             this.detailData = res.data
+            console.log(this.detailData.amount)
             this.amount = this.keepTwoNum | res.data.amount
             this.marks[100] = this.amount + ''
           }
@@ -135,6 +138,10 @@
     }
 
     .el-slider__marks .el-slider__marks-text:last-child {
+      left: 100% !important;
+    }
+
+    .el-slider__stop.el-slider__marks-stop {
       left: 100% !important;
     }
 
