@@ -25,7 +25,7 @@
       <mt-popup v-model="resevationModelModel" class="resevation-modal">
         <img class="fr" @click="modalHide" src="../../../assets/images/cancel.svg" alt="" />
         <span>输入支付密码</span>
-        <p>服务预约</p>
+        <p>转让</p>
         <p>{{this.$route.params.transferParams.amount}}({{this.$route.params.code}})</p>
         <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
       </mt-popup>

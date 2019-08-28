@@ -13,7 +13,7 @@
     <div class="transfer-progress">
       <div class="block">
           <!-- v-model=""  -->
-        <el-slider v-model="transferParams.amount" :step="100" show-stops :marks="marks" show-input
+        <el-slider v-model="transferParams.amount" :step="this.$route.params.amount/5" show-stops :marks="marks" show-input
           :max="this.$route.params.amount|keepTwoNum">
         </el-slider>
       </div>
@@ -31,6 +31,7 @@
   export default {
     data() {
       return {
+        value:0,
         detailData: {},
         marks: {
           0: '0',
@@ -41,7 +42,7 @@
         showBtn: true,  // 控制按钮盒子显示隐藏
         transferParams: {
           mobile: '',
-          amount: '',
+          amount: [],
         }
       }
     },
@@ -61,6 +62,7 @@
       }
     },
     methods: {
+      
       // 转让按钮
       transfer() {
         if (this.transferParams.amount == '' || this.transferParams.mobile == "") {
@@ -117,8 +119,6 @@
   }
 
   .transfer-progress-name {
-    border-bottom: 2px solid #f2f2f2;
-
     span {
       margin-top: 10px;
       display: block;

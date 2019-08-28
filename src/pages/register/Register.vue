@@ -36,6 +36,7 @@
   export default {
     data() {
       return {
+        info: {},
         disabled: true,
         CodeStatus: '',
         // 注册参数
@@ -62,10 +63,18 @@
           if (this.$store.getters.token !== '') {
             this.$store.commit('detail', res.data)
             // window.sessionStorage.setItem('info', info)
-            if (res.code === 0) {
-              this.$router.push({
-                name: 'Result'
-              })
+            if (res.code == 0) {
+              // 判断是否为新用户 ，如果是新用户，注册成功后跳转到注册结果页，
+              // 如果不是新用户，注册成功后跳到首页
+              if (res.info.new_user == true) {
+                this.$router.push({
+                  name: 'Result'
+                })
+              } else {
+                this.$router.push({
+                  name: 'Index'
+                })
+              }
             }
           }
         }).catch(err => {
@@ -141,6 +150,7 @@
       width: 170px !important;
     }
   }
+
   body {
     background-color: #fff;
   }

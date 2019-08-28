@@ -51,7 +51,8 @@ const user = {
             // commit('SET_TOKENEXPIREDTIME', nowTime + webTokenExpiredTime)
             dispatch('GetUserInfo', true)
               .then(res => {
-                resolve(res)
+                // resolve(res)
+                resolve(response)
               })
               .catch(err => {
                 reject(err)

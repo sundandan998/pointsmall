@@ -11,8 +11,9 @@
     <!-- <mt-field placeholder="请输入转出数量" type="number">{{detailData.token}}</mt-field> -->
     <div class="transfer-progress">
       <div class="block">
-        <el-slider  v-model="transferParams.amount" :step="100" show-stops :marks="marks" show-input :max="detailData.amount|keepTwoNum">
-          </el-slider>
+        <el-slider v-model="transferParams.amount" :step="detailData.amount/4" show-stops :marks="marks" show-input
+          :max="detailData.amount|keepTwoNum">
+        </el-slider>
       </div>
     </div>
     <div class="bottom-button" v-show="showBtn">
@@ -38,7 +39,7 @@
         showBtn: true,  // 控制按钮盒子显示隐藏
         transferParams: {
           mobile: '',
-          amount: '',
+          amount: [],
         }
       }
     },
@@ -114,8 +115,6 @@
   }
 
   .transfer-progress-name {
-    border-bottom: 2px solid #f2f2f2;
-
     span {
       margin-top: 10px;
       display: block;
@@ -134,10 +133,11 @@
       margin-bottom: 10px;
       width: 130px;
     }
-    .el-slider__marks .el-slider__marks-text:last-child{
+
+    .el-slider__marks .el-slider__marks-text:last-child {
       left: 100% !important;
     }
-   
+
   }
 
   .transfer-num {
