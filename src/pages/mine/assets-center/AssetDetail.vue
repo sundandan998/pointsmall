@@ -19,7 +19,8 @@
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="asset-list">
-        <router-link :to="{name:'AvailableTransfer',params:{amount:assetData.available_amount,action:'available',code:this.assetDataToken.code}}">
+        <router-link
+          :to="{name:'AvailableTransfer',params:{amount:assetData.available_amount,action:'available',code:this.assetDataToken.code}}">
           <div class="asset-list-available">
             <span>可用</span>
             <p>{{assetData.available_amount|keepTwoNum}}</p>
@@ -29,7 +30,8 @@
         <div class="asset-list-freeze">
           <span>冻结</span>
           <div class="asset-list-freeze-num" v-for="item in listData">
-            <router-link :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze','day':item.remain_days,'freezeDay':item.freeze_days}}">
+            <router-link
+              :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze','day':item.remain_days,'freezeDay':item.freeze_days}}">
               <p><span>{{item.amount|keepTwoNum}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
               <div class="progress">
                 <el-slider :value="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
@@ -200,9 +202,11 @@
       margin-left: 15px;
 
       .el-slider__runway {
-        background-color: #409EFF;
+        background-color: #409EFF !important;
       }
+
 
     }
   }
+
 </style>
