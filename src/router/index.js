@@ -46,6 +46,12 @@ export default new Router({
       name: 'ToPay',
       component: () => import('@/pages/index/ToPay')
     },
+    // 会员日
+    {
+      path: '/member',
+      name: 'MemberDay',
+      component: () => import('@/pages/member-day/MemberDay')
+    },
     // 我的
     {
       path: '/mine',

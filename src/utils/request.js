@@ -53,7 +53,7 @@ service.interceptors.response.use(
       store.dispatch('setLoading', false)
     }
     let data = JSON.parse(response.data)
-    if (data.code == 401 || data.code == 403) {
+    if (data.code === 401 || data.code === 403) {
       // let token = localStorage.getItem("token")
       window.localStorage.removeItem('token')
       router.push({
