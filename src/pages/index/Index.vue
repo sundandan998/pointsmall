@@ -53,7 +53,9 @@
 </template>
 <script>
   import Tabber from '../../assets/tabber/Tabber.vue'
-  import api from '@/api/goods/Goods.js'
+  // 接口请求
+  import api from '@/api/user/User.js'
+  // import api from '@/api/goods/Goods.js'
   import { Toast } from 'mint-ui'
   export default {
     data() {
@@ -66,17 +68,45 @@
     },
     created() {
       this.goodsList()
+      this.openId()
     },
     components: {
       Tabber,
     },
     methods: {
+      // 商品列表
       goodsList() {
         api.goodsList().then(res => {
           this.memberList = res.data
         }).catch(err => {
           console.log(err)
         })
+      },
+      openId() {
+        var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
+        var r = window.location.href.split('?')
+        if (r.length === 1) {
+          return null
+        }
+        r = r[1]
+        r = r.match(reg)
+        if (r == null) {
+          return null
+        }
+        var code = unescape(r[2])
+        if (code !== '' && this.$store.getters.token === '') {
+          api.openId({ code: code }).then(res => {
+            if (res.code === 0) {
+              this.$store.dispatch('setUserInfo', { data: res.info })
+              this.$store.dispatch('setToken', res.token)
+              this.information()
+            }
+          }).catch(err => {
+            if (err.code === 4003) {
+              window.sessionStorage.setItem('access_token', err.access_token)
+            }
+          })
+        }
       },
     }
   }

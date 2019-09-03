@@ -22,6 +22,12 @@ export default new Router({
       name: 'Result',
       component: () => import('@/pages/register/RegisterResult')
     },
+     // 邀请码
+     {
+      path: '/code',
+      name: 'Code',
+      component: () => import('@/pages/register/InvitationCode')
+    },
     // 首页
     {
       path: '/',

@@ -1,14 +1,14 @@
 <template>
   <div class="safety-verification">
     <div class="safety-verification-infomation">
-      <span>{{this.infor.mobile}}</span>
+      <span>{{infor.mobile}}</span>
       <mt-field placeholder="请输入验证码" type="number" v-model="verification.code">
         <input class="send-input" v-on:click="sendSmsCode" readonly="readonly" v-model="btnCode.btnContent" />
       </mt-field>
     </div>
     <div class="safety-verification-protocol">
       <!-- @click.native=safetyVerification -->
-      <mt-button size="large" class="submit-btn" :disabled=disabled @click="submit">提交</mt-button>
+      <mt-button size="large" class="submit-btn" :disabled=disabled @click.native="submit">提交</mt-button>
       <mt-button size="large" class="submit-btn-cancel" @click.native="cancel">取消</mt-button>
     </div>
   </div>
@@ -50,8 +50,10 @@
       },
       // 提交
       submit() {
+        // debugger
         var userInfo = sessionStorage.getItem('userInfo')
         userInfo = JSON.parse(userInfo)
+        console.log(userInfo)
         this.verification.mobile = userInfo.data.mobile
         api.verification(this.verification).then(res => {
           if (res.code == 0) {

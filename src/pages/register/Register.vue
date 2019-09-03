@@ -20,7 +20,7 @@
       <p>如果该手机号未曾注册过,将为您自动注册</p>
       <p>点击注册即表示同意 <span>《用户协议》</span> </p>
       <!-- <router-link to=""> -->
-      <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">登录</mt-button>
+      <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">登录/注册</mt-button>
       <!-- </router-link> -->
       <router-link to="/">
         <mt-button size="large" class="register-btn-cancel">取消</mt-button>
@@ -39,11 +39,12 @@
         info: {},
         disabled: true,
         CodeStatus: '',
+        is_use: '',
         // 注册参数
         registerParams: {
           mobile: '',
           access_token: '',
-          code: ''
+          code: '',
         },
         // 发送验证码
         btnCode: {
@@ -59,23 +60,65 @@
       // 注册
       register() {
         this.registerParams.access_token = sessionStorage.getItem('access_token')
-        this.$store.dispatch('loginByCode', this.registerParams).then(res => {
-          if (this.$store.getters.token !== '') {
-            this.$store.commit('detail', res.data)
-            // window.sessionStorage.setItem('info', info)
-            if (res.code == 0) {
-              // 判断是否为新用户 ，如果是新用户，注册成功后跳转到注册结果页，
-              // 如果不是新用户，注册成功后跳到首页
-              if (res.info.new_user == true) {
-                this.$router.push({
-                  name: 'Result'
-                })
-              } else {
-                this.$router.push({
-                  name: 'Index'
-                })
-              }
+        // 判断是否是新用户，如果是新用户，跳转到邀请码页面，如果不是新用户，跳转到首页
+        if (this.is_use == true) {
+          this.$store.dispatch('loginByCode', this.registerParams).then(res => {
+            if (this.$store.getters.token !== '') {
+              // window.sessionStorage.setItem('info', info)
+              this.$store.commit('detail', res.data)
+              this.$router.push({
+                name: 'Index'
+              })
             }
+          }).catch(err => {
+            Toast({
+              message: err.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          })
+        } else {
+          if (this.is_use == false) {
+            this.$router.push({
+              name: 'Code',
+              params: { registerParams: this.registerParams }
+            })
+          }
+        }
+      },
+      // register() {
+      //   this.registerParams.access_token = sessionStorage.getItem('access_token')
+      //   this.$store.dispatch('loginByCode', this.registerParams).then(res => {
+      //     if (this.$store.getters.token !== '') {
+      //       this.$store.commit('detail', res.data)
+      //       // window.sessionStorage.setItem('info', info)
+      //       if (res.code == 0) {
+      //         // 判断是否为新用户 ，如果是新用户，注册成功后跳转到注册结果页，
+      //         // 如果不是新用户，注册成功后跳到首页
+      //         if (res.info.new_user == true) {
+      //           this.$router.push({
+      //             name: 'Result'
+      //           })
+      //         } else {
+      //           this.$router.push({
+      //             name: 'Index'
+      //           })
+      //         }
+      //       }
+      //     }
+      //   }).catch(err => {
+      //     Toast({
+      //       message: err.msg,
+      //       position: 'top',
+      //       className: 'zZindex'
+      //     })
+      //   })
+      // },
+      // 手机号校验
+      sendCode() {
+        api.username({ mobile: this.registerParams.mobile }).then(res => {
+          if (res.code == 0) {
+            this.is_use = res.is_use
           }
         }).catch(err => {
           Toast({
@@ -84,16 +127,13 @@
             className: 'zZindex'
           })
         })
-      },
-      // 手机号校验
-      sendCode() {
-        var tel = /^1[3-9]\d{9}$/
-        if (!tel.test(this.registerParams.mobile)) {
-          this.CodeStatus = 'error'
-          this.errTitle = '请输入有效的手机号码'
-        } else {
-          this.CodeStatus = 'success'
-        }
+        // var tel = /^1[3-9]\d{9}$/
+        // if (!tel.test(this.registerParams.mobile)) {
+        //   this.CodeStatus = 'error'
+        //   this.errTitle = '请输入有效的手机号码'
+        // } else {
+        //   this.CodeStatus = 'success'
+        // }
       },
       // 发送验证码
       sendSmsCode() {

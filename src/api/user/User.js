@@ -211,4 +211,20 @@ export default {
       data: params
     })
   },
+  // 检测用户名是否唯一
+  username(params = {}) {
+    return request({
+      url: '/user/username/check/',
+      method: 'get',
+      params: params
+    })
+  },
+  // 根据分类获取商品列表信息
+  goodsList(params = {}) {
+    return request({
+      url: '/goods/cat/',
+      method: 'get',
+      params: params
+    })
+  },
 }

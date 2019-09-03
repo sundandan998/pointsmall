@@ -39,6 +39,7 @@
           name: 'MemberDay'
         })
       },
+      
       mine() {
         if (this.$store.getters.token !== '') {
           this.$router.push({
@@ -49,7 +50,7 @@
             name: 'Register'
           })
         }
-      }
+      },
     }
   }
 </script>

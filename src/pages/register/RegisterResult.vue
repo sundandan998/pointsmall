@@ -13,7 +13,8 @@
       <!-- <router-link :to="{name:'Verified',params:{id:'result'}}" >
         <mt-button size="large" class="result-btn-name">进行实名认证</mt-button>
       </router-link> -->
-      <router-link :to="{name:'SafetyVerification',params: {id:'result'}}">
+      <!-- <router-link :to="{name:'SafetyVerification',params: {id:'result'}}"> -->
+      <router-link :to="{name:'SetPwd',params: {id:'result'}}">
         <mt-button size="large" class="result-btn-pwd">设置支付密码</mt-button>
       </router-link>
     </div>
