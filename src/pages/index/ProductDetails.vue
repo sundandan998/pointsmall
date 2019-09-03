@@ -1,9 +1,13 @@
 <template>
   <div class="product-detail">
     <div class="produce-title">
-      <p>{{detail.name}}</p>
-      <p>{{detail.price}}积分</p>
+      <img src="../../assets/images/680-80-1.jpg" alt="" class="fl">
+      <span>
+        <p>{{detail.name}}</p>
+        <p>{{detail.price}}积分 <span class="delete-line">120积分</span></p> 
+      </span>
     </div>
+    <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
     <div class="detail-img">
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
@@ -48,7 +52,7 @@
       },
       cancel() {
         this.$router.push({
-          name: 'Index' 
+          name: 'Index'
         })
       },
       buy() {
@@ -76,13 +80,26 @@
     background-color: #fff;
     width: 100%;
 
-    p {
+    img {
+      margin-left: 15px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    span {
       margin: 10px 0 10px 15px;
+      font-size: 0.78rem;
+      line-height: 20px;
+    }
+    .delete-line{
+      text-decoration:line-through;
+      color: #ccc;
+      font-size: 0.76rem;
+      margin-left: 5px;
     }
   }
 
   .detail-img {
     margin-top: 60px;
   }
-
 </style>

@@ -24,4 +24,13 @@ export default {
       params: params
     })
   },
+  // 根据分类获取商品列表信息
+  goodsList(params = {}) {
+    return request({
+      url: '/goods/cat/',
+      method: 'get',
+      params: params
+    })
+  },
+  
 }

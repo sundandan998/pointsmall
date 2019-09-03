@@ -1,22 +1,18 @@
 <template>
   <div class="order">
     <div class="order-product">
-      <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" />
+      <p>{{orderData.name}}</p>
+      <img :src="orderData.vip_image" alt="">
+      <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
-    <!-- <div class="order-detail">
-      <div v-for="item in orderColor">
-        <p>{{item.name}}</p>
-        <div v-for="items in item.options" class="order-color">
-          <p>{{items.value}}</p>
-        </div>
-      </div>
-    </div> -->
+    <mt-cell title="赠送 2000life+" to="//github.com" is-link>
+  </mt-cell>
     <!-- 数量 -->
-    <div class="order-detail">
+    <!-- <div class="order-detail">
       <span>数量</span> <span class="fr">
         <van-stepper v-model="value" /></span>
       <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}}</span></p>
-    </div>
+    </div> -->
     <!-- 收货地址 -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
       <div class="order-address">
@@ -147,6 +143,7 @@
       display: none !important;
     }
   }
+
   .van-card {
     background-color: #fff;
   }
@@ -161,8 +158,12 @@
     -webkit-transform: translate3d(-50%, 0, 0);
   }
 
-  .order-detail {
-    margin: 10px 10px 10px 15px;
+  .order-product {
+    margin: 10px 0 5px 15px;
+
+    p {
+      margin-bottom: 10px;
+    }
   }
 
   .order-color {
@@ -195,6 +196,7 @@
         margin-top: 15px;
       }
     }
+
     p {
       color: #333;
       line-height: 30px;

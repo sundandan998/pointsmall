@@ -1,7 +1,7 @@
 // vant框架
 import {
   PasswordInput, NumberKeyboard, Popup, List, PullRefresh, Dialog, GoodsAction, Tab, Tabs, AddressList,
-  Button,Card,Stepper,RadioGroup, Radio,AddressEdit,NoticeBar } from 'vant'
+  Button,Card,Stepper,RadioGroup, Radio,AddressEdit,NoticeBar,Swipe, SwipeItem} from 'vant'
 import { Slider } from 'element-ui'
 const external = {
   install: function (Vue) {
@@ -21,6 +21,7 @@ const external = {
     Vue.use(RadioGroup).use(Radio)
     Vue.use(AddressEdit)
     Vue.use(NoticeBar)
+    Vue.use(Swipe).use(SwipeItem)
     
   }
 }
