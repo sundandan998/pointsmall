@@ -4,7 +4,7 @@
       <img src="../../assets/images/680-80-1.jpg" alt="" class="fl">
       <span>
         <p>{{detail.name}}</p>
-        <p>{{detail.price}}积分 <span class="delete-line">120积分</span></p> 
+        <p>￥{{detail.price}} <span class="delete-line">120积分</span></p>
       </span>
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
@@ -34,8 +34,8 @@
       document.title = '商品详情'
       this.detailId = this.$route.params
       this.goods()
-
     },
+    
     methods: {
       // 商品详情
       goods() {
@@ -59,6 +59,7 @@
         if (this.$store.getters.token !== '') {
           this.$router.push({
             name: 'Order',
+            params:{price:this.detail.price}
           })
         } else {
           this.$router.push({
@@ -68,8 +69,6 @@
       }
     }
   }
-
-
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
@@ -91,8 +90,9 @@
       font-size: 0.78rem;
       line-height: 20px;
     }
-    .delete-line{
-      text-decoration:line-through;
+
+    .delete-line {
+      text-decoration: line-through;
       color: #ccc;
       font-size: 0.76rem;
       margin-left: 5px;

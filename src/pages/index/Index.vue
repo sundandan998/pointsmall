@@ -3,16 +3,11 @@
     <!-- 轮播图 -->
     <div class="index-swipe">
       <van-radio-group v-model="radio">
-        <van-swipe>
-          <van-swipe-item class="one">
-            <div class="swipe-title">
-              <p>千企国际联盟商城</p>
-            </div>
-            <div class="one-introduction">
-              <p><span>精选商品</span><span>价格超低</span></p>
-              <p><span>会员专享</span><span>坐等收益</span></p>
-              <div class="one-token">
-                <p>免费赠送生态通证</p>
+        <van-swipe  >
+          <van-swipe-item>
+            <div class="index-start">
+              <div class="index-logo">
+                <img src="../../assets/images/logo.png" alt="">
               </div>
             </div>
           </van-swipe-item>
@@ -37,7 +32,7 @@
               <router-link :to="/product/+radio">
                 <!-- <router-link :to="{name:'Product',id:this.goods.id}"> -->
                 <div class="index-button">
-                  <mt-button type="danger">￥ 立即抢购 </mt-button>
+                  <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
                 </div>
               </router-link>
             </van-swipe-item>
@@ -72,6 +67,12 @@
     },
     components: {
       Tabber,
+    },
+    // 过滤按钮部分文字
+    filters: {
+      number(value) {
+        return value.replace(/[\u4e00-\u9fa5]/g, '')
+      }
     },
     methods: {
       // 商品列表
@@ -114,15 +115,19 @@
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
 
-  .index {
+  body {
     height: 100%;
+  }
+
+  .index {
+    height: auto;
     width: 100%;
     background-color: #f2f2f2;
     overflow: hidden;
     border-radius: 5px;
 
     .index-swipe {
-      height: 100%;
+      height: auto;
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
@@ -145,25 +150,18 @@
         margin: 20px 0;
         text-align: center;
       }
-    }
 
-    .one {
-      p {
-        text-align: center;
-      }
+      .index-start {
+        background: url('../../assets/images/bg.png')no-repeat;
+        height: 510px;
+        width: 100%;
+        overflow: hidden;
+        background-size: 100% 100%;
+        background-attachment: fixed;
 
-      .one-introduction {
-        span {
-          font-size: 0.76rem;
-          margin: 0 10px 0px 10px;
-        }
-      }
-
-      .one-token {
-        p {
-          margin-top: 15px;
-          margin-bottom: 10px;
-          font-size: 0.78rem;
+        .index-logo {
+          margin: 50px auto;
+          display: table;
         }
       }
     }

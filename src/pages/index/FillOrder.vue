@@ -5,8 +5,8 @@
       <img :src="orderData.vip_image" alt="">
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
-    <mt-cell title="赠送 2000life+" to="//github.com" is-link>
-  </mt-cell>
+    <mt-cell title="赠送 2000life+">
+    </mt-cell>
     <!-- 数量 -->
     <!-- <div class="order-detail">
       <span>数量</span> <span class="fr">
@@ -33,6 +33,18 @@
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click="submit" class="submit-btn">提交订单</van-button>
     </div>
+    <!-- 支付弹框 -->
+    <div>
+      <mt-popup v-model="resevationModelModel" class="resevation-modal">
+        <img class="fr" @click="modalHide" src="../../assets/images/cancel.svg" alt="" />
+        <span>输入支付密码</span>
+        <p>￥{{this.$route.params.price}}</p>
+        <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
+      </mt-popup>
+    </div>
+    <!-- 数字键盘 -->
+    <van-number-keyboard :show="showKeyboard" extra-key="." @input="onInput" @delete="onDelete"
+      @blur="showKeyboard = false" />
   </div>
 </template>
 <script>
@@ -44,6 +56,7 @@
         value: 1,
         orderData: {},
         orderInformation: '',
+        add: {},
         orderAddress: {
           id: '',
           addressDetail: '',
@@ -51,6 +64,15 @@
           county: '',
           tel: '',
           name: ''
+        },
+        showKeyboard: false,
+        resevationModelModel: false,
+        pay_pwd: '',
+        // 支付参数
+        payParams: {
+          sku_id: '',
+          address_id: '',
+          pay_pwd: '',
         },
       }
     },
@@ -78,10 +100,21 @@
           name: 'Product'
         })
       },
+      onInput(key) {
+        this.pay_pwd = (this.pay_pwd + key).slice(0, 6)
+      },
+      onDelete() {
+        this.pay_pwd = this.pay_pwd.slice(0, this.pay_pwd.length - 1)
+      },
+      modalHide() {
+        this.resevationModelModel = false
+      },
       // 个人信息
       information() {
         api.information().then(res => {
+          this.add = res.data
           this.orderInformation = res.data.default_address
+          // console.log(this.orderInformation)
         }).catch(err => {
           console.log(err)
         })
@@ -100,13 +133,33 @@
         } else {
           this.address_id = this.$route.params.item.id
         }
-        this.$router.push({
-          name: 'ToPay',
-          params: {
-            total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-            address_id: this.address_id
-          }
-        })
+        // 跳转到支付页面
+        // this.$router.push({
+        //   name: 'ToPay',
+        //   params: {
+        //     total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+        //     address_id: this.address_id
+        //   }
+        // })
+        // 弹起支付密码框
+        if (this.add.pay_pwd_active == true) {
+          this.resevationModelModel = true
+        } else {
+          this.$messagebox({
+            title: '提示',
+            message: `请先设置支付密码再进行操作`,
+            cancelButtonText: '取消',
+            confirmButtonText: '确定',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              this.$router.push({
+                name: 'SafetyVerification',
+                params: { id: 'reservation' }
+              })
+            }
+          })
+        }
       }
     },
     watch: {
@@ -130,6 +183,39 @@
             this.orderInformation.county = this.$route.params.item.county,
             this.orderInformation.tel = this.$route.params.item.tel,
             this.orderInformation.name = this.$route.params.item.name
+        }
+      },
+      pay_pwd() {
+        if (this.pay_pwd.length == 6) {
+          // 确认支付
+          this.payParams.address_id = this.orderInformation.id
+          this.payParams.pay_pwd = this.pay_pwd
+          this.payParams.sku_id = this.$route.params.id
+          api.addOrder(this.payParams).then(res => {
+            if (res.code === 0) {
+              Toast({
+                message: res.msg,
+                position: 'top',
+                className: 'zZindex'
+              })
+              this.$router.push({
+                name: 'OrderDetail',
+                params: { id: res.data.id }
+
+              })
+            }
+          }).catch(err => {
+            if (err.code !== 0) {
+              Toast({
+                message: err.msg,
+                position: 'top',
+                className: 'zZindex'
+              })
+            }
+            this.pay_pwd = ''
+            this.resevationModelModel = false
+            this.showKeyboard = false
+          })
         }
       }
     }

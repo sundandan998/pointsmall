@@ -10,29 +10,6 @@
     <!-- 特卖商品 -->
     <div class="member-product">
       <p>会员日特卖 <span>自x价,抢不到,就是亏</span></p>
-      <div class="member-product-img">
-        <div class="member-product-img-left fl">
-          <img src="../../assets/images/680-80-3.jpg" alt="">
-          <div class="member-product-text">
-            <div class="member-product-text-left fl">
-              <p>120</p>
-              <p>会员价</p>
-            </div>
-            <div class="member-product-text-left fr">
-              <span>2400</span>
-              <span>市场价</span>
-            </div>
-            <div class="line"></div>
-          </div>
-        </div>
-
-        <div class="member-product-img-right fr">
-          <img src="../../assets/images/680-80-2.jpg" alt="">
-          <p>120会员价</p>
-          <div class="line"></div>
-          <span class="fr">2400市场价</span>
-        </div>
-      </div>
     </div>
     <!-- 底部tabber -->
     <div>
@@ -81,40 +58,6 @@
 
     p {
       font-size: 0.78rem;
-
-      span {
-        font-size: 0.76rem;
-        color: #ccc;
-        margin-left: 7px;
-      }
-    }
   }
-
-  .member-product-img-left {
-    img {
-      border: 1px solid #ccc;
-      padding: 5px;
-    }
-
-    .line {
-      width: 1px;
-      height: 20px;
-      background-color: #ccc;
-      margin-left: 44px;
-    }
-  }
-
-  .member-product-text-left {
-    span {
-      display: block;
-      font-size: 0.76rem;
-    }
-  }
-
-  .member-product-img-right {
-    img {
-      border: 1px solid #ccc;
-      padding: 5px;
-    }
-  }
+}
 </style>

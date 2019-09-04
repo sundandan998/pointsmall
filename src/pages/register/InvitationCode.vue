@@ -55,17 +55,6 @@
             })
           })
         }, 
-        // api.loginByCode(this.registerParams).then(res => {
-        //   if (res.code == 0) {
-        //     window.localStorage.setItem('token', res.token)
-        //     window.sessionStorage.setItem('userInfo', JSON.stringify(res.info)) 
-        //     this.$router.push({
-        //       name: 'Result'
-        //     })
-        //   }
-        // }).catch(err => {
-        //   console.log(err)
-        // })
     }
   }
 </script>

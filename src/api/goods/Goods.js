@@ -32,5 +32,12 @@ export default {
       params: params
     })
   },
-  
+  // 添加订单
+  addOrder(params = {}) {
+    return request({
+      url: '/order/add/',
+      method: 'post',
+      data: params
+    })
+  },
 }
