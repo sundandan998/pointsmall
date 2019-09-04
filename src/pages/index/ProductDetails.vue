@@ -1,10 +1,11 @@
 <template>
   <div class="product-detail">
     <div class="produce-title">
-      <img src="../../assets/images/680-80-1.jpg" alt="" class="fl">
+      <img :src="detail.default_image" alt="" class="fl">
       <span>
         <p>{{detail.name}}</p>
-        <p>￥{{detail.price}} <span class="delete-line">120积分</span></p>
+        <!-- <span class="delete-line">120积分</span> -->
+        <p>￥{{detail.price}} </p>
       </span>
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
@@ -59,7 +60,7 @@
         if (this.$store.getters.token !== '') {
           this.$router.push({
             name: 'Order',
-            params:{price:this.detail.price}
+            params:{price:this.detail.price,}
           })
         } else {
           this.$router.push({

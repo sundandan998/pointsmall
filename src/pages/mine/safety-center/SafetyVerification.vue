@@ -7,8 +7,7 @@
       </mt-field>
     </div>
     <div class="safety-verification-protocol">
-      <!-- @click.native=safetyVerification -->
-      <mt-button size="large" class="submit-btn" :disabled=disabled @click.native="submit">提交</mt-button>
+      <mt-button size="large" class="submit-btn" :disabled="disabled" @click="safetyVerification">提交</mt-button>
       <mt-button size="large" class="submit-btn-cancel" @click.native="cancel">取消</mt-button>
     </div>
   </div>
@@ -38,6 +37,7 @@
     created() {
       document.title = '安全验证'
       this.information()
+      console.log(this.$route.params.id)
     },
     methods: {
       // 个人信息
@@ -49,80 +49,79 @@
         })
       },
       // 提交
-      submit() {
-        // debugger
-        var userInfo = sessionStorage.getItem('userInfo')
-        userInfo = JSON.parse(userInfo)
-        console.log(userInfo)
-        this.verification.mobile = userInfo.data.mobile
-        api.verification(this.verification).then(res => {
-          if (res.code == 0) {
-            Toast({
-              message: res.msg,
-              position: 'top',
-              className: 'zZindex'
-            })
-            if (this.$route.params.id == 'safetycenter') {
-              this.$router.push({
-                name: 'ModifyPwd',
-                params: { id: 'mine' }
-              })
-            } else {
-              if (this.$route.params.id == 'out') {
-                this.$router.push({
-                  name: 'SetPwd',
-                  params: { id: 'out' }
-                })
-              } else {
-                if (this.$route.params.id == 'result') {
-                  this.$router.push({
-                    name: 'SetPwd',
-                    params: { id: 'result' }
-                  })
-                } else {
-                  if (this.$route.params.id == 'reservation') {
-                    this.$router.push({
-                      name: 'SetPwd',
-                      params: { id: 'reservation' }
-                    })
-                  } else {
-                    if (this.$route.params.id == 'mine') {
-                      this.$router.push({
-                        name: 'SetPwd',
-                        params: { id: 'mine' }
-                      })
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }).catch(err => {
-        })
-      },
-      // 安全验证
-      // safetyVerification() {
-      //   if (this.$route.params.id == 'mine') {
-      //     this.$router.push({
-      //       name: 'SetPwd',
-      //       params: { id: 'mine' }
-      //     })
-      //   } else {
-      //     if (this.$route.params.id == 'result') {
-      //       this.$router.push({
-      //         name: 'SetPwd',
-      //         params: { id: 'result' }
+      // btn() {
+      //   // debugger
+      //   var userInfo = sessionStorage.getItem('userInfo')
+      //   userInfo = JSON.parse(userInfo)
+      //   this.verification.mobile = userInfo.data.mobile
+      //   api.verification(this.verification).then(res => {
+      //     if (res.code == 0) {
+      //       Toast({
+      //         message: res.msg,
+      //         position: 'top',
+      //         className: 'zZindex'
       //       })
-      //     } else {
-      //       if (this.$route.params.id == 'reservation') {
+      //       if (this.$route.params.id == 'safetycenter') {
       //         this.$router.push({
-      //           name: 'SetPwd',
-      //           params: { id: 'reservation' }
+      //           name: 'ModifyPwd',
+      //           params: { id: 'mine' }
       //         })
+      //       } else {
+      //         if (this.$route.params.id == 'out') {
+      //           this.$router.push({
+      //             name: 'SetPwd',
+      //             params: { id: 'out' }
+      //           })
+      //         } else {
+      //           if (this.$route.params.id == 'result') {
+      //             this.$router.push({
+      //               name: 'SetPwd',
+      //               params: { id: 'result' }
+      //             })
+      //           } else {
+      //             if (this.$route.params.id == 'reservation') {
+      //               this.$router.push({
+      //                 name: 'SetPwd',
+      //                 params: { id: 'reservation' }
+      //               })
+      //             } else {
+      //               if (this.$route.params.id == 'mine') {
+      //                 this.$router.push({
+      //                   name: 'SetPwd',
+      //                   params: { id: 'mine' }
+      //                 })
+      //               }
+      //             }
+      //           }
+      //         }
       //       }
       //     }
-      //   }
+      //   }).catch(err => {
+      //   })
       // },
+      // 安全验证
+      safetyVerification() {
+        if (this.$route.params.id == 'mine') {
+          this.$router.push({
+            name: 'SetPwd',
+            params: { id: 'mine' }
+          })
+        } else {
+          if (this.$route.params.id == 'result') {
+            this.$router.push({
+              name: 'SetPwd',
+              params: { id: 'result' }
+            })
+          } else {
+            if (this.$route.params.id == 'reservation') {
+              this.$router.push({
+                name: 'SetPwd',
+                params: { id: 'reservation' }
+              })
+            }
+          }
+        }
+      },
       // 发送验证码
       sendSmsCode() {
         this.time = 60

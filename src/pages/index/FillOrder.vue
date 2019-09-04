@@ -30,8 +30,8 @@
       </div>
     </router-link>
     <div class="bottom-button">
-      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <van-button square size="large" type="danger" @click="submit" class="submit-btn">提交订单</van-button>
+      <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
+      <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
     </div>
     <!-- 支付弹框 -->
     <div>

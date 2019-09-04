@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <div class="index-swipe">
       <van-radio-group v-model="radio">
-        <van-swipe  >
+        <van-swipe>
           <van-swipe-item>
             <div class="index-start">
               <div class="index-logo">
@@ -79,6 +79,7 @@
       goodsList() {
         api.goodsList().then(res => {
           this.memberList = res.data
+          console.log(this.memberList)
         }).catch(err => {
           console.log(err)
         })
@@ -109,7 +110,7 @@
           })
         }
       },
-    }
+    },
   }
 </script>
 <style lang="scss">
