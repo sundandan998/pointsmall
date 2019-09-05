@@ -2,43 +2,43 @@
   <div class="index">
     <!-- 轮播图 -->
     <div class="index-swipe">
-      <van-radio-group v-model="radio">
-        <van-swipe>
-          <van-swipe-item>
-            <div class="index-start">
-              <div class="index-logo">
-                <img src="../../assets/images/logo.png" alt="">
-              </div>
+      <!-- <van-radio-group v-model="radio"> -->
+      <van-swipe>
+        <van-swipe-item>
+          <div class="index-start">
+            <div class="index-logo">
+              <img src="../../assets/images/logo.png" alt="">
             </div>
-          </van-swipe-item>
-          <div v-for="item in memberList">
-            <van-swipe-item>
-              <div class="swipe-title">
-                <p>{{item.name}}</p>
-              </div>
-              <!-- <p class="swipe-img" v-for=" goods in item.goods">
-                <van-radio :name="goods.id" :radio="goods.id" checked-color="#09BB07">
+          </div>
+        </van-swipe-item>
+        <div v-for="item in memberList">
+          <van-swipe-item>
+            <div class="swipe-title">
+              <p>{{item.name}}</p>
+            </div>
+            <van-radio-group v-model="radio" >
+              <div class="swipe-img" v-for="(goods,index)  in item.goods">
+                <van-radio :name="goods.id" checked-color="#09BB07">
                   <img :src="goods.vip_image" alt="">
                 </van-radio>
-              </p> -->
-              <div class="swipe-img" v-for="goods in item.goods">
-                <van-radio-group v-model="radio">
-                  <van-radio :name="goods.id" :radio="goods.id" checked-color="#09BB07">
-                    <img :src="goods.vip_image" alt="">
-                  </van-radio>
-                </van-radio-group>
               </div>
-              <!-- 底部按钮 -->
-              <router-link :to="/product/+radio">
-                <!-- <router-link :to="{name:'Product',id:this.goods.id}"> -->
-                <div class="index-button">
-                  <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
-                </div>
-              </router-link>
-            </van-swipe-item>
-          </div>
-        </van-swipe>
-      </van-radio-group>
+            </van-radio-group>
+            <!-- <van-radio-group v-model="radio">
+              <van-radio v-for="(goods,index) in item.goods" :key="index" :name="goods.id" checked-color="#09BB07">
+                <img :src="goods.vip_image" alt="">
+              </van-radio>
+            </van-radio-group> -->
+            <!-- 底部按钮 -->
+            <router-link :to="/product/+radio">
+              <!-- <router-link :to="{name:'Product',id:this.goods.id}"> -->
+              <div class="index-button">
+                <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
+              </div>
+            </router-link>
+          </van-swipe-item>
+        </div>
+      </van-swipe>
+      <!-- </van-radio-group> -->
     </div>
     <!-- 底部tabber -->
     <div>
@@ -79,7 +79,7 @@
       goodsList() {
         api.goodsList().then(res => {
           this.memberList = res.data
-          console.log(this.memberList)
+          this.radio = (this.memberList[0].goods[0].id)
         }).catch(err => {
           console.log(err)
         })

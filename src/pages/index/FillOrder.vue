@@ -31,7 +31,7 @@
     </router-link>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
-      <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
+      <van-button square size="large" type="danger" @click.native="submit" class="submit-btn" disabled="disabled">提交订单</van-button>
     </div>
     <!-- 支付弹框 -->
     <div>
@@ -53,6 +53,7 @@
   export default {
     data() {
       return {
+        disabled:true,
         value: 1,
         orderData: {},
         orderInformation: '',
