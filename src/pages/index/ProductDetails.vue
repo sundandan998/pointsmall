@@ -14,7 +14,7 @@
     </div>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
+      <van-button square size="large" type="danger" @click="buy" disabled="disabled">立即购买</van-button>
     </div>
     <!-- <van-goods-action>
       <van-goods-action-button type="warning" text="加入购物车"  />
@@ -28,7 +28,8 @@
   export default {
     data() {
       return {
-        detail: ''
+        detail: '',
+        disabled:true,
       }
     },
     created() {
@@ -79,11 +80,11 @@
     top: 0px;
     background-color: #fff;
     width: 100%;
-
     img {
-      margin-left: 15px;
+      width: 80px;
+      height: 80px;
       display: inline-block;
-      margin-right: 10px;
+      margin:10px;
     }
 
     span {

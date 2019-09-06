@@ -22,7 +22,7 @@ const external = {
     Vue.use(AddressEdit)
     Vue.use(NoticeBar)
     Vue.use(Swipe).use(SwipeItem)
-    
+    // Vue.use(CountDown)
   }
 }
 export default external

@@ -1,5 +1,9 @@
 <template>
   <div class="index">
+    <!-- <div class="swipe-arrow" @click="index">
+      <img src="../../assets/images/l.svg" alt="" class="fl">
+      <img src="../../assets/images/r.svg" alt="" class="fr">
+    </div> -->
     <!-- 轮播图 -->
     <div class="index-swipe">
       <!-- <van-radio-group v-model="radio"> -->
@@ -11,23 +15,18 @@
             </div>
           </div>
         </van-swipe-item>
-        <div v-for="item in memberList">
+        <div v-for="(item,index) in memberList">
           <van-swipe-item>
             <div class="swipe-title">
               <p>{{item.name}}</p>
             </div>
-            <van-radio-group v-model="radio" >
+            <van-radio-group v-model="radio">
               <div class="swipe-img" v-for="(goods,index)  in item.goods">
                 <van-radio :name="goods.id" checked-color="#09BB07">
                   <img :src="goods.vip_image" alt="">
                 </van-radio>
               </div>
             </van-radio-group>
-            <!-- <van-radio-group v-model="radio">
-              <van-radio v-for="(goods,index) in item.goods" :key="index" :name="goods.id" checked-color="#09BB07">
-                <img :src="goods.vip_image" alt="">
-              </van-radio>
-            </van-radio-group> -->
             <!-- 底部按钮 -->
             <router-link :to="/product/+radio">
               <!-- <router-link :to="{name:'Product',id:this.goods.id}"> -->
@@ -75,6 +74,8 @@
       }
     },
     methods: {
+      index(index) {
+      },
       // 商品列表
       goodsList() {
         api.goodsList().then(res => {
@@ -127,11 +128,21 @@
     overflow: hidden;
     border-radius: 5px;
 
+    .swipe-arrow {
+      position: relative;
+      top: 220px;
+    }
+
     .index-swipe {
       height: auto;
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
+
+      img {
+        width: 242px;
+        height: 100%;
+      }
 
       .van-swipe__indicators {
         display: none;
