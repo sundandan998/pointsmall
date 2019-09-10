@@ -166,6 +166,18 @@ export default new Router({
       name: 'MerchantCenterDetail',
       component: () => import('@/pages/mine/merchant-center/MerchantCenterDetail')
     },
+    // 代理商列表
+    {
+      path: '/agent',
+      name: 'Agent',
+      component: () => import('@/pages/mine/agent/Agent')
+    },
+    // 代理商详情
+    {
+      path: '/agentdetail/:id',
+      name: 'AgentDetail',
+      component: () => import('@/pages/mine/agent/AgentDetail')
+    },
     // 修改手机号
     {
       path: '/tel',

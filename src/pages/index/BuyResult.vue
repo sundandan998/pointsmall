@@ -3,7 +3,9 @@
     <img src="../../assets/images/success.svg" alt="">
     <p>我们已收到订单,请联系代理商付款</p>
     <div class="buy-result-button">
-      <van-button square size="large" type="default">好的</van-button>
+      <router-link to="/">
+        <van-button square size="large" type="default">好的</van-button>
+      </router-link>
     </div>
   </div>
 </template>

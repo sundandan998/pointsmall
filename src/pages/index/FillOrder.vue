@@ -142,13 +142,6 @@
         //     address_id: this.address_id
         //   }
         // })
-        // this.$router.push({
-        //   name: 'ToPay',
-        //   params: {
-        //     total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-        //     address_id: this.address_id
-        //   }
-        // })
         // 弹起支付密码框
         if (this.add.pay_pwd_active == true) {
           this.resevationModelModel = true
@@ -201,15 +194,8 @@
           this.payParams.sku_id = this.$route.params.id
           api.addOrder(this.payParams).then(res => {
             if (res.code === 0) {
-              Toast({
-                message: res.msg,
-                position: 'top',
-                className: 'zZindex'
-              })
               this.$router.push({
-                name: 'OrderDetail',
-                params: { id: res.data.id }
-
+                name: 'BuyResult',
               })
             }
           }).catch(err => {

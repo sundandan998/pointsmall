@@ -56,6 +56,22 @@ export default {
       params: params
     })
   },
+  // 代理商订单
+  agent(params = {}) {
+    return request({
+      url: '/order/agent/list/',
+      method: 'get',
+      params: params
+    })
+  },
+  // 代理商订单详情
+  agentDetail(params = {}) {
+    return request({
+      url: '/order/agent/' + params.id + '/detail/',
+      method: 'get',
+      params: params
+    })
+  },
   // 商家发货
   ship(params = {}) {
     return request({
@@ -99,7 +115,7 @@ export default {
   // 获取个人资产详情--用户模块里的
   personalAssets(params = {}) {
     return request({
-      url: '/user/asset/'+ params.code+'/detail/',
+      url: '/user/asset/' + params.code + '/detail/',
       method: 'get',
       params: params
     })

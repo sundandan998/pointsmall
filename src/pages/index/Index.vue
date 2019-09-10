@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <div class="index-swipe">
       <!-- <van-radio-group v-model="radio"> -->
-      <van-swipe>
+      <van-swipe >
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
@@ -33,8 +33,9 @@
           </van-swipe-item>
         </div>
       </van-swipe>
-      <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left">
-      <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right">
+      <!-- @click="pre" -->
+      <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left" >
+      <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" @click="next">
       <!-- </van-radio-group> -->
     </div>
     <!-- 底部tabber -->
@@ -81,6 +82,10 @@
         }).catch(err => {
           console.log(err)
         })
+      },
+      // 下一步
+      next(index){
+        console.log(index)
       },
       openId() {
         var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')

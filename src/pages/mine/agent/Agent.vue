@@ -6,12 +6,25 @@
         <van-tabs v-model="active" color="#1890FF" title-active-color="#1890FF" @click="index">
           <van-tab title="全部">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/merchantdetail/+item.id">
+              <router-link :to="/agentdetail/+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>{{item.user}}</p>
+                </div>
+                <span class="fr status">{{item.status|orderStatus}}</span>
+              </router-link>
+            </div>
+          </van-tab>
+          <van-tab title="待付款">
+            <div class="product" v-for="(item,index) in orderList">
+              <router-link :to="/agentdetail /+item.id">
+                <p>{{item.transaction_time}}</p>
+                <img :src="item.sku_image" alt="" class="fl">
+                <div class="product-text">
+                  <p>{{item.sku_name}}</p>
+                  <p>{{item.user}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -19,12 +32,12 @@
           </van-tab>
           <van-tab title="待发货">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/merchantdetail/+item.id">
+              <router-link :to="/agentdetail /+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>{{item.user}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -32,12 +45,12 @@
           </van-tab>
           <van-tab title="待收货">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/merchantdetail/+item.id">
+              <router-link :to="/agentdetail /+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>{{item.user}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -45,12 +58,12 @@
           </van-tab>
           <van-tab title="已完成">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/merchantdetail/+item.id">
+              <router-link :to="/agentdetail /+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>{{item.user}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -59,11 +72,10 @@
         </van-tabs>
       </van-list>
     </div>
-    <router-link to="mine">
-      <div class="order-button">
-        <mt-button size="large">返回</mt-button>
-      </div>
-    </router-link>
+    <div class="bottom-button">
+      <van-button square size="large" type="warning"> 返回</van-button>
+      <van-button square size="large" type="danger">导出</van-button>
+    </div>
   </div>
 </template>
 <script>
@@ -81,19 +93,20 @@
         pageNum: 1,
         shops: {
           page: '',
-          is_shops: '1'
+          // is_shops: '1',
+          status: ''
         }
       }
     },
     created() {
-      document.title = '用户订单'
+      document.title = '商家中心'
     },
     methods: {
       // 上拉加载
       onLoad() {
         setTimeout(() => {
           this.shops.page = this.pageNum
-          api.merchantOrder(this.shops).then(res => {
+          api.agent(this.shops).then(res => {
             if (res.code == 0) {
               this.orderList.push.apply(this.orderList, res.data)
               this.loading = false
@@ -122,6 +135,7 @@
         } else {
           this.shops.status = index
           if (index == 1) {
+            this.shops.status = 9
             this.onLoad()
           } else {
             if (index == 2) {
@@ -129,13 +143,16 @@
             } else {
               if (index == 3) {
                 this.onLoad()
+              }else{
+                if(index == 4){
+                  this.onLoad()
+                }
               }
             }
           }
         }
       },
     }
-
   }
 </script>
 <style lang="scss">
@@ -166,7 +183,6 @@
     .product-text p:last-child {
       position: relative;
       top: 16px;
-      color: #E51C23;
     }
 
     .status {
