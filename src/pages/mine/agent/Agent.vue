@@ -13,8 +13,11 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.user}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
+              <button class="fr status"
+                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                @click="copy">复制
+              </button>
             </div>
           </van-tab>
           <van-tab title="待付款">
@@ -26,8 +29,11 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.user}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
+              <button class="fr status"
+                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                @click="copy">复制
+              </button>
             </div>
           </van-tab>
           <van-tab title="待发货">
@@ -39,8 +45,11 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.user}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
+              <button class="fr status"
+                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                @click="copy">复制
+              </button>
             </div>
           </van-tab>
           <van-tab title="待收货">
@@ -52,8 +61,11 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.user}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
+              <button class="fr status"
+                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                @click="copy">复制
+              </button>
             </div>
           </van-tab>
           <van-tab title="已完成">
@@ -65,15 +77,25 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.user}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
+              <button class="fr status"
+                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                @click="copy">复制
+              </button>
             </div>
           </van-tab>
         </van-tabs>
       </van-list>
     </div>
-    <div class="bottom-button">
-      <van-button square size="large" type="warning"> 返回</van-button>
+    <router-link to="mine">
+      <div class="order-button" v-if="shops.status!=9">
+        <mt-button size="large">返回</mt-button>
+      </div>
+    </router-link>
+    <div class="bottom-button" v-if="shops.status==9">
+      <router-link to="mine">
+        <van-button square size="large" type="warning"> 返回</van-button>
+      </router-link>
       <van-button square size="large" type="danger">导出</van-button>
     </div>
   </div>
@@ -81,6 +103,8 @@
 <script>
   // 接口请求
   import api from '@/api/order/order.js'
+  import Clipboard from 'clipboard'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
@@ -123,6 +147,23 @@
           })
         }, 100)
       },
+      copy() {
+        var clipboard = new Clipboard('.status')
+        clipboard.on('success', e => {
+          Toast({
+            message: '复制成功',
+            className: 'zZindex'
+          })
+          // 释放内存
+          clipboard.destroy()
+        })
+        clipboard.on('error', e => {
+          // 不支持复制
+          console.log('该浏览器不支持自动复制')
+          // 释放内存
+          clipboard.destroy()
+        })
+      },
       // tab栏展示列表
       index(index, title) {
         this.pageNum = 1
@@ -143,8 +184,8 @@
             } else {
               if (index == 3) {
                 this.onLoad()
-              }else{
-                if(index == 4){
+              } else {
+                if (index == 4) {
                   this.onLoad()
                 }
               }
@@ -187,7 +228,12 @@
 
     .status {
       position: relative;
-      top: -24px;
+      top: -16px;
+      border: 1px solid #7ECAC3;
+      padding: 2px 15px;
+      color: #7ECAC3;
+      font-size: 0.78rem;
+      background-color: #fff;
     }
   }
 
