@@ -18,7 +18,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import external from './external-components/index'
 Vue.use(MintUI)
 // Vue.use(axios)
-Vue.use(external) 
+Vue.use(external)
 // Vue.use(Vant)
 Vue.prototype.$Indicator = Indicator
 Vue.config.productionTip = false
@@ -29,6 +29,7 @@ Vue.config.productionTip = false
 //   value = Number(value)
 //   return value.toFixed(0)
 // })
+// 全局过滤去掉小数点后数字
 Vue.filter('keepTwoNum', function (value) {
   if (value == 0.00) {
     value = Number(value)
@@ -38,11 +39,15 @@ Vue.filter('keepTwoNum', function (value) {
     return value
   }
 })
-new Vue({
-  el: '#app',
-  router,
-  store,
-  // axios,
-  components: { App },
-  template: '<App/>'
-})
+// 全局过滤订单状态
+Vue.filter('orderStatus', function (value) {
+  return value == 1 ? '待发货' : value == 2? '待收货' : value == 3? '已完成' :value == 4? '失败':value == 5?'审核中':value==6?'已取消':value==7?'进行中':value==8?'锁仓中':'待付款'
+}),
+  new Vue({
+    el: '#app',
+    router,
+    store,
+    // axios,
+    components: { App },
+    template: '<App/>'
+  })

@@ -34,6 +34,12 @@ export default new Router({
       name: 'Index',
       component: () => import('@/pages/index/Index')
     },
+    // 购买结果
+    {
+      path: '/buyresult',
+      name: 'BuyResult',
+      component: () => import('@/pages/index/BuyResult')
+    },
     // 商品详情
     {
       path: '/product/:id',

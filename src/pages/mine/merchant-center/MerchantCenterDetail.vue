@@ -14,7 +14,7 @@
         :thumb="detailData.sku_image" />
     </div>
     <div class="detail-status">
-      <p><span>订单状态:</span><span class="fr">{{detailData.status==1?'待发货':detailData.status==2?'待收货':'已完成'}}</span></p>
+      <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
       <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
       <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
     </div>

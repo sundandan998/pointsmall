@@ -13,7 +13,7 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
                 </div>
-                <span class="fr status">{{item.status==1?'待发货':item.status==2?'待收货':'已完成'}}</span>
+                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
@@ -26,7 +26,7 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
                 </div>
-                <span class="fr status">{{item.status==1?'待发货':item.status==2?'待收货':'已完成'}}</span>
+                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
@@ -39,7 +39,7 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
                 </div>
-                <span class="fr status">{{item.status==1?'待发货':item.status==2?'待收货':'已完成'}}</span>
+                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
@@ -52,7 +52,7 @@
                   <p>{{item.sku_name}}</p>
                   <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
                 </div>
-                <span class="fr status">{{item.status==1?'待发货':item.status==2?'待收货':'已完成'}}</span>
+                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>

@@ -2,7 +2,7 @@
   <div class="order">
     <div class="order-product">
       <p>{{orderData.name}}</p>
-      <img :src="orderData.vip_image" alt="">
+      <img :src="orderData.default_image" alt="">
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
     <mt-cell title="赠送 2000life+">
@@ -31,7 +31,7 @@
     </router-link>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
-      <van-button square size="large" type="danger" @click.native="submit" class="submit-btn" disabled="disabled">提交订单</van-button>
+      <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
     </div>
     <!-- 支付弹框 -->
     <div>
@@ -53,7 +53,6 @@
   export default {
     data() {
       return {
-        disabled:true,
         value: 1,
         orderData: {},
         orderInformation: '',
@@ -71,6 +70,7 @@
         pay_pwd: '',
         // 支付参数
         payParams: {
+          amount:1,
           sku_id: '',
           address_id: '',
           pay_pwd: '',
@@ -135,6 +135,13 @@
           this.address_id = this.$route.params.item.id
         }
         // 跳转到支付页面
+        // this.$router.push({
+        //   name: 'ToPay',
+        //   params: {
+        //     total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+        //     address_id: this.address_id
+        //   }
+        // })
         // this.$router.push({
         //   name: 'ToPay',
         //   params: {

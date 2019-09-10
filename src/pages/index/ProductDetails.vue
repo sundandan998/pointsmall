@@ -5,7 +5,7 @@
       <span>
         <p>{{detail.name}}</p>
         <!-- <span class="delete-line">120积分</span> -->
-        <p>￥{{detail.price}} </p>
+        <!-- <p>￥{{detail.price}} </p> -->
       </span>
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
@@ -13,8 +13,12 @@
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
     <div class="bottom-button">
-      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <van-button square size="large" type="danger" @click="buy" disabled="disabled">立即购买</van-button>
+      <!-- @click="cancel" -->
+      <router-link :to="{name:'Index',params:{index:this.$route.params.index}}">
+        <!-- <router-link :to="///+index"> -->
+        <van-button square size="large" type="warning"> 取消</van-button>
+      </router-link>
+      <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
     </div>
     <!-- <van-goods-action>
       <van-goods-action-button type="warning" text="加入购物车"  />
@@ -29,7 +33,6 @@
     data() {
       return {
         detail: '',
-        disabled:true,
       }
     },
     created() {
@@ -37,7 +40,6 @@
       this.detailId = this.$route.params
       this.goods()
     },
-    
     methods: {
       // 商品详情
       goods() {
@@ -52,16 +54,17 @@
 
         })
       },
-      cancel() {
-        this.$router.push({
-          name: 'Index'
-        })
-      },
+      // cancel() {
+      //   this.$router.push({
+      //     name: 'Index',
+      //     params:{index:this.$route.params.index}
+      //   })
+      // },
       buy() {
         if (this.$store.getters.token !== '') {
           this.$router.push({
             name: 'Order',
-            params:{price:this.detail.price,}
+            params: { price: this.detail.price, }
           })
         } else {
           this.$router.push({
@@ -80,11 +83,12 @@
     top: 0px;
     background-color: #fff;
     width: 100%;
+
     img {
       width: 80px;
       height: 80px;
       display: inline-block;
-      margin:10px;
+      margin: 10px;
     }
 
     span {
@@ -103,5 +107,9 @@
 
   .detail-img {
     margin-top: 60px;
+
+    img {
+      margin-top: 30px;
+    }
   }
 </style>

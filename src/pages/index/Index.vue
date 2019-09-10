@@ -1,9 +1,5 @@
 <template>
   <div class="index">
-    <!-- <div class="swipe-arrow" @click="index">
-      <img src="../../assets/images/l.svg" alt="" class="fl">
-      <img src="../../assets/images/r.svg" alt="" class="fr">
-    </div> -->
     <!-- 轮播图 -->
     <div class="index-swipe">
       <!-- <van-radio-group v-model="radio"> -->
@@ -28,8 +24,8 @@
               </div>
             </van-radio-group>
             <!-- 底部按钮 -->
-            <router-link :to="/product/+radio">
-              <!-- <router-link :to="{name:'Product',id:this.goods.id}"> -->
+            <!-- <router-link :to="/product/+radio"> -->
+            <router-link :to="{name:'Product',params:{id:radio,index:index}}">
               <div class="index-button">
                 <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
               </div>
@@ -37,6 +33,8 @@
           </van-swipe-item>
         </div>
       </van-swipe>
+      <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left">
+      <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right">
       <!-- </van-radio-group> -->
     </div>
     <!-- 底部tabber -->
@@ -74,13 +72,12 @@
       }
     },
     methods: {
-      index(index) {
-      },
       // 商品列表
       goodsList() {
         api.goodsList().then(res => {
           this.memberList = res.data
           this.radio = (this.memberList[0].goods[0].id)
+          this.index = this.$route.params.index
         }).catch(err => {
           console.log(err)
         })
@@ -128,16 +125,24 @@
     overflow: hidden;
     border-radius: 5px;
 
-    .swipe-arrow {
-      position: relative;
-      top: 220px;
-    }
-
     .index-swipe {
       height: auto;
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
+
+      .swipe-arrow-right {
+        width: 18px;
+        position: relative;
+        top: -260px;
+        right: -20px;
+      }
+      .swipe-arrow-left {
+        width: 18px;
+        position: relative;
+        top: -260px;
+        left: -20px;
+      }
 
       img {
         width: 242px;
