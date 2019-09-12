@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <div class="index-swipe">
       <!-- <van-radio-group v-model="radio"> -->
-      <van-swipe>
+      <van-swipe class="swipe">
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
@@ -134,7 +134,9 @@
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
-
+      .swipe{
+        height: 500px;
+      }
       .swipe-arrow-right {
         width: 18px;
         position: relative;
