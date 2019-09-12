@@ -22,8 +22,8 @@ export default new Router({
       name: 'Result',
       component: () => import('@/pages/register/RegisterResult')
     },
-     // 邀请码
-     {
+    // 邀请码
+    {
       path: '/code',
       name: 'Code',
       component: () => import('@/pages/register/InvitationCode')
@@ -51,6 +51,12 @@ export default new Router({
       path: '/order/:id',
       name: 'Order',
       component: () => import('@/pages/index/FillOrder')
+    },
+     // 通证列表
+     {
+      path: '/tokenlist',
+      name: 'TokenList',
+      component: () => import('@/pages/index/TokenList')
     },
     // 去支付
     {
@@ -112,8 +118,8 @@ export default new Router({
       name: 'AssetsDetail',
       component: () => import('@/pages/mine/order/AssetsDetail')
     },
-     // 明细详情
-     {
+    // 明细详情
+    {
       path: '/assetsdetails/:id',
       name: 'AssetsDetails',
       component: () => import('@/pages/mine/order/AssetsDetails')
@@ -124,28 +130,29 @@ export default new Router({
       name: 'MyOrder',
       component: () => import('@/pages/mine/order/MyOrder')
     },
+
     // 订单详情
     {
-      path:'/orderdetail/:id',
-      name:'OrderDetail',
+      path: '/orderdetail/:id',
+      name: 'OrderDetail',
       component: () => import('@/pages/mine/order/OrderDetail')
     },
     // 收货地址
     {
-      path:'/address',
-      name:'ShippingAddress',
+      path: '/address',
+      name: 'ShippingAddress',
       component: () => import('@/pages/mine/shipping-address/ShippingAddress')
     },
-     // 新建地址
-     {
-      path:'/newaddress',
-      name:'NewAddress',
+    // 新建地址
+    {
+      path: '/newaddress',
+      name: 'NewAddress',
       component: () => import('@/pages/mine/shipping-address/NewAddress')
     },
-     // 地址详情
-     {
-      path:'/addressdetail',
-      name:'AddressDetail',
+    // 地址详情
+    {
+      path: '/addressdetail',
+      name: 'AddressDetail',
       component: () => import('@/pages/mine/shipping-address/AddressDetail')
     },
     // 安全中心
@@ -154,14 +161,14 @@ export default new Router({
       name: 'SafetyCenter',
       component: () => import('@/pages/mine/safety-center/SafetyCenter')
     },
-     // 商家中心
-     {
+    // 商家中心
+    {
       path: '/merchant',
       name: 'MerchantCenter',
       component: () => import('@/pages/mine/merchant-center/MerchantCenter')
     },
-     // 商家中心详情
-     {
+    // 商家中心详情
+    {
       path: '/merchantdetail/:id',
       name: 'MerchantCenterDetail',
       component: () => import('@/pages/mine/merchant-center/MerchantCenterDetail')

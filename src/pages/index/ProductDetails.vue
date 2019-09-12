@@ -64,7 +64,7 @@
         if (this.$store.getters.token !== '') {
           this.$router.push({
             name: 'Order',
-            params: { price: this.detail.price, }
+            params: { price: this.detail.price}
           })
         } else {
           this.$router.push({

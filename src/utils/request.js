@@ -49,11 +49,12 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
+    // debugger
     if (response.config.loading) {
       store.dispatch('setLoading', false)
     }
     let data = JSON.parse(response.data)
-    if (data.code === 401 || data.code === 403) {
+    if (data.code === 401) {
       // let token = localStorage.getItem("token")
       window.localStorage.removeItem('token')
       router.push({

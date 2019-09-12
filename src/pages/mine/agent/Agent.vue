@@ -96,7 +96,8 @@
       <router-link to="mine">
         <van-button square size="large" type="warning"> 返回</van-button>
       </router-link>
-      <van-button square size="large" type="danger">导出</van-button>
+      <a id="a_id"></a>
+      <van-button square size="large" type="danger" @click="downloadFile">导出</van-button>
     </div>
   </div>
 </template>
@@ -105,6 +106,10 @@
   import api from '@/api/order/order.js'
   import Clipboard from 'clipboard'
   import { Toast } from 'mint-ui'
+  import axios from 'axios'
+  import qs from 'qs'
+  import baseURL from '../../../utils/baseURL'
+  import store from '@/store/index'
   export default {
     data() {
       return {
@@ -124,6 +129,7 @@
     },
     created() {
       document.title = '商家中心'
+      // this.downloadFile()
     },
     methods: {
       // 上拉加载
@@ -147,6 +153,7 @@
           })
         }, 100)
       },
+      // 复制内容
       copy() {
         var clipboard = new Clipboard('.status')
         clipboard.on('success', e => {
@@ -164,6 +171,32 @@
           clipboard.destroy()
         })
       },
+      // 导出excel
+      downloadFile() {
+        axios.get(baseURL + '/order/agent/export/', qs.stringify(), {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization':'JWT'
+          },
+          // baseURL: baseURL,
+          'responseType': 'blob',
+          operateFile(file) {
+            // let fileName = '' + "-" + new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate() + ".xlsx";
+            let blobObject = new Blob([file], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+            //是IE浏览器
+            if (!!window.ActiveXObject || "ActiveXObject" in window) {
+              window.navigator.msSaveOrOpenBlob(blobObject);
+            } else {//火狐谷歌都兼容
+              //模板中要有一个预定义好的a标签
+              let link = document.getElementById('a_id')
+              link.href = URL.createObjectURL(blobObject);
+              // link.download = fileName
+              link.click();
+            }
+          }
+        })
+      },
+
       // tab栏展示列表
       index(index, title) {
         this.pageNum = 1

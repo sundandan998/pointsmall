@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <div class="index-swipe">
       <!-- <van-radio-group v-model="radio"> -->
-      <van-swipe >
+      <van-swipe>
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
@@ -17,7 +17,7 @@
               <p>{{item.name}}</p>
             </div>
             <van-radio-group v-model="radio">
-              <div class="swipe-img" v-for="(goods,index)  in item.goods">
+              <div class="swipe-img" v-for="(goods,index) in item.goods">
                 <van-radio :name="goods.id" checked-color="#09BB07">
                   <img :src="goods.vip_image" alt="">
                 </van-radio>
@@ -84,8 +84,7 @@
         })
       },
       // 下一步
-      next(index){
-        console.log(index)
+      next(){
       },
       openId() {
         var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')

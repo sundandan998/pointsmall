@@ -5,8 +5,31 @@
       <img :src="orderData.default_image" alt="">
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
-    <mt-cell title="赠送 2000life+">
-    </mt-cell>
+    <!-- 选择通证部分 -->
+    <div class="select-token">
+      <router-link :to="{name:'TokenList',params:{id:this.$route.params.id,price:orderData.price}}">
+        <p v-if="this.$route.params.url!='tokenlist'">选择通证</p>
+        <p
+          v-if="this.$route.params.url==='tokenlist'">{{this.$route.params.item.amount|keepTwoNum}}{{this.$route.params.item.token}}</p>
+        </router-link">
+        <img src="../../assets/images/r.png" alt="" class="fr">
+    </div>
+
+    <!-- 选择通证部分 -->
+    <!-- <div class="page-actionsheet-wrapper select-token">
+      <button @click="actionSheet" class="mint-button mint-button--default mint-button--large">
+        <span>赠送</span>
+        <img src="../../assets/images/r.png" alt="" class="fr ">
+      </button>
+      <div v-for="item in orderData.vip_info">
+        cancelText="" 
+        :actions="
+        <mt-actionsheet v-model="sheetVisible" :actions="[{name:item.token+item.amount}]">
+          <mt-radio title="选择受赠通证" v-model="value" :options="[item.token+item.amount]">
+            </mt-radio>
+        </mt-actionsheet>
+      </div> -->
+    <!-- </div> -->
     <!-- 数量 -->
     <!-- <div class="order-detail">
       <span>数量</span> <span class="fr">
@@ -70,11 +93,16 @@
         pay_pwd: '',
         // 支付参数
         payParams: {
-          amount:1,
+          amount: 1,
           sku_id: '',
           address_id: '',
           pay_pwd: '',
+          token_code: '',
         },
+        actions: [{
+          name: '',
+          amount: ''
+        }],
       }
     },
     created() {
@@ -93,6 +121,7 @@
       order() {
         api.orderDetail(this.$route.params).then(res => {
           this.orderData = res.data.sku
+          this.actions = res.data.sku.vip_info
         }).catch(err => {
         })
       },
@@ -192,6 +221,7 @@
           this.payParams.address_id = this.orderInformation.id
           this.payParams.pay_pwd = this.pay_pwd
           this.payParams.sku_id = this.$route.params.id
+          this.payParams.token_code = this.$route.params.item.token
           api.addOrder(this.payParams).then(res => {
             if (res.code === 0) {
               this.$router.push({
@@ -221,6 +251,25 @@
   .order {
     .van-address-item .van-radio__icon {
       display: none !important;
+    }
+
+    .select-token {
+      width: 100%;
+      height: 40px;
+      .mint-button--default {
+        color: #333 !important;
+        text-align: left;
+        padding-left: 15px;
+        background-color: #fff;
+      }
+
+      p {
+        margin-left: 15px;
+      }
+      img {
+        margin-right: 10px;
+        margin-top: -15px;
+      }
     }
   }
 

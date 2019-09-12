@@ -72,6 +72,14 @@ export default {
       params: params
     })
   },
+  // 导出excel 
+  export(params = {}) {
+    return request({
+      url: '/order/agent/export/',
+      method: 'get',
+      params: params
+    })
+  },
   // 商家发货
   ship(params = {}) {
     return request({
@@ -80,6 +88,7 @@ export default {
       data: params
     })
   },
+
   // 用户收货
   receipt(params = {}) {
     return request({
