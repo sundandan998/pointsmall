@@ -5,31 +5,6 @@
       <img :src="orderData.default_image" alt="">
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
-    <!-- 选择通证部分 -->
-    <div class="select-token">
-      <router-link :to="{name:'TokenList',params:{id:this.$route.params.id,price:orderData.price}}">
-        <p v-if="this.$route.params.url!='tokenlist'">选择通证</p>
-        <p
-          v-if="this.$route.params.url==='tokenlist'">{{this.$route.params.item.amount|keepTwoNum}}{{this.$route.params.item.token}}</p>
-        </router-link">
-        <img src="../../assets/images/r.png" alt="" class="fr">
-    </div>
-
-    <!-- 选择通证部分 -->
-    <!-- <div class="page-actionsheet-wrapper select-token">
-      <button @click="actionSheet" class="mint-button mint-button--default mint-button--large">
-        <span>赠送</span>
-        <img src="../../assets/images/r.png" alt="" class="fr ">
-      </button>
-      <div v-for="item in orderData.vip_info">
-        cancelText="" 
-        :actions="
-        <mt-actionsheet v-model="sheetVisible" :actions="[{name:item.token+item.amount}]">
-          <mt-radio title="选择受赠通证" v-model="value" :options="[item.token+item.amount]">
-            </mt-radio>
-        </mt-actionsheet>
-      </div> -->
-    <!-- </div> -->
     <!-- 数量 -->
     <!-- <div class="order-detail">
       <span>数量</span> <span class="fr">
@@ -52,6 +27,16 @@
         <img src="../../assets/images/r.png" alt="" class="fr ">
       </div>
     </router-link>
+    <!-- 选择通证部分 -->
+    <p @click="show" class="select-token">{{value1}}
+      <mt-popup v-model="popupVisible" position="bottom" class="token-list-model">
+        <div class="token-list">
+          <mt-radio v-model="value1" :options="options" title="选择受赠通证">
+          </mt-radio>
+        </div>
+      </mt-popup>
+      <img src="../../assets/images/r.png" alt="" class="fr">
+    </p>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
@@ -61,7 +46,7 @@
       <mt-popup v-model="resevationModelModel" class="resevation-modal">
         <img class="fr" @click="modalHide" src="../../assets/images/cancel.svg" alt="" />
         <span>输入支付密码</span>
-        <p>￥{{this.$route.params.price}}</p>
+        <p>￥{{orderData.price}}</p>
         <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
       </mt-popup>
     </div>
@@ -77,6 +62,9 @@
     data() {
       return {
         value: 1,
+        value1: '请选择通证',
+        options: [],
+        popupVisible: false,
         orderData: {},
         orderInformation: '',
         add: {},
@@ -99,10 +87,6 @@
           pay_pwd: '',
           token_code: '',
         },
-        actions: [{
-          name: '',
-          amount: ''
-        }],
       }
     },
     created() {
@@ -117,11 +101,23 @@
       })
     },
     methods: {
+      show() {
+        this.popupVisible = !this.popupVisible
+      },
       // 商品信息
       order() {
         api.orderDetail(this.$route.params).then(res => {
           this.orderData = res.data.sku
-          this.actions = res.data.sku.vip_info
+          if (this.options != null) {
+            this.options = []
+            for (var i = 0; i < res.data.sku.vip_info.length; i++) {
+              var tokenList = {
+                value: res.data.sku.vip_info[i].amount + ' ' + res.data.sku.vip_info[i].token,
+                label: res.data.sku.vip_info[i].amount + res.data.sku.vip_info[i].token
+              }
+              this.options.push(tokenList)
+            }
+          }
         }).catch(err => {
         })
       },
@@ -157,6 +153,34 @@
             message: '请选择收货地址',
             className: 'zZindex'
           })
+
+        } else {
+          if (this.value1 == '请选择通证') {
+            Toast({
+              message: '请选择通证',
+              className: 'zZindex'
+            })
+          } else {
+            if (this.add.pay_pwd_active == true) {
+              this.resevationModelModel = true
+            } else {
+              this.$messagebox({
+                title: '提示',
+                message: `请先设置支付密码再进行操作`,
+                cancelButtonText: '取消',
+                confirmButtonText: '确定',
+                showCancelButton: true
+              }).then(action => {
+                if (action == 'confirm') {
+                  this.$router.push({
+                    name: 'SafetyVerification',
+                    params: { id: 'reservation' }
+                  })
+                }
+              })
+            }
+          }
+
         }
         if (this.orderAddress.id == '') {
           this.address_id = this.orderInformation.id
@@ -172,24 +196,7 @@
         //   }
         // })
         // 弹起支付密码框
-        if (this.add.pay_pwd_active == true) {
-          this.resevationModelModel = true
-        } else {
-          this.$messagebox({
-            title: '提示',
-            message: `请先设置支付密码再进行操作`,
-            cancelButtonText: '取消',
-            confirmButtonText: '确定',
-            showCancelButton: true
-          }).then(action => {
-            if (action == 'confirm') {
-              this.$router.push({
-                name: 'SafetyVerification',
-                params: { id: 'reservation' }
-              })
-            }
-          })
-        }
+
       }
     },
     watch: {
@@ -221,7 +228,8 @@
           this.payParams.address_id = this.orderInformation.id
           this.payParams.pay_pwd = this.pay_pwd
           this.payParams.sku_id = this.$route.params.id
-          this.payParams.token_code = this.$route.params.item.token
+          var token = (this.value1.split(' ')[1])
+          this.payParams.token_code = token
           api.addOrder(this.payParams).then(res => {
             if (res.code === 0) {
               this.$router.push({
@@ -253,9 +261,17 @@
       display: none !important;
     }
 
-    .select-token {
+    .mint-popup.token-list-model.mint-popup-bottom {
       width: 100%;
+      border-radius: 5px;
+      height: 250px;
+    }
+
+    .select-token {
       height: 40px;
+      margin-left: 15px;
+      margin-top: 10px;
+
       .mint-button--default {
         color: #333 !important;
         text-align: left;
@@ -263,12 +279,8 @@
         background-color: #fff;
       }
 
-      p {
-        margin-left: 15px;
-      }
       img {
-        margin-right: 10px;
-        margin-top: -15px;
+        margin-top: 10px;
       }
     }
   }

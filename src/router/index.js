@@ -52,12 +52,6 @@ export default new Router({
       name: 'Order',
       component: () => import('@/pages/index/FillOrder')
     },
-     // 通证列表
-     {
-      path: '/tokenlist',
-      name: 'TokenList',
-      component: () => import('@/pages/index/TokenList')
-    },
     // 去支付
     {
       path: '/pay/:id',

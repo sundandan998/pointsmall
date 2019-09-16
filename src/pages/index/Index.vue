@@ -7,7 +7,7 @@
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
-              <img src="../../assets/images/logo.png" alt="">
+              <img src="../../assets/images/logo.png" alt="" >
             </div>
           </div>
         </van-swipe-item>
@@ -19,7 +19,7 @@
             <van-radio-group v-model="radio">
               <div class="swipe-img" v-for="(goods,index) in item.goods">
                 <van-radio :name="goods.id" checked-color="#09BB07">
-                  <img :src="goods.vip_image" alt="">
+                  <img :src="goods.vip_image" alt="" v-lazy="goods.vip_image">
                 </van-radio>
               </div>
             </van-radio-group>
@@ -33,10 +33,8 @@
           </van-swipe-item>
         </div>
       </van-swipe>
-      <!-- @click="pre" -->
       <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left" >
       <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" @click="next">
-      <!-- </van-radio-group> -->
     </div>
     <!-- 底部tabber -->
     <div>
