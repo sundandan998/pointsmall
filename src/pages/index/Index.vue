@@ -3,11 +3,11 @@
     <!-- 轮播图 -->
     <div class="index-swipe">
       <!-- <van-radio-group v-model="radio"> -->
-      <van-swipe class="swipe">
+      <van-swipe class="swipe" :initial-swipe=this.$route.params.position>
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
-              <img src="../../assets/images/logo.png" alt="" >
+              <img src="../../assets/images/logo.png" alt="">
             </div>
           </div>
         </van-swipe-item>
@@ -19,13 +19,12 @@
             <van-radio-group v-model="radio">
               <div class="swipe-img" v-for="(goods,index) in item.goods">
                 <van-radio :name="goods.id" checked-color="#09BB07">
-                  <img :src="goods.vip_image" alt="" v-lazy="goods.vip_image">
+                  <img :src="goods.vip_image" alt="">
                 </van-radio>
               </div>
             </van-radio-group>
             <!-- 底部按钮 -->
-            <!-- <router-link :to="/product/+radio"> -->
-            <router-link :to="{name:'Product',params:{id:radio,index:index}}">
+            <router-link :to="{name:'Product',params:{id:radio,position:index+1}}">
               <div class="index-button">
                 <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
               </div>
@@ -33,8 +32,9 @@
           </van-swipe-item>
         </div>
       </van-swipe>
-      <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left" >
-      <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" @click="next">
+      <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left">
+      <!-- @click="next" -->
+      <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" >
     </div>
     <!-- 底部tabber -->
     <div>
@@ -76,13 +76,9 @@
         api.goodsList().then(res => {
           this.memberList = res.data
           this.radio = (this.memberList[0].goods[0].id)
-          this.index = this.$route.params.index
         }).catch(err => {
           console.log(err)
         })
-      },
-      // 下一步
-      next(){
       },
       openId() {
         var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
@@ -132,15 +128,18 @@
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
-      .swipe{
+
+      .swipe {
         height: 500px;
       }
+
       .swipe-arrow-right {
         width: 18px;
         position: relative;
         top: -260px;
         right: -20px;
       }
+
       .swipe-arrow-left {
         width: 18px;
         position: relative;

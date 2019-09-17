@@ -14,7 +14,7 @@
     </div>
     <div class="bottom-button">
       <!-- @click="cancel" -->
-      <router-link :to="{name:'Index',params:{index:this.$route.params.index}}">
+      <router-link :to="{name:'Index',params:{position:this.$route.params.position}}">
         <!-- <router-link :to="///+index"> -->
         <van-button square size="large" type="warning"> 取消</van-button>
       </router-link>
@@ -64,7 +64,7 @@
         if (this.$store.getters.token !== '') {
           this.$router.push({
             name: 'Order',
-            params: { price: this.detail.price}
+            params: { price: this.detail.price }
           })
         } else {
           this.$router.push({
