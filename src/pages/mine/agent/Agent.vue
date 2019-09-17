@@ -22,7 +22,7 @@
           </van-tab>
           <van-tab title="待付款">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/agentdetail /+item.id">
+              <router-link :to="/agentdetail/+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
@@ -173,27 +173,10 @@
       },
       // 导出excel
       downloadFile() {
-        axios.get(baseURL + '/order/agent/export/', qs.stringify(), {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization':'JWT'
-          },
-          // baseURL: baseURL,
-          'responseType': 'blob',
-          operateFile(file) {
-            // let fileName = '' + "-" + new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate() + ".xlsx";
-            let blobObject = new Blob([file], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
-            //是IE浏览器
-            if (!!window.ActiveXObject || "ActiveXObject" in window) {
-              window.navigator.msSaveOrOpenBlob(blobObject);
-            } else {//火狐谷歌都兼容
-              //模板中要有一个预定义好的a标签
-              let link = document.getElementById('a_id')
-              link.href = URL.createObjectURL(blobObject);
-              // link.download = fileName
-              link.click();
-            }
-          }
+        api.export().then(res=>{
+
+        }).catch(err=>{
+          
         })
       },
 

@@ -11,30 +11,28 @@
             </div>
           </div>
         </van-swipe-item>
-        <div v-for="(item,index) in memberList">
-          <van-swipe-item>
-            <div class="swipe-title">
-              <p>{{item.name}}</p>
+        <van-swipe-item v-for="(item,index) in memberList" :key="index">
+          <div class="swipe-title">
+            <p>{{item.name}}</p>
+          </div>
+          <div class="swipe-img" v-for="(goods, index) in item.goods">
+            <van-radio-group v-model="radio":key="index">
+              <van-radio :name="goods.id" checked-color="#09BB07">
+                <img :src="goods.vip_image" alt="">
+              </van-radio>
+            </van-radio-group>
+          </div>
+          <!-- 底部按钮 -->
+          <router-link :to="{name:'Product',params:{id:radio,position:index+1}}">
+            <div class="index-button">
+              <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
             </div>
-            <div class="swipe-img" v-for="(goods, index) in item.goods" :key="index">
-              <van-radio-group v-model="radio">
-                <van-radio :name="goods.id" checked-color="#09BB07">
-                  <img :src="goods.vip_image" alt="">
-                </van-radio>
-              </van-radio-group>
-            </div>
-            <!-- 底部按钮 -->
-            <router-link :to="{name:'Product',params:{id:radio,position:index+1}}">
-              <div class="index-button">
-                <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
-              </div>
-            </router-link>
-          </van-swipe-item>
-        </div>
+          </router-link>
+        </van-swipe-item>
       </van-swipe>
+      <!-- </van-radio-group> -->
       <!-- <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left"> -->
-      <!-- @click="next" -->
-      <!-- <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" > -->
+      <!-- <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" @click="next"> -->
     </div>
     <!-- 底部tabber -->
     <div>
@@ -79,6 +77,9 @@
         }).catch(err => {
           console.log(err)
         })
+      },
+      next() {
+        // console.log(this.index)
       },
       openId() {
         var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
@@ -129,9 +130,9 @@
       background-color: #fff;
       margin: 10px auto;
 
-      .swipe {
-        height: 500px;
-      }
+      /* .swipe {
+          height: 500px;
+        } */
 
       .swipe-arrow-right {
         width: 18px;
@@ -147,15 +148,12 @@
         left: -20px;
       }
 
-      img {
-        width: 242px;
-        height: 100%;
-      }
-
       .van-swipe__indicators {
-        display: none;
+        /* display: none; */
       }
-
+      .van-swipe__indicator{
+        background-color: #1989FA;
+      }
       .swipe-title {
         margin: 20px auto;
         color: #FF7177;
@@ -165,10 +163,9 @@
       .swipe-img {
         text-align: center;
 
-        /* img {
+        img {
           width: 242px;
-          height: 100%;
-        } */
+        }
       }
 
       .index-button {
