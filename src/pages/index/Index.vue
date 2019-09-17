@@ -16,13 +16,13 @@
             <div class="swipe-title">
               <p>{{item.name}}</p>
             </div>
-            <van-radio-group v-model="radio">
-              <div class="swipe-img" v-for="(goods,index) in item.goods">
+            <div class="swipe-img" v-for="(goods, index) in item.goods" :key="index">
+              <van-radio-group v-model="radio">
                 <van-radio :name="goods.id" checked-color="#09BB07">
                   <img :src="goods.vip_image" alt="">
                 </van-radio>
-              </div>
-            </van-radio-group>
+              </van-radio-group>
+            </div>
             <!-- 底部按钮 -->
             <router-link :to="{name:'Product',params:{id:radio,position:index+1}}">
               <div class="index-button">
@@ -32,9 +32,9 @@
           </van-swipe-item>
         </div>
       </van-swipe>
-      <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left">
+      <!-- <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left"> -->
       <!-- @click="next" -->
-      <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" >
+      <!-- <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" > -->
     </div>
     <!-- 底部tabber -->
     <div>
@@ -164,6 +164,11 @@
 
       .swipe-img {
         text-align: center;
+
+        /* img {
+          width: 242px;
+          height: 100%;
+        } */
       }
 
       .index-button {
