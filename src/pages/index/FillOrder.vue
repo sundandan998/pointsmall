@@ -28,7 +28,8 @@
       </div>
     </router-link>
     <!-- 选择通证部分 -->
-    <p @click="show" class="select-token">{{value1}}
+    <div class="select-token">
+      <p @click="handlelick">{{value1}}</p>
       <mt-popup v-model="popupVisible" position="bottom" class="token-list-model">
         <div class="token-list">
           <mt-radio v-model="value1" :options="options" title="选择受赠通证">
@@ -36,7 +37,7 @@
         </div>
       </mt-popup>
       <img src="../../assets/images/r.png" alt="" class="fr">
-    </p>
+    </div>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
@@ -101,8 +102,8 @@
       })
     },
     methods: {
-      show() {
-        this.popupVisible = !this.popupVisible
+      handlelick() {
+        this.popupVisible = true
       },
       // 商品信息
       order() {
@@ -278,9 +279,9 @@
         padding-left: 15px;
         background-color: #fff;
       }
-
       img {
-        margin-top: 10px;
+        margin-top: -20px;
+        margin-right: 10px;
       }
     }
   }
