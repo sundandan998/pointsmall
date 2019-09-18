@@ -16,7 +16,7 @@
             <p>{{item.name}}</p>
           </div>
           <div class="swipe-img" v-for="(goods, index) in item.goods">
-            <van-radio-group v-model="radio":key="index">
+            <van-radio-group v-model="radio" :key="index">
               <van-radio :name="goods.id" checked-color="#09BB07">
                 <img :src="goods.vip_image" alt="">
               </van-radio>
@@ -150,38 +150,40 @@
       }
 
       .van-swipe__indicators {
-        /* display: none; */
+        position: absolute;
+        top: 10px;
       }
-      .van-swipe__indicator{
+
+      .van-swipe__indicator {
         background-color: #1989FA;
       }
+
       .swipe-title {
-        margin: 20px auto;
+        margin:20px auto 0 auto;
         color: #FF7177;
         text-align: center;
       }
 
       .swipe-img {
         text-align: center;
-
         img {
           width: 242px;
+          margin: 5px 0;
         }
       }
 
       .index-button {
-        margin: 20px 0;
+        margin-top: 20px;
         text-align: center;
       }
 
       .index-start {
         background: url('../../assets/images/bg.png')no-repeat;
-        height: 510px;
+        height: 550px;
         width: 100%;
         overflow: hidden;
         background-size: 100% 100%;
         background-attachment: fixed;
-
         .index-logo {
           margin: 50px auto;
           display: table;

@@ -10,7 +10,7 @@
       </span>
     </div>
     <div class="detail-product">
-      <van-card :num="detailData.count" :price="detailData.price" :title="detailData.sku_name"
+      <van-card :num="detailData.count" :price="detailData.currency" :title="detailData.sku_name"
         :thumb="detailData.sku_image" />
     </div>
     <div class="detail-status">

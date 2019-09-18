@@ -5,7 +5,7 @@
     </div>
     <router-link to="/address">
       <div class="address-btn">
-        <van-button square size="large" type="warning" >返回</van-button>
+        <van-button square size="large" type="warning">返回</van-button>
       </div>
     </router-link>
   </div>

@@ -10,7 +10,7 @@
       </span>
     </div>
     <div class="detail-product">
-      <van-card :num="detailData.count" :desc="detailData.price+'积分'" :title="detailData.sku_name"
+      <van-card :num="detailData.count" :desc="'￥'+detailData.currency" :title="detailData.sku_name"
         :thumb="detailData.sku_image" />
     </div>
     <p class="detail-num"><span>积分总额:</span><span
@@ -41,7 +41,7 @@
   export default {
     data() {
       return {
-        status:'',
+        status: '',
         detailData: {},
         detailAddress: {},
         // 解决底部按钮被弹起问题
@@ -84,7 +84,11 @@
       receipt() {
         api.receipt(this.$route.params).then(res => {
           if (res.code == 0) {
-            this.detailData.status=3     
+            this.detailData.status = 3
+            Toast({
+              message: res.msg,
+              className: 'zZindex'
+            })
           }
         }).catch(err => {
           if (err.code != 0) {
