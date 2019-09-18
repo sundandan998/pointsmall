@@ -11,7 +11,7 @@
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>￥{{item.total_amount|keepTwoNum}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -24,7 +24,7 @@
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>￥{{item.total_amount|keepTwoNum}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -37,7 +37,8 @@
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <!-- <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p> -->
+                  <p>￥{{item.total_amount|keepTwoNum}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
@@ -50,7 +51,7 @@
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p>
+                  <p>￥{{item.total_amount|keepTwoNum}}</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>

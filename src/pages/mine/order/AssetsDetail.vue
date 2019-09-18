@@ -5,7 +5,7 @@
       <div class="detail-list" v-for="item in detailData">
         <router-link :to="/assetsdetails/+item.id">
           <mt-cell :title="item.detail_type" :label="item.transaction_time" is-link>
-            <span>{{item.amount|keepTwoNum}}({{item.token}})</span>
+            <span>{{item.transaction_type==0?'+':'-'}}{{item.amount|keepTwoNum}}({{item.token}})</span>
           </mt-cell>
         </router-link>
       </div>

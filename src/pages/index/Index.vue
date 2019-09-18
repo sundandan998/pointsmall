@@ -56,6 +56,7 @@
       }
     },
     created() {
+      document.title = '首页'
       this.goodsList()
       this.openId()
     },

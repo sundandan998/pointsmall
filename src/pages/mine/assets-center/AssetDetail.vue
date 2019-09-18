@@ -46,7 +46,7 @@
     <!-- 底部按钮 -->
     <router-link to="/assets">
       <div class="order-button">
-        <mt-button size="large">取消</mt-button>
+        <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
   </div>

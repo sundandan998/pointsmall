@@ -47,7 +47,9 @@
   .safety-center .cancel{
     position: absolute;
     bottom: 10px;
-    background-color: #09bb07 !important;
-    color: #fff;
+    background-color: #fff !important;
+    color: #09bb07 !important;
+    border-radius: 20px;
+    border:1px solid #09bb07;
   }
 </style>

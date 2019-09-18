@@ -21,7 +21,6 @@
   </div>
 </template>
 <script>
-  import { CountDown } from 'vant'
   import Tabber from '../../assets/tabber/Tabber.vue'
   export default {
     data() {

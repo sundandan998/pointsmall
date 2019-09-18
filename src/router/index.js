@@ -64,6 +64,12 @@ export default new Router({
       name: 'MemberDay',
       component: () => import('@/pages/member-day/MemberDay')
     },
+     // 会员日开始
+     {
+      path: '/memberstart',
+      name: 'MemberDayStart',
+      component: () => import('@/pages/member-day/MemberDayStart')
+    },
     // 我的
     {
       path: '/mine',

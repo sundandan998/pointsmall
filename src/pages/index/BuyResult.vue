@@ -27,11 +27,14 @@
 
     .buy-result-button {
       button {
-        background-color: #259B24;
-        color: #fff;
-        border-radius: 3px;
+        height: 40px;
+        line-height:40px;
+        border:1px solid #259B24;
+        background-color: #fff;
+        color: #259B24;
+        border-radius: 25px;
         position: fixed;
-        bottom: 0px;
+        bottom: 2px;
       }
     }
   }

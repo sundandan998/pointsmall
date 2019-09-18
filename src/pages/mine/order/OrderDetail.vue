@@ -20,7 +20,6 @@
     <p class="detail-num" v-if="detailData.status!=1"><span>物流单号:</span><span class="fr">{{detailData.wl_number}}</span>
     </p>
     <div class="detail-status">
-      <!-- <p><span>订单状态:</span><span class="fr">{{detailData.status==1?'待发货':detailData.status==2?'待收货':detailData.status==9?'待付款':'已完成'}}</span></p> -->
       <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
       <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
       <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
@@ -42,6 +41,7 @@
   export default {
     data() {
       return {
+        status:'',
         detailData: {},
         detailAddress: {},
         // 解决底部按钮被弹起问题
@@ -84,7 +84,7 @@
       receipt() {
         api.receipt(this.$route.params).then(res => {
           if (res.code == 0) {
-            this.detailData.status = '已完成'
+            this.detailData.status=3     
           }
         }).catch(err => {
           if (err.code != 0) {

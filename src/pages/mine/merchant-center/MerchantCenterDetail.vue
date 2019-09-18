@@ -10,18 +10,18 @@
       </span>
     </div>
     <div class="detail-product">
-      <van-card :num="detailData.count" :price="detailData.price+'积分'" :title="detailData.sku_name"
+      <van-card :num="detailData.count" :price="detailData.price" :title="detailData.sku_name"
         :thumb="detailData.sku_image" />
     </div>
     <div class="detail-status">
-      <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
       <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
       <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
+      <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
     </div>
     <div class="detail-num" v-if="detailData.status==1">
       <mt-field label="物流单号" placeholder="请输入物流单号" type="number" v-model="shipParams.wl_number"></mt-field>
     </div>
-    <div class="detail-num" v-if="detailData.status!=1">
+    <div class="detail-num" v-if="detailData.status==2">
       <p class="wl-num"><span>物流单号</span><span class="fr">{{detailData.wl_number}}</span></p>
     </div>
     <router-link to="/merchant">
@@ -51,17 +51,17 @@
           wl_number: '',
           id: this.$route.params.id
         },
-         // 解决底部按钮被弹起问题
-        clientHeight:document.documentElement.clientHeight,
+        // 解决底部按钮被弹起问题
+        clientHeight: document.documentElement.clientHeight,
         showBtn: true,  // 控制按钮盒子显示隐藏
       }
     },
     // 解决底部按钮被弹起问题
     mounted() {
-      window.onresize= ()=>{
-        if(this.clientHeight>document.documentElement.clientHeight) {
-          this.showBtn =false
-        }else{
+      window.onresize = () => {
+        if (this.clientHeight > document.documentElement.clientHeight) {
+          this.showBtn = false
+        } else {
           this.showBtn = true
         }
       }
@@ -91,15 +91,17 @@
       ship() {
         api.ship(this.shipParams).then(res => {
           if (res.code == 0) {
-            // console.log(this.detailData.status==)
-            this.detailData.status='已完成'
-            // window.location.reload()
+            this.detailData.status = 2
+            this.detailData.wl_number = res.data.wl_number
+            Toast({
+              message: res.msg,
+              className: 'zZindex'
+            })
           }
         }).catch(err => {
           if (err.code != 0) {
             Toast({
               message: err.msg,
-              position: 'top',
               className: 'zZindex'
             })
           }
@@ -138,7 +140,7 @@
   }
 
   .detail-product {
-    height: 70px;
+    /* height: 70px; */
     padding: 10px 10px 0 15px;
 
     img {
@@ -159,6 +161,8 @@
   }
 
   .detail-status {
+    margin-top: 20px;
+    height: auto;
     p {
       border-bottom: 1px solid #f2f2f2;
       padding: 10px 10px 10px 15px;

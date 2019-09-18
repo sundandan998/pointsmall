@@ -78,7 +78,7 @@ export default {
       url: '/order/agent/export/',
       method: 'get',
       params: params,
-      responseType:'arraybuffer'
+      // responseType:'arraybuffer'
     })
   },
   // 商家发货

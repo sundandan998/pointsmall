@@ -38,7 +38,7 @@
           </van-tab>
           <van-tab title="待发货">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/agentdetail /+item.id">
+              <router-link :to="/agentdetail/+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
@@ -54,7 +54,7 @@
           </van-tab>
           <van-tab title="待收货">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/agentdetail /+item.id">
+              <router-link :to="/agentdetail/+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
@@ -70,7 +70,7 @@
           </van-tab>
           <van-tab title="已完成">
             <div class="product" v-for="(item,index) in orderList">
-              <router-link :to="/agentdetail /+item.id">
+              <router-link :to="/agentdetail/+item.id">
                 <p>{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
@@ -171,24 +171,27 @@
           clipboard.destroy()
         })
       },
-      operateFile(file) {
-        let fileName = '' + "-" + new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate() + ".xls";
-        let blobObject = new Blob([file], { type: "application/octet-stream;charset=utf-8" })
-        //是IE浏览器
-        if (!!window.ActiveXObject || "ActiveXObject" in window) {
-          window.navigator.msSaveOrOpenBlob(blobObject,fileName);
-        } else {//火狐谷歌都兼容
-          //模板中要有一个预定义好的a标签
-          let link = document.getElementById('a_id')
-          link.href = URL.createObjectURL(blobObject);
-          link.download = fileName
-          link.click();
-        }
-      },
+      // 导出excel
+      // operateFile(file) {
+      //   let fileName = '' + "-" + new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate() + ".xls";
+      //   let blobObject = new Blob([file], { type: "application/octet-stream;charset=utf-8" })
+      //   let link = document.getElementById('a_id')
+      //   link.href = URL.createObjectURL(blobObject)
+      //   link.download = fileName
+      //   link.click();
+      // },
       // 导出excel
       downloadFile() {
+        // debugger
         api.export().then(res => {
-         this.operateFile(res)
+          if (res.code == 0) {
+            var url = res.url
+            var iframe = document.createElement("iframe")
+            iframe.style.display = "none"
+            iframe.src = url
+            document.body.appendChild(iframe)
+            // this.operateFile(res)
+          }
         }).catch(err => {})
       },
 
@@ -216,7 +219,7 @@
                 this.onLoad()
               } else {
                 if (index == 4) {
-                this.shops.status = 3
+                  this.shops.status = 3
                   this.onLoad()
                 }
               }

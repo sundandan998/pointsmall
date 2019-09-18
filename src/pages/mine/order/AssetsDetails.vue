@@ -2,7 +2,7 @@
   <div class="details">
     <div class="details-title">
       <span>{{detailsData.detail_type}}</span>
-      <p>{{detailsData.amount|keepTwoNum}} ({{detailsData.token}})</p>
+      <p>{{detailsData.transaction_type==0?'+':'-'}}{{detailsData.amount|keepTwoNum}} ({{detailsData.token}})</p>
     </div>
     <div class="details-information">
       <mt-cell title="流 水 号" :value="detailsData.serial_number"></mt-cell>
@@ -33,7 +33,6 @@
         api.details(this.$route.params).then(res => {
           this.detailsData = res.data
         }).catch(err => {
-
         })
       }
     }

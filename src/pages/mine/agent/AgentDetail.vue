@@ -14,9 +14,9 @@
           :thumb="detailData.sku_image" />
       </div>
       <div class="detail-status">
-        <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
         <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
         <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
+        <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
       </div>
       <router-link to="/agent">
         <div class="merchant-button">
@@ -81,9 +81,7 @@
         ship() {
           api.ship(this.shipParams).then(res => {
             if (res.code == 0) {
-              // console.log(this.detailData.status==)
-              this.detailData.status='已完成'
-              // window.location.reload()
+              this.detailData.status=1
             }
           }).catch(err => {
             if (err.code != 0) {
@@ -149,6 +147,8 @@
     }
   
     .detail-status {
+      margin-top: 20px;
+      height: auto;
       p {
         border-bottom: 1px solid #f2f2f2;
         padding: 10px 10px 10px 15px;

@@ -3,8 +3,10 @@
     <!-- 中间部分 -->
     <div class="home-body">
       <div class="health-information">
-          <!-- merchant -->
-        <mt-cell title="商家中心" to="agent" is-link v-if="shops.is_shops==true">
+        <mt-cell title="商家中心" to="agent" is-link v-if="shops.is_agent==true">
+          <img slot="icon" src="../../assets/images/merchant.svg">
+        </mt-cell>
+        <mt-cell title="商家中心" to="merchant" is-link v-if="shops.is_shops==true">
           <img slot="icon" src="../../assets/images/merchant.svg">
         </mt-cell>
         <mt-cell title="资产中心" to="assets" is-link>
@@ -13,7 +15,7 @@
         <mt-cell title="我的订单" to="myorder" is-link>
           <img slot="icon" src="../../assets/images/reservation.svg">
         </mt-cell>
-        <mt-cell title="收货地址"  to="address" is-link>
+        <mt-cell title="收货地址" to="address" is-link>
           <img slot="icon" src="../../assets/images/address.svg">
         </mt-cell>
         <!-- to="safety" -->
@@ -41,7 +43,7 @@
         show: true,
         info: {},
         // 商家中心
-        shops:{},
+        shops: {},
         integral: {
           'available': '--'
         }
@@ -76,10 +78,10 @@
         }
       },
       // 个人信息
-      userInfo(){
-        api.information().then(res=>{
+      userInfo() {
+        api.information().then(res => {
           this.shops = res.data
-        }).catch(err=>{
+        }).catch(err => {
         })
       }
     }

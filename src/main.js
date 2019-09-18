@@ -41,7 +41,7 @@ Vue.filter('keepTwoNum', function (value) {
 })
 // 全局过滤订单状态
 Vue.filter('orderStatus', function (value) {
-  return value == 1 ? '待发货' : value == 2? '待收货' : value == 3? '已完成' :value == 4? '失败':value == 5?'审核中':value==6?'已取消':value==7?'进行中':value==8?'锁仓中':'待付款'
+  return value == 1 ? '待发货' :value == 2 ? '待收货' :value == 3 ? '已完成' :value == 4 ? '失败':value == 5 ?'审核中':value==6 ?'已取消':value==7 ?'进行中':value==8 ?'锁仓中':'待付款'
 }),
   new Vue({
     el: '#app',

@@ -8,7 +8,7 @@
     <div class="confirm-transfer-content">
       <mt-cell title="接收方" :value="this.$route.params.transferParams.mobile"></mt-cell>
       <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
-      <mt-cell title="手续费" :value="this.$route.params.token"></mt-cell>
+      <mt-cell title="手续费" :value="this.$route.params.token">0</mt-cell>
     </div>
     <div class="confirm-transfer-progress">
       <div class="confirm-transfer-num" v-if="this.$route.params.action=='freeze'">
