@@ -97,7 +97,7 @@
         <van-button square size="large" type="warning"> 返回</van-button>
       </router-link>
       <a id="a_id"></a>
-      <van-button square size="large" type="danger" @click="downloadFile">导出</van-button>
+      <van-button square size="large" type="danger" @click.native="downloadFile">导出</van-button>
     </div>
   </div>
 </template>
@@ -171,13 +171,25 @@
           clipboard.destroy()
         })
       },
+      operateFile(file) {
+        let fileName = '' + "-" + new Date().getFullYear() + '' + (new Date().getMonth() + 1) + '' + new Date().getDate() + ".xls";
+        let blobObject = new Blob([file], { type: "application/octet-stream;charset=utf-8" })
+        //是IE浏览器
+        if (!!window.ActiveXObject || "ActiveXObject" in window) {
+          window.navigator.msSaveOrOpenBlob(blobObject,fileName);
+        } else {//火狐谷歌都兼容
+          //模板中要有一个预定义好的a标签
+          let link = document.getElementById('a_id')
+          link.href = URL.createObjectURL(blobObject);
+          link.download = fileName
+          link.click();
+        }
+      },
       // 导出excel
       downloadFile() {
-        api.export().then(res=>{
-
-        }).catch(err=>{
-          
-        })
+        api.export().then(res => {
+         this.operateFile(res)
+        }).catch(err => {})
       },
 
       // tab栏展示列表
@@ -196,12 +208,15 @@
             this.onLoad()
           } else {
             if (index == 2) {
+              this.shops.status = 1
               this.onLoad()
             } else {
               if (index == 3) {
+                this.shops.status = 2
                 this.onLoad()
               } else {
                 if (index == 4) {
+                this.shops.status = 3
                   this.onLoad()
                 }
               }

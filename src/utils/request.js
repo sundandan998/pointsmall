@@ -53,6 +53,9 @@ service.interceptors.response.use(
     if (response.config.loading) {
       store.dispatch('setLoading', false)
     }
+    if (response.headers['content-type']!='application/json'){
+      return response.data
+    }
     let data = JSON.parse(response.data)
     if (data.code === 401) {
       // let token = localStorage.getItem("token")
