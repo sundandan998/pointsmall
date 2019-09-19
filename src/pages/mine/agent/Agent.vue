@@ -128,7 +128,7 @@
       }
     },
     created() {
-      document.title = '商家中心'
+      document.title = '供货商中心'
       // this.downloadFile()
     },
     methods: {

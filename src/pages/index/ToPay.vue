@@ -145,7 +145,7 @@
       // 取消
       cancel() {
         this.$router.push({
-          name: 'Order'
+          name: 'MemberDayOrder'
         })
       },
       // 积分换算
@@ -215,9 +215,11 @@
     height: 50px;
     border-bottom: 1px solid #f2f2f2;
     padding-left: 15px;
-
     img {
       margin-right: 10px;
+    }
+    p{
+      font-size: 0.76rem;
     }
   }
 

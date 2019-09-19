@@ -4,8 +4,7 @@
       <img :src="detail.default_image" alt="" class="fl">
       <span>
         <p>{{detail.name}}</p>
-        <!-- <span class="delete-line">120积分</span> -->
-        <!-- <p>￥{{detail.price}} </p> -->
+        <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分 <span class="delete-line">市场价 ￥{{detail.market_price}}</span></p>
       </span>
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
@@ -13,17 +12,19 @@
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
     <div class="bottom-button">
-      <!-- @click="cancel" -->
       <router-link :to="{name:'Index',params:{position:this.$route.params.position}}">
-        <!-- <router-link :to="///+index"> -->
         <van-button square size="large" type="warning"> 取消</van-button>
       </router-link>
       <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
     </div>
-    <!-- <van-goods-action>
-      <van-goods-action-button type="warning" text="加入购物车"  />
-      <van-goods-action-button type="danger" text="立即购买"  />
-    </van-goods-action> -->
+    <div class="bottom-button" v-if="detail.is_vip==false">
+      <router-link :to="{name:'MemberDayStart'}">
+      <van-button square size="large" type="warning"> 取消</van-button>
+      </router-link>
+      <router-link :to="{name:'MemberDayOrder'}">
+        <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
+      </router-link>
+    </div>
   </div>
 
 </template>

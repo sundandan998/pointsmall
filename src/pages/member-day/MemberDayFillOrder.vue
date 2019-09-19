@@ -1,9 +1,22 @@
 <template>
   <div class="order">
     <div class="order-product">
-      <p>{{orderData.name}}</p>
-      <img :src="orderData.default_image" alt="">
-      <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
+      <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" />
+    </div>
+    <!-- 商品信息 -->
+    <div class="product-model">
+      <div class="product-model-title" v-for="(item,index) in orderModel">
+        <p>{{item.name}}</p>
+        <!-- :class="{disabled:goods.sku_id ===null}" -->
+        <span v-for="(goods,index) in item.options" @click="selectGoods(goods.sku_id)"
+          :class="{disabled:goods.sku_id ===null}">{{goods.value}}</span>
+      </div>
+    </div>
+    <!-- 数量 -->
+    <div class="order-detail">
+      <span>数量</span> <span class="fr">
+        <van-stepper v-model="value" /></span>
+      <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}}</span></p>
     </div>
     <!-- 收货地址 -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
@@ -18,36 +31,13 @@
             {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
           </p>
         </div>
-        <img src="../../assets/images/r.png" alt="" class="fr ">
+        <img src="../../assets/images/r.png" alt="" class="fr right-arrow">
       </div>
     </router-link>
-    <!-- 选择通证部分 -->
-    <div class="select-token">
-      <p @click="handlelick">{{value1}}</p>
-      <mt-popup v-model="popupVisible" position="bottom" class="token-list-model">
-        <div class="token-list">
-          <mt-radio v-model="value1" :options="options" title="选择受赠通证">
-          </mt-radio>
-        </div>
-      </mt-popup>
-      <img src="../../assets/images/r.png" alt="" class="fr">
-    </div>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
     </div>
-    <!-- 支付弹框 -->
-    <div>
-      <mt-popup v-model="resevationModelModel" class="resevation-modal">
-        <img class="fr" @click="modalHide" src="../../assets/images/cancel.svg" alt="" />
-        <span>输入支付密码</span>
-        <p>￥{{orderData.price}}</p>
-        <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
-      </mt-popup>
-    </div>
-    <!-- 数字键盘 -->
-    <van-number-keyboard :show="showKeyboard" extra-key="." @input="onInput" @delete="onDelete"
-      @blur="showKeyboard = false" />
   </div>
 </template>
 <script>
@@ -57,10 +47,10 @@
     data() {
       return {
         value: 1,
-        value1: '请选择通证',
         options: [],
         popupVisible: false,
         orderData: {},
+        orderModel: {},
         orderInformation: '',
         add: {},
         orderAddress: {
@@ -71,8 +61,6 @@
           tel: '',
           name: ''
         },
-        showKeyboard: false,
-        resevationModelModel: false,
         pay_pwd: '',
         // 支付参数
         payParams: {
@@ -96,13 +84,11 @@
       })
     },
     methods: {
-      handlelick() {
-        this.popupVisible = true
-      },
       // 商品信息
       order() {
         api.orderDetail(this.$route.params).then(res => {
           this.orderData = res.data.sku
+          this.orderModel = res.data.specs
           if (this.options != null) {
             this.options = []
             for (var i = 0; i < res.data.sku.vip_info.length; i++) {
@@ -116,19 +102,19 @@
         }).catch(err => {
         })
       },
+      // 选择商品
+      selectGoods(sku_id) {
+        if (sku_id != null) {
+          this.order()
+          if (sku_id == this.orderData.id) {
+            console.log('选中的商品')
+          }
+        }
+      },
       cancel() {
         this.$router.push({
           name: 'Product'
         })
-      },
-      onInput(key) {
-        this.pay_pwd = (this.pay_pwd + key).slice(0, 6)
-      },
-      onDelete() {
-        this.pay_pwd = this.pay_pwd.slice(0, this.pay_pwd.length - 1)
-      },
-      modalHide() {
-        this.resevationModelModel = false
       },
       // 个人信息
       information() {
@@ -148,50 +134,21 @@
             message: '请选择收货地址',
             className: 'zZindex'
           })
-
         } else {
-          if (this.value1 == '请选择通证') {
-            Toast({
-              message: '请选择通证',
-              className: 'zZindex'
-            })
+          if (this.orderAddress.id == '') {
+            this.address_id = this.orderInformation.id
           } else {
-            if (this.add.pay_pwd_active == true) {
-              this.resevationModelModel = true
-            } else {
-              this.$messagebox({
-                title: '提示',
-                message: `请先设置支付密码再进行操作`,
-                cancelButtonText: '取消',
-                confirmButtonText: '确定',
-                showCancelButton: true
-              }).then(action => {
-                if (action == 'confirm') {
-                  this.$router.push({
-                    name: 'SafetyVerification',
-                    params: { id: 'reservation' }
-                  })
-                }
-              })
-            }
+            this.address_id = this.$route.params.item.id
           }
-
+          // 跳转到支付页面
+          this.$router.push({
+            name: 'ToPay',
+            params: {
+              total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
+              address_id: this.address_id
+            }
+          })
         }
-        if (this.orderAddress.id == '') {
-          this.address_id = this.orderInformation.id
-        } else {
-          this.address_id = this.$route.params.item.id
-        }
-        // 跳转到支付页面
-        // this.$router.push({
-        //   name: 'ToPay',
-        //   params: {
-        //     total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-        //     address_id: this.address_id
-        //   }
-        // })
-        // 弹起支付密码框
-
       }
     },
     watch: {
@@ -240,8 +197,6 @@
               })
             }
             this.pay_pwd = ''
-            this.resevationModelModel = false
-            this.showKeyboard = false
           })
         }
       }
@@ -261,58 +216,18 @@
       border-radius: 5px;
       height: 250px;
     }
-
-    .select-token {
-      height: 40px;
-      margin-left: 15px;
-      margin-top: 10px;
-
-      .mint-button--default {
-        color: #333 !important;
-        text-align: left;
-        padding-left: 15px;
-        background-color: #fff;
-      }
-      img {
-        margin-top: -20px;
-        margin-right: 10px;
-      }
-    }
   }
 
   .van-card {
     background-color: #fff;
   }
 
-  .van-overlay {
-    position: unset;
-  }
-
-  .van-popup--bottom {
-    width: 100%;
-    top: 24px;
-    -webkit-transform: translate3d(-50%, 0, 0);
-  }
-
   .order-product {
-    margin: 10px 0 5px 15px;
-
-    p {
-      margin-bottom: 10px;
-    }
+    margin: 10px 0 5px 0px;
   }
 
-  .order-color {
-    display: inline-block;
-    margin-right: 20px;
-    background-color: #ccc;
-    color: #333;
-    padding: 3px;
-    border-radius: 5px;
-    width: 40px;
-    text-align: center;
-    font-size: 0.86rem;
-    margin: 10px 20px 10px 0;
+  .order-detail {
+    margin: 20px 10px 0 15px;
   }
 
   .order-total {
@@ -321,6 +236,7 @@
 
   .order-address {
     padding-top: 10px;
+    padding-left: 15px;
     border-top: 2px solid #f2f2f2;
     height: auto;
     border-bottom: 2px solid #f2f2f2;
@@ -342,23 +258,43 @@
       color: #333;
     }
 
-    .detail-address {
-      width: 75%;
-      height: auto;
-      word-wrap: break-word;
-      word-break: break-all;
-      overflow: hidden
+    .right-arrow {
+      position: relative;
+      top: -40px;
+      right: 10px;
     }
   }
 
-  .order-address img:last-child {
-    position: relative;
-    top: -50px;
-    right: 10px;
-  }
+  .product-model {
+    margin-left: 15px;
 
-  .order-address img:first-child {
-    margin: 10px 10px 0 15px;
-    height: 31px;
+    .product-model-title {
+      span {
+        font-size: 0.76rem;
+        /* color: #fff;
+        background-color: #8BC34A; */
+        color: #000;
+        background-color: #f2f2f2;
+        padding: 5px 10px;
+        margin-right: 10px;
+        border-radius: 7px;
+      }
+
+      p {
+        margin: 10px 0 10px 0;
+      }
+
+      .disabled {
+        color: #C8C9CC;
+        background-color: #F7F8FA;
+      }
+
+      .select {
+        color: #fff;
+        background-color: #8BC34A;
+      }
+    }
+
+
   }
 </style>

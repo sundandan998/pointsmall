@@ -52,6 +52,12 @@ export default new Router({
       name: 'Order',
       component: () => import('@/pages/index/FillOrder')
     },
+    // 会员日填写订单
+    {
+      path: '/memberdayorder/:id',
+      name: 'MemberDayOrder',
+      component: () => import('@/pages/member-day/MemberDayFillOrder')
+    },
     // 去支付
     {
       path: '/pay/:id',

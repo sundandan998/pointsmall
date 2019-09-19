@@ -3,7 +3,7 @@
     <!-- 中间部分 -->
     <div class="home-body">
       <div class="health-information">
-        <mt-cell title="商家中心" to="agent" is-link v-if="shops.is_agent==true">
+        <mt-cell title="供货商中心" to="agent" is-link v-if="shops.is_agent==true">
           <img slot="icon" src="../../assets/images/merchant.svg">
         </mt-cell>
         <mt-cell title="商家中心" to="merchant" is-link v-if="shops.is_shops==true">
