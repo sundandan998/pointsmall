@@ -9,7 +9,7 @@
         <p>{{item.name}}</p>
         <!-- :class="{disabled:goods.sku_id ===null}" -->
         <span v-for="(goods,index) in item.options" @click="selectGoods(goods.sku_id)"
-          :class="{disabled:goods.sku_id ===null}">{{goods.value}}</span>
+          :class="{select:goods.sku_id ===orderData.id,disabled:goods.sku_id ===null}">{{goods.value}}</span>
       </div>
     </div>
     <!-- 数量 -->
@@ -89,27 +89,28 @@
         api.orderDetail(this.$route.params).then(res => {
           this.orderData = res.data.sku
           this.orderModel = res.data.specs
-          if (this.options != null) {
-            this.options = []
-            for (var i = 0; i < res.data.sku.vip_info.length; i++) {
-              var tokenList = {
-                value: res.data.sku.vip_info[i].amount + ' ' + res.data.sku.vip_info[i].token,
-                label: res.data.sku.vip_info[i].amount + res.data.sku.vip_info[i].token
-              }
-              this.options.push(tokenList)
-            }
-          }
         }).catch(err => {
         })
       },
       // 选择商品
       selectGoods(sku_id) {
-        if (sku_id != null) {
+        // console.log(sku_id)
+        // if (sku_id != null) {
+        // this.order()
+        if (sku_id == this.orderData.id) {
           this.order()
-          if (sku_id == this.orderData.id) {
-            console.log('选中的商品')
-          }
+          console.log(sku_id + '选中的商品')
+        } else {
+          console.log(sku_id + '未选中的商品')
+          api.orderDetail({ id: sku_id}).then(res => {
+            this.orderData = res.data.sku
+            this.orderModel = res.data.specs
+          }).catch(err => {
+          })
+          // this.orderData.id = sku_id
+          // this.order(sku_id)
         }
+        // }
       },
       cancel() {
         this.$router.push({
