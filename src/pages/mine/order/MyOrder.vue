@@ -11,7 +11,8 @@
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>￥{{item.currency|keepTwoNum}}</p>
+                  <p v-if="item.is_vip==true">￥{{item.currency|keepTwoNum}}</p>
+                  <p v-if="item.is_vip==false">{{item.total_amount|keepTwoNum}}({{item.token}})</p>
                 </div>
                 <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>

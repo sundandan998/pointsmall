@@ -36,7 +36,7 @@
       },
       member() {
         this.$router.push({
-          name: 'MemberDay'
+          name: 'MemberDayStart'
         })
       },
       

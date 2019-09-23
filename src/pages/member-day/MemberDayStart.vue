@@ -2,7 +2,9 @@
   <div class="member-day">
     <div class="member-day-title">
       <p>会员日,买啥都值</p>
-      <span>距结束</span>
+      <span>距结束 {{time|formatDate}}</span>
+      <!-- <span>{formatDate}}</span> -->
+      <!-- <span>距开始</span> -->
     </div>
     <div class="member-day-buy">
       <p>会员日特卖<span>白菜价,抢不到,就是亏</span></p>
@@ -47,13 +49,50 @@
         finished: false,
         error: false,
         pageNum: 1,
+        time: '',
+        Countdown: '',
+        value: 0
       }
     },
     created() {
       document.title = '会员日'
+      this.timer()
     },
     components: {
       'app-tabber': Tabber
+    },
+    // 将时间戳转化成年月日
+    filters: {
+      formatDate: function (timer) {
+        let date = new Date(timer)
+        let y = date.getFullYear()
+        let MM = date.getMonth() + 1
+        MM = MM < 10 ? ('0' + MM) : MM
+        let d = date.getDate();
+        d = d < 10 ? ('0' + d) : d
+        // console.log(d)
+        // if (d > 10) {
+        //   // console.log('1-9')
+        //   let days = date - today
+        //   return days / (24 * 3600 * 1000)
+        // }
+        let h = date.getHours();
+        h = h < 10 ? ('0' + h) : h
+        let m = date.getMinutes()
+        m = m < 10 ? ('0' + m) : m
+        let s = date.getSeconds()
+        s = s < 10 ? ('0' + s) : s
+        return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
+      },
+      // 到期时间
+      // days(formatDate) {
+      //   let today = new Date()
+      //   today.setHours(0, 0, 0, 0)
+      //   let date = new Date(unfreeze_date + ' 00:00:00')
+      //   let days_number = date - today
+      //   console.log(days_number)
+      //   return days_number / (24 * 3600 * 1000)
+      // },
     },
     methods: {
       // 商品列表
@@ -77,6 +116,23 @@
           })
         }, 100)
       },
+      // 倒计时
+      timer() {
+        api.timer().then(res => {
+          if (res.code == 0) {
+            this.time = res.time
+          }
+        }).catch(err => {
+
+        })
+      },
+
+    },
+    mounted() {
+      this.Countdown = setInterval(this.timer, 1000);
+    },
+    beforeDestroy() {
+      clearInterval(this.Countdown)
     }
   }
 </script>
@@ -96,6 +152,7 @@
 
     span {
       font-size: 0.76rem;
+      display: block;
     }
   }
 

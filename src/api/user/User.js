@@ -227,4 +227,12 @@ export default {
       params: params
     })
   },
+  // 倒计时
+  timer(params = {}) {
+    return request({
+      url: '/system/info/',
+      method: 'get',
+      params: params
+    })
+  },
 }
