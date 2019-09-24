@@ -19,7 +19,7 @@
       <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}}</span></p>
     </div>
     <!-- 收货地址 -->
-    <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
+    <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id,path:'memberday'}}">
       <div class="order-address">
         <img src="../../assets/images/address.svg" alt="" class="fl">
         <div v-if="orderInformation==null" class="select-address">

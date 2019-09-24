@@ -6,7 +6,7 @@
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
     <!-- 收货地址 -->
-    <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
+    <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id,path:'is_vip'}}">
       <div class="order-address">
         <img src="../../assets/images/address.svg" alt="" class="fl">
         <div v-if="orderInformation==null" class="select-address">

@@ -2,9 +2,8 @@
   <div class="member-day">
     <div class="member-day-title">
       <p>会员日,买啥都值</p>
-      <span>距结束 {{time|formatDate}}</span>
-      <!-- <span>{formatDate}}</span> -->
-      <!-- <span>距开始</span> -->
+      <span id="start">距开始 {{day}} 天 {{hour}} 时 {{min}} 分 {{second}} 秒</span>
+      <span id="end">距结束 <b>{{hour}}</b><b>{{min}}</b> <b>{{second}}</b></span>
     </div>
     <div class="member-day-buy">
       <p>会员日特卖<span>白菜价,抢不到,就是亏</span></p>
@@ -49,50 +48,21 @@
         finished: false,
         error: false,
         pageNum: 1,
-        time: '',
-        Countdown: '',
-        value: 0
+        // 倒计时
+        curStartTime: '2019-09-30',
+        day: '0',
+        hour: '00',
+        min: '00',
+        second: '00',
       }
     },
     created() {
       document.title = '会员日'
       this.timer()
+      setInterval(this.time, 1000)
     },
     components: {
       'app-tabber': Tabber
-    },
-    // 将时间戳转化成年月日
-    filters: {
-      formatDate: function (timer) {
-        let date = new Date(timer)
-        let y = date.getFullYear()
-        let MM = date.getMonth() + 1
-        MM = MM < 10 ? ('0' + MM) : MM
-        let d = date.getDate();
-        d = d < 10 ? ('0' + d) : d
-        // console.log(d)
-        // if (d > 10) {
-        //   // console.log('1-9')
-        //   let days = date - today
-        //   return days / (24 * 3600 * 1000)
-        // }
-        let h = date.getHours();
-        h = h < 10 ? ('0' + h) : h
-        let m = date.getMinutes()
-        m = m < 10 ? ('0' + m) : m
-        let s = date.getSeconds()
-        s = s < 10 ? ('0' + s) : s
-        return y + '-' + MM + '-' + d + ' ' + h + ':' + m + ':' + s
-      },
-      // 到期时间
-      // days(formatDate) {
-      //   let today = new Date()
-      //   today.setHours(0, 0, 0, 0)
-      //   let date = new Date(unfreeze_date + ' 00:00:00')
-      //   let days_number = date - today
-      //   console.log(days_number)
-      //   return days_number / (24 * 3600 * 1000)
-      // },
     },
     methods: {
       // 商品列表
@@ -116,24 +86,96 @@
           })
         }, 100)
       },
-      // 倒计时
       timer() {
         api.timer().then(res => {
           if (res.code == 0) {
-            this.time = res.time
+            // 服务器时间
+            this.date = res.time
+            // this.date = this.curStartTime
+            // console.log(this.date)
+            this.time()
           }
         }).catch(err => {
-
+          console.log(err)
         })
       },
-
+      time() {
+        let now = this.date
+        let date = new Date(now)
+        let days = date.getDate()
+        if (days == 10 || days == 20 || days == 30) {
+          // console.log('距开始')
+          // document.getElementById('start').style.display = "block"
+          // document.getElementById('end').style.display = "none"
+          let month = date.getMonth()
+          let endDay = 0
+          if (days > 0 && days < 10 || days == 31 || (month == 2 && days > 20)) {
+            endDay = 10
+          } else if (days > 10 && days < 20) {
+            endDay = 20
+          } else {
+            endDay = 30
+          }
+          let endDate = new Date(date)
+          endDate.setDate(endDay)
+          endDate.setHours(0, 0, 0, 0)
+          // 设置截止时间
+          let end = endDate.getTime()
+          // 时间差
+          // 距开始
+          let leftTime = end - now
+          // 定义变量 d,h,m,s保存倒计时的时间
+          if (leftTime >= 0) {
+            // 天
+            let d = Math.floor(leftTime / 1000 / 60 / 60 / 24)
+            this.day = d < 10 ? '0' + d : d
+            // 时
+            let h = Math.floor(leftTime / 1000 / 60 / 60 % 24)
+            this.hour = h < 10 ? '0' + h : h
+            // 分
+            let m = Math.floor(leftTime / 1000 / 60 % 60)
+            this.min = m < 10 ? '0' + m : m
+            // 秒
+            let s = Math.floor(leftTime / 1000 % 60)
+            this.second = s < 10 ? '0' + s : s
+            this.date += 1000
+          } else {
+            this.day+=1
+            this.hour=0
+            this.min=0
+            this.second=0
+          }
+        } else {
+          // console.log('距结束')
+          // document.getElementById('start').style.display = "none"
+          // document.getElementById('end').style.display = "block"
+          let now = '2019-09-30 00:00:00'
+          // console.log(now)
+          let date = new Date(now)
+          let days = date.getDate()
+          let month = date.getMonth()
+          // let endDay =0
+          let endDate = new Date(date)
+          // console.log(endDate)
+          // let endDate1= endDate.getTime()
+          let endDate1= endDate.getTime()+(24*60*60*1000)
+          endDate=endDate1
+          let end = Date(endDate)
+          // console.log(end)
+          // let endDate= endDate+'(24*60*60*1000)'
+          // console.log(endDate)d
+          // endDate.setDate(endDay)
+          // endDate.setHours(0, 0, 0, 0)
+          // 设置截止时间
+          // let end = endDate.getTime()
+          // 时间差
+          // 距开始
+          let leftTime = end - now
+          // console.log(leftTime)
+        }
+        // console.log(days)
+      }
     },
-    mounted() {
-      this.Countdown = setInterval(this.timer, 1000);
-    },
-    beforeDestroy() {
-      clearInterval(this.Countdown)
-    }
   }
 </script>
 <style lang="scss">
@@ -153,6 +195,16 @@
     span {
       font-size: 0.76rem;
       display: block;
+      margin: 10px 0;
+
+      b {
+        background-color: #E51C23;
+        color: #fff;
+        width: 10px;
+        height: 10px;
+        margin-left: 7px;
+        padding: 2px;
+      }
     }
   }
 

@@ -20,6 +20,7 @@
     created() {
       document.title = '收货地址'
       this.address()
+      console.log()
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -38,7 +39,7 @@
       onEdit(item, index) {
         this.$router.push({
           name: 'AddressDetail',
-          params: { index: index, item: item, id: this.$route.params.id}
+          params: { index: index, item: item, id: this.$route.params.id }
         })
       },
       onAdd(item, index) {
@@ -57,10 +58,15 @@
             name: 'ShippingAddress',
             params: { index: index, item: item, id: this.$route.params.id }
           })
-        } else {
+        } else if (this.$route.params.path == 'is_vip') {
           this.$router.push({
             name: 'Order',
-            params: { index: index, item: item,}
+            params: { index: index, item: item, }
+          })
+        }else if(this.$route.params.path == 'memberday'){
+          this.$router.push({
+            name: 'MemberDayOrder',
+            params: { index: index, item: item, }
           })
         }
       },
