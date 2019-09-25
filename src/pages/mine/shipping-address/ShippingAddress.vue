@@ -1,11 +1,11 @@
 <template>
   <div class="address">
     <van-address-list :list="list" @edit="onEdit" @add="onAdd" @select="selectAddress" />
-    <router-link to="/mine">
+    <!-- <router-link to="/mine"> -->
       <div class="address-btn" @click.native="back">
-        <van-button square size="large" type="warning">返回</van-button>
+        <van-button square size="large" type="warning" v-on:click="$router.go(-1)">返回</van-button>
       </div>
-    </router-link>
+    <!-- </router-link> -->
   </div>
 </template>
 <script>

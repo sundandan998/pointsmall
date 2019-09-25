@@ -31,7 +31,8 @@
     methods: {
       index() {
         this.$router.push({
-          name: 'Index'
+          // name: 'Index'
+          name: 'AgentIndex'
         })
       },
       member() {

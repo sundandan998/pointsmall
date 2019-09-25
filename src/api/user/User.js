@@ -65,6 +65,14 @@ export default {
       params: params
     })
   },
+  // 代理商列表
+  agent(params = {}) {
+    return request({
+      url: '/goods/agent/list/',
+      method: 'get',
+      params: params
+    })
+  },
   // 个人资产列表
   assets(params = {}) {
     return request({

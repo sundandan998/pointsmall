@@ -35,13 +35,18 @@
       <!-- <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" @click="next"> -->
     </div>
     <!-- 底部tabber -->
-    <div>
+    <router-link to="/">
+      <div class="order-button">
+        <mt-button size="large">返回</mt-button>
+      </div>
+    </router-link>
+    <!-- <div>
       <tabber :message="selected"></tabber>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
-  import Tabber from '../../assets/tabber/Tabber.vue'
+  // import Tabber from '../../assets/tabber/Tabber.vue'
   // 接口请求
   import api from '@/api/user/User.js'
   // import api from '@/api/goods/Goods.js'
@@ -60,9 +65,9 @@
       this.goodsList()
       this.openId()
     },
-    components: {
-      Tabber,
-    },
+    // components: {
+    //   Tabber,
+    // },
     // 过滤按钮部分文字
     filters: {
       number(value) {
@@ -159,13 +164,14 @@
       }
 
       .swipe-title {
-        margin:20px auto 0 auto;
+        margin: 20px auto 0 auto;
         color: #FF7177;
         text-align: center;
       }
 
       .swipe-img {
         text-align: center;
+
         img {
           width: 242px;
           margin: 5px 0;
@@ -184,6 +190,7 @@
         overflow: hidden;
         background-size: 100% 100%;
         background-attachment: fixed;
+
         .index-logo {
           margin: 50px auto;
           display: table;

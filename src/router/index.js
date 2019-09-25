@@ -30,9 +30,15 @@ export default new Router({
     },
     // 首页
     {
-      path: '/',
+      path: '/index',
       name: 'Index',
       component: () => import('@/pages/index/Index')
+    },
+    // 代理商首页
+    {
+      path: '/',
+      name: 'AgentIndex',
+      component: () => import('@/pages/index/AgentIndex')
     },
     // 购买结果
     {

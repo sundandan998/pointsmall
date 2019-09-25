@@ -2,8 +2,8 @@
   <div class="member-day">
     <div class="member-day-title">
       <p>会员日,买啥都值</p>
-      <span id="start">距开始 {{day}} 天 {{hour}} 时 {{min}} 分 {{second}} 秒</span>
-      <span id="end">距结束 <b>{{hour}}</b><b>{{min}}</b> <b>{{second}}</b></span>
+      <span v-if="timeInfo.start==false">距开始 {{day}} 天 {{hour}} 时 {{min}} 分 {{second}} 秒</span>
+      <span v-if="timeInfo.start==true">距结束 <b>{{hour}}</b><b>{{min}}</b> <b>{{second}}</b></span>
     </div>
     <div class="member-day-buy">
       <p>会员日特卖<span>白菜价,抢不到,就是亏</span></p>
@@ -22,7 +22,7 @@
               <span>会员价￥{{item.member_price}}</span>|<span>市场价￥{{item.market_price}}</span>
             </span>
             <div class="member-day-button fr">
-              <van-button round size="small">马上抢></van-button>
+              <van-button round size="small" :disabled="disabled">马上抢></van-button>
             </div>
           </router-link>
         </div>
@@ -48,18 +48,21 @@
         finished: false,
         error: false,
         pageNum: 1,
+        disabled:true,
         // 倒计时
-        curStartTime: '2019-09-30',
+        timeInfo: '',
+        curStartTime: '',
         day: '0',
         hour: '00',
         min: '00',
         second: '00',
+        // now: '1568822408000',
+        // end: '1568908800000'
       }
     },
     created() {
       document.title = '会员日'
-      this.timer()
-      setInterval(this.time, 1000)
+      window.setInterval(this.time, 1000)
     },
     components: {
       'app-tabber': Tabber
@@ -70,6 +73,7 @@
         setTimeout(() => {
           api.goods({ 'page': this.pageNum }).then(res => {
             if (res.code == 0) {
+              this.timeInfo = res.info
               this.goodsData.push.apply(this.goodsData, res.data)
               this.loading = false
               if (res.has_next == true) {
@@ -85,95 +89,35 @@
             this.error = true
           })
         }, 100)
+
       },
-      timer() {
-        api.timer().then(res => {
-          if (res.code == 0) {
-            // 服务器时间
-            this.date = res.time
-            // this.date = this.curStartTime
-            // console.log(this.date)
-            this.time()
-          }
-        }).catch(err => {
-          console.log(err)
-        })
-      },
+      // 倒计时
       time() {
-        let now = this.date
-        let date = new Date(now)
-        let days = date.getDate()
-        if (days == 10 || days == 20 || days == 30) {
-          // console.log('距开始')
-          // document.getElementById('start').style.display = "block"
-          // document.getElementById('end').style.display = "none"
-          let month = date.getMonth()
-          let endDay = 0
-          if (days > 0 && days < 10 || days == 31 || (month == 2 && days > 20)) {
-            endDay = 10
-          } else if (days > 10 && days < 20) {
-            endDay = 20
-          } else {
-            endDay = 30
-          }
-          let endDate = new Date(date)
-          endDate.setDate(endDay)
-          endDate.setHours(0, 0, 0, 0)
-          // 设置截止时间
-          let end = endDate.getTime()
-          // 时间差
-          // 距开始
-          let leftTime = end - now
-          // 定义变量 d,h,m,s保存倒计时的时间
-          if (leftTime >= 0) {
-            // 天
-            let d = Math.floor(leftTime / 1000 / 60 / 60 / 24)
-            this.day = d < 10 ? '0' + d : d
-            // 时
-            let h = Math.floor(leftTime / 1000 / 60 / 60 % 24)
-            this.hour = h < 10 ? '0' + h : h
-            // 分
-            let m = Math.floor(leftTime / 1000 / 60 % 60)
-            this.min = m < 10 ? '0' + m : m
-            // 秒
-            let s = Math.floor(leftTime / 1000 % 60)
-            this.second = s < 10 ? '0' + s : s
-            this.date += 1000
-          } else {
-            this.day+=1
-            this.hour=0
-            this.min=0
-            this.second=0
-          }
+        let now = this.timeInfo.now
+        let end = this.timeInfo.end_time
+        // 设置截止时间
+        let leftTime = end -now
+        // let leftTime = this.timeInfo.end_time-this.timeInfo.now
+        // 定义变量 d,h,m,s保存倒计时的时间
+        if (leftTime >= 0) {
+          // 天
+          let d = Math.floor(leftTime / 1000 / 60 / 60 / 24)
+          this.day = d < 10 ? '0' + d : d
+          // 时
+          let h = Math.floor(leftTime / 1000 / 60 / 60 % 24)
+          this.hour = h < 10 ? '0' + h : h
+          // 分
+          let m = Math.floor(leftTime / 1000 / 60 % 60)
+          this.min = m < 10 ? '0' + m : m
+          // 秒
+          let s = Math.floor(leftTime / 1000 % 60)
+          this.second = s < 10 ? '0' + s : s
+          // 倒计时实时变动
+          this.timeInfo.now += 1000
         } else {
-          // console.log('距结束')
-          // document.getElementById('start').style.display = "none"
-          // document.getElementById('end').style.display = "block"
-          let now = '2019-09-30 00:00:00'
-          // console.log(now)
-          let date = new Date(now)
-          let days = date.getDate()
-          let month = date.getMonth()
-          // let endDay =0
-          let endDate = new Date(date)
-          // console.log(endDate)
-          // let endDate1= endDate.getTime()
-          let endDate1= endDate.getTime()+(24*60*60*1000)
-          endDate=endDate1
-          let end = Date(endDate)
-          // console.log(end)
-          // let endDate= endDate+'(24*60*60*1000)'
-          // console.log(endDate)d
-          // endDate.setDate(endDay)
-          // endDate.setHours(0, 0, 0, 0)
-          // 设置截止时间
-          // let end = endDate.getTime()
-          // 时间差
-          // 距开始
-          let leftTime = end - now
-          // console.log(leftTime)
+          this.timeInfo.start = !this.timeInfo.start
+          this.disabled=!this.disabled
         }
-        // console.log(days)
       }
     },
   }
