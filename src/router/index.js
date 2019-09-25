@@ -40,6 +40,12 @@ export default new Router({
       name: 'AgentIndex',
       component: () => import('@/pages/index/AgentIndex')
     },
+    // 代理商列表页
+    {
+      path: '/agentlist',
+      name: 'AgentList',
+      component: () => import('@/pages/index/AgentList')
+    },
     // 购买结果
     {
       path: '/buyresult',
@@ -76,8 +82,8 @@ export default new Router({
       name: 'MemberDay',
       component: () => import('@/pages/member-day/MemberDay')
     },
-     // 会员日开始
-     {
+    // 会员日开始
+    {
       path: '/memberstart',
       name: 'MemberDayStart',
       component: () => import('@/pages/member-day/MemberDayStart')

@@ -24,20 +24,25 @@
       <router-link to="memberstart">
         <p>会员日特卖 <span></span> <span class="fr">更多></span></p>
       </router-link>
-      <div class="memberday-buy-list" v-for="(item,index) in goodsList" v-if="index<3">
+      <div class="memberday-buy-list fl " v-for="(item,index) in goodsList" v-if="index<3">
+        <!-- <div> -->
         <router-link :to="/product/+item.id">
           <div class="memberday-buy-list-img">
-            <img :src="item.default_image" alt="" class="fl">
+            <img :src="item.default_image" alt="">
           </div>
         </router-link>
         <div class="memberday-buy-list-text">
-          <!-- <span>ytrse</span> -->
+          <span>{{item.price}}超级积分</span>
+          <span>市场价￥{{item.market_price}}</span>
         </div>
+        <!-- </div> -->
       </div>
     </div>
     <!-- 代理商专区 -->
     <div class="agent-area">
-      <p>代理商专区 <span class="fr">更多></span></p>
+      <router-link to="agentlist">
+        <p>代理商专区 <span class="fr">更多></span></p>
+      </router-link>
       <div class="agent-area-list" v-for="(item,index) in agent" v-if="index<3">
         <div class="member-day-list-img fl">
           <img :src="item.default_image" alt="">
@@ -51,7 +56,6 @@
           <van-button round size="small">购买></van-button>
         </div>
       </div>
-      <!-- <p>更多></p> -->
     </div>
     <!-- 底部tabber -->
     <div>
@@ -152,15 +156,20 @@
         margin-top: 15px;
 
         .memberday-buy-list-img {
+          float: left;
+
           img {
             width: 90px;
             height: 80px;
-            margin-right: 30px;
+            margin-right: 20px;
           }
         }
 
         .memberday-buy-list-text {
-          /* height: 20px; */
+          span {
+            display: block;
+            font-size: 0.76rem;
+          }
         }
       }
 
@@ -177,8 +186,6 @@
         span {
           margin-right: 15px;
         }
-
-        /* border-bottom: 1px solid #f2f2f2; */
       }
 
       img {
@@ -189,8 +196,10 @@
 
       .agent-area-list {
         height: 90px;
-        margin-left: 15px;
+        padding-left: 15px;
         margin-top: 10px;
+        padding-top: 15px;
+        border-top: 1px solid #f2f2f2;
 
         span {
           font-size: 0.76rem;
