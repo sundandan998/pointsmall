@@ -35,7 +35,8 @@
       </div>
     </router-link>
     <div class="bottom-button">
-      <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
+        <!-- v-on:click="$router.go(-1)" -->
+      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
     </div>
   </div>
@@ -102,7 +103,7 @@
           console.log(sku_id + '选中的商品')
         } else {
           console.log(sku_id + '未选中的商品')
-          api.orderDetail({ id: sku_id}).then(res => {
+          api.orderDetail({ id: sku_id }).then(res => {
             this.orderData = res.data.sku
             this.orderModel = res.data.specs
           }).catch(err => {

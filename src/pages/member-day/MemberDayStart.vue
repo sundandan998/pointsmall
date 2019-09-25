@@ -12,7 +12,8 @@
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="member-day-list" v-for="item in goodsData">
-          <router-link :to="/product/+item.id">
+          <!-- <router-link :to="/product/+item.id"> -->
+          <div @click="memberBuy(item.id)">
             <div class="member-day-list-img fl">
               <img :src="item.default_image" alt="">
             </div>
@@ -24,7 +25,8 @@
             <div class="member-day-button fr">
               <van-button round size="small" :disabled="disabled">马上抢></van-button>
             </div>
-          </router-link>
+          </div>
+          <!-- </router-link> -->
         </div>
       </van-list>
     </div>
@@ -48,7 +50,7 @@
         finished: false,
         error: false,
         pageNum: 1,
-        disabled:true,
+        disabled: true,
         // 倒计时
         timeInfo: '',
         curStartTime: '',
@@ -96,7 +98,7 @@
         let now = this.timeInfo.now
         let end = this.timeInfo.end_time
         // 设置截止时间
-        let leftTime = end -now
+        let leftTime = end - now
         // let leftTime = this.timeInfo.end_time-this.timeInfo.now
         // 定义变量 d,h,m,s保存倒计时的时间
         if (leftTime >= 0) {
@@ -116,10 +118,17 @@
           this.timeInfo.now += 1000
         } else {
           this.timeInfo.start = !this.timeInfo.start
-          this.disabled=!this.disabled
+          this.disabled = !this.disabled
         }
-      }
-    },
+      },
+      // 会员日特卖列表
+      memberBuy(id) {
+        this.$router.push({
+          name: 'Product',
+          params: { id: id, path: 'member' }
+        })
+      },
+    }
   }
 </script>
 <style lang="scss">

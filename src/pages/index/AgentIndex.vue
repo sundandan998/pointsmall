@@ -25,37 +25,40 @@
         <p>会员日特卖 <span></span> <span class="fr">更多></span></p>
       </router-link>
       <div class="memberday-buy-list fl " v-for="(item,index) in goodsList" v-if="index<3">
-        <!-- <div> -->
+        <!-- <div @click="memberBuy(item.id)"> -->
         <router-link :to="/product/+item.id">
           <div class="memberday-buy-list-img">
             <img :src="item.default_image" alt="">
           </div>
         </router-link>
         <div class="memberday-buy-list-text">
-          <span>{{item.price}}超级积分</span>
-          <span>市场价￥{{item.market_price}}</span>
+          <span class="memberday-buy-price"><b>{{item.price|keepTwoNum}}</b>超级积分</span>
+          <span class="memberday-buy-market">市场价￥{{item.market_price}}</span>
         </div>
         <!-- </div> -->
       </div>
     </div>
     <!-- 代理商专区 -->
     <div class="agent-area">
-      <router-link to="agentlist">
-        <p>代理商专区 <span class="fr">更多></span></p>
-      </router-link>
+      <p>代理商专区 <span class="fr" @click="more">更多></span></p>
       <div class="agent-area-list" v-for="(item,index) in agent" v-if="index<3">
-        <div class="member-day-list-img fl">
-          <img :src="item.default_image" alt="">
-        </div>
-        <span>
-          <p>{{item.name}}</p>
-          <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-          <span>市场价￥{{item.market_price}}</span>
-        </span>
-        <div class="agent-area-btn fr">
-          <van-button round size="small">购买></van-button>
-        </div>
+        <!-- <div @click="buy(item.id)"> -->
+        <router-link :to="/product/+item.id">
+          <div class="member-day-list-img fl">
+            <img :src="item.default_image" alt="">
+          </div>
+          <span>
+            <p>{{item.name}}</p>
+            <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
+            <span>市场价￥{{item.market_price}}</span>
+          </span>
+          <div class="agent-area-btn fr">
+            <van-button round size="small">购买></van-button>
+          </div>
+        </router-link>
+        <!-- </div> -->
       </div>
+      <p class="agent-more" @click="more">更多></p>
     </div>
     <!-- 底部tabber -->
     <div>
@@ -73,18 +76,20 @@
         message: 'index',
         goodsList: '',
         memberDay: '',
-        agent: ''
+        agent: '',
+        info: ''
       }
     },
     created() {
       document.title = '千企国际'
       this.list()
       this.agentList()
+      this.userInfo()
+      this.openId()
     },
     components: {
       Tabber,
     },
-
     methods: {
       // 会员日特卖
       list() {
@@ -102,6 +107,67 @@
         }).catch(err => {
           console.log(err)
         })
+      },
+      // 个人信息
+      userInfo() {
+        api.information().then(res => {
+          if (res.code == 0) {
+            this.info = res.data
+          }
+        }).catch(err => {
+
+        })
+      },
+      openId() {
+        var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
+        var r = window.location.href.split('?')
+        if (r.length === 1) {
+          return null
+        }
+        r = r[1]
+        r = r.match(reg)
+        if (r == null) {
+          return null
+        }
+        var code = unescape(r[2])
+        if (code !== '' && this.$store.getters.token === '') {
+          api.openId({ code: code }).then(res => {
+            if (res.code === 0) {
+              this.$store.dispatch('setUserInfo', { data: res.info })
+              this.$store.dispatch('setToken', res.token)
+              this.information()
+            }
+          }).catch(err => {
+            if (err.code === 4003) {
+              window.sessionStorage.setItem('access_token', err.access_token)
+            }
+          })
+        }
+      },
+      // 更多按钮，判断是否是代理商
+      more() {
+        if (this.info.is_agent == true) {
+          this.$router.push({
+            name: 'AgentList'
+          })
+        } else {
+          this.$router.push({
+            name: 'NonAgent'
+          })
+        }
+      },
+      // 购买按钮 判断是否是代理商
+      buy(id) {
+        if (this.info.is_agent == true) {
+          this.$router.push({
+            name: 'Product',
+            params: { id: id, path: 'index' }
+          })
+        } else {
+          this.$router.push({
+            name: 'NonAgent'
+          })
+        }
       }
     }
   }
@@ -168,7 +234,19 @@
         .memberday-buy-list-text {
           span {
             display: block;
-            font-size: 0.76rem;
+            font-size: 0.70rem;
+          }
+          .memberday-buy-price{
+            color:#E51C23;
+          }
+          .memberday-buy-market{
+            text-decoration:line-through;
+            /* color:#ccc; */
+          }
+          b{
+            font-weight: 400;
+            font-size: 0.9rem;
+            margin-right: 5px;
           }
         }
       }
@@ -178,6 +256,10 @@
     .agent-area {
       margin-top: 10px;
       margin-bottom: 70px;
+
+      .agent-more {
+        text-align: center;
+      }
 
       p {
         padding-left: 15px;

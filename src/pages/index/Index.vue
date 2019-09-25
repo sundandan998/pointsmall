@@ -63,7 +63,6 @@
     created() {
       document.title = '首页'
       this.goodsList()
-      this.openId()
     },
     // components: {
     //   Tabber,
@@ -86,32 +85,6 @@
       },
       next() {
         // console.log(this.index)
-      },
-      openId() {
-        var reg = new RegExp('(^|&)' + 'code' + '=([^&]*)(&|$)', 'i')
-        var r = window.location.href.split('?')
-        if (r.length === 1) {
-          return null
-        }
-        r = r[1]
-        r = r.match(reg)
-        if (r == null) {
-          return null
-        }
-        var code = unescape(r[2])
-        if (code !== '' && this.$store.getters.token === '') {
-          api.openId({ code: code }).then(res => {
-            if (res.code === 0) {
-              this.$store.dispatch('setUserInfo', { data: res.info })
-              this.$store.dispatch('setToken', res.token)
-              this.information()
-            }
-          }).catch(err => {
-            if (err.code === 4003) {
-              window.sessionStorage.setItem('access_token', err.access_token)
-            }
-          })
-        }
       },
     },
   }

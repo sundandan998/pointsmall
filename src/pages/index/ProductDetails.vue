@@ -4,7 +4,8 @@
       <img :src="detail.default_image" alt="" class="fl">
       <span>
         <p>{{detail.name}}</p>
-        <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分 <span class="delete-line">市场价 ￥{{detail.market_price}}</span></p>
+        <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分 <span class="delete-line">市场价
+            ￥{{detail.market_price}}</span></p>
       </span>
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
@@ -12,6 +13,7 @@
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
     <div class="bottom-button">
+      <!-- v-on:click="$router.go(-1)" -->
       <router-link :to="{name:'Index',params:{position:this.$route.params.position}}">
         <van-button square size="large" type="warning"> 取消</van-button>
       </router-link>
@@ -19,7 +21,8 @@
     </div>
     <div class="bottom-button" v-if="detail.is_vip==false">
       <!-- <router-link :to="{name:'MemberDayStart'}"> -->
-      <van-button square size="large" type="warning" v-on:click="$router.go(-1)"> 取消</van-button>
+        <!-- v-on:click="$router.go(-1)" -->
+        <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <!-- </router-link> -->
       <router-link :to="{name:'MemberDayOrder'}">
         <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
@@ -52,15 +55,20 @@
             }
           }
         }).catch(err => {
-
         })
       },
-      // cancel() {
-      //   this.$router.push({
-      //     name: 'Index',
-      //     params:{index:this.$route.params.index}
-      //   })
-      // },
+      cancel(){
+        if(this.$route.params.path=='member'){
+          this.$router.push({
+            name:'MemberDayStart'
+          })
+        }else{
+          this.$router.push({
+            name:'AgentIndex'
+          })
+        }
+        
+      },
       buy() {
         if (this.$store.getters.token !== '') {
           this.$router.push({

@@ -46,6 +46,12 @@ export default new Router({
       name: 'AgentList',
       component: () => import('@/pages/index/AgentList')
     },
+     // 非代理商页
+     {
+      path: '/nonagent',
+      name: 'NonAgent',
+      component: () => import('@/pages/index/NonAgent')
+    },
     // 购买结果
     {
       path: '/buyresult',
@@ -76,12 +82,6 @@ export default new Router({
       name: 'ToPay',
       component: () => import('@/pages/index/ToPay')
     },
-    // 会员日
-    {
-      path: '/member',
-      name: 'MemberDay',
-      component: () => import('@/pages/member-day/MemberDay')
-    },
     // 会员日开始
     {
       path: '/memberstart',
@@ -93,6 +93,12 @@ export default new Router({
       path: '/mine',
       name: 'Mine',
       component: () => import('@/pages/mine/Mine')
+    },
+    // 邀请新人
+    {
+      path: '/invite',
+      name: 'InvitePeople',
+      component: () => import('@/pages/mine/invite-people/InvitePeople')
     },
     //  资产中心
     {

@@ -2,8 +2,8 @@
   <div class="agent-list">
     <div class="agent-list-img">
       <router-link to="/memberstart">
-        <img src="../../assets/images/start.png" alt="">
-        <img src="../../assets/images/agent.png" alt="">
+        <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt="">
+        <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt="">
       </router-link>
     </div>
     <div class="agent-pro-list">
@@ -35,22 +35,32 @@
   export default {
     data() {
       return {
-        agent: ''
+        agent: '',
+        memberDay:''
       }
     },
     created() {
       document.title = '代理商专区'
       this.agentList()
+      this.list()
     },
     methods: {
+      // 商品列表
       agentList() {
         api.agent().then(res => {
           this.agent = res.data
-          console.log(this.agent)
         }).catch(err => {
           console.log(err)
         })
-      }
+      },
+      // 是否是会员日
+      list() {
+        api.goods().then(res => {
+          this.memberDay = res.info
+        }).catch(err => {
+          console.log(err)
+        })
+      },
     }
   }
 </script>
