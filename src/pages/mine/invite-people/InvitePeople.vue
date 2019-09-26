@@ -1,6 +1,8 @@
 <template>
   <div class="invite-people">
-
+    <div class="invitation-code">
+      <p>千企国际联盟商城</p>
+    </div>
   </div>
 </template>
 <script>
@@ -17,6 +19,14 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-  .invite-people{
+
+  .invite-people {
+    .invitation-code {
+      width: 95%;
+      height: auto;
+      background-color: #fff;
+      margin: 30px auto;
+      text-align: center;
+    }
   }
 </style>

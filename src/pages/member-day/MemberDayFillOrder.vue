@@ -16,7 +16,7 @@
     <div class="order-detail">
       <span>数量</span> <span class="fr">
         <van-stepper v-model="value" /></span>
-      <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}}</span></p>
+      <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}} <b>超级积分</b> </span></p>
     </div>
     <!-- 收货地址 -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id,path:'memberday'}}">
@@ -115,7 +115,8 @@
       },
       cancel() {
         this.$router.push({
-          name: 'Product'
+          name: 'Product',
+          params:{path:'member'}
         })
       },
       // 个人信息
@@ -233,6 +234,10 @@
   }
 
   .order-total {
+    b{
+      font-size: 0.76rem;
+      font-weight:400;
+    }
     margin: 16px 10px 10px 0px;
   }
 

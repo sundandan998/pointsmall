@@ -3,7 +3,10 @@
     <div class="member-day-title">
       <p>会员日,买啥都值</p>
       <span v-if="timeInfo.start==false">距开始 {{day}} 天 {{hour}} 时 {{min}} 分 {{second}} 秒</span>
-      <span v-if="timeInfo.start==true">距结束 <b>{{hour}}</b><b>{{min}}</b> <b>{{second}}</b></span>
+      <span v-if="timeInfo.start==true">距结束 <b>{{hour}}</b>
+        <h6>:</h6><b>{{min}}</b>
+        <h6>:</h6><b>{{second}}</b>
+      </span>
     </div>
     <div class="member-day-buy">
       <p>会员日特卖<span>白菜价,抢不到,就是亏</span></p>
@@ -11,19 +14,24 @@
     <div class="index-body">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
-        <div class="member-day-list" v-for="item in goodsData">
+        <div class="member-day-list" v-for="(item,index) in goodsData">
           <!-- <router-link :to="/product/+item.id"> -->
-          <div @click="memberBuy(item.id)">
+          <div @click="memberBuy(item.id,index)">
             <div class="member-day-list-img fl">
               <img :src="item.default_image" alt="">
             </div>
             <span>
               <p>{{item.name}}</p>
               <p class="member-day-price">{{item.price|keepTwoNum}}超级积分</p>
-              <span>会员价￥{{item.member_price}}</span>|<span>市场价￥{{item.market_price}}</span>
+              <span>市场价￥{{item.market_price}}</span>
             </span>
             <div class="member-day-button fr">
-              <van-button round size="small" :disabled="disabled">马上抢></van-button>
+              <!-- v-if="item.stock==0" -->
+              <van-button round size="small" :disabled="disabled" v-if="item.stock!=0">马上抢</van-button>
+              <van-button round size="small" v-if="item.stock==0" class="sold-out">已售罄</van-button>
+            </div>
+            <div v-if="item.stock<=10">
+              <span class="remaining fr">剩余{{item.stock}}件</span>
             </div>
           </div>
           <!-- </router-link> -->
@@ -39,6 +47,7 @@
 <script>
   import Tabber from '../../assets/tabber/Tabber.vue'
   import api from '@/api/user/User.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
@@ -58,8 +67,6 @@
         hour: '00',
         min: '00',
         second: '00',
-        // now: '1568822408000',
-        // end: '1568908800000'
       }
     },
     created() {
@@ -76,6 +83,12 @@
           api.goods({ 'page': this.pageNum }).then(res => {
             if (res.code == 0) {
               this.timeInfo = res.info
+              this.timeInfo = { start: true, end_time: 1569859200000, now: 1569772800000 }
+              if (this.timeInfo.start == true) {
+                this.disabled = false
+              } else {
+                this.disabled = true
+              }
               this.goodsData.push.apply(this.goodsData, res.data)
               this.loading = false
               if (res.has_next == true) {
@@ -118,19 +131,27 @@
           this.timeInfo.now += 1000
         } else {
           this.timeInfo.start = !this.timeInfo.start
-          this.disabled = !this.disabled
         }
       },
       // 会员日特卖列表
-      memberBuy(id) {
-        // 判断是否是会员日，如果不是会员日，点击不能跳转
-        if (this.timeInfo.start == false) {
-        } else {
-          this.$router.push({
-            name: 'Product',
-            params: { id: id, path: 'member' }
+      memberBuy(id, index) {
+        // 判断是否是售罄商品
+        if (this.goodsData[index].stock == 0) {
+          Toast({
+            message: '商品已经卖完啦',
+            className: 'zZindex'
           })
+        } else {
+          // 判断是否是会员日，如果不是会员日，点击不能跳转
+          if (this.timeInfo.start == false) {
+          } else {
+            this.$router.push({
+              name: 'Product',
+              params: { id: id }
+            })
+          }
         }
+
       }
     }
   }
@@ -159,8 +180,15 @@
         color: #fff;
         width: 10px;
         height: 10px;
-        margin-left: 7px;
+        margin-left: 3px;
         padding: 2px;
+        border-radius: 3px;
+      }
+
+      h6 {
+        color: #E51C23;
+        font-size: 0.78rem;
+        display: inline-block;
       }
     }
   }
@@ -207,12 +235,25 @@
     }
   }
 
+  .remaining {
+    color: #E51C23;
+    background-color: #FFF0D9;
+    padding: 2px 7px;
+    position: relative;
+    top: -60px;
+    right: -45px;
+  }
+
   .member-day-button {
+    .sold-out {
+      background-color: #ccc;
+    }
+
     button {
       background-color: #E51C23;
       color: #fff;
       position: relative;
-      top: -20px;
+      top: -10px;
       right: 10px;
     }
   }

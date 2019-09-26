@@ -2,7 +2,7 @@
   <div class="order">
     <div class="order-product">
       <p>{{orderData.name}}</p>
-      <img :src="orderData.default_image" alt="">
+      <img :src="orderData.middle_image" alt="">
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
     <!-- 收货地址 -->
@@ -299,6 +299,10 @@
 
     p {
       margin-bottom: 10px;
+    }
+    img{
+      width: 95%;
+      margin:0 auto;
     }
   }
 

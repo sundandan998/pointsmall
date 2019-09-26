@@ -15,7 +15,6 @@
 <script>
   import api from '@/api/user/User.js'
   import { Toast } from 'mint-ui'
-
   export default {
     data() {
       return {
@@ -101,26 +100,42 @@
       // },
       // 安全验证
       safetyVerification() {
-        if (this.$route.params.id == 'mine') {
-          this.$router.push({
-            name: 'SetPwd',
-            params: { id: 'mine' }
-          })
-        } else {
-          if (this.$route.params.id == 'result') {
-            this.$router.push({
-              name: 'SetPwd',
-              params: { id: 'result' }
+        // var userInfo = sessionStorage.getItem('userInfo')
+        // userInfo = JSON.parse(userInfo)
+        // console.log(userInfo)
+        this.verification.mobile = this.infor.mobile
+        api.verification(this.verification).then(res => {
+          if (res.code == 0) {
+            Toast({
+              message: res.msg,
+              position: 'top',
+              className: 'zZindex'
             })
-          } else {
-            if (this.$route.params.id == 'reservation') {
+            if (this.$route.params.id == 'mine') {
+              this.$router.push({
+                name: 'SetPwd',
+                params: { id: 'mine' }
+              })
+            } else if (this.$route.params.id == 'result') {
+              this.$router.push({
+                name: 'SetPwd',
+                params: { id: 'result' }
+              })
+            } else if (this.$route.params.id == 'reservation') {
               this.$router.push({
                 name: 'SetPwd',
                 params: { id: 'reservation' }
               })
+            }else if(this.$route.params.id == 'safetycenter'){
+              this.$router.push({
+                name: 'ModifyPwd',
+              })
             }
           }
-        }
+        }).catch(err => {
+
+        })
+
       },
       // 发送验证码
       sendSmsCode() {
