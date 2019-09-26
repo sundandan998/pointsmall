@@ -9,7 +9,8 @@
     <div class="agent-pro-list">
       <p>商品列表</p>
       <div v-for="(item,index) in agent" class="agent-pro-list-text">
-        <router-link :to="/product/+item.id">
+        <!-- <router-link :to="/product/+item.id"> -->
+        <div @click="agentBtn(item.id)">
           <div class="agent-pro-line"></div>
           <div class="agent-pro-list-img fl">
             <img :src="item.default_image" alt="">
@@ -22,7 +23,8 @@
           <div class="agent-pro-list-btn fr">
             <van-button round size="small">购买></van-button>
           </div>
-        </router-link>
+        </div>
+        <!-- </router-link> -->
       </div>
     </div>
     <router-link to="/">
@@ -63,6 +65,13 @@
           console.log(err)
         })
       },
+      // 购买
+      agentBtn(id) {
+        this.$router.push({
+          name: 'Product',
+          params: { id: id, path: 'agentList' }
+        })
+      }
     }
   }
 </script>

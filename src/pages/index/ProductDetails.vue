@@ -59,6 +59,10 @@
           this.$router.push({
             name: 'MemberDayStart'
           })
+        } else if (this.$route.params.path == 'agentList') {
+          this.$router.push({
+            name: 'AgentList'
+          })
         } else {
           this.$router.push({
             name: 'AgentIndex'

@@ -123,11 +123,15 @@
       },
       // 会员日特卖列表
       memberBuy(id) {
-        this.$router.push({
-          name: 'Product',
-          params: { id: id, path: 'member' }
-        })
-      },
+        // 判断是否是会员日，如果不是会员日，点击不能跳转
+        if (this.timeInfo.start == false) {
+        } else {
+          this.$router.push({
+            name: 'Product',
+            params: { id: id, path: 'member' }
+          })
+        }
+      }
     }
   }
 </script>
