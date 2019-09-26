@@ -20,10 +20,7 @@
       <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
     </div>
     <div class="bottom-button" v-if="detail.is_vip==false">
-      <!-- <router-link :to="{name:'MemberDayStart'}"> -->
-        <!-- v-on:click="$router.go(-1)" -->
-        <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <!-- </router-link> -->
+      <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <router-link :to="{name:'MemberDayOrder'}">
         <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
       </router-link>
@@ -57,17 +54,17 @@
         }).catch(err => {
         })
       },
-      cancel(){
-        if(this.$route.params.path=='member'){
+      cancel() {
+        if (this.$route.params.path == 'member') {
           this.$router.push({
-            name:'MemberDayStart'
+            name: 'MemberDayStart'
           })
-        }else{
+        } else {
           this.$router.push({
-            name:'AgentIndex'
+            name: 'AgentIndex'
           })
         }
-        
+
       },
       buy() {
         if (this.$store.getters.token !== '') {

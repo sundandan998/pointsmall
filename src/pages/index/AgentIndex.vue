@@ -8,7 +8,7 @@
     </div>
     <!-- 千企会员 -->
     <div class="agent-member">
-      <p>千企会员</p>
+      <p>会员权益包</p>
       <div class="agent-member-img">
         <van-row>
           <router-link to="/index">
@@ -18,14 +18,13 @@
           </router-link>
         </van-row>
       </div>
+      <router-link to="memberstart">
+        <p>会员日特卖<span class="fr">更多></span></p>
+      </router-link>
     </div>
     <!-- 会员日特卖 -->
     <div class="memberday-buy">
-      <router-link to="memberstart">
-        <p>会员日特卖 <span></span> <span class="fr">更多></span></p>
-      </router-link>
       <div class="memberday-buy-list fl " v-for="(item,index) in goodsList" v-if="index<3">
-        <!-- <div @click="memberBuy(item.id)"> -->
         <router-link :to="/product/+item.id">
           <div class="memberday-buy-list-img">
             <img :src="item.default_image" alt="">
@@ -35,7 +34,6 @@
           <span class="memberday-buy-price"><b>{{item.price|keepTwoNum}}</b>超级积分</span>
           <span class="memberday-buy-market">市场价￥{{item.market_price}}</span>
         </div>
-        <!-- </div> -->
       </div>
     </div>
     <!-- 代理商专区 -->
@@ -50,7 +48,7 @@
           <span>
             <p>{{item.name}}</p>
             <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-            <span>市场价￥{{item.market_price}}</span>
+            <span>会员价￥{{item.member_price}} | 市场价￥{{item.market_price}}</span>
           </span>
           <div class="agent-area-btn fr">
             <van-button round size="small">购买></van-button>
@@ -189,37 +187,34 @@
       p {
         padding-left: 15px;
         font-size: 0.78rem;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f2f2f2;
+
+        span {
+          margin-right: 10px;
+        }
       }
 
       .agent-member-img {
         margin-top: 10px;
-        border-top: 1px solid #f2f2f2;
 
         img {
           width: 70%;
           display: block;
-          margin: 10px auto;
+          margin: 0px auto 10px auto;
         }
       }
     }
 
     .memberday-buy {
-      height: 170px;
-
-      p {
-        padding-left: 15px;
-        padding-bottom: 10px;
-        font-size: 0.78rem;
-        border-bottom: 1px solid #f2f2f2;
-
-        span {
-          margin-right: 15px;
-        }
-      }
+      height: 135px;
+      display: flex;
 
       .memberday-buy-list {
         margin-left: 15px;
-        margin-top: 15px;
+        width: 30%;
+        text-align: center;
+        margin: 10px auto 0 auto;
 
         .memberday-buy-list-img {
           float: left;
@@ -227,7 +222,7 @@
           img {
             width: 90px;
             height: 80px;
-            margin-right: 20px;
+            margin-left: 12px;
           }
         }
 
@@ -236,14 +231,17 @@
             display: block;
             font-size: 0.70rem;
           }
-          .memberday-buy-price{
-            color:#E51C23;
+
+          .memberday-buy-price {
+            color: #E51C23;
           }
-          .memberday-buy-market{
-            text-decoration:line-through;
+
+          .memberday-buy-market {
+            text-decoration: line-through;
             /* color:#ccc; */
           }
-          b{
+
+          b {
             font-weight: 400;
             font-size: 0.9rem;
             margin-right: 5px;

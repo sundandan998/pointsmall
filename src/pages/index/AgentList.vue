@@ -9,18 +9,20 @@
     <div class="agent-pro-list">
       <p>商品列表</p>
       <div v-for="(item,index) in agent" class="agent-pro-list-text">
-        <div class="agent-pro-line"></div>
-        <div class="agent-pro-list-img fl">
-          <img :src="item.default_image" alt="">
-        </div>
-        <span>
-          <p>{{item.name}}</p>
-          <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-          <span>会员价￥{{item.member_price}} | 市场价￥{{item.market_price}}</span>
-        </span>
-        <div class="agent-pro-list-btn fr">
-          <van-button round size="small">购买></van-button>
-        </div>
+        <router-link :to="/product/+item.id">
+          <div class="agent-pro-line"></div>
+          <div class="agent-pro-list-img fl">
+            <img :src="item.default_image" alt="">
+          </div>
+          <span>
+            <p>{{item.name}}</p>
+            <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
+            <span>会员价￥{{item.member_price}} | 市场价￥{{item.market_price}}</span>
+          </span>
+          <div class="agent-pro-list-btn fr">
+            <van-button round size="small">购买></van-button>
+          </div>
+        </router-link>
       </div>
     </div>
     <router-link to="/">
@@ -36,7 +38,7 @@
     data() {
       return {
         agent: '',
-        memberDay:''
+        memberDay: ''
       }
     },
     created() {

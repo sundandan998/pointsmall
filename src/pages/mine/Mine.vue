@@ -6,10 +6,10 @@
         <mt-cell title="邀请新人" to="invite" is-link>
           <img slot="icon" src="../../assets/images/invite.svg">
         </mt-cell>
-        <mt-cell title="供货商中心" to="agent" is-link v-if="shops.is_agent==true">
+        <mt-cell title="代理商中心" to="agent" is-link v-if="shops.is_agent==true">
           <img slot="icon" src="../../assets/images/merchant.svg">
         </mt-cell>
-        <mt-cell title="商家中心" to="merchant" is-link v-if="shops.is_shops==true">
+        <mt-cell title="供货商中心" to="merchant" is-link v-if="shops.is_shops==true">
           <img slot="icon" src="../../assets/images/merchant.svg">
         </mt-cell>
         <mt-cell title="资产中心" to="assets" is-link>
