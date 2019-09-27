@@ -7,7 +7,8 @@
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
-              <img src="../../assets/images/logo.png" alt="">
+              <!-- <img src="../../assets/images/logo.png" alt=""> -->
+              <img src="../../assets/images/xc.png" alt="">
             </div>
           </div>
         </van-swipe-item>
@@ -157,7 +158,7 @@
       }
 
       .index-start {
-        background: url('../../assets/images/bg.png')no-repeat;
+        /* background: url('../../assets/images/bg.png')no-repeat; */
         height: 550px;
         width: 100%;
         overflow: hidden;
@@ -165,8 +166,12 @@
         background-attachment: fixed;
 
         .index-logo {
-          margin: 50px auto;
+          margin: 0px auto;
           display: table;
+          img{
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }

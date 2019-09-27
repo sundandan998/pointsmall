@@ -1,6 +1,6 @@
 <template>
   <div class="order">
-    <div class="order-product">
+    <div class="order-product-img">
       <p>{{orderData.name}}</p>
       <img :src="orderData.middle_image" alt="">
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
@@ -108,7 +108,7 @@
             for (var i = 0; i < res.data.sku.vip_info.length; i++) {
               var tokenList = {
                 value: Number(res.data.sku.vip_info[i].amount).toFixed(0)+ ' ' + res.data.sku.vip_info[i].token,
-                label: Number(res.data.sku.vip_info[i].amount).toFixed(0) + res.data.sku.vip_info[i].token
+                label: Number(res.data.sku.vip_info[i].amount).toFixed(0) +  '('+res.data.sku.vip_info[i].token+')'
               }
               this.options.push(tokenList)
             }
@@ -294,16 +294,12 @@
     -webkit-transform: translate3d(-50%, 0, 0);
   }
 
-  .order-product {
+  .order-product-img {
     margin: 10px 0 15px 15px;
-
     p {
       margin-bottom: 10px;
     }
-    img{
-      width: 95%;
-      margin:0 auto;
-    }
+    
   }
 
   .order-color {

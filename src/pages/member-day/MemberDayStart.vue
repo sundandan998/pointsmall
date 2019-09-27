@@ -30,7 +30,7 @@
               <van-button round size="small" :disabled="disabled" v-if="item.stock!=0">马上抢</van-button>
               <van-button round size="small" v-if="item.stock==0" class="sold-out">已售罄</van-button>
             </div>
-            <div v-if="item.stock<=10">
+            <div v-if="item.stock<=10&&item.stock!=0">
               <span class="remaining fr">剩余{{item.stock}}件</span>
             </div>
           </div>
@@ -83,7 +83,7 @@
           api.goods({ 'page': this.pageNum }).then(res => {
             if (res.code == 0) {
               this.timeInfo = res.info
-              this.timeInfo = { start: true, end_time: 1569859200000, now: 1569772800000 }
+              // this.timeInfo = { start: true, end_time: 1569859200000, now: 1569772800000 }
               if (this.timeInfo.start == true) {
                 this.disabled = false
               } else {
