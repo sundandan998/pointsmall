@@ -11,9 +11,14 @@
       <p>会员权益包</p>
       <div class="agent-member-img">
         <van-row>
-          <router-link to="index">
+          <!-- <router-link to="index"> -->
+          <router-link :to="{name:'Index',params:{position:1}}">
             <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
+          </router-link>
+          <router-link :to="{name:'Index',params:{position:2}}">
             <van-col span="8"><img src="../../assets/images/1380.png" alt=""></van-col>
+          </router-link>
+          <router-link :to="{name:'Index',params:{position:3}}">
             <van-col span="8"><img src="../../assets/images/2580.png" alt=""></van-col>
           </router-link>
         </van-row>
@@ -38,7 +43,7 @@
           </div>
           <div class="memberday-buy-list-text">
             <span class="memberday-buy-price"><b>{{item.price|keepTwoNum}}</b>超级积分</span>
-            <span class="memberday-buy-market">市场价￥{{item.market_price}}</span>
+            <span class="memberday-buy-market">市场价￥{{item.market_price|keepTwoNum}}</span>
           </div>
         </router-link>
       </div>
@@ -55,7 +60,7 @@
           <span>
             <p>{{item.name}}</p>
             <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-            <span>市场价￥{{item.market_price}}</span>
+            <span>市场价￥{{item.market_price|keepTwoNum}}</span>
           </span>
           <div class="agent-area-btn fr">
             <van-button round size="small" v-if="item.stock!=0">购买</van-button>
@@ -334,7 +339,7 @@
         font-size: 0.78rem;
 
         span {
-          margin-right: 15px;
+          margin-right: 5px;
         }
       }
 

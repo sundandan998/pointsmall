@@ -1,7 +1,12 @@
 <template>
   <div class="order">
     <div class="order-product">
-      <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" />
+      <img :src="orderData.default_image" alt="" class="fl">
+      <span>
+        <p>{{orderData.name}}</p>
+        <p>{{orderData.price|keepTwoNum}}超级积分</p>
+      </span>
+      <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
     <!-- 商品信息 -->
     <div class="product-model">
@@ -35,7 +40,7 @@
       </div>
     </router-link>
     <div class="bottom-button">
-        <!-- v-on:click="$router.go(-1)" -->
+      <!-- v-on:click="$router.go(-1)" -->
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
       <van-button square size="large" type="danger" @click.native="submit" class="submit-btn">提交订单</van-button>
     </div>
@@ -116,7 +121,7 @@
       cancel() {
         this.$router.push({
           name: 'Product',
-          params:{path:'member'}
+          params: { path: 'member' }
         })
       },
       // 个人信息
@@ -226,7 +231,22 @@
   }
 
   .order-product {
-    margin: 10px 0 5px 0px;
+    height: 100px;
+    margin: 10px 10px 5px 15px;
+    font-size: 0.78rem;
+    img{
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+    }
+    span{
+      display: block;
+      padding-top: 10px;
+    }
+  }
+  .order-product span :last-child {
+    color: #E51C23;
+    padding-top: 10px;
   }
 
   .order-detail {
@@ -234,10 +254,11 @@
   }
 
   .order-total {
-    b{
+    b {
       font-size: 0.76rem;
-      font-weight:400;
+      font-weight: 400;
     }
+
     margin: 16px 10px 10px 0px;
   }
 

@@ -58,11 +58,14 @@
         message: 'index',
         radio: '',
         memberList: '',
+        current: '',
       }
     },
     created() {
       document.title = '首页'
       this.goodsList()
+      // swipeTo(this.$route.params.index)
+      console.log(this.$route.params.index)
     },
     // components: {
     //   Tabber,
@@ -82,9 +85,6 @@
         }).catch(err => {
           console.log(err)
         })
-      },
-      next() {
-        // console.log(this.index)
       },
     },
   }

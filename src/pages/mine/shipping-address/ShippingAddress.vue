@@ -21,7 +21,6 @@
     created() {
       document.title = '收货地址'
       this.address()
-      console.log(this.$route.params.path)
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {

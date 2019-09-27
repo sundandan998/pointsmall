@@ -12,8 +12,8 @@
         </div>
       </div>
       <div class="asset-detail-code-right fr">
-        <span>{{assetData.balance|keepTwoNum}}</span>
-        <p><img src="../../../assets/images/wait.png" alt="">{{assetData.integral|keepTwoNum}}(超级积分)</p>
+        <span>{{assetData.balance}}</span>
+        <p><img src="../../../assets/images/wait.png" alt="">{{assetData.integral}}(超级积分)</p>
       </div>
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
@@ -23,7 +23,7 @@
           :to="{name:'AvailableTransfer',params:{amount:assetData.available_amount,action:'available',code:this.assetDataToken.code}}">
           <div class="asset-list-available">
             <span>可用</span>
-            <p>{{assetData.available_amount|keepTwoNum}}</p>
+            <p>{{assetData.available_amount}}</p>
             <img src="../../../assets/images/r.png" alt="" class="fr">
           </div>
         </router-link>
@@ -32,7 +32,7 @@
           <div class="asset-list-freeze-num" v-for="item in listData">
             <router-link
               :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze','day':item.remain_days,'freezeDay':item.freeze_days}}">
-              <p><span>{{item.amount|keepTwoNum}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
+              <p><span>{{item.amount}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
               <div class="progress">
                 <el-slider :value="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
               </div>
@@ -110,32 +110,34 @@
   @import '../../../assets/scss/Global.scss';
 
   .asset-detail-code {
-    height: 55px;
+    height: 75px;
     border-bottom: 4px solid #f2f2f2;
   }
 
   .asset-detail-name {
     display: inline-block;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
   }
 
   .asset-detail-code-left {
     margin-left: 15px;
 
     img {
-      margin-right: 10px;
+      margin-right: 8px;
     }
   }
 
   .asset-detail-code-right {
     margin-right: 10px;
     font-size: 0.78rem;
-
+    margin-top: -6px;
     span {
       margin-left: 80px;
-      font-size: 1.2rem;
+      font-size: 1.0rem;
     }
-
+    p{
+      margin-left: 25px;
+    }
     img {
       width: 10px;
     }

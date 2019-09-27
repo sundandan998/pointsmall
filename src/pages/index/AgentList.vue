@@ -18,7 +18,7 @@
           <span>
             <p>{{item.name}}</p>
             <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-            <span>市场价￥{{item.market_price}}</span>
+            <span>市场价￥{{item.market_price|keepTwoNum}}</span>
           </span>
           <div class="agent-pro-list-btn fr">
             <van-button round size="small" v-if="item.stock!=0">马上抢</van-button>

@@ -1,13 +1,10 @@
 <template>
   <div class="pay">
     <div class="pay-title">
-      <mt-cell title="合计" :value="this.$route.params.total"></mt-cell>
-      <div v-if="integralToken.token_amount==undefined">
-        <mt-cell title="支付通证" value="--"></mt-cell>
-      </div>
-      <div v-else>
-        <mt-cell title="支付通证" :value="integralToken.token_amount+'('+ integralToken.token+')'"></mt-cell>
-      </div>
+      <mt-cell title="合计" :value="this.$route.params.total +'超级积分'"></mt-cell>
+      <mt-cell v-if="integralToken.token_amount==undefined" title="支付通证" value="--"></mt-cell>
+      <mt-cell v-if="integralToken.token_amount!=undefined" title="支付通证">{{(integralToken.token_amount).toFixed(8)}}
+        ({{integralToken.token}}) </mt-cell>
     </div>
     <div class="pay-list">
       <van-radio-group v-model="radio">
@@ -36,7 +33,7 @@
       <mt-popup v-model="resevationModelModel" class="resevation-modal">
         <img class="fr" @click="modalHide" src="../../assets/images/cancel.svg" alt="" />
         <span>输入支付密码</span>
-        <p>{{integralToken.token_amount+'('+ integralToken.token+')'}}</p>
+        <p v-if="integralToken.token_amount!=undefined">{{(integralToken.token_amount).toFixed(8)}}({{integralToken.token}})</p>
         <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
       </mt-popup>
     </div>
@@ -77,11 +74,17 @@
         }
       }
     },
+    // filters: {
+    //   token(value) {
+    //     return value.(8)
+    //   }
+    // },
     created() {
       document.title = '支付'
       this.information()
     },
     methods: {
+
       // 上拉加载
       onLoad() {
         setTimeout(() => {
@@ -103,6 +106,7 @@
           })
         }, 100)
       },
+
       // 支付
       success() {
         if (this.radio == '') {
@@ -215,10 +219,12 @@
     height: 50px;
     border-bottom: 1px solid #f2f2f2;
     padding-left: 15px;
+
     img {
       margin-right: 10px;
     }
-    p{
+
+    p {
       font-size: 0.76rem;
     }
   }
@@ -227,6 +233,7 @@
     background-image: none !important;
     border-bottom: 1px solid #f2f2f2;
   }
+
   .pay-list {
     .van-radio {
       position: relative;

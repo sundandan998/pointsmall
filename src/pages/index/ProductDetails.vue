@@ -4,8 +4,7 @@
       <img :src="detail.default_image" alt="" class="fl">
       <span>
         <p>{{detail.name}}</p>
-        <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分 <span class="delete-line">市场价
-            ￥{{detail.market_price}}</span></p>
+        <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分</p>
       </span>
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->

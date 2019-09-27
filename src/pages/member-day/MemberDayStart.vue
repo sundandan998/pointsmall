@@ -23,7 +23,7 @@
             <span>
               <p>{{item.name}}</p>
               <p class="member-day-price">{{item.price|keepTwoNum}}超级积分</p>
-              <span>市场价￥{{item.market_price}}</span>
+              <span>市场价￥{{item.market_price|keepTwoNum}}</span>
             </span>
             <div class="member-day-button fr">
               <!-- v-if="item.stock==0" -->

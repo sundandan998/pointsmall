@@ -14,9 +14,9 @@
         :thumb="detailData.sku_image" />
     </div>
     <p class="detail-num"><span>积分总额:</span><span
-        class="fr">{{detailData.total_integral|keepTwoNum}}(超级积分)</span></p>
+        class="fr">{{detailData.total_integral}}(超级积分)</span></p>
     <p class="detail-num"><span>实付通证数量:</span><span
-        class="fr">{{detailData.total_amount|keepTwoNum}}({{detailData.token}})</span></p>
+        class="fr">{{detailData.total_amount}}({{detailData.token}})</span></p>
     <p class="detail-num" v-if="detailData.status!=1"><span>物流单号:</span><span class="fr">{{detailData.wl_number}}</span>
     </p>
     <div class="detail-status">

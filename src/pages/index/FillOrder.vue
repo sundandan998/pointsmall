@@ -107,8 +107,8 @@
             this.options = []
             for (var i = 0; i < res.data.sku.vip_info.length; i++) {
               var tokenList = {
-                value: res.data.sku.vip_info[i].amount + ' ' + res.data.sku.vip_info[i].token,
-                label: res.data.sku.vip_info[i].amount + res.data.sku.vip_info[i].token
+                value: Number(res.data.sku.vip_info[i].amount).toFixed(0)+ ' ' + res.data.sku.vip_info[i].token,
+                label: Number(res.data.sku.vip_info[i].amount).toFixed(0) + res.data.sku.vip_info[i].token
               }
               this.options.push(tokenList)
             }
@@ -295,7 +295,7 @@
   }
 
   .order-product {
-    margin: 10px 0 5px 15px;
+    margin: 10px 0 15px 15px;
 
     p {
       margin-bottom: 10px;
