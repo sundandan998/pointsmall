@@ -2,9 +2,10 @@
   <div class="address">
     <van-address-list :list="list" @edit="onEdit" @add="onAdd" @select="selectAddress" />
     <!-- <router-link to="/mine"> -->
-      <div class="address-btn" @click.native="back">
-        <van-button square size="large" type="warning" v-on:click="$router.go(-1)">返回</van-button>
-      </div>
+    <!-- v-on:click="$router.go(-1)" -->
+    <div class="address-btn">
+      <van-button square size="large" type="warning" @click="back">返回</van-button>
+    </div>
     <!-- </router-link> -->
   </div>
 </template>
@@ -20,7 +21,7 @@
     created() {
       document.title = '收货地址'
       this.address()
-      console.log()
+      console.log(this.$route.params.path)
     },
     beforeRouteEnter(to, from, next) {
       next(vm => {
@@ -39,13 +40,13 @@
       onEdit(item, index) {
         this.$router.push({
           name: 'AddressDetail',
-          params: { index: index, item: item, id: this.$route.params.id }
+          params: { index: index, item: item, id: this.$route.params.id, path: this.$route.params.path }
         })
       },
       onAdd(item, index) {
         this.$router.push({
           name: 'NewAddress',
-          params: { index: index, item: item, id: this.$route.params.id }
+          params: { index: index, item: item, id: this.$route.params.id, path: this.$route.params.path }
 
         })
       },
@@ -63,21 +64,38 @@
             name: 'Order',
             params: { index: index, item: item, }
           })
-        }else if(this.$route.params.path == 'memberday'){
+        } else if (this.$route.params.path == 'memberday') {
           this.$router.push({
             name: 'MemberDayOrder',
             params: { index: index, item: item, }
           })
         }
       },
-      // back(){
-
-      // }
-    },
+      back(item, index) {
+        let refpath = window.sessionStorage.getItem('refpath')
+        if (this.$route.params.path == 'is_vip') {
+          this.$router.push({
+            name: 'Order',
+            params: { id: this.$route.params.id }
+          })
+        } else if (this.$route.params.path == 'memberday') {
+          this.$router.push({
+            name: 'MemberDayOrder',
+            params: { id: this.$route.params.id }
+          })
+        } else if (refpath == '/newaddress' || refpath == '/mine' || refpath == '/addressdetail') {
+          this.$router.push({
+            name: 'Mine',
+            params: { id: this.$route.params.id }
+          })
+        }
+      }
+    }
   }
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+
   .address {
     .van-address-item .van-radio__icon {
       display: none !important;

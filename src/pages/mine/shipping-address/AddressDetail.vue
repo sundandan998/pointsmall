@@ -41,7 +41,7 @@
           if (res.code == 0) {
             this.$router.push({
               name: 'ShippingAddress',
-              params: { id: this.$route.params.id }
+              params: { id: this.$route.params.id,path:this.$route.params.path }
             })
             Toast({
               message: res.msg,

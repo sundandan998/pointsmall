@@ -3,7 +3,8 @@
     <div>
       <van-address-edit :area-list="areaList" show-set-default show-search-result @save="onSave" />
     </div>
-    <router-link to="/address">
+    <!-- <router-link to="/address"> -->
+    <router-link :to="{name:'ShippingAddress',params:{path:this.$route.params.path,id: this.$route.params.id}}">
       <div class="address-btn">
         <van-button square size="large" type="warning">返回</van-button>
       </div>
@@ -31,7 +32,7 @@
           if (res.code == 0) {
             this.$router.push({
               name: 'ShippingAddress',
-              params: { id: this.$route.params.id }
+              params: { id: this.$route.params.id,path:this.$route.params.path}
             })
             Toast({
               message: res.msg,
