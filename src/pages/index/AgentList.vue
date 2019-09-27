@@ -26,7 +26,7 @@
             </van-button>
           </div>
         </div>
-        <div v-if="item.stock<=10">
+        <div v-if="item.stock<=10&&item.stock!=0">
           <span class="remaining fr">剩余{{item.stock}}件</span>
         </div>
         <!-- </div> -->
