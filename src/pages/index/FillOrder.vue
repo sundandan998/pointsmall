@@ -26,8 +26,10 @@
       <p @click="handlelick">{{value1}}</p>
       <mt-popup v-model="popupVisible" position="bottom" class="token-list-model">
         <div class="token-list">
-          <mt-radio v-model="value1" :options="options" title="选择受赠通证">
-          </mt-radio>
+          <div v-model="popupVisible" @click="hide">
+            <mt-radio v-model="value1" :options="options" title="选择受赠通证">
+            </mt-radio>
+          </div>
         </div>
       </mt-popup>
       <img src="../../assets/images/r.png" alt="" class="fr">
@@ -99,6 +101,9 @@
       handlelick() {
         this.popupVisible = true
       },
+      hide(){
+        this.popupVisible = false
+      },
       // 商品信息
       order() {
         api.orderDetail(this.$route.params).then(res => {
@@ -107,8 +112,8 @@
             this.options = []
             for (var i = 0; i < res.data.sku.vip_info.length; i++) {
               var tokenList = {
-                value: Number(res.data.sku.vip_info[i].amount).toFixed(0)+ ' ' + res.data.sku.vip_info[i].token,
-                label: Number(res.data.sku.vip_info[i].amount).toFixed(0) +  '('+res.data.sku.vip_info[i].token+')'
+                value: Number(res.data.sku.vip_info[i].amount).toFixed(0) + ' ' + res.data.sku.vip_info[i].token,
+                label: Number(res.data.sku.vip_info[i].amount).toFixed(0) + '(' + res.data.sku.vip_info[i].token + ')'
               }
               this.options.push(tokenList)
             }
@@ -273,6 +278,7 @@
         padding-left: 15px;
         background-color: #fff;
       }
+
       img {
         margin-top: -20px;
         margin-right: 10px;
@@ -296,10 +302,11 @@
 
   .order-product-img {
     margin: 10px 0 15px 15px;
+
     p {
       margin-bottom: 10px;
     }
-    
+
   }
 
   .order-color {

@@ -144,6 +144,10 @@
         } else {
           // 判断是否是会员日，如果不是会员日，点击不能跳转
           if (this.timeInfo.start == false) {
+            Toast({
+              message: '活动尚未开始',
+              className: 'zZindex'
+            })
           } else {
             this.$router.push({
               name: 'Product',

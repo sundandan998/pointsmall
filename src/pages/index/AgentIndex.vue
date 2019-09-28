@@ -86,7 +86,6 @@
         selected: 'index',
         message: 'index',
         goodsList: '',
-        memberDay: '',
         agent: '',
         info: '',
         // 倒计时
@@ -238,7 +237,7 @@
         padding-left: 15px;
         font-size: 0.78rem;
         padding-bottom: 10px;
-        border-top: 4px solid #f2f2f2;
+        border-bottom: 1px solid #f2f2f2;
 
         span {
           margin-right: 10px;
@@ -279,8 +278,6 @@
     .memberday-buy {
       height: 135px;
       display: flex;
-      border-bottom: 4px solid #f2f2f2;
-      padding-bottom: 10px;
 
       .memberday-buy-list {
         margin-left: 15px;

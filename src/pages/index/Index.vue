@@ -7,7 +7,6 @@
         <van-swipe-item>
           <div class="index-start">
             <div class="index-logo">
-              <!-- <img src="../../assets/images/logo.png" alt=""> -->
               <img src="../../assets/images/xc.png" alt="">
             </div>
           </div>
@@ -55,8 +54,8 @@
   export default {
     data() {
       return {
-        selected: 'index',
-        message: 'index',
+        // selected: 'index',
+        // message: 'index',
         radio: '',
         memberList: '',
         current: '',
@@ -66,7 +65,6 @@
       document.title = '首页'
       this.goodsList()
       // swipeTo(this.$route.params.index)
-      console.log(this.$route.params.index)
     },
     // components: {
     //   Tabber,
