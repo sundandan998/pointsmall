@@ -5,11 +5,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/cs',
-      name: 'cs',
-      component: () => import('@/pages/index/cs')
-    },
+    // {
+    //   path: '/cs',
+    //   name: 'cs',
+    //   component: () => import('@/pages/index/cs')
+    // },
     // 注册
     {
       path: '/register',
