@@ -13,7 +13,7 @@
         <van-row>
           <!-- <router-link to="index"> -->
           <router-link :to="{name:'Index',params:{position:1}}">
-            <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
+              <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
           </router-link>
           <router-link :to="{name:'Index',params:{position:2}}">
             <van-col span="8"><img src="../../assets/images/1380.png" alt=""></van-col>
@@ -102,7 +102,7 @@
       window.setInterval(this.time, 1000)
       this.list()
       this.agentList()
-      this.userInfo()
+      // this.userInfo()
       this.openId()
     },
     components: {
@@ -193,15 +193,23 @@
       },
       // 更多按钮，判断是否是代理商
       more() {
-        if (this.info.is_agent == true) {
-          this.$router.push({
-            name: 'AgentList'
-          })
-        } else {
-          this.$router.push({
-            name: 'NonAgent'
-          })
-        }
+        api.information().then(res => {
+          if (res.code == 0) {
+            this.info = res.data
+            if (this.info.is_agent == true) {
+              this.$router.push({
+                name: 'AgentList'
+              })
+            } else {
+              this.$router.push({
+                name: 'NonAgent'
+              })
+            }
+          }
+        }).catch(err => {
+
+        })
+
       },
       // 购买按钮 判断是否是代理商
       buy(id) {
@@ -224,6 +232,8 @@
 
   .agent {
     .agent-img {
+      height: 152px;
+      width: 100%;
       img {
         width: 95%;
         margin: 20px auto;
@@ -311,7 +321,7 @@
 
           .memberday-buy-market {
             font-size: 0.6rem;
-            text-decoration: line-through;
+            /* text-decoration: line-through; */
             /* color:#ccc; */
           }
 

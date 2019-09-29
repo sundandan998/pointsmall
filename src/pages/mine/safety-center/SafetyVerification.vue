@@ -133,7 +133,13 @@
             }
           }
         }).catch(err => {
-
+          if(err.code!=0){
+            Toast({
+              message: err.msg,
+              position: 'top',
+              className: 'zZindex'
+            })
+          }
         })
 
       },
@@ -141,9 +147,10 @@
       sendSmsCode() {
         this.time = 60
         this.timer()
-        var userInfo = sessionStorage.getItem('userInfo')
+        // var userInfo = sessionStorage.getItem('userInfo')
+        var userInfo = localStorage.getItem('userInfo')
         userInfo = JSON.parse(userInfo)
-        api.sendCode({ mobile: userInfo.data.mobile }).then(res => {
+        api.sendCode({ mobile: userInfo.data.mobile}).then(res => {
           if (res.code === 0) {
             Toast({
               message: res.msg,

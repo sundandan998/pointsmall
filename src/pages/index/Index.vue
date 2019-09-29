@@ -2,32 +2,36 @@
   <div class="index">
     <!-- 轮播图 -->
     <div class="index-swipe">
-      <!-- <van-radio-group v-model="radio"> -->
-      <van-swipe class="swipe" :initial-swipe=this.$route.params.position>
-        <van-swipe-item>
+      <!-- :initial-swipe=this.$route.params.position -->
+      <van-swipe class="swipe">
+        <!-- <van-swipe-item>
+          <img src="../../assets/images/left.svg" alt="" class=" left fl ">
+          <img src="../../assets/images/right.svg" alt="" class=" right fr">
           <div class="index-start">
             <div class="index-logo">
               <img src="../../assets/images/xc.png" alt="">
             </div>
           </div>
-        </van-swipe-item>
-        <van-swipe-item v-for="(item,index) in memberList" :key="index">
+        </van-swipe-item> -->
+        <van-swipe-item v-for="(item,index) in memberList" :key="index" class="swipe-index">
+          <img src="../../assets/images/left.svg" alt="" class=" left fl ">
+          <img src="../../assets/images/right.svg" alt="" class=" right fr">
           <div class="swipe-title">
             <p>{{item.name}}</p>
           </div>
-          <div class="swipe-img" v-for="(goods, index) in item.goods">
-            <van-radio-group v-model="radio" :key="index">
+          <div class="swipe-img" v-for="(goods, index) in item.goods" :key="index">
+            <van-radio-group :key="index" v-model="radio">
               <van-radio :name="goods.id" checked-color="#09BB07">
                 <img :src="goods.vip_image" alt="">
               </van-radio>
             </van-radio-group>
           </div>
           <!-- 底部按钮 -->
-          <router-link :to="{name:'Product',params:{id:radio,position:index+1}}">
-            <div class="index-button">
-              <mt-button type="danger">￥{{item.name|number}} 立即抢购 </mt-button>
-            </div>
-          </router-link>
+          <!-- <router-link :to="{name:'Product',params:{id:radio,position:index+1}}"> -->
+          <div class="index-button">
+            <mt-button type="danger" @click="buy">￥{{item.name|number}} 立即抢购 </mt-button>
+          </div>
+          <!-- </router-link> -->
         </van-swipe-item>
       </van-swipe>
       <!-- </van-radio-group> -->
@@ -80,11 +84,23 @@
       goodsList() {
         api.goodsList().then(res => {
           this.memberList = res.data
-          this.radio = (this.memberList[0].goods[0].id)
         }).catch(err => {
           console.log(err)
         })
       },
+      buy() {
+        if (this.radio == '') {
+          Toast({
+            message: '请先选择商品',
+            className: 'zZindex'
+          })
+        } else {
+          this.$router.push({
+            name: 'Product',
+            params: { id: this.radio, position: this.index + 1 }
+          })
+        }
+      }
     },
   }
 </script>
@@ -101,16 +117,26 @@
     background-color: #f2f2f2;
     overflow: hidden;
     border-radius: 5px;
-
+    swipe-index{
+      height: 550px;
+    }
     .index-swipe {
       height: auto;
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
 
-      /* .swipe {
-          height: 500px;
-        } */
+      .swipe {
+        .left {
+          position: relative;
+          top: 230px;
+        }
+
+        .right {
+          position: relative;
+          top: 227px;
+        }
+      }
 
       .swipe-arrow-right {
         width: 18px;
@@ -141,8 +167,12 @@
         text-align: center;
       }
 
+      /* .swipe-img .van-radio__icon--round .van-icon:first-child(){
+        margin-left: 30px;
+      } */
       .swipe-img {
         text-align: center;
+        /* padding-left: 30px; */
 
         img {
           width: 242px;

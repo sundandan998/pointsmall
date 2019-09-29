@@ -49,6 +49,10 @@
               position: 'top',
               className: 'zZindex'
             })
+            let userInfo = localStorage.getItem('userInfo')
+            userInfo = JSON.parse(userInfo)
+            userInfo.data.mobile = this.tel.mobile
+            window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
             this.$router.push({
               name: 'SafetyCenter'
             })

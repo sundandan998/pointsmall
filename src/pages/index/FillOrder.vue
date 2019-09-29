@@ -302,6 +302,10 @@
 
   .order-product-img {
     margin: 10px 0 15px 15px;
+    img{
+      width: 242px;
+      height: 120px;
+    }
 
     p {
       margin-bottom: 10px;
