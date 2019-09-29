@@ -164,11 +164,20 @@
         background-attachment: fixed;
 
         .index-logo {
-          margin: 0px auto;
-          display: table;
-          img{
-            width: 100%;
+          /* margin: 0px auto;
+          display: table; */
+          width: 100%;
+          height: 100%;
+          top: 0;
+          z-index: -1;
+          position: absolute;
+
+          img {
+            display: block;
+            outline: none;
+            border: 0;
             height: 100%;
+            width: 100%;
           }
         }
       }
