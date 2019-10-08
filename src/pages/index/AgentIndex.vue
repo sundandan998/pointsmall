@@ -12,13 +12,13 @@
       <div class="agent-member-img">
         <van-row>
           <!-- <router-link to="index"> -->
-          <router-link :to="{name:'Index',params:{position:1}}">
+          <router-link :to="{name:'Index',params:{position:0}}">
               <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
           </router-link>
-          <router-link :to="{name:'Index',params:{position:2}}">
+          <router-link :to="{name:'Index',params:{position:1}}">
             <van-col span="8"><img src="../../assets/images/1380.png" alt=""></van-col>
           </router-link>
-          <router-link :to="{name:'Index',params:{position:3}}">
+          <router-link :to="{name:'Index',params:{position:2}}">
             <van-col span="8"><img src="../../assets/images/2580.png" alt=""></van-col>
           </router-link>
         </van-row>

@@ -1,52 +1,38 @@
 <template>
   <div class="index">
+    <p>选择购买价位及赠品</p>
     <!-- 轮播图 -->
-    <div class="index-swipe">
-      <!-- :initial-swipe=this.$route.params.position -->
-      <van-swipe class="swipe">
-        <!-- <van-swipe-item>
-          <img src="../../assets/images/left.svg" alt="" class=" left fl ">
-          <img src="../../assets/images/right.svg" alt="" class=" right fr">
-          <div class="index-start">
-            <div class="index-logo">
-              <img src="../../assets/images/xc.png" alt="">
-            </div>
-          </div>
-        </van-swipe-item> -->
-        <van-swipe-item v-for="(item,index) in memberList" :key="index" class="swipe-index">
-          <img src="../../assets/images/left.svg" alt="" class=" left fl ">
-          <img src="../../assets/images/right.svg" alt="" class=" right fr">
-          <div class="swipe-title">
-            <p>{{item.name}}</p>
-          </div>
-          <div class="swipe-img" v-for="(goods, index) in item.goods" :key="index">
-            <van-radio-group :key="index" v-model="radio">
-              <van-radio :name="goods.id" checked-color="#09BB07">
-                <img :src="goods.vip_image" alt="">
-              </van-radio>
-            </van-radio-group>
-          </div>
-          <!-- 底部按钮 -->
-          <!-- <router-link :to="{name:'Product',params:{id:radio,position:index+1}}"> -->
-          <div class="index-button">
-            <mt-button type="danger" @click="buy">￥{{item.name|number}} 立即抢购 </mt-button>
-          </div>
-          <!-- </router-link> -->
-        </van-swipe-item>
-      </van-swipe>
-      <!-- </van-radio-group> -->
-      <!-- <img src="../../assets/images/l.svg" alt="" class=" fl swipe-arrow-left"> -->
-      <!-- <img src="../../assets/images/r.svg" alt="" class=" fr swipe-arrow-right" @click="next"> -->
-    </div>
-    <!-- 底部tabber -->
-    <router-link to="/">
-      <div class="order-button">
-        <mt-button size="large">返回</mt-button>
+    <!-- <van-swipe-item>
+      <img src="../../assets/images/left.svg" alt="" class=" left fl ">
+      <img src="../../assets/images/right.svg" alt="" class=" right fr">
+      <div class="index-start">
+        <div class="index-logo">
+          <img src="../../assets/images/xc.png" alt="">
+        </div>
       </div>
-    </router-link>
-    <!-- <div>
-      <tabber :message="selected"></tabber>
-    </div> -->
+    </van-swipe-item> -->
+    <div class="index-swipe">
+      <van-tabs v-model="active" swipeable>
+        <div v-for="(item,index) in memberList">
+          <van-tab :title="item.name">
+            <div class="swipe-img" v-for="(goods, index) in item.goods" :key="index">
+              <van-radio-group :key="index" v-model="radio">
+                <van-radio :name="goods.id" checked-color="#09BB07">
+                  <img :src="goods.vip_image" alt="">
+                </van-radio>
+              </van-radio-group>
+            </div>
+          </van-tab>
+        </div>
+      </van-tabs>
+      <!-- 底部按钮 -->
+      <div class="bottom-button">
+        <router-link :to="{name:'AgentIndex'}">
+          <van-button square size="large" type="warning"> 取消</van-button>
+        </router-link>
+        <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -58,6 +44,7 @@
   export default {
     data() {
       return {
+        active: this.$route.params.position,
         // selected: 'index',
         // message: 'index',
         radio: '',
@@ -68,7 +55,6 @@
     created() {
       document.title = '首页'
       this.goodsList()
-      // swipeTo(this.$route.params.index)
     },
     // components: {
     //   Tabber,
@@ -97,7 +83,8 @@
         } else {
           this.$router.push({
             name: 'Product',
-            params: { id: this.radio, position: this.index + 1 }
+            // , position: this.index + 1 
+            params: { id: this.radio, position: this.$route.params.position }
           })
         }
       }
@@ -114,70 +101,38 @@
   .index {
     height: auto;
     width: 100%;
-    background-color: #f2f2f2;
     overflow: hidden;
     border-radius: 5px;
-    swipe-index{
-      height: 550px;
+
+    p {
+      margin: 20px 0 20px 15px;
     }
+
     .index-swipe {
       height: auto;
       width: 90%;
       background-color: #fff;
       margin: 10px auto;
 
-      .swipe {
-        .left {
-          position: relative;
-          top: 230px;
-        }
-
-        .right {
-          position: relative;
-          top: 227px;
-        }
+      .van-tab--active {
+        font-weight: 500;
+        color: #09BB07;
+      }
+      .van-tabs__line {
+        background-color: #09BB07;
       }
 
-      .swipe-arrow-right {
-        width: 18px;
-        position: relative;
-        top: -260px;
-        right: -20px;
-      }
-
-      .swipe-arrow-left {
-        width: 18px;
-        position: relative;
-        top: -260px;
-        left: -20px;
-      }
-
-      .van-swipe__indicators {
-        position: absolute;
-        top: 10px;
-      }
-
-      .van-swipe__indicator {
-        background-color: #1989FA;
-      }
-
-      .swipe-title {
-        margin: 20px auto 0 auto;
-        color: #FF7177;
-        text-align: center;
-      }
-
-      /* .swipe-img .van-radio__icon--round .van-icon:first-child(){
-        margin-left: 30px;
-      } */
       .swipe-img {
         text-align: center;
+        margin-top: 20px;
         /* padding-left: 30px; */
 
         img {
           width: 242px;
           margin: 5px 0;
         }
+
+
       }
 
       .index-button {

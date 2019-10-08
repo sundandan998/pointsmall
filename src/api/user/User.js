@@ -243,4 +243,12 @@ export default {
       params: params
     })
   },
+  // 邀请新人/邀请码
+  code(params = {}) {
+    return request({
+      url: '/user/invite_code/',
+      method: 'get',
+      params: params
+    })
+  },
 }
