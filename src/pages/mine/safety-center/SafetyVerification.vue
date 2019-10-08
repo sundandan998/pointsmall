@@ -47,62 +47,8 @@
           console.log(err)
         })
       },
-      // 提交
-      // btn() {
-      //   // debugger
-      //   var userInfo = sessionStorage.getItem('userInfo')
-      //   userInfo = JSON.parse(userInfo)
-      //   this.verification.mobile = userInfo.data.mobile
-      //   api.verification(this.verification).then(res => {
-      //     if (res.code == 0) {
-      //       Toast({
-      //         message: res.msg,
-      //         position: 'top',
-      //         className: 'zZindex'
-      //       })
-      //       if (this.$route.params.id == 'safetycenter') {
-      //         this.$router.push({
-      //           name: 'ModifyPwd',
-      //           params: { id: 'mine' }
-      //         })
-      //       } else {
-      //         if (this.$route.params.id == 'out') {
-      //           this.$router.push({
-      //             name: 'SetPwd',
-      //             params: { id: 'out' }
-      //           })
-      //         } else {
-      //           if (this.$route.params.id == 'result') {
-      //             this.$router.push({
-      //               name: 'SetPwd',
-      //               params: { id: 'result' }
-      //             })
-      //           } else {
-      //             if (this.$route.params.id == 'reservation') {
-      //               this.$router.push({
-      //                 name: 'SetPwd',
-      //                 params: { id: 'reservation' }
-      //               })
-      //             } else {
-      //               if (this.$route.params.id == 'mine') {
-      //                 this.$router.push({
-      //                   name: 'SetPwd',
-      //                   params: { id: 'mine' }
-      //                 })
-      //               }
-      //             }
-      //           }
-      //         }
-      //       }
-      //     }
-      //   }).catch(err => {
-      //   })
-      // },
       // 安全验证
       safetyVerification() {
-        // var userInfo = sessionStorage.getItem('userInfo')
-        // userInfo = JSON.parse(userInfo)
-        // console.log(userInfo)
         this.verification.mobile = this.infor.mobile
         api.verification(this.verification).then(res => {
           if (res.code == 0) {

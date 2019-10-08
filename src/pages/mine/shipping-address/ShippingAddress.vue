@@ -1,12 +1,9 @@
 <template>
   <div class="address">
     <van-address-list :list="list" @edit="onEdit" @add="onAdd" @select="selectAddress" />
-    <!-- <router-link to="/mine"> -->
-    <!-- v-on:click="$router.go(-1)" -->
     <div class="address-btn">
       <van-button square size="large" type="warning" @click="back">返回</van-button>
     </div>
-    <!-- </router-link> -->
   </div>
 </template>
 <script>
@@ -61,7 +58,7 @@
         } else if (this.$route.params.path == 'is_vip') {
           this.$router.push({
             name: 'Order',
-            params: { index: index, item: item, }
+            params: { index: index, item: item,id: this.$route.params.id}
           })
         } else if (this.$route.params.path == 'memberday') {
           this.$router.push({
@@ -75,7 +72,7 @@
         if (this.$route.params.path == 'is_vip') {
           this.$router.push({
             name: 'Order',
-            params: { id: this.$route.params.id }
+            params: { id: this.$route.params.id, item: item,}
           })
         } else if (this.$route.params.path == 'memberday') {
           this.$router.push({

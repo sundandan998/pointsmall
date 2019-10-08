@@ -101,7 +101,7 @@
       handlelick() {
         this.popupVisible = true
       },
-      hide(){
+      hide() {
         this.popupVisible = false
       },
       // 商品信息
@@ -140,7 +140,6 @@
         api.information().then(res => {
           this.add = res.data
           this.orderInformation = res.data.default_address
-          // console.log(this.orderInformation)
         }).catch(err => {
           console.log(err)
         })
@@ -180,31 +179,22 @@
               })
             }
           }
-
         }
         if (this.orderAddress.id == '') {
           this.address_id = this.orderInformation.id
         } else {
           this.address_id = this.$route.params.item.id
         }
-        // 跳转到支付页面
-        // this.$router.push({
-        //   name: 'ToPay',
-        //   params: {
-        //     total: this.orderData.price * this.value, amount: this.value, id: this.orderData.id,
-        //     address_id: this.address_id
-        //   }
-        // })
-        // 弹起支付密码框
-
       }
     },
     watch: {
       // 监听来的路径，并且替换内容
       orderInformation(val) {
+        // debugger
         let refpath = window.sessionStorage.getItem('refpath')
         if (refpath == '/address') {
-          if (this.orderInformation == null) {
+          if (this.orderInformation == null && this.$route.params.item.id!=undefined) {
+          // this.orderInformation.id = this.$route.params.item.id,
             this.orderInformation = {
               city: '',
               county: '',
@@ -213,13 +203,14 @@
               addressDetail: '',
               id: ''
             }
-          }
-          this.orderInformation.id = this.$route.params.item.id,
+            this.orderInformation.id = this.$route.params.item.id,
             this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
             this.orderInformation.city = this.$route.params.item.city,
             this.orderInformation.county = this.$route.params.item.county,
             this.orderInformation.tel = this.$route.params.item.tel,
             this.orderInformation.name = this.$route.params.item.name
+          }
+          
         }
       },
       pay_pwd() {
@@ -302,7 +293,8 @@
 
   .order-product-img {
     margin: 10px 0 15px 15px;
-    img{
+
+    img {
       width: 242px;
       height: 120px;
     }
