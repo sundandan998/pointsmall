@@ -225,7 +225,7 @@
     }
 
     p {
-      font-size: 0.76rem;
+      font-size: 0.076rem;
     }
   }
 

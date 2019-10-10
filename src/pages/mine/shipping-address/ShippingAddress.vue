@@ -63,7 +63,7 @@
         } else if (this.$route.params.path == 'memberday') {
           this.$router.push({
             name: 'MemberDayOrder',
-            params: { index: index, item: item, }
+            params: { index: index, item: item}
           })
         }
       },
@@ -77,7 +77,7 @@
         } else if (this.$route.params.path == 'memberday') {
           this.$router.push({
             name: 'MemberDayOrder',
-            params: { id: this.$route.params.id }
+            params: { id: this.$route.params.id,item: item}
           })
         } else if (refpath == '/newaddress' || refpath == '/mine' || refpath == '/addressdetail') {
           this.$router.push({

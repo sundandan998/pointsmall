@@ -69,7 +69,7 @@
     .code-description {
       p {
         margin-right: 10px;
-        font-size: 0.76rem;
+        font-size: 0.076rem;
         color: #ccc;
       }
     }

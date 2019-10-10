@@ -266,7 +266,7 @@
       border: 1px solid #7ECAC3;
       padding: 2px 15px;
       color: #7ECAC3;
-      font-size: 0.78rem;
+      font-size: 0.078rem;
       background-color: #fff;
     }
   }

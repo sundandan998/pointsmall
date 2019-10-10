@@ -127,7 +127,7 @@
         height: 90px;
 
         span {
-          font-size: 0.78rem;
+          font-size: 0.078rem;
         }
       }
 
@@ -135,7 +135,7 @@
         margin: 5px 0 5px 0;
 
         span {
-          font-size: 1.0rem;
+          font-size: 0.1rem;
           color: #E51C23;
         }
       }

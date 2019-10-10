@@ -220,7 +220,7 @@
     margin: 20px 0px 20px 20px;
 
     span {
-      font-size: 1.2rem;
+      font-size: 0.60rem;
     }
   }
 
@@ -239,7 +239,7 @@
     p {
       margin-top: 10px;
       margin-left: 20px;
-      font-size: 0.78rem;
+      /* font-size: 0.78rem; */
       margin-bottom: 10px;
 
       span {

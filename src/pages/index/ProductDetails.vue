@@ -97,14 +97,14 @@
 
     span {
       margin: 10px 0 10px 15px;
-      font-size: 0.78rem;
+      font-size: 0.078rem;
       line-height: 20px;
     }
 
     .delete-line {
       text-decoration: line-through;
       color: #ccc;
-      font-size: 0.76rem;
+      font-size: 0.076rem;
       margin-left: 5px;
     }
   }

@@ -171,11 +171,11 @@
 
     p {
       color: #E51C23;
-      font-size: 1.1rem;
+      font-size: 0.11rem;
     }
 
     span {
-      font-size: 0.76rem;
+      font-size: 0.076rem;
       display: block;
       margin: 10px 0;
 
@@ -191,7 +191,7 @@
 
       h6 {
         color: #E51C23;
-        font-size: 0.78rem;
+        font-size: 0.078rem;
         display: inline-block;
       }
     }
@@ -201,13 +201,13 @@
     border-bottom: 1px solid #f2f2f2;
 
     p {
-      font-size: 0.78rem;
+      font-size: 0.078rem;
       margin-left: 15px;
       margin-bottom: 10px;
 
       span {
         margin-left: 5px;
-        font-size: 0.70rem;
+        font-size: 0.070rem;
         color: #ccc;
       }
     }
@@ -220,12 +220,12 @@
     border-bottom: 1px solid #f2f2f2;
 
     p {
-      font-size: 0.76rem;
+      font-size: 0.076rem;
       padding-top: 5px;
     }
 
     span {
-      font-size: 0.70rem;
+      font-size: 0.07rem;
     }
 
     img {

@@ -1,6 +1,5 @@
 <template>
   <div class="index">
-    <p>选择购买价位及赠品</p>
     <!-- 轮播图 -->
     <!-- <van-swipe-item>
       <img src="../../assets/images/left.svg" alt="" class=" left fl ">
@@ -118,6 +117,7 @@
         font-weight: 500;
         color: #09BB07;
       }
+
       .van-tabs__line {
         background-color: #09BB07;
       }

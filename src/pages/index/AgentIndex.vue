@@ -245,7 +245,7 @@
     .agent-member {
       p {
         padding-left: 15px;
-        font-size: 0.78rem;
+        /* font-size: 0.78rem; */
         padding-bottom: 10px;
         border-bottom: 1px solid #f2f2f2;
 
@@ -256,7 +256,7 @@
         .timer {
           color: #E51C23;
           margin-left: 15px;
-          font-size: 0.6rem;
+          font-size: 0.06rem;
 
           b {
             background-color: #E51C23;
@@ -268,7 +268,7 @@
 
           h6 {
             color: #E51C23;
-            font-size: 0.70rem;
+            /* font-size: 0.70rem; */
             display: inline-block;
           }
         }
@@ -308,26 +308,26 @@
         .memberday-buy-list-text {
           span {
             display: block;
-            font-size: 0.70rem;
+            /* font-size: 0.70rem; */
           }
 
           .memberday-buy-price {
             color: #E51C23;
 
             b {
-              font-size: 1.0rem;
+              /* font-size: 1.0rem; */
             }
           }
 
           .memberday-buy-market {
-            font-size: 0.6rem;
+            /* font-size: 0.6rem; */
             /* text-decoration: line-through; */
             /* color:#ccc; */
           }
 
           b {
             font-weight: 400;
-            font-size: 0.9rem;
+            /* font-size: 0.9rem; */
             margin-right: 5px;
           }
         }
@@ -345,7 +345,7 @@
 
       p {
         padding-left: 15px;
-        font-size: 0.78rem;
+        /* font-size: 0.78rem; */
 
         span {
           margin-right: 5px;
@@ -366,7 +366,7 @@
         border-top: 1px solid #f2f2f2;
 
         span {
-          font-size: 0.76rem;
+          /* font-size: 0.76rem; */
         }
 
         .integral {
@@ -374,7 +374,7 @@
           color: #E51C23;
 
           span {
-            font-size: 1.0rem;
+            /* font-size: 1.0rem; */
           }
         }
       }

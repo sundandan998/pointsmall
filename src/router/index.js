@@ -28,6 +28,7 @@ export default new Router({
       name: 'Code',
       component: () => import('@/pages/register/InvitationCode')
     },
+    
     // 首页
     {
       path: '/index',
@@ -99,6 +100,12 @@ export default new Router({
       path: '/invite',
       name: 'InvitePeople',
       component: () => import('@/pages/mine/invite-people/InvitePeople')
+    },
+    // 邀请记录
+    {
+      path: '/record',
+      name: 'InvitationRecord',
+      component: () => import('@/pages/mine/invite-people/InvitationRecord')
     },
     //  资产中心
     {

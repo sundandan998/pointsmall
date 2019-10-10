@@ -164,7 +164,7 @@
       orderInformation(val) {
         let refpath = window.sessionStorage.getItem('refpath')
         if (refpath == '/address') {
-          if (this.orderInformation == null) {
+          if (this.orderInformation == null && this.$route.params.item.id != undefined) {
             this.orderInformation = {
               city: '',
               county: '',
@@ -173,13 +173,13 @@
               addressDetail: '',
               id: ''
             }
+            this.orderInformation.id = this.$route.params.item.id,
+              this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
+              this.orderInformation.city = this.$route.params.item.city,
+              this.orderInformation.county = this.$route.params.item.county,
+              this.orderInformation.tel = this.$route.params.item.tel,
+              this.orderInformation.name = this.$route.params.item.name
           }
-          this.orderInformation.id = this.$route.params.item.id,
-            this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
-            this.orderInformation.city = this.$route.params.item.city,
-            this.orderInformation.county = this.$route.params.item.county,
-            this.orderInformation.tel = this.$route.params.item.tel,
-            this.orderInformation.name = this.$route.params.item.name
         }
       },
       pay_pwd() {
@@ -233,17 +233,20 @@
   .order-product {
     height: 100px;
     margin: 10px 10px 5px 15px;
-    font-size: 0.78rem;
-    img{
+    font-size: 0.078rem;
+
+    img {
       width: 80px;
       height: 80px;
       margin-right: 10px;
     }
-    span{
+
+    span {
       display: block;
       padding-top: 10px;
     }
   }
+
   .order-product span :last-child {
     color: #E51C23;
     padding-top: 10px;
@@ -255,7 +258,7 @@
 
   .order-total {
     b {
-      font-size: 0.76rem;
+      font-size: 0.076rem;
       font-weight: 400;
     }
 
@@ -298,7 +301,7 @@
 
     .product-model-title {
       span {
-        font-size: 0.76rem;
+        font-size: 0.076rem;
         /* color: #fff;
         background-color: #8BC34A; */
         color: #000;

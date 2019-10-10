@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
+// 适配
+import 'lib-flexible'
 // import Vant from 'vant'
 // import axios from 'axios'
 import store from './store'
