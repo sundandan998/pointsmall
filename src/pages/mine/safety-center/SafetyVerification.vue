@@ -15,6 +15,7 @@
 <script>
   import api from '@/api/user/User.js'
   import { Toast } from 'mint-ui'
+  // import { sendCode } from '@/assets/js/common.js'
   export default {
     data() {
       return {
@@ -36,7 +37,6 @@
     created() {
       document.title = '安全验证'
       this.information()
-      console.log(this.$route.params.id)
     },
     methods: {
       // 个人信息
@@ -91,6 +91,7 @@
       },
       // 发送验证码
       sendSmsCode() {
+        // debugger
         this.time = 60
         this.timer()
         // var userInfo = sessionStorage.getItem('userInfo')

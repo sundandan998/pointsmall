@@ -20,7 +20,7 @@
       <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
     </div>
     <router-link to="/agent">
-      <div class="merchant-button">
+      <div class="merchant-button" v-show="showBtn">
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>

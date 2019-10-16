@@ -1,12 +1,13 @@
 <template>
   <div class="invitation-record">
     <div class="search">
-      <mt-search v-model="list.query" cancel-text="取消" placeholder="被邀请人手机号">
+      <mt-search v-model="list.query" cancel-text="取消" placeholder="手机号">
       </mt-search> <span class="fr search-btn" @click="search">搜索</span>
     </div>
     <div class="invitation-list">
       <span class="total" v-if="this.invitePeople.inviter==null">小计: {{total}}</span>
-      <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{invitePeople.inviter}}</span>
+      <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{this.people.query}}</span>
+      <!-- <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{invitePeople.inviter}}</span> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="invitation-tel" v-for="(item,index) in invitationList">
@@ -16,7 +17,9 @@
       </van-list>
     </div>
     <!-- <router-link to="invite"> -->
+      <div v-show="showBtn">
       <mt-button size="large" class="cancel" v-on:click="$router.go(-1)" >返回</mt-button>
+    </div>
     <!-- </router-link> -->
   </div>
 </template>
@@ -45,11 +48,24 @@
           page: '',
           page_size: '',
           query: ''
-        }
+        },
+         // 解决底部按钮被弹起问题
+         clientHeight: document.documentElement.clientHeight,
+        showBtn: true,  // 控制按钮盒子显示隐藏
       }
     },
     created() {
       document.title = '邀请记录'
+    },
+    // 解决底部按钮被弹起问题
+    mounted() {
+      window.onresize = () => {
+        if (this.clientHeight > document.documentElement.clientHeight) {
+          this.showBtn = false
+        } else {
+          this.showBtn = true
+        }
+      }
     },
     methods: {
       // 上拉加载
@@ -79,6 +95,7 @@
       search() {
         api.codeList(this.list).then(res => {
           if (res.code == 0) {
+            this.people.query=this.list.query
             this.invitePeople = res
             this.invitationList = []
             this.invitationList.push.apply(this.invitationList, res.data)
