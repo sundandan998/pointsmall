@@ -1,7 +1,8 @@
 <template>
   <div class="invitation-record">
-    <div class="search">
-      <mt-search v-model="list.query" cancel-text="取消" placeholder="手机号">
+    <div class="search"> 
+        <!--  -->
+      <mt-search  v-model="number"  cancel-text="取消" placeholder="手机号">
       </mt-search> <span class="fr search-btn" @click="search">搜索</span>
     </div>
     <div class="invitation-list">
@@ -11,8 +12,7 @@
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="invitation-tel" v-for="(item,index) in invitationList">
-          <mt-cell :title="item.invitee" :value="item.count" @click.native="tel(index)" is-link></mt-cell>
-          <!-- <span>{{item.invitee}}</span> -->
+          <mt-cell :title="item.invitee" :value="item.count" @click.native="tel(index)" is-link :label="item.create_time"></mt-cell>
         </div>
       </van-list>
     </div>
@@ -37,6 +37,7 @@
         invitationList: [],
         total: '',
         invitePeople: '',
+        number:'',
         // 点击搜索文字参数
         list: {
           page: '',
@@ -93,12 +94,13 @@
       },
       // 搜索时
       search() {
+        this.list.query=this.number
         api.codeList(this.list).then(res => {
           if (res.code == 0) {
-            this.people.query=this.list.query
+            this.people.query=res.inviter
             this.invitePeople = res
-            this.invitationList = []
-            this.invitationList.push.apply(this.invitationList, res.data)
+            this.invitationList = [{"count":res.count,"create_time":res.create_time,"invitee":this.list.query}]
+            // this.invitationList.push.apply(this.invitationList, res.data)
           }
         }).catch(err => {
           if (err.code == 404) {
@@ -112,9 +114,12 @@
       },
       // 点击电话时的请求接口
       tel(index) {
-        this.people.page = this.pageNum
+        // 点击电话号码时清空搜索框
+        this.number =''
+        this.list.page = this.pageNum
+        this.list.query = this.invitationList[index].invitee
         this.people.query = this.invitationList[index].invitee
-        api.codeList(this.people).then(res => {
+        api.codeList(this.list).then(res => {
           if (res.code == 0) {
             this.invitePeople = res
             this.invitationList = []
@@ -171,7 +176,6 @@
       .total {
         margin-left: 15px;
       }
-
       .invite-people {
         margin-left: 15px;
         padding: 5px;
