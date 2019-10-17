@@ -11,7 +11,7 @@
     <div class="invitation-list">
       <mt-cell title="邀请历史"></mt-cell>
       <div v-for="(item,index) in recentlyList ">
-        <mt-cell  v-if="item.count==0" :title="item.invitee" :value="item.count"
+        <mt-cell  v-if="item.count==0" :title="item.invitee" value=""
           :label="'注册于:'+item.create_time" class="count">
         </mt-cell>
         <router-link :to="{name:'InvitationRecord',params:{query:item.invitee}}">

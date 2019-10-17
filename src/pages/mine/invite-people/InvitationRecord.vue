@@ -11,15 +11,16 @@
         {{total}}</span>
       <!-- 在带有搜索页面，点击电话列表展示的邀请人 -->
       <span class="invite-people" v-if="this.invitePeople.inviter!=null||this.$route.params.query!=undefined"
-        @click="invite"> <img src="../../../assets/images/left.svg" alt="">
+        @click="invite">
+        <img src="../../../assets/images/left.svg" alt="">
         邀请人:{{this.people.query||this.$route.params.query}}</span>
+
       <!-- 在邀请记录页面点击电话列表展示的邀请人 -->
       <!-- <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{invitePeople.inviter}}</span> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="invitation-tel" v-for="(item,index) in invitationList">
-          <mt-cell v-if="item.count==0" :title="item.invitee" :value="item.count" :label="'注册于:'+ item.create_time"
-            class="count">
+          <mt-cell v-if="item.count==0" :title="item.invitee" value="" :label="'注册于:'+ item.create_time" class="count">
           </mt-cell>
           <mt-cell v-if="item.count!=0" :title="item.invitee" :value="item.count" @click.native="tel(index)" is-link
             :label="'注册于:'+ item.create_time"></mt-cell>
@@ -217,27 +218,31 @@
         margin-left: 15px;
       }
 
+      img {
+        width: 16px;
+        position: relative;
+        top:2px;
+      }
+
       .invitation-tel {
         .count {
           span {
             margin-right: 20px;
           }
+
         }
+
       }
 
       .invite-people {
-        margin-left: 15px;
+        font-size:0.35rem;
+        /* margin-left: 15px; */
         padding: 5px;
         border-radius: 5px;
-        color: #fff;
-        background-color: #009688;
+        color: #333;
+        /* background-color: #009688; */
         display: block;
         width: 40%;
-        img {
-          width: 12px;
-          top: 1px;
-          position: relative;
-        }
       }
     }
 
