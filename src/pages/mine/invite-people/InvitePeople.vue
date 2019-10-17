@@ -4,23 +4,26 @@
       <p>千企国际联盟商城</p>
       <span class="text">您的邀请码</span>
       <p class="code">{{invite_code}}</p>
-      <van-button class="inviteCode" type="primary" size="small" :data-clipboard-text="invite_code" @click="copy" >复制</van-button>
+      <van-button class="inviteCode" type="primary" size="small" :data-clipboard-text="invite_code" @click="copy">复制
+      </van-button>
     </div>
-
+    <!-- 邀请记录列表 -->
     <div class="invitation-list">
-      <div class="line"></div>
-      <mt-progress class="invitation-description">
-        <div slot="start"><span></span></div>
-        <div slot="end"><span></span></div>
-      </mt-progress>
-      <div class="invitation-text">
-        <span class=" fl">发送邀请码 <p>给新人</p> </span>
-        <span class="fr">新人填写邀请码 <p>完成注册</p> </span>
+      <mt-cell title="邀请历史"></mt-cell>
+      <div v-for="(item,index) in recentlyList ">
+        <mt-cell  v-if="item.count==0" :title="item.invitee" :value="item.count"
+          :label="'注册于:'+item.create_time" class="count">
+        </mt-cell>
+        <router-link :to="{name:'InvitationRecord',params:{query:item.invitee}}">
+          <mt-cell v-if="item.count!=0" :title="item.invitee" :value="item.count" is-link
+            :label="'注册于:'+item.create_time"></mt-cell>
+        </router-link>
       </div>
       <router-link to="record">
-        <span>邀请记录</span>
+        <span class="all">全部 >></span>
       </router-link>
     </div>
+
     <router-link to="mine">
       <mt-button size="large" class="cancel">返回</mt-button>
     </router-link>
@@ -33,17 +36,30 @@
   export default {
     data() {
       return {
-        invite_code: ''
+        invite_code: '',
+        recentlyList: [],
       }
     },
     created() {
       document.title = '邀请新人'
       this.code()
+      this.list()
     },
     methods: {
+      // 获取验证码
       code() {
         api.code().then(res => {
           this.invite_code = res.invite_code
+        }).catch(err => {
+
+        })
+      },
+      // 获取列表
+      list() {
+        api.recentlyList().then(res => {
+          if (res.code == 0) {
+            this.recentlyList = res.data
+          }
         }).catch(err => {
 
         })
@@ -74,7 +90,7 @@
 
   .invite-people {
     .invitation-code {
-      
+
       width: 95%;
       height: auto;
       background-color: #fff;
@@ -94,55 +110,23 @@
         display: block;
         margin: 20px 0px;
       }
-      .van-button--primary{
+
+      .van-button--primary {
         background-color: #009688;
       }
     }
 
-
-
     .invitation-list {
-      .invitation-description {
-        width: 70%;
-        margin: 30px auto;
-
-        .mt-progress-runway {
-          background-color: #009688;
-        }
-
-        span {
-          width: 10px;
-          height: 10px;
-          display: block;
-          border: 1px solid #009688;
-          border-radius: 50%;
-          margin-top: 8px;
-        }
-      }
-
-      .invitation-text {
-        height: 50px;
-        margin: -27px 18px 0 20px;
-
-        span {
-          text-align: center;
-        }
-      }
-
-      .line {
-        margin: 0 auto;
-        height: 2px;
-        width: 90%;
-        background-color: #f2f2f2;
-      }
-
-      a {
+      .all {
         display: block;
-        margin: 20px auto;
         text-align: center;
       }
+      .count{
+        span{
+          margin-right: 20px;
+        }
+      }
     }
-
     .cancel {
       position: absolute;
       bottom: 10px;

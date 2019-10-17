@@ -251,6 +251,14 @@ export default {
       params: params
     })
   },
+  // 代理商最近邀请列表
+  recentlyList(params = {}){
+    return request({
+      url: '/user/invite/recently/',
+      method: 'get',
+      params: params
+    })
+  },
   // 邀请新人/列表
   codeList(params = {}) {
     return request({

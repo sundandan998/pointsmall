@@ -1,24 +1,34 @@
 <template>
   <div class="invitation-record">
-    <div class="search"> 
-        <!--  -->
-      <mt-search  v-model="number"  cancel-text="取消" placeholder="手机号">
+    <div class="search">
+      <!--  -->
+      <mt-search v-model="number" cancel-text="取消" placeholder="手机号">
       </mt-search> <span class="fr search-btn" @click="search">搜索</span>
     </div>
     <div class="invitation-list">
-      <span class="total" v-if="this.invitePeople.inviter==null">小计: {{total}}</span>
-      <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{this.people.query}}</span>
+      <!-- 点击全部时展示小计总数 -->
+      <span class="total" v-if="this.invitePeople.inviter==null&&this.$route.params.query==undefined">小计:
+        {{total}}</span>
+      <!-- 在带有搜索页面，点击电话列表展示的邀请人 -->
+      <span class="invite-people" v-if="this.invitePeople.inviter!=null||this.$route.params.query!=undefined"
+        @click="invite"> <img src="../../../assets/images/left.svg" alt="">
+        邀请人:{{this.people.query||this.$route.params.query}}</span>
+      <!-- 在邀请记录页面点击电话列表展示的邀请人 -->
       <!-- <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{invitePeople.inviter}}</span> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="invitation-tel" v-for="(item,index) in invitationList">
-          <mt-cell :title="item.invitee" :value="item.count" @click.native="tel(index)" is-link :label="item.create_time"></mt-cell>
+          <mt-cell v-if="item.count==0" :title="item.invitee" :value="item.count" :label="'注册于:'+ item.create_time"
+            class="count">
+          </mt-cell>
+          <mt-cell v-if="item.count!=0" :title="item.invitee" :value="item.count" @click.native="tel(index)" is-link
+            :label="'注册于:'+ item.create_time"></mt-cell>
         </div>
       </van-list>
     </div>
     <!-- <router-link to="invite"> -->
-      <div v-show="showBtn">
-      <mt-button size="large" class="cancel" v-on:click="$router.go(-1)" >返回</mt-button>
+    <div v-show="showBtn">
+      <mt-button size="large" class="cancel" v-on:click="$router.go(-1)">返回</mt-button>
     </div>
     <!-- </router-link> -->
   </div>
@@ -37,12 +47,12 @@
         invitationList: [],
         total: '',
         invitePeople: '',
-        number:'',
+        number: '',
         // 点击搜索文字参数
         list: {
           page: '',
           page_size: '',
-          query: ''
+          query: this.$route.params.query
         },
         // 点击列表中电话号码参数
         people: {
@@ -50,8 +60,8 @@
           page_size: '',
           query: ''
         },
-         // 解决底部按钮被弹起问题
-         clientHeight: document.documentElement.clientHeight,
+        // 解决底部按钮被弹起问题
+        clientHeight: document.documentElement.clientHeight,
         showBtn: true,  // 控制按钮盒子显示隐藏
       }
     },
@@ -77,7 +87,6 @@
             if (res.code == 0) {
               this.total = res.count
               this.invitationList.push.apply(this.invitationList, res.data)
-              // console.log(this.invitationList)
               this.loading = false
               if (res.has_next == true) {
                 this.pageNum++
@@ -92,30 +101,61 @@
           })
         }, 100)
       },
-      // 搜索时
-      search() {
-        this.list.query=this.number
+      inviteList() {
         api.codeList(this.list).then(res => {
           if (res.code == 0) {
-            this.people.query=res.inviter
+            this.people.query = res.inviter
             this.invitePeople = res
-            this.invitationList = [{"count":res.count,"create_time":res.create_time,"invitee":this.list.query}]
-            // this.invitationList.push.apply(this.invitationList, res.data)
+            this.invitationList = [{ "count": res.count, "create_time": res.create_time, "invitee": this.list.query }]
           }
         }).catch(err => {
           if (err.code == 404) {
-            this.$messagebox({
-              title: '提示',
-              message: '未查询到该用户',
-              showCancelButton: false
+            this.$router.push({
+              name: 'InvitePeople'
             })
           }
         })
       },
+      invite() {
+        if (this.people.query == '') {
+          this.list.query = this.$route.params.query
+          this.inviteList()
+        } else {
+          this.list.query = this.people.query
+          this.inviteList()
+        }
+      },
+      // 搜索时
+      search() {
+        if (this.number == '') {
+          Toast({
+            message: '请输入手机号',
+            position: 'top',
+            className: 'zZindex'
+          })
+        } else {
+          this.list.query = this.number
+          api.codeList(this.list).then(res => {
+            if (res.code == 0) {
+              this.people.query = res.inviter
+              this.invitePeople = res
+              this.invitationList = [{ "count": res.count, "create_time": res.create_time, "invitee": this.list.query }]
+            }
+          }).catch(err => {
+            if (err.code == 404) {
+              this.$messagebox({
+                title: '提示',
+                message: '未查询到该用户',
+                showCancelButton: false
+              })
+            }
+          })
+        }
+      },
       // 点击电话时的请求接口
       tel(index) {
         // 点击电话号码时清空搜索框
-        this.number =''
+        this.number = ''
         this.list.page = this.pageNum
         this.list.query = this.invitationList[index].invitee
         this.people.query = this.invitationList[index].invitee
@@ -126,7 +166,7 @@
             this.invitationList.push.apply(this.invitationList, res.data)
           }
         }).catch(err => { })
-      }
+      },
     }
   }
 </script>
@@ -176,6 +216,15 @@
       .total {
         margin-left: 15px;
       }
+
+      .invitation-tel {
+        .count {
+          span {
+            margin-right: 20px;
+          }
+        }
+      }
+
       .invite-people {
         margin-left: 15px;
         padding: 5px;
@@ -183,9 +232,15 @@
         color: #fff;
         background-color: #009688;
         display: block;
-        width: 35%;
+        width: 40%;
+        img {
+          width: 12px;
+          top: 1px;
+          position: relative;
+        }
       }
     }
+
     .cancel {
       position: absolute;
       bottom: 10px;
