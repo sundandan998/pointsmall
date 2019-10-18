@@ -74,18 +74,22 @@
       },
       // 购买
       agentBtn(id, index) {
+        this.$router.push({
+          name:'Product',
+          params: { id: id,path:'agentList'}
+        })
         // 判断是否是售罄商品
-        if (this.agent[index].stock == 0) {
-          Toast({
-            message: '商品已经卖完啦',
-            className: 'zZindex'
-          })
-        } else {
-          this.$router.push({
-            name: 'Product',
-            params: { id: id, path: 'agentList' }
-          })
-        }
+        // if (this.agent[index].stock == 0) {
+        //   Toast({
+        //     message: '商品已经卖完啦',
+        //     className: 'zZindex'
+        //   })
+        // } else {
+        //   this.$router.push({
+        //     name: 'Product',
+        //     params: { id: id, path: 'agentList' }
+        //   })
+        // }
       },
     }
   }

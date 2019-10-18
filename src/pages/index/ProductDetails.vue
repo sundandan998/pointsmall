@@ -20,15 +20,19 @@
     </div>
     <div class="bottom-button" v-if="detail.is_vip==false">
       <van-button square size="large" type="warning" @click="cancel"> 取消</van-button>
-      <router-link :to="{name:'MemberDayOrder',params:{path:'member'}}">
-        <van-button square size="large" type="danger">立即购买</van-button>
-      </router-link>
+      <!-- <router-link :to="{name:'MemberDayOrder',params:{path:'member'}}"> -->
+      <van-button square size="large" type="danger" @click="memberBuy" class="buyBtn">立即购买</van-button>
+      <van-button square size="large" type="default" @click="memberBuy" class="buyBtn"
+        v-if="this.detail.stock == 0||this.$route.params.start==false">
+        立即购买</van-button>
+      <!-- </router-link> -->
     </div>
   </div>
 
 </template>
 <script>
   import api from '@/api/goods/Goods.js'
+  import { Toast } from 'mint-ui'
   export default {
     data() {
       return {
@@ -39,6 +43,7 @@
       document.title = '商品详情'
       this.detailId = this.$route.params
       this.goods()
+      console.log()
     },
     methods: {
       // 商品详情
@@ -46,6 +51,9 @@
         api.goodsDetail(this.$route.params).then(res => {
           if (res.code == 0) {
             this.detail = res.data
+            // console.log(this.detail)
+            // if (this.detail.stock == 0) {
+            // }
             for (var i = 0; i < this.singers.length; i++) {
               this.singers[i].Fsinger_mid = '//y.gtimg.cn/music/photo_new/T001R300x300M000' + this.singers[i].Fsinger_mid + '.jpg?max_age=2592000'
             }
@@ -54,17 +62,30 @@
         })
       },
       cancel() {
-        if (this.$route.params.path == 'agentList') {
-          this.$router.push({
-            name: 'AgentList'
-          })
-        } else {
+        if (this.$route.params.path == 'memberDay') {
           this.$router.push({
             name: 'MemberDayStart'
           })
+        } else {
+          this.$router.push({
+            name: 'AgentList'
+          })
         }
+        // if (this.$route.params.path == 'agentList') {
+        //   this.$router.push({
+        //     name: 'AgentList'
+        //   })
+        // } else if (this.$route.params.path == 'memberDay') {
+        //   this.$router.push({
+        //     name: 'MemberDayStart'
+        //   })
+        // } else {
+        //   this.$router.push({
+        //     name: 'AgentIndex'
+        //   })
+        // }
       },
-      buy() {
+      buy(id, index) {
         if (this.$store.getters.token !== '') {
           this.$router.push({
             name: 'Order',
@@ -75,12 +96,33 @@
             name: 'Register'
           })
         }
+      },
+      memberBuy() {
+        // 判断是否是售罄商品
+        if (this.detail.stock == 0) {
+          Toast({
+            message: '商品已经卖完啦',
+            className: 'zZindex'
+          })
+          // 判断是否是会员日
+        } else if (this.$route.params.start == false) {
+          Toast({
+            message: '活动尚未开始',
+            className: 'zZindex'
+          })
+        } else {
+          this.$router.push({
+            name: 'MemberDayOrder',
+            params: { path: 'member' }
+          })
+        }
       }
     }
   }
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
+
 
   .produce-title {
     position: fixed;
@@ -114,6 +156,22 @@
 
     img {
       margin-top: 30px;
+    }
+  }
+
+  .bottom-button {
+    .van-button--default {
+      color: #fff !important;
+      background-color: #ccc !important;
+      border: 1px solid #ccc !important;
+      border-top-right-radius: 25px !important;
+      border-bottom-right-radius: 25px !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      width: 48% !important;
+      position: fixed !important;
+      bottom: 10px !important;
+      left: 50% !important;
     }
   }
 </style>

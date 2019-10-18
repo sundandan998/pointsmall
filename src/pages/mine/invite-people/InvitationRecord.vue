@@ -13,6 +13,7 @@
       <span class="invite-people" v-if="this.invitePeople.inviter!=null||this.$route.params.query!=undefined"
         @click="invite">
         <img src="../../../assets/images/left.svg" alt="">
+        <!-- <i class="mint-cell-allow-left"></i> -->
         邀请人:{{this.people.query||this.$route.params.query}}</span>
 
       <!-- 在邀请记录页面点击电话列表展示的邀请人 -->
@@ -221,8 +222,11 @@
       img {
         width: 16px;
         position: relative;
-        top:2px;
+        top: 2px;
+
       }
+
+   
 
       .invitation-tel {
         .count {
@@ -235,7 +239,7 @@
       }
 
       .invite-people {
-        font-size:0.35rem;
+        font-size: 0.35rem;
         /* margin-left: 15px; */
         padding: 5px;
         border-radius: 5px;

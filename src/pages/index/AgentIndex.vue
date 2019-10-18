@@ -13,7 +13,7 @@
         <van-row>
           <!-- <router-link to="index"> -->
           <router-link :to="{name:'Index',params:{position:0}}">
-              <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
           </router-link>
           <router-link :to="{name:'Index',params:{position:1}}">
             <van-col span="8"><img src="../../assets/images/1380.png" alt=""></van-col>
@@ -53,7 +53,7 @@
       <p>代理商专区 <span class="fr" @click="more">更多></span></p>
       <div class="agent-area-list" v-for="(item,index) in agent" v-if="index<3">
         <div @click="more">
-          <!-- <router-link :to="/product/+item.id"> -->
+        <!-- <router-link :to="/product/+item.id"> -->
           <div class="member-day-list-img fl">
             <img :src="item.default_image" alt="">
           </div>
@@ -66,7 +66,7 @@
             <van-button round size="small" v-if="item.stock!=0">购买</van-button>
             <van-button round size="small" v-if="item.stock==0" class="sold-out">已售罄</van-button>
           </div>
-          </router-link>
+        <!-- </router-link> -->
         </div>
       </div>
       <p class="agent-more" @click="more">更多></p>
@@ -234,6 +234,7 @@
     .agent-img {
       height: 152px;
       width: 100%;
+
       img {
         width: 95%;
         margin: 20px auto;

@@ -135,27 +135,10 @@
       },
       // 会员日特卖列表
       memberBuy(id, index) {
-        // 判断是否是售罄商品
-        if (this.goodsData[index].stock == 0) {
-          Toast({
-            message: '商品已经卖完啦',
-            className: 'zZindex'
-          })
-        } else {
-          // 判断是否是会员日，如果不是会员日，点击不能跳转
-          if (this.timeInfo.start == false) {
-            Toast({
-              message: '活动尚未开始',
-              className: 'zZindex'
-            })
-          } else {
-            this.$router.push({
-              name: 'Product',
-              params: { id: id }
-            })
-          }
-        }
-
+        this.$router.push({
+          name:'Product',
+          params: { id: id,path:'memberDay',start:this.timeInfo.start}
+        })
       }
     }
   }

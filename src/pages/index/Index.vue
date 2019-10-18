@@ -1,15 +1,6 @@
 <template>
   <div class="index">
     <!-- 轮播图 -->
-    <!-- <van-swipe-item>
-      <img src="../../assets/images/left.svg" alt="" class=" left fl ">
-      <img src="../../assets/images/right.svg" alt="" class=" right fr">
-      <div class="index-start">
-        <div class="index-logo">
-          <img src="../../assets/images/xc.png" alt="">
-        </div>
-      </div>
-    </van-swipe-item> -->
     <div class="index-swipe">
       <van-tabs v-model="active" swipeable>
         <div v-for="(item,index) in memberList">
