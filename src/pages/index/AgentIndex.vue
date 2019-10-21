@@ -232,7 +232,7 @@
 
   .agent {
     .agent-img {
-      height: 152px;
+      height: 100%;
       width: 100%;
 
       img {
@@ -287,7 +287,7 @@
     }
 
     .memberday-buy {
-      height: 135px;
+      height: auto;
       display: flex;
 
       .memberday-buy-list {
@@ -300,8 +300,8 @@
           float: left;
 
           img {
-            width: 90px;
-            height: 80px;
+            width: 180px;
+            height: 160px;
             margin-left: 12px;
           }
         }
@@ -354,13 +354,13 @@
       }
 
       img {
-        width: 80px;
-        height: 80px;
+        width: 160px;
+        height: 160px;
         margin-right: 10px;
       }
 
       .agent-area-list {
-        height: 90px;
+        height: 180px;
         padding-left: 15px;
         margin-top: 10px;
         padding-top: 15px;

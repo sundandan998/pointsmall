@@ -199,22 +199,22 @@
   .member-day-list {
     margin-top: 16px;
     padding-left: 15px;
-    height: 95px;
+    height: 190px;
     border-bottom: 1px solid #f2f2f2;
 
     p {
-      font-size: 0.076rem;
+      font-size: 20px;
       padding-top: 5px;
     }
 
     span {
-      font-size: 0.07rem;
+      font-size:16px;
     }
 
     img {
       margin-right: 10px;
-      width: 80px;
-      height: 80px;
+      width: 160px;
+      height: 160px;
     }
 
     .member-day-price {
@@ -227,8 +227,8 @@
     background-color: #FFF0D9;
     padding: 2px 7px;
     position: relative;
-    top: -60px;
-    right: -45px;
+    top: -110px;
+    right: -90px;
   }
 
   .member-day-button {

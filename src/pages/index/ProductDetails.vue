@@ -131,8 +131,8 @@
     width: 100%;
 
     img {
-      width: 80px;
-      height: 80px;
+      width: 160px;
+      height: 160px;
       display: inline-block;
       margin: 10px;
     }

@@ -116,8 +116,8 @@
         padding-left: 15px;
 
         img {
-          width: 80px;
-          height: 80px;
+          width:160px;
+          height: 160px;
           margin-right: 10px;
         }
       }
@@ -128,7 +128,7 @@
       }
 
       .agent-pro-list-text {
-        height: 90px;
+        height: 180px;
 
         span {
           font-size: 0.078rem;
