@@ -143,8 +143,8 @@
   @import '../../../assets/scss/Global.scss';
 
   .product {
-    margin: 10px 15px 0 15px;
-    height: 106px;
+    margin: 20px 15px 0 30px;
+    height: 180px;
 
     p {
       color: #333;
@@ -155,13 +155,13 @@
     }
 
     img {
-      width: 60px;
-      height: 80px;
+      width: 120px;
+      height: 150px;
       margin-right: 10px;
     }
 
     .product-text {
-      margin-top: 8px;
+      margin-top: 16px;
     }
 
     .product-text p:last-child {

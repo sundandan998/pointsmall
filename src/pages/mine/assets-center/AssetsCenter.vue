@@ -78,9 +78,9 @@
   }
 
   .assets-center-list {
-    height: 50px;
+    height: 70px;
     border-bottom: 1px solid #f2f2f2;
-    font-size: 0.80rem;
+    font-size: 20px;
 
     a {
       color: #000;
@@ -100,8 +100,11 @@
 
     span {
       margin-left: 80px;
+      font-size:16px;
     }
-
+    p{
+      font-size:16px;
+    }
     img {
       width: 10px;
     }

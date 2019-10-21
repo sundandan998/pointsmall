@@ -108,7 +108,7 @@
       display: inline-block;
       float: left;
       margin-right: 10px;
-      height: 30px;
+      height: 60px;
     }
   }
 
@@ -148,12 +148,12 @@
   }
 
   .detail-status {
-    margin-top: 20px;
+    margin-top: 40px;
     height: auto;
 
     p {
       border-bottom: 1px solid #f2f2f2;
-      padding: 10px 10px 10px 15px;
+      padding: 20px 10px 20px 15px;
     }
 
     p span:first-child {
