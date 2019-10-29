@@ -72,7 +72,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
   .assets-center-name {
     display: inline-block;
   }
@@ -80,7 +79,7 @@
   .assets-center-list {
     height: 70px;
     border-bottom: 1px solid #f2f2f2;
-    font-size: 20px;
+    font-size: 14px;
 
     a {
       color: #000;
@@ -100,10 +99,10 @@
 
     span {
       margin-left: 80px;
-      font-size:16px;
+      font-size:12px;
     }
     p{
-      font-size:16px;
+      font-size:12px;
     }
     img {
       width: 10px;

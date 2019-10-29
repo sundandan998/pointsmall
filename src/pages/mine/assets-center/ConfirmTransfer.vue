@@ -95,8 +95,8 @@
           console.log(err)
         })
       },
-      //转让
-      transfer() {
+      // 检查是否设置支付密码
+      setPwd(){
         if (this.add.pay_pwd_active == true) {
           this.resevationModelModel = true
         } else {
@@ -115,6 +115,25 @@
             }
           })
         }
+      },
+      //转让
+      transfer() {
+        if(this.$route.params.transferParams.out==true){
+          this.$messagebox({
+            title: '提示',
+            message: `将转让至收款人柏拉图兰账号是否继续?`,
+            cancelButtonText: '取消',
+            confirmButtonText: '继续',
+            showCancelButton: true
+          }).then(action => {
+            if (action == 'confirm') {
+              // 调用
+              this.setPwd()
+            }
+          })
+        }else{
+          this.setPwd()
+        }
       }
     },
     watch: {
@@ -125,7 +144,8 @@
           this.transferParams.amount = this.$route.params.transferParams.amount
           this.transferParams.code = this.$route.params.code
           this.transferParams.pay_pwd = this.pay_pwd
-          this.transferParams.order_id = this.$route.params.order_id
+          this.transferParams.order_id = this.$route.params.order_id,
+          this.transferParams.out = this.$route.params.transferParams.out
           api.transfer(this.transferParams).then(res => {
             if (res.code === 0) {
               Toast({
@@ -179,7 +199,7 @@
 
     span {
       margin: 0 30px 0 15px;
-      font-size: 0.78rem;
+      font-size: 0.078rem;
     }
 
     .confirm-transfer-nums {

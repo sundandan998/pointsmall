@@ -1,5 +1,8 @@
 <template>
   <div class="transfer">
+    <mt-cell title="商城账户">
+      <mt-switch v-model="transferParams.out"></mt-switch>
+    </mt-cell>
     <div class="transfer-progress-name">
       <span>接收人</span>
       <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile"></mt-field>
@@ -12,8 +15,8 @@
     </div>
     <div class="transfer-progress">
       <div class="block">
-          <!-- v-model=""  -->
-        <el-slider v-model="transferParams.amount" :step="this.$route.params.amount/5"  :marks="marks" show-input
+        <!-- v-model=""  -->
+        <el-slider v-model="transferParams.amount" :step="this.$route.params.amount/5" :marks="marks" show-input
           :max="this.$route.params.amount|keepTwoNum">
         </el-slider>
       </div>
@@ -31,7 +34,7 @@
   export default {
     data() {
       return {
-        value:0,
+        value: 0,
         detailData: {},
         marks: {
           0: '0',
@@ -43,6 +46,7 @@
         transferParams: {
           mobile: '',
           amount: [],
+          out:false
         }
       }
     },
@@ -62,7 +66,7 @@
       }
     },
     methods: {
-      
+
       // 转让按钮
       transfer() {
         if (this.transferParams.amount == '' || this.transferParams.mobile == "") {
@@ -88,7 +92,7 @@
     border-bottom: 1px solid #f2f2f2;
 
     .fee {
-      font-size: 0.76rem;
+      font-size: 0.076rem;
       color: #409EFF;
     }
   }
@@ -116,6 +120,7 @@
     .el-slider__marks .el-slider__marks-text:last-child {
       left: 100% !important;
     }
+
     .el-slider__stop.el-slider__marks-stop {
       left: 100% !important;
     }

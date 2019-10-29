@@ -6,7 +6,7 @@
     </div>
     <div class="transfer-detail-infor">
       <mt-cell title="订单号" :value="transferData.order_id"></mt-cell>
-      <mt-cell title="接收方" :value="transferData.other_user"></mt-cell>
+      <mt-cell title="接收方" :value="transferData.other_user" v-if="transferData.other_user!=null"></mt-cell>
       <mt-cell title="状态" :value="transferData.status"></mt-cell>
       <mt-cell title="交易时间" :value="transferData.transaction_time"></mt-cell>
       <mt-cell title="到期日" :value="transferData.unfreeze_date"></mt-cell>
