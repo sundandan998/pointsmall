@@ -116,7 +116,7 @@
 
   .asset-detail-name {
     display: inline-block;
-    font-size: 0.76rem;
+    font-size: 0.076rem;
   }
 
   .asset-detail-code-left {
@@ -129,11 +129,11 @@
 
   .asset-detail-code-right {
     margin-right: 10px;
-    font-size: 0.78rem;
+    font-size: 0.078rem;
     margin-top: -6px;
     span {
       margin-left: 80px;
-      font-size: 1.0rem;
+      font-size: 0.1rem;
     }
     p{
       margin-left: 25px;
@@ -147,7 +147,7 @@
     border-bottom: 4px solid #f2f2f2;
 
     span {
-      font-size: 0.78rem;
+      font-size: 0.078rem;
       color: #333;
       padding: 5px 15px;
       display: block;
@@ -178,7 +178,7 @@
 
     span {
       margin: 0 30px 0 15px;
-      font-size: 0.78rem;
+      font-size: 0.078rem;
     }
 
     .asset-list-freeze-num {
