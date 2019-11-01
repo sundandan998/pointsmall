@@ -1,5 +1,5 @@
 body {
-  background-color: #fff;
+  background-color: #f2f2f2;
 }
 
 * {
@@ -24,17 +24,9 @@ a {
   margin-bottom: 8px;
 }
 
-.mint-cell {
-  margin-bottom: 10px;
-}
-
 input {
   border: none;
   width: 50%;
-}
-
-.mint-button--default {
-  color: #fff !important;
 }
 
 .mint-cell-wrapper {
@@ -43,10 +35,6 @@ input {
 
 #disbtn {
   background-color: #ccc;
-}
-
-.mint-cell:last-child {
-  background-image: none !important;
 }
 
 .mint-cell-value span {
@@ -73,14 +61,12 @@ input.mint-field-core {
 }
 
 .van-button--warning {
-  color: #09BB07 !important;
-  background-color: #fff !important;
-  border: 1px solid #09BB07 !important;
-  border-top-left-radius: 25px !important;
-  border-bottom-left-radius: 25px !important;
-  height: 40px !important;
-  line-height: 40px !important;
-  width: 48% !important;
+  color: #fff !important;
+  background-color: #333 !important;
+  height: 48px !important;
+  border: 1px solid #333;
+  line-height: 48px !important;
+  width: 50% !important;
   position: fixed !important;
   bottom: 10px !important;
   right: 50%;
@@ -88,13 +74,11 @@ input.mint-field-core {
 
 .van-button--danger {
   color: #fff !important;
-  background-color: #09BB07 !important;
-  border: 1px solid #09BB07 !important;
-  border-top-right-radius: 25px !important;
-  border-bottom-right-radius: 25px !important;
-  height: 40px !important;
-  line-height: 40px !important;
-  width: 48% !important;
+  background-color: #c9191d !important;
+  border: 1px solid #c9191d !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  width: 50% !important;
   position: fixed !important;
   bottom: 10px !important;
   left: 50% !important;
@@ -115,12 +99,10 @@ input.mint-field-core {
 }
 
 .order-button button {
-  border-radius: 20px;
-  background-color: #F9F9F9;
-  width: 96%;
+  background-color: #C9191D;
+  width: 100%;
   display: inline-block;
-  color: #4ECD4D !important;
-  border: 1px solid #4ECD4D !important;
+  color: #fff !important;
 }
 
 .health-score {

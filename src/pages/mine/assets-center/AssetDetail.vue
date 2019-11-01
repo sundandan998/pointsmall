@@ -11,9 +11,9 @@
           <p>{{assetDataToken.subject}}</p>
         </div>
       </div>
-      <div class="asset-detail-code-right fr">
-        <span>{{assetData.balance}}</span>
-        <p><img src="../../../assets/images/wait.png" alt="">{{assetData.integral}}(超级积分)</p>
+      <div class="asset-detail-code-right">
+        <span class="fr">{{assetData.balance}}</span>
+        <p>&asymp;{{assetData.integral}}(超级积分)</p>
       </div>
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
@@ -28,16 +28,17 @@
           </div>
         </router-link>
         <div class="asset-list-freeze">
-          <span>冻结</span>
+          <span class="asset-list-freeze-title">冻结</span>
           <div class="asset-list-freeze-num" v-for="item in listData">
             <router-link
               :to="{name:'FreezeTransfer',params:{order_id: item.order_id,action:'freeze','day':item.remain_days,'freezeDay':item.freeze_days}}">
-              <p><span>{{item.amount}}</span><span class="fr">还剩{{item.remain_days}}天解冻</span></p>
+              <p><span>{{item.amount}}</span><span class="fr asset-list-day">还剩 <b>{{item.remain_days}}</b>天解冻</span>
+              </p>
               <div class="progress">
                 <el-slider :value="item.freeze_days-item.remain_days" disabled :max="item.freeze_days"></el-slider>
               </div>
               <img src="../../../assets/images/r.png" alt="" class="fr">
-              <span>到期日 {{item.unfreeze_date}}</span>
+              <span class="asset-list-date">到期日 {{item.unfreeze_date}}</span>
             </router-link>
           </div>
         </div>
@@ -109,106 +110,161 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-  .asset-detail-code {
-    height: 75px;
-    border-bottom: 4px solid #f2f2f2;
-  }
+  .asset-detail {
 
-  .asset-detail-name {
-    display: inline-block;
-    font-size: 0.076rem;
-  }
+    /* 标题部分 */
+    .asset-center-title {
+      margin: 10px 24px;
 
-  .asset-detail-code-left {
-    margin-left: 15px;
-
-    img {
-      margin-right: 8px;
-    }
-  }
-
-  .asset-detail-code-right {
-    margin-right: 10px;
-    font-size: 0.078rem;
-    margin-top: -6px;
-    span {
-      margin-left: 80px;
-      font-size: 0.1rem;
-    }
-    p{
-      margin-left: 25px;
-    }
-    img {
-      width: 10px;
-    }
-  }
-
-  .asset-list-available {
-    border-bottom: 4px solid #f2f2f2;
-
-    span {
-      font-size: 0.078rem;
-      color: #333;
-      padding: 5px 15px;
-      display: block;
+      .mint-cell {
+        border-radius: 10px;
+      }
     }
 
-    P {
-      padding: 10px 15px;
-      border-top: 1px solid #f2f2f2;
+    /* 通证部分 */
+    .asset-detail-code {
+      background-color: #fff;
+      margin: 10px 24px;
+      border-radius: 10px;
+      height: 150px;
+
+      .asset-detail-code-left {
+        margin-top: 40px;
+
+        .asset-detail-name {
+          display: inline-block;
+
+          span {
+            font-size: 28px;
+          }
+
+          p {
+            font-size: 22px;
+            color: #999;
+          }
+        }
+
+        img {
+          margin: 0 30px 0 20px;
+        }
+
+      }
+
+      .asset-detail-code-right {
+        text-align: right;
+
+        p {
+          display: inline-block;
+          font-size: 20px;
+          margin-right: 20px;
+          color: #999;
+        }
+
+        span {
+          font-size: 28px;
+          color: #c9191d;
+          display: inline-block;
+          margin: 40px 20px 0 0px;
+        }
+      }
     }
 
-    img {
-      position: relative;
-      top: -30px;
-      right: 10px;
-    }
+    /* 可用 */
+    .asset-list-available {
+      height: 160px;
+      background-color: #fff;
+      margin: 10px 24px;
+      border-radius: 10px;
+      overflow: hidden;
 
-  }
+      span {
+        font-size: 28px;
+        color: #333;
+        display: block;
+        margin: 20px;
+      }
 
-  .asset-list {
-    .asset-list-top {
-      margin: 10px 10px 10px 15px;
-    }
-  }
-
-  /* 冻结部分 */
-  .asset-list-freeze {
-    border-bottom: 1px solid #f2f2f2;
-
-    span {
-      margin: 0 30px 0 15px;
-      font-size: 0.078rem;
-    }
-
-    .asset-list-freeze-num {
-      border-top: 2px solid #f2f2f2;
-      margin-top: 5px;
-
-      p {
-        margin-top: 5px;
+      P {
+        padding: 20px;
+        font-size: 28px;
+        border-top: 1px solid #f2f2f2;
       }
 
       img {
-        margin: -30px 10px 0 0;
-      }
-    }
-
-    .asset-list-freeze-num span:last-child {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .progress {
-      width: 85%;
-      margin-left: 15px;
-
-      .el-slider__runway {
-        background-color: #409EFF !important;
+        position: relative;
+        top: -50px;
+        right: 10px;
       }
 
+    }
 
+    /* 冻结部分 */
+    .asset-list-freeze {
+      background-color: #fff;
+      height: auto;
+      margin: 0 24px;
+      border-radius: 20px;
+      overflow: hidden;
+
+      .asset-list-freeze-title {
+        font-size: 28px;
+        display: block;
+        margin: 20px;
+      }
+
+      .asset-list-freeze-num {
+        border-top: 2px solid #f2f2f2;
+
+        p {
+          font-size: 28px;
+          margin: 32px 20px 32px 20px;
+
+          .asset-list-day {
+            color: #333;
+
+            b {
+              color: #c9191d;
+              font-weight: 400;
+            }
+          }
+        }
+
+        img {
+          margin: -30px 10px 0 0;
+        }
+        .asset-list-date {
+          display: block;
+          margin: 22px 0 22px 20px;
+          color: #999;
+          font-size: 22px;
+        }
+      }
+
+      /* 步骤条 */
+      .progress {
+        width: 85%;
+        margin-left: 20px;
+
+        .el-slider__runway {
+          background-color: #409EFF !important;
+          height: 20px;
+          border-radius: 20px;
+          line-height: 20px;
+        }
+
+        .el-slider__runway.disabled .el-slider__bar {
+          background-color: #C0C4CC;
+          height: 20px;
+          border-radius: 20px;
+        }
+
+        .el-slider__runway.disabled .el-slider__button {
+          height: 30px;
+          width: 30px;
+          top: 4px;
+          position: relative;
+        }
+      }
     }
   }
-
 </style>

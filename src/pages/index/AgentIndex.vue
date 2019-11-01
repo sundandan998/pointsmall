@@ -11,41 +11,39 @@
       <p>会员权益包</p>
       <div class="agent-member-img">
         <van-row>
-          <!-- <router-link to="index"> -->
           <router-link :to="{name:'Index',params:{position:0}}">
-            <van-col span="8"><img src="../../assets/images/680.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/index-680.png" alt=""></van-col>
           </router-link>
           <router-link :to="{name:'Index',params:{position:1}}">
-            <van-col span="8"><img src="../../assets/images/1380.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/index-1380.png" alt=""></van-col>
           </router-link>
           <router-link :to="{name:'Index',params:{position:2}}">
-            <van-col span="8"><img src="../../assets/images/2580.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/index-2580.png" alt=""></van-col>
           </router-link>
         </van-row>
       </div>
-      <!-- 会员日特卖 -->
+    </div>
+    <!-- 会员日特卖 -->
+    <div class="member-timer">
       <router-link to="memberstart">
-        <p>会员日特卖
-          <span v-if="memberDay.start==false" class="timer">距开始 {{day}} 天 {{hour}} 时 {{min}} 分 {{second}} 秒</span>
-          <span v-if="memberDay.start==true" class="timer">距结束 <b>{{hour}}</b>
-            <h6>:</h6><b>{{min}}</b>
-            <h6>:</h6><b>{{second}}</b>
-          </span>
+        <p class="member-buy">会员日特卖
+          <span v-if="memberDay.start==false" class="timer">距开始 <b>{{day}}</b> : <b>{{hour}}</b> : <b>{{min}}</b> :
+            <b>{{second}}</b></span>
+          <span v-if="memberDay.start==true" class="timer">距结束 <b>{{hour}}</b>:<b>{{min}}</b>:<b>{{second}}</b></span>
           <span class="fr">更多></span></p>
       </router-link>
-    </div>
-    <div class="memberday-buy">
-      <div class="memberday-buy-list fl " v-for="(item,index) in goodsList" v-if="index<3">
-        <!-- <router-link :to="/product/+item.id"> -->
-        <router-link to="memberstart">
-          <div class="memberday-buy-list-img">
-            <img :src="item.default_image" alt="">
-          </div>
-          <div class="memberday-buy-list-text">
-            <span class="memberday-buy-price"><b>{{item.price|keepTwoNum}}</b>超级积分</span>
+      <div class="memberday-buy">
+        <div class="memberday-buy-list  " v-for="(item,index) in goodsList" v-if="index<3">
+          <!-- <router-link :to="/product/+item.id"> -->
+          <router-link to="memberstart">
+            <p class="super-points"><b>{{item.price|keepTwoNum}}</b> 超级积分</p>
             <span class="memberday-buy-market">市场价￥{{item.market_price|keepTwoNum}}</span>
-          </div>
-        </router-link>
+            <div class="memberday-buy-list-img">
+              <!-- <img :src="item.default_image" alt=""> -->
+              <img src="../../assets/images/Memberimg.png" alt="" class="fl">
+            </div>
+          </router-link>
+        </div>
       </div>
     </div>
     <!-- 代理商专区 -->
@@ -53,23 +51,23 @@
       <p>代理商专区 <span class="fr" @click="more">更多></span></p>
       <div class="agent-area-list" v-for="(item,index) in agent" v-if="index<3">
         <div @click="more">
-        <!-- <router-link :to="/product/+item.id"> -->
+          <!-- <router-link :to="/product/+item.id"> -->
           <div class="member-day-list-img fl">
             <img :src="item.default_image" alt="">
           </div>
           <span>
             <p>{{item.name}}</p>
-            <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-            <span>市场价￥{{item.market_price|keepTwoNum}}</span>
+            <b><span>{{item.price|keepTwoNum}}</span> 超级积分</b>
+            <span class="market-price">市场价￥{{item.market_price|keepTwoNum}}</span>
           </span>
           <div class="agent-area-btn fr">
-            <van-button round size="small" v-if="item.stock!=0">购买</van-button>
-            <van-button round size="small" v-if="item.stock==0" class="sold-out">已售罄</van-button>
+            <van-button round size="small" v-if="item.stock!=0">购 买</van-button>
+            <van-button round size="small" v-if="item.stock==0" class="sold-out">已 售 罄</van-button>
           </div>
-        <!-- </router-link> -->
+          <!-- </router-link> -->
         </div>
       </div>
-      <p class="agent-more" @click="more">更多></p>
+      <!-- <p class="agent-more" @click="more">更多></p> -->
     </div>
     <!-- 底部tabber -->
     <div>
@@ -98,7 +96,7 @@
       }
     },
     created() {
-      document.title = '千企国际'
+      document.title = '千企联盟'
       window.setInterval(this.time, 1000)
       this.list()
       this.agentList()
@@ -231,165 +229,212 @@
   @import "../../assets/scss/Global.scss";
 
   .agent {
-    .agent-img {
-      height: 152px;
-      width: 100%;
+    background-color: #f2f2f2;
 
+    .agent-img {
+
+      /* overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: url("../../assets/images/index-bg.png")no-repeat; */
       img {
         width: 95%;
-        margin: 20px auto;
+        margin: 0px auto 28px auto;
         display: block;
         border-radius: 7px;
       }
     }
 
+    /* 会员权益包 */
     .agent-member {
+      height: 300px;
+
       p {
-        padding-left: 15px;
-        /* font-size: 0.78rem; */
-        padding-bottom: 10px;
-        border-bottom: 1px solid #f2f2f2;
-
-        span {
-          margin-right: 10px;
-        }
-
-        .timer {
-          color: #E51C23;
-          margin-left: 15px;
-          font-size: 0.06rem;
-
-          b {
-            background-color: #E51C23;
-            color: #fff;
-            margin-left: 3px;
-            padding: 2px;
-            border-radius: 3px;
-          }
-
-          h6 {
-            color: #E51C23;
-            /* font-size: 0.70rem; */
-            display: inline-block;
-          }
-        }
+        font-size: 32px;
+        color: #333;
+        margin: 10px 0 20px 24px;
       }
 
       .agent-member-img {
-        margin-top: 10px;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background: url("../../assets/images/index-member.png")no-repeat center top;
+        /* background: url("../../assets/images/index-member(2).png")no-repeat center top; */
 
         img {
           width: 70%;
           display: block;
-          margin: 0px auto 10px auto;
+          margin: 36px auto 0px auto;
         }
       }
     }
 
-    .memberday-buy {
-      height: 135px;
-      display: flex;
-
-      .memberday-buy-list {
-        margin-left: 15px;
-        width: 30%;
-        text-align: center;
-        margin: 10px auto 0 auto;
-
-        .memberday-buy-list-img {
-          float: left;
-
-          img {
-            width: 90px;
-            height: 80px;
-            margin-left: 12px;
-          }
-        }
-
-        .memberday-buy-list-text {
-          span {
-            display: block;
-            /* font-size: 0.70rem; */
-          }
-
-          .memberday-buy-price {
-            color: #E51C23;
-
-            b {
-              /* font-size: 1.0rem; */
-            }
-          }
-
-          .memberday-buy-market {
-            /* font-size: 0.6rem; */
-            /* text-decoration: line-through; */
-            /* color:#ccc; */
-          }
+    /* 会员日特卖 */
+    .member-timer {
+      margin-top: 30px;
+      .member-buy {
+        font-size: 32px;
+        color: #333;
+        margin: 10px 24px 20px 24px;
+        display: inline;
+        span {
+          font-size: 20px;
+          color: #c9191d;
+          margin-left: 30px;
 
           b {
             font-weight: 400;
-            /* font-size: 0.9rem; */
-            margin-right: 5px;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            background-color: #c9191d;
+            color: #fff;
+            padding-left: 2px;
+            margin: 0 4px;
           }
+
         }
       }
-
     }
 
-    .agent-area {
-      margin-top: 10px;
-      margin-bottom: 70px;
+    .member-timer span:last-child {
+      font-size: 22px;
+      color: #333;
+      margin-right: 24px;
+    }
 
+    .memberday-buy {
+      margin: 0 24px;
+      width: 100%;
+      display: flex;
+
+      .memberday-buy-list {
+        width: 31%;
+        margin-top: -70px;
+        .super-points {
+          height: 40px;
+          background-color: #ce0101;
+          color: #fff;
+          border-radius: 20px;
+          line-height: 40px;
+          font-size: 22px;
+          text-align: center;
+          position: relative;
+          top: 90px;
+          width: 88%;
+          margin:0 auto;
+          padding:2px;
+          b{
+          font-size: 36px;
+          font-weight:400;
+          }
+        }
+        .memberday-buy-market {
+          font-size: 20px;
+          color: #342f2c;
+          position: relative;
+          top: 100px;
+          left: 50px;
+        }
+
+        .memberday-buy-list-img {
+          img {
+            width: 100%;
+          }
+        }
+
+      }
+    }
+
+    /* 设置第一个图片和最后一个图片边框圆角 */
+    .memberday-buy .memberday-buy-list:first-child img {
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .memberday-buy .memberday-buy-list:last-child img {
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    /* 代理商专区 */
+    .agent-area {
+      margin: 30px 24px 0 24px;
+      height: auto;
+      padding-bottom: 120px;
+
+      /* 最底部更多文字 */
       .agent-more {
         text-align: center;
       }
 
+      /* 代理商专区/更多文字 */
       p {
-        padding-left: 15px;
-        /* font-size: 0.78rem; */
+        font-size: 32px;
 
         span {
-          margin-right: 5px;
+          font-size: 24px;
         }
       }
 
+      /* 列表图片 */
       img {
-        width: 80px;
-        height: 80px;
-        margin-right: 10px;
+        width: 160px;
+        height: 160px;
+        margin: 0 10px;
       }
 
       .agent-area-list {
-        height: 90px;
-        padding-left: 15px;
-        margin-top: 10px;
-        padding-top: 15px;
-        border-top: 1px solid #f2f2f2;
+        margin: 20px 0;
+        padding: 20px 0px;
+        background-color: #fff;
+        border: 1px solid #DEDEDE;
+        border-radius: 20px;
+        height: auto;
 
-        span {
-          /* font-size: 0.76rem; */
-        }
-
-        .integral {
-          margin: 5px 0 5px 0;
-          color: #E51C23;
+        /* 列表标题 */
+        b {
+          display: block;
+          font-weight: 400;
+          font-size: 24px;
+          color: #342f2c;
+          margin-bottom: 12px;
 
           span {
-            /* font-size: 1.0rem; */
+            font-size: 32px;
+            color: #ce0101;
           }
+        }
+
+        /* 超级积分文字 */
+        p {
+          margin-top: 30px;
+          font-size: 28px;
+          color: #333;
+          display: inline-block;
+        }
+
+        /* 市场价文字 */
+        .market-price {
+          font-size: 22px;
+          color: #999;
         }
       }
 
+      /* 按钮 */
       .agent-area-btn {
         .sold-out {
           background-color: #ccc;
         }
 
         button {
+          font-size: 30px;
           background-color: #E51C23;
           color: #fff;
           position: relative;
-          top: -15px;
+          top: -30px;
           right: 10px;
         }
       }

@@ -1,6 +1,6 @@
 <template>
   <div class="newaddress">
-    <div>
+    <div class="newaddress-text">
       <van-address-edit :area-list="areaList" show-set-default show-search-result @save="onSave" />
     </div>
     <!-- <router-link to="/address"> -->
@@ -32,7 +32,7 @@
           if (res.code == 0) {
             this.$router.push({
               name: 'ShippingAddress',
-              params: { id: this.$route.params.id,path:this.$route.params.path}
+              params: { id: this.$route.params.id, path: this.$route.params.path }
             })
             Toast({
               message: res.msg,
@@ -53,7 +53,7 @@
     }
   }
 </script>
-<style>
+<style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
   .van-address-edit__buttons .van-button {

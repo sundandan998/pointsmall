@@ -5,7 +5,7 @@
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
-      <div class="assets-center-list" v-for="item in assetsData">
+      <div v-for="item in assetsData" class="assets-center-list">
         <router-link :to="{name:'AssetDetail',params:{code:item.token.code}}">
           <div class="assets-center-list-left fl">
             <img :src="item.token.icon" alt="">
@@ -16,7 +16,7 @@
           </div>
           <div class="assets-center-list-right fr">
             <span>{{item.balance|keepTwoNum}}</span>
-            <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
+            <p> &asymp;{{item.integral|keepTwoNum}} 超级积分</p>
           </div>
         </router-link>
       </div>
@@ -72,41 +72,56 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-  .assets-center-name {
-    display: inline-block;
+
+  .assets-center {
+    .assets-center-title {
+      margin: 10px 12px;
+
+      .mint-cell {
+        border-radius: 10px;
+      }
+    }
+
   }
 
+  /* 列表 */
   .assets-center-list {
-    height: 50px;
-    border-bottom: 1px solid #f2f2f2;
-    font-size: 14px;
-
-    a {
-      color: #000;
-    }
-  }
-
-  .assets-center-list-left {
-    margin-left: 15px;
-
-    img {
-      margin-right: 10px;
-    }
-  }
-
-  .assets-center-list-right {
-    margin-right: 10px;
-
-    span {
-      margin-left: 80px;
-      font-size:12px;
-    }
-    p{
-      font-size:12px;
+    background-color: #fff;
+    height: 150px;
+    margin: 10px 12px;
+    border-radius: 10px;
+    .assets-center-list-left {
+      display: -webkit-box;
+      margin: 30px 0;
+      img {
+        margin: 7px 30px 0 20px;
+      }
     }
 
-    img {
-      width: 10px;
+    .assets-center-name {
+      span {
+        font-size: 28px;
+      }
+
+      p {
+        font-size: 22px;
+        color: #999;
+      }
+    }
+
+    .assets-center-list-right {
+      p {
+        color: #999;
+        margin-right: 20px;
+      }
+
+      span {
+        display: block;
+        text-align: right;
+        font-size: 28px;
+        color: #c9191d;
+        margin:30px 20px 20px 0;
+      }
     }
   }
 </style>

@@ -57,6 +57,6 @@
 </script>
 <style>
   .color {
-    color: #09bb07;
+    color: #c9191d;
   }
 </style>

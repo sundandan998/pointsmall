@@ -1,9 +1,10 @@
 <template>
   <div class="address-detail">
     <div class="edit-address">
-      <van-address-edit :address-info="AddressInfo" :area-list="areaList" show-delete show-set-default
-        @save="onSave" @delete="onDelete" id="text"/>
+      <van-address-edit :address-info="AddressInfo" :area-list="areaList" @delete="onDelete" show-delete id="text" show-set-default
+        @save="onSave"/>
     </div>
+    <!-- <mt-cell title="删除该收获地址" @delete.native="onDelete" show-delete id="text"></mt-cell> -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
       <div>
         <van-button square size="large" type="warning">取消</van-button>
@@ -46,7 +47,8 @@
             Toast({
               message: res.msg,
               position: 'top',
-              className: 'zZindex'
+              className: 'zZindex',
+              iconClass: '../../../assets/images/ok.png'
             })
           }
         }).catch(err => {
@@ -69,7 +71,7 @@
             Toast({
               message: res.msg,
               position: 'top',
-              className: 'zZindex'
+              className: 'zZindex',
             })
           }
         }).catch(err => {
@@ -87,7 +89,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
   .address-detail {
     .van-button--warning {
       width: 50%;

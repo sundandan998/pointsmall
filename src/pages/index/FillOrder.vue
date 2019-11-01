@@ -1,28 +1,30 @@
 <template>
   <div class="order">
     <div class="order-product-img">
-      <p>{{orderData.name}}</p>
-      <img :src="orderData.middle_image" alt="">
+      <img :src="orderData.middle_image" alt="" class="fl">
+      <span>{{orderData.name}} <img src="../../assets/images/quanyibag.png" alt=""> </span>
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
     <!-- 收货地址 -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id,path:'is_vip'}}">
       <div class="order-address">
-        <img src="../../assets/images/address.svg" alt="" class="fl">
+        <img src="../../assets/images/map.png" alt="" class="fl">
+        <img src="../../assets/images/r.png" alt="" class="fr order-address-arrow">
         <div v-if="orderInformation==null" class="select-address">
           <p>请选择收货地址</p>
         </div>
-        <div v-else>
+        <div v-else class="detail-address">
           <p><span>{{orderInformation.name}}</span> <span>{{orderInformation.tel}}</span></p>
-          <p class="detail-address">
+          <p>
             {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
           </p>
         </div>
-        <img src="../../assets/images/r.png" alt="" class="fr ">
       </div>
     </router-link>
     <!-- 选择通证部分 -->
     <div class="select-token">
+      <img src="../../assets/images/present.png" alt="" class="fl">
+      <img src="../../assets/images/r.png" alt="" class="fr select-token-arrow ">
       <p @click="handlelick">{{value1}}</p>
       <mt-popup v-model="popupVisible" position="bottom" class="token-list-model">
         <div class="token-list">
@@ -32,7 +34,6 @@
           </div>
         </div>
       </mt-popup>
-      <img src="../../assets/images/r.png" alt="" class="fr">
     </div>
     <div class="bottom-button">
       <van-button square size="large" type="warning" @click.native="cancel"> 取消</van-button>
@@ -193,8 +194,8 @@
         // debugger
         let refpath = window.sessionStorage.getItem('refpath')
         if (refpath == '/address') {
-          if (this.orderInformation == null && this.$route.params.item.id!=undefined) {
-          // this.orderInformation.id = this.$route.params.item.id,
+          if (this.orderInformation == null && this.$route.params.item.id != undefined) {
+            // this.orderInformation.id = this.$route.params.item.id,
             this.orderInformation = {
               city: '',
               county: '',
@@ -204,13 +205,13 @@
               id: ''
             }
             this.orderInformation.id = this.$route.params.item.id,
-            this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
-            this.orderInformation.city = this.$route.params.item.city,
-            this.orderInformation.county = this.$route.params.item.county,
-            this.orderInformation.tel = this.$route.params.item.tel,
-            this.orderInformation.name = this.$route.params.item.name
+              this.orderInformation.addressDetail = this.$route.params.item.addressDetail,
+              this.orderInformation.city = this.$route.params.item.city,
+              this.orderInformation.county = this.$route.params.item.county,
+              this.orderInformation.tel = this.$route.params.item.tel,
+              this.orderInformation.name = this.$route.params.item.name
           }
-          
+
         }
       },
       pay_pwd() {
@@ -259,109 +260,121 @@
     }
 
     .select-token {
-      height: 40px;
-      margin-left: 15px;
-      margin-top: 10px;
-
-      .mint-button--default {
-        color: #333 !important;
-        text-align: left;
-        padding-left: 15px;
-        background-color: #fff;
-      }
-
-      img {
-        margin-top: -20px;
-        margin-right: 10px;
-      }
-    }
-  }
-
-  .van-card {
-    background-color: #fff;
-  }
-
-  .van-overlay {
-    position: unset;
-  }
-
-  .van-popup--bottom {
-    width: 100%;
-    top: 24px;
-    -webkit-transform: translate3d(-50%, 0, 0);
-  }
-
-  .order-product-img {
-    margin: 10px 0 15px 15px;
-
-    img {
-      width: 242px;
-      height: 120px;
-    }
-
-    p {
-      margin-bottom: 10px;
-    }
-
-  }
-
-  .order-color {
-    display: inline-block;
-    margin-right: 20px;
-    background-color: #ccc;
-    color: #333;
-    padding: 3px;
-    border-radius: 5px;
-    width: 40px;
-    text-align: center;
-    font-size: 0.86rem;
-    margin: 10px 20px 10px 0;
-  }
-
-  .order-total {
-    margin: 16px 10px 10px 0px;
-  }
-
-  .order-address {
-    padding-top: 10px;
-    border-top: 2px solid #f2f2f2;
-    height: auto;
-    border-bottom: 2px solid #f2f2f2;
-
-    .select-address {
-      height: 60px;
+      background-color: #fff;
+      height: 100px;
+      margin: 10px 24px;
+      border-radius: 20px;
 
       p {
-        margin-top: 15px;
+        font-size: 28px;
+        line-height: 100px;
+      }
+
+      .select-token-arrow {
+        position: relative;
+        top: 30px;
+        right: 20px;
+      }
+
+    }
+
+    .select-token img:first-child {
+      margin: 25px 20px 0 20px;
+    }
+
+    .van-card {
+      background-color: #fff;
+    }
+
+    .van-overlay {
+      position: unset;
+    }
+
+    .van-popup--bottom {
+      width: 100%;
+      top: 24px;
+      -webkit-transform: translate3d(-50%, 0, 0);
+    }
+
+    /* 头部图片部分 */
+    .order-product-img {
+      background-color: #fff;
+      height: 230px;
+      margin: 10px 24px;
+      border-radius: 20px;
+      overflow: hidden;
+
+      img {
+        width: 50%;
+        height: 100%;
+      }
+
+      span {
+        text-align: center;
+        display: block;
+        margin-top: 80px;
+        font-size: 28px;
+
+        img {
+          height: 50px;
+          width: 160px;
+          margin-top: 20px;
+        }
+      }
+
+    }
+
+    .order-color {
+      display: inline-block;
+      margin-right: 20px;
+      background-color: #ccc;
+      color: #333;
+      padding: 3px;
+      border-radius: 5px;
+      width: 40px;
+      text-align: center;
+      font-size: 0.86rem;
+      margin: 10px 20px 10px 0;
+    }
+
+    .order-total {
+      margin: 16px 10px 10px 0px;
+    }
+
+    /* 地址 */
+    .order-address {
+      height: 190px;
+      background-color: #fff;
+      margin: 20px 24px;
+      border-radius: 20px;
+      overflow: hidden;
+
+      .select-address {
+        p {
+          font-size: 32px;
+          line-height: 190px;
+        }
+      }
+
+      .order-address-arrow {
+        position: relative;
+        top: 80px;
+        right: 20px;
+      }
+
+      .detail-address {
+        margin-top: 50px;
+        font-size: 26px;
+      }
+
+      .detail-address p:first-child {
+        font-size: 32px;
       }
     }
 
-    p {
-      color: #333;
-      line-height: 30px;
+    .order-address img:first-child {
+      width: 40px;
+      margin: 58px 20px 0 20px;
     }
-
-    span {
-      color: #333;
-    }
-
-    .detail-address {
-      width: 75%;
-      height: auto;
-      word-wrap: break-word;
-      word-break: break-all;
-      overflow: hidden
-    }
-  }
-
-  .order-address img:last-child {
-    position: relative;
-    top: -50px;
-    right: 10px;
-  }
-
-  .order-address img:first-child {
-    margin: 10px 10px 0 15px;
-    height: 31px;
   }
 </style>

@@ -6,10 +6,11 @@
       </router-link>
     </mt-header>
     <div class="result-img">
-      <img src="../../assets/images/success.svg" lt="">
+      <img src="../../assets/images/register-successfu.png" lt="">
       <p>注册成功</p>
     </div>
     <div class="result-btn">
+      <p>*设置支付密码后可购买商品</p>
       <!-- <router-link :to="{name:'Verified',params:{id:'result'}}" >
         <mt-button size="large" class="result-btn-name">进行实名认证</mt-button>
       </router-link> -->
@@ -20,43 +21,65 @@
     </div>
   </div>
 </template>
-<script></script>
+<script>
+  export default {
+    data() {
+      return {
+
+      }
+    },
+    created() {
+      document.title = '千企联盟'
+    },
+  }
+</script>
 <style lang="scss">
-  body {
+  @import "../../assets/scss/Global.scss";
+  body{
     background-color: #fff;
   }
+  .result {
+    .result-header {
+      background-color: #fff !important;
+      margin: 50px 0 80px 54px;
 
-  .result-header {
-    background-color: #fff !important;
+      label.mint-button-text {
+        color: #333 !important;
+      }
 
-    label.mint-button-text {
-      color: #000 !important;
+      .mintui {
+        color: #333;
+      }
     }
 
-    .mintui {
-      color: #000;
-    }
-  }
+    .result-img {
+      margin: 0px auto;
+      display: table;
+      width: 62px;
 
-  .result-img {
-    margin: 50px auto;
-    display: table;
-  }
-
-  .result-btn {
-    width: 80%;
-    margin: 0 auto;
-
-    .result-btn-pwd {
-      background-color: #fff;
-      margin-top: 20px;
-      color: #09bb07 !important;
-      border: 1px solid #09bb07;
+      p {
+        margin-top: 30px;
+        font-size: 36px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 210px;
+      }
     }
 
-    .result-btn-name {
-      background-color: #09bb07;
-      color: #fff;
+    .result-btn {
+      margin: 0px 54px 0 54px;
+      .result-btn-pwd {
+        height: 88px;
+        width: 100%;
+        border-radius: 44px;
+        background-color: #fff;
+        color: #fff;
+        border: 1px solid #c9191D;
+        background-color: #c9191D;
+      }
+      p{
+        margin-bottom: 10px;
+      }
     }
   }
 </style>

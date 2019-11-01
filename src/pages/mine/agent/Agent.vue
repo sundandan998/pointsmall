@@ -7,81 +7,116 @@
           <van-tab title="全部">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/agentdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.user}}</p>
+                  <p class="product-tel"> {{item.user}}</p>
+                  <img src="../../../assets/images/tel.svg" alt="">
                 </div>
               </router-link>
-              <button class="fr status"
-                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
-                @click="copy">复制
-              </button>
+              <div class="product-copy">
+                <span>{{item.currency}}</span>
+                <button class="status fr"
+                  :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                  @click="copy">复制
+                </button>
+                <router-link :to="/agentdetail/+item.id">
+                  <button class="status fr">详情</button>
+                </router-link>
+              </div>
             </div>
           </van-tab>
           <van-tab title="待付款">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/agentdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.user}}</p>
+                  <p class="product-tel">{{item.user}}</p>
+                  <img src="../../../assets/images/tel.svg" alt="">
                 </div>
               </router-link>
-              <button class="fr status"
-                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
-                @click="copy">复制
-              </button>
+              <div class="product-copy">
+                <span>{{item.currency}}</span>
+                <button class="status fr"
+                  :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                  @click="copy">复制
+                </button>
+                <router-link :to="/agentdetail/+item.id">
+                  <button class="status fr">详情</button>
+                </router-link>
+              </div>
             </div>
           </van-tab>
           <van-tab title="待发货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/agentdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.user}}</p>
+                  <p class="product-tel">{{item.user}}</p>
+                  <img src="../../../assets/images/tel.svg" alt="">
                 </div>
               </router-link>
-              <button class="fr status"
-                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
-                @click="copy">复制
-              </button>
+              <div class="product-copy">
+                <span>{{item.currency}}</span>
+                <button class="status fr"
+                  :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                  @click="copy">复制
+                </button>
+                <router-link :to="/agentdetail/+item.id">
+                  <button class="status fr">详情</button>
+                </router-link>
+              </div>
             </div>
           </van-tab>
           <van-tab title="待收货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/agentdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.user}}</p>
+                  <p class="product-tel">{{item.user}}</p>
+                  <img src="../../../assets/images/tel.svg" alt="">
                 </div>
               </router-link>
-              <button class="fr status"
-                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
-                @click="copy">复制
-              </button>
+              <div class="product-copy">
+                <span>{{item.currency}}</span>
+                <button class="status fr"
+                  :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                  @click="copy">复制
+                </button>
+                <router-link :to="/agentdetail/+item.id">
+                  <button class="status fr">详情</button>
+                </router-link>
+              </div>
             </div>
           </van-tab>
           <van-tab title="已完成">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/agentdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>{{item.user}}</p>
+                  <p class="product-tel">{{item.user}}</p>
+                  <img src="../../../assets/images/tel.svg" alt="">
                 </div>
               </router-link>
-              <button class="fr status"
-                :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
-                @click="copy">复制
-              </button>
+              <div class="product-copy">
+                <span>{{item.currency}}</span>
+                <button class="status fr"
+                  :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
+                  @click="copy">复制
+                </button>
+                <router-link :to="/agentdetail/+item.id">
+                  <button class="status fr">详情</button>
+                </router-link>
+              </div>
             </div>
           </van-tab>
         </van-tabs>
@@ -192,7 +227,7 @@
             document.body.appendChild(iframe)
             // this.operateFile(res)
           }
-        }).catch(err => {})
+        }).catch(err => { })
       },
 
       // tab栏展示列表
@@ -233,45 +268,86 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-  .product {
-    margin: 10px 15px 0 15px;
-    height: 106px;
-
-    p {
+  .my-order {
+    .van-tab {
       color: #333;
     }
 
-    span {
-      color: #333;
+    .van-tab.van-tab--active {
+      color: #c9191d !important;
     }
 
-    img {
-      width: 60px;
-      height: 80px;
-      margin-right: 10px;
+    .van-tabs__line {
+      background-color: #c9191d !important;
     }
 
-    .product-text {
-      margin-top: 8px;
-    }
-
-    .product-text p:last-child {
-      position: relative;
-      top: 16px;
-    }
-
-    .status {
-      position: relative;
-      top: -16px;
-      border: 1px solid #7ECAC3;
-      padding: 2px 15px;
-      color: #7ECAC3;
-      font-size: 0.078rem;
+    .product {
       background-color: #fff;
-    }
-  }
+      margin: 10px 24px 10px 24px;
+      height: 430px;
+      border-radius: 10px;
 
-  .van-tabs__wrap--scrollable .van-tab {
-    flex: unset;
+      /* 时间 */
+      .product-time {
+        height: 90px;
+        line-height: 90px;
+        margin-left: 20px;
+        font-size: 28px;
+        border-bottom: 1px solid #f2f2f2;
+      }
+
+      img {
+        width: 180px;
+        height: 180px;
+        margin: 30px 24px 0 20px;
+      }
+
+      .product-text {
+        border-bottom: 1px solid #f2f2f2;
+        height: 170px;
+        margin-top: 70px;
+        font-size: 28px;
+
+        .product-tel {
+          color: #656565;
+          margin-top: 30px;
+          position: relative;
+          left: 50px;
+        }
+
+        img {
+          width: 40px;
+          position: relative;
+          top: -140px;
+          left: -14px;
+        }
+      }
+
+      .product-copy {
+        height: 90px;
+        margin-left: 20px;
+        margin-top: 30px;
+        display: block;
+
+        span {
+          font-size: 36px;
+          color: #ce0101;
+        }
+
+        button {
+          margin-right: 20px;
+          width: 100px;
+          height: 45px;
+          background-color: #fff;
+          border: 1px solid #c9191d;
+          color: #c9191d;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    .van-tabs__wrap--scrollable .van-tab {
+      flex: unset;
+    }
   }
 </style>

@@ -4,7 +4,7 @@
       <img :src="orderData.default_image" alt="" class="fl">
       <span>
         <p>{{orderData.name}}</p>
-        <p>{{orderData.price|keepTwoNum}}超级积分</p>
+        <p><b class="order-product-price">{{orderData.price|keepTwoNum}}</b>超级积分</p>
       </span>
       <!-- <van-card :desc="orderData.price+'积分'" :title="orderData.name" :thumb="orderData.default_image" /> -->
     </div>
@@ -19,14 +19,17 @@
     </div>
     <!-- 数量 -->
     <div class="order-detail">
-      <span>数量</span> <span class="fr">
-        <van-stepper v-model="value" /></span>
-      <p class="order-total"><span>合计</span><span class="fr">{{orderData.price*value}} <b>超级积分</b> </span></p>
+      <div class="order-detail-num">
+        <span>数量</span> <span class="fr">
+          <van-stepper v-model="value" /></span>
+      </div>
+      <p class="order-total"><span>合计</span><span class="fr"><b>{{orderData.price*value}} </b>超级积分 </span></p>
     </div>
     <!-- 收货地址 -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id,path:'memberday'}}">
-      <div class="order-address">
-        <img src="../../assets/images/address.svg" alt="" class="fl">
+      <div class="order-address-member">
+        <img src="../../assets/images/map.png" alt="" class="fl">
+        <img src="../../assets/images/r.png" alt="" class="fr right-arrow">
         <div v-if="orderInformation==null" class="select-address">
           <p>请选择收货地址</p>
         </div>
@@ -36,7 +39,6 @@
             {{orderInformation.province}}{{orderInformation.city}}{{orderInformation.county}}{{orderInformation.addressDetail}}
           </p>
         </div>
-        <img src="../../assets/images/r.png" alt="" class="fr right-arrow">
       </div>
     </router-link>
     <div class="bottom-button">
@@ -215,6 +217,34 @@
   @import "../../assets/scss/Global.scss";
 
   .order {
+
+    /* 商品名称/图片 */
+    .order-product {
+      overflow: hidden;
+      border-radius: 20px;
+      margin: 10px 24px;
+      background-color: #fff;
+
+      img {
+        width: 50%;
+        height: 100%;
+        margin-right: 30px;
+      }
+
+      span {
+        display: block;
+        margin-top: 80px;
+        font-size: 28px;
+
+        .order-product-price {
+          font-weight: normal;
+          font-size: 36px;
+          color: #ce0101;
+          margin-right: 10px;
+        }
+      }
+    }
+
     .van-address-item .van-radio__icon {
       display: none !important;
     }
@@ -230,99 +260,103 @@
     background-color: #fff;
   }
 
-  .order-product {
-    height: 100px;
-    margin: 10px 10px 5px 15px;
-    font-size: 0.078rem;
-
-    img {
-      width: 80px;
-      height: 80px;
-      margin-right: 10px;
-    }
-
-    span {
-      display: block;
-      padding-top: 10px;
-    }
-  }
-
-  .order-product span :last-child {
-    color: #E51C23;
-    padding-top: 10px;
-  }
-
+  /* 数量 */
   .order-detail {
-    margin: 20px 10px 0 15px;
-  }
+    background-color: #fff;
+    margin: 0px 24px 10px 24px;
+    border-radius: 20px;
+    overflow: hidden;
 
-  .order-total {
-    b {
-      font-size: 0.076rem;
-      font-weight: 400;
-    }
+    .order-detail-num {
+      margin: 30px 20px 40px 22px;
 
-    margin: 16px 10px 10px 0px;
-  }
-
-  .order-address {
-    padding-top: 10px;
-    padding-left: 15px;
-    border-top: 2px solid #f2f2f2;
-    height: auto;
-    border-bottom: 2px solid #f2f2f2;
-
-    .select-address {
-      height: 60px;
-
-      p {
-        margin-top: 15px;
+      span {
+        font-size: 28px;
       }
     }
 
-    p {
-      color: #333;
-      line-height: 30px;
-    }
+  }
+
+  /* 合计 */
+  .order-total {
+    margin-top: 50px;
 
     span {
+      font-size: 28px;
+      margin: 0px 20px 40px 22px;
+    }
+
+    b {
+      font-size: 28px;
+      font-weight: 400;
+      color: #c9191d;
+    }
+  }
+
+  /* 地址 */
+  .order-address-member {
+    height: 190px;
+    background-color: #fff;
+    margin: 10px 24px;
+    border-radius: 20px;
+
+    img {
+      width: 40px;
+      margin-left: 32px;
+      margin-right: 32px;
+      margin-top: 68px;
+    }
+
+    .select-address {
+      overflow: hidden;
+      p {
+        margin-top: 83px;
+        font-size: 32px;
+      }
+    }
+    span {
+      display: inline-block;
+      margin-top: 58px;
       color: #333;
     }
 
     .right-arrow {
       position: relative;
-      top: -40px;
       right: 10px;
     }
   }
 
+  /* 颜色 */
   .product-model {
-    margin-left: 15px;
+    background-color: #fff;
+    margin: 0 24px 10px 24px;
+    border-radius: 20px;
+    overflow: hidden;
 
     .product-model-title {
       span {
-        font-size: 0.076rem;
-        /* color: #fff;
-        background-color: #8BC34A; */
-        color: #000;
-        background-color: #f2f2f2;
-        padding: 5px 10px;
-        margin-right: 10px;
-        border-radius: 7px;
+        display: inline-block;
+        height: 44px;
+        width: 100px;
+        font-size: 26px;
+        line-height: 44px;
+        text-align: center;
+        border-radius: 10px;
+        background-color: #dcdcdc;
+        color: #333;
+        margin: 0 30px 30px 22px;
       }
 
       p {
-        margin: 10px 0 10px 0;
-      }
-
-      .disabled {
-        color: #C8C9CC;
-        background-color: #F7F8FA;
+        margin: 30px 0 22px 22px;
+        font-size: 28px;
+        color: #333;
       }
 
       .select {
-        color: #fff;
-        background-color: #8BC34A;
+        color: #c9191d;
+        background-color: #f4d1d2;
+        border: 1px solid #c9191d;
       }
     }
 

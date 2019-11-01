@@ -6,9 +6,12 @@
         <div v-for="(item,index) in memberList">
           <van-tab :title="item.name">
             <div class="swipe-img" v-for="(goods, index) in item.goods" :key="index">
+              <img src="../../assets/images/680sign.png" alt="" class="exclusive" v-if="item.name=='680超级会员'">
+              <img src="../../assets/images/1380sign.png" alt="" class="exclusive" v-if="item.name=='1380超级会员'">
+              <img src="../../assets/images/2580sign.png" alt="" class="exclusive" v-if="item.name=='2580超级会员'">
               <van-radio-group :key="index" v-model="radio">
-                <van-radio :name="goods.id" checked-color="#09BB07">
-                  <img :src="goods.vip_image" alt="">
+                <van-radio :name="goods.id" checked-color="#c9191d">
+                  <img :src="goods.vip_image" alt="" class="commodity">
                 </van-radio>
               </van-radio-group>
             </div>
@@ -18,7 +21,7 @@
       <!-- 底部按钮 -->
       <div class="bottom-button">
         <router-link :to="{name:'AgentIndex'}">
-          <van-button square size="large" type="warning"> 取消</van-button>
+          <van-button square size="large" type="warning"> 返回</van-button>
         </router-link>
         <van-button square size="large" type="danger" @click="buy">立即购买</van-button>
       </div>
@@ -57,7 +60,7 @@
     },
     methods: {
       // 商品列表
-      goodsList() {
+      goodsList(index) {
         api.goodsList().then(res => {
           this.memberList = res.data
         }).catch(err => {
@@ -86,76 +89,66 @@
 
   body {
     height: 100%;
+    background-color: #f2f2f2;
   }
 
   .index {
-    height: auto;
-    width: 100%;
-    overflow: hidden;
-    border-radius: 5px;
 
-    p {
-      margin: 20px 0 20px 15px;
+    /* 改变顶部标题背景颜色 */
+    .van-tabs__nav {
+      background-color: #f2f2f2;
     }
 
     .index-swipe {
       height: auto;
-      width: 90%;
-      background-color: #fff;
-      margin: 10px auto;
+      width: 100%;
+
+      .van-tab {
+        color: #333;
+      }
 
       .van-tab--active {
-        font-weight: 500;
-        color: #09BB07;
+        color: #c9191d;
       }
 
       .van-tabs__line {
-        background-color: #09BB07;
+        background-color: #c9191d;
       }
 
       .swipe-img {
+        margin: 30px 24px 20px 24px;
+        background-color: #fff;
+        border-radius: 15px;
         text-align: center;
-        margin-top: 20px;
-        /* padding-left: 30px; */
+        position: relative;
 
-        img {
-          width: 242px;
-          margin: 5px 0;
+        .commodity {
+          width: 100%;
+          margin: 12px auto;
         }
 
+        .exclusive {
+          position: absolute;
+          top: 112px;
+          right: 1px;
+          z-index: 1;
+        }
+
+        /* 修改radio样式 */
+        .van-radio__icon .van-icon {
+          font-size: 26px;
+          line-height: 26px;
+          width: 26px;
+          height: 26px;
+          position: relative;
+          left: -25px;
+        }
 
       }
 
       .index-button {
         margin-top: 20px;
         text-align: center;
-      }
-
-      .index-start {
-        /* background: url('../../assets/images/bg.png')no-repeat; */
-        height: 550px;
-        width: 100%;
-        overflow: hidden;
-        background-size: 100% 100%;
-        background-attachment: fixed;
-
-        .index-logo {
-          /* margin: 0px auto;
-          display: table; */
-          width: 100%;
-          height: 100%;
-          top: 0;
-          z-index: -1;
-          position: absolute;
-
-          img {
-            display: block;
-            outline: none;
-            border: 0;
-            height: 100%;
-            width: 100%;
-          }
-        }
       }
     }
   }
