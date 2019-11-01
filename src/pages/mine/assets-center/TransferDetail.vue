@@ -9,7 +9,7 @@
       <mt-cell title="接收方" :value="transferData.other_user" v-if="transferData.other_user!=null"></mt-cell>
       <mt-cell title="状态" :value="transferData.status"></mt-cell>
       <mt-cell title="交易时间" :value="transferData.transaction_time"></mt-cell>
-      <mt-cell title="到期日" :value="transferData.unfreeze_date"></mt-cell>
+      <mt-cell title="到期日" :value="transferData.unfreeze_date" v-if="transferData.unfreeze_date!=null"></mt-cell>
     </div>
     <div class="bottom-button">
       <van-button square size="large" type="warning" v-on:click="$router.go(-3)"> 返回</van-button>

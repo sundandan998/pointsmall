@@ -1,11 +1,11 @@
 <template>
   <div class="transfer">
-    <mt-cell title="商城账户">
+    <mt-cell title="柏拉图兰账号">
       <mt-switch v-model="transferParams.out"></mt-switch>
     </mt-cell>
     <div class="transfer-progress-name">
       <span>接收人</span>
-      <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile"></mt-field>
+      <mt-field placeholder="接收人账号" type="tel" v-model="transferParams.mobile" @blur.native.capture="check"></mt-field>
     </div>
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
@@ -46,7 +46,11 @@
         transferParams: {
           mobile: '',
           amount: [],
-          out:false
+          out: false
+        },
+        verifyParams: {
+          username: '',
+          code: ''
         }
       }
     },
@@ -66,7 +70,6 @@
       }
     },
     methods: {
-
       // 转让按钮
       transfer() {
         if (this.transferParams.amount == '' || this.transferParams.mobile == "") {
@@ -75,12 +78,72 @@
             className: 'zZindex'
           })
         } else {
-          this.$router.push({
-            name: 'ConfirmTransfer',
-            params: { 'transferParams': this.transferParams, 'token': this.detailData.token, 'code': this.$route.params.code, 'action': this.$route.params.action }
-          })
+          // 判断是不是往外部转账
+          if (this.transferParams.out == true) {
+            // / 检测是否是第三方账号和通证是否合法
+            this.verifyParams.code = this.$route.params.code
+            this.verifyParams.username = this.transferParams.mobile
+            api.verify(this.verifyParams).then(res => {
+              if (res.code == 0) {
+                this.$router.push({
+                  name: 'ConfirmTransfer',
+                  params: { 'transferParams': this.transferParams, 'token': this.detailData.token, 'code': this.$route.params.code, 'action': this.$route.params.action }
+                })
+              }
+            }).catch(err => {
+              if (err.code == 4001) {
+                Toast({
+                  message: err.msg,
+                  className: 'zZindex'
+                })
+              }
+            })
+          } else {
+            // 内部转让
+            api.internal({ mobile: this.transferParams.mobile }).then(res => {
+              if (res.is_use == true) {
+                this.$router.push({
+                  name: 'ConfirmTransfer',
+                  params: { 'transferParams': this.transferParams, 'token': this.detailData.token, 'code': this.$route.params.code, 'action': this.$route.params.action }
+                })
+              } else {
+                Toast({
+                  message: res.msg,
+                  className: 'zZindex'
+                })
+              }
+            }).catch(err=>{
+              if (err.code == 4001) {
+                Toast({
+                  message: err.msg,
+                  className: 'zZindex'
+                })
+              }
+            })
+          }
         }
       },
+      // 邮箱手机号校验
+      check() {
+        let email = /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/
+        let tel = /^1[23456789]\d{9}$/
+        if (this.transferParams.out == true) {
+          if (!email.test(this.transferParams.mobile) && !tel.test(this.transferParams.mobile)) {
+            // this.status = 'error'
+            Toast({
+              message: '请填写正确的手机号或邮箱地址',
+              className: 'zZindex'
+            })
+          }
+        } else {
+          if (!tel.test(this.transferParams.mobile)) {
+            Toast({
+              message: '请填写正确的手机号',
+              className: 'zZindex'
+            })
+          }
+        }
+      }
     }
   }
 </script>

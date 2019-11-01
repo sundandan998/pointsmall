@@ -34,7 +34,7 @@
     <van-number-keyboard :show="showKeyboard" extra-key="." @input="onInput" @delete="onDelete"
       @blur="showKeyboard = false" />
     <div class="bottom-button" v-show="showBtn">
-      <van-button square size="large" type="warning" v-on:click="$router.go(-1)"> 返回</van-button>
+      <van-button square size="large" type="warning" v-on:click="$router.go(-2)"> 返回</van-button>
       <van-button square size="large" type="danger" @click="transfer">确认转让</van-button>
     </div>
   </div>
