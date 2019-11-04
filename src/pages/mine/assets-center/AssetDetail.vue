@@ -20,7 +20,7 @@
       :error.sync="error" error-text="请求失败，点击重新加载">
       <div class="asset-list">
         <router-link
-          :to="{name:'AvailableTransfer',params:{amount:assetData.available_amount,action:'available',code:this.assetDataToken.code}}">
+          :to="{name:'AvailableTransfer',params:{amount:assetData.available_amount||this.detail.available_amount,action:'available',code:this.assetDataToken.code}}">
           <div class="asset-list-available">
             <span>可用</span>
             <p>{{assetData.available_amount}}</p>
@@ -54,6 +54,7 @@
 <script>
   // 接口请求
   import api from '@/api/order/order.js'
+  import {mapActions,mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -100,9 +101,15 @@
           if (res.code == 0) {
             this.assetData = res.data
             this.assetDataToken = res.data.token
+            this.$store.commit('detail',res.data)
           }
         }).catch()
       }
+    },
+    computed: {
+      ...mapGetters([
+        'detail'
+      ])
     }
   }
 </script>

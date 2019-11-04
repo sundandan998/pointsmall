@@ -58,7 +58,7 @@
     created() {
       document.title = '转让'
       this.assetDetail()
-      // console.log(this.$route.params.amount)
+      console.log()
     },
     // 解决底部按钮被弹起问题
     mounted() {
@@ -97,12 +97,11 @@
             this.verifyParams.username = this.transferParams.mobile
             api.verify(this.verifyParams).then(res => {
               if (res.code == 0) {
-                console.log('79')
                 this.$router.push({
                   name: 'ConfirmTransfer',
                   params: {
                     'transferParams': this.transferParams, 'order_id': this.detailData.order_id,
-                    'action': this.$route.params.action, 'detailData': this.detailData,
+                    'action': this.$route.params.action||'freeze', 'detailData': this.detailData,
                     'code': this.detailData.token, 'date': this.detailData.unfreeze_date,
                     'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay,
                   }
@@ -123,7 +122,7 @@
                   name: 'ConfirmTransfer',
                   params: {
                     'transferParams': this.transferParams, 'order_id': this.detailData.order_id,
-                    'action': this.$route.params.action, 'detailData': this.detailData,
+                    'action': this.$route.params.action||'freeze', 'detailData': this.detailData,
                     'code': this.detailData.token, 'date': this.detailData.unfreeze_date,
                     'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay,
                   }
@@ -166,7 +165,7 @@
           }
         }
       }
-    }
+    },
   }
 </script>
 <style lang="scss">

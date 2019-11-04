@@ -8,12 +8,12 @@
     <div class="confirm-transfer-content">
       <mt-cell title="接收方" :value="this.$route.params.transferParams.mobile"></mt-cell>
       <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
-      <mt-cell title="手续费" :value="this.$route.params.token">0</mt-cell>
+      <mt-cell title="手续费" :value="this.$route.params.token">退换期暂免手续费</mt-cell>
     </div>
     <div class="confirm-transfer-progress">
       <div class="confirm-transfer-num" v-if="this.$route.params.action=='freeze'">
         <p><span>{{this.$route.params.detailData.amount||keepTwoNum}}</span><span
-            class="fr">还剩{{this.$route.params.day}}天解冻</span></p>
+            v-if="this.$route.params.day!=undefined" class="fr">还剩{{this.$route.params.day}}天解冻</span></p>
         <div class="progress">
           <el-slider :value="this.$route.params.freezeDay-this.$route.params.day" disabled></el-slider>
         </div>
@@ -34,7 +34,7 @@
     <van-number-keyboard :show="showKeyboard" extra-key="." @input="onInput" @delete="onDelete"
       @blur="showKeyboard = false" />
     <div class="bottom-button" v-show="showBtn">
-      <van-button square size="large" type="warning" v-on:click="$router.go(-2)"> 返回</van-button>
+      <van-button square size="large" type="warning" v-on:click="$router.go(-1)"> 返回</van-button>
       <van-button square size="large" type="danger" @click="transfer">确认转让</van-button>
     </div>
   </div>
@@ -50,6 +50,8 @@
         clientHeight: document.documentElement.clientHeight,
         showBtn: true,  // 控制按钮盒子显示隐藏
         pay_pwd: '',
+        detailData: [],
+        listData: '',
         showKeyboard: false,
         resevationModelModel: false,
         // 转让参数
@@ -96,7 +98,7 @@
         })
       },
       // 检查是否设置支付密码
-      setPwd(){
+      setPwd() {
         if (this.add.pay_pwd_active == true) {
           this.resevationModelModel = true
         } else {
@@ -118,7 +120,7 @@
       },
       //转让
       transfer() {
-        if(this.$route.params.transferParams.out==true){
+        if (this.$route.params.transferParams.out == true) {
           this.$messagebox({
             title: '提示',
             message: `将转让至收款人柏拉图兰账号是否继续?`,
@@ -131,7 +133,7 @@
               this.setPwd()
             }
           })
-        }else{
+        } else {
           this.setPwd()
         }
       }
@@ -145,7 +147,7 @@
           this.transferParams.code = this.$route.params.code
           this.transferParams.pay_pwd = this.pay_pwd
           this.transferParams.order_id = this.$route.params.order_id,
-          this.transferParams.out = this.$route.params.transferParams.out
+            this.transferParams.out = this.$route.params.transferParams.out
           api.transfer(this.transferParams).then(res => {
             if (res.code === 0) {
               Toast({

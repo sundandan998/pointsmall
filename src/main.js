@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
+import Vuex from 'vuex';
 // 适配
 import 'lib-flexible'
 // import Vant from 'vant'
@@ -22,6 +23,7 @@ Vue.use(MintUI)
 // Vue.use(axios)
 Vue.use(external)
 // Vue.use(Vant)
+Vue.use(Vuex);
 Vue.prototype.$Indicator = Indicator
 Vue.config.productionTip = false
 /* eslint-disable no-new */
