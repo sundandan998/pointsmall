@@ -269,18 +269,6 @@
   @import '../../../assets/scss/Global.scss';
 
   .my-order {
-    .van-tab {
-      color: #333;
-    }
-
-    .van-tab.van-tab--active {
-      color: #c9191d !important;
-    }
-
-    .van-tabs__line {
-      background-color: #c9191d !important;
-    }
-
     .product {
       background-color: #fff;
       margin: 10px 24px 10px 24px;

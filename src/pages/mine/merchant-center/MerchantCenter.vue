@@ -7,53 +7,53 @@
           <van-tab title="全部">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/merchantdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
+                <span class="fr status">{{item.status|orderStatus}}</span>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
                   <p>￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
           <van-tab title="待发货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/merchantdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
+                <span class="fr status">{{item.status|orderStatus}}</span>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
                   <p>￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
           <van-tab title="待收货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/merchantdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
+                <span class="fr status">{{item.status|orderStatus}}</span>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
                   <!-- <p>{{item.total_amount|keepTwoNum}} ({{item.token}})</p> -->
                   <p>￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
           <van-tab title="已完成">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/merchantdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}</p>
+                <span class="fr status">{{item.status|orderStatus}}</span>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
                   <p>￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
@@ -143,39 +143,46 @@
   @import '../../../assets/scss/Global.scss';
 
   .product {
-    margin: 10px 15px 0 15px;
-    height: 106px;
-
-    p {
+    margin: 10px 24px;
+    height: 310px;
+    background-color: #fff;
+    border-radius:20px;
+    .product-time{
+      width: 94%;
+      font-size: 28px;
       color: #333;
+      height: 90px;
+      line-height:90px;
+      margin-left: 20px;
+      border-bottom:1px solid #f2f2f2;
     }
-
-    span {
-      color: #333;
-    }
-
     img {
-      width: 60px;
-      height: 80px;
-      margin-right: 10px;
+      width: 180px;
+      height: 180px;
+      margin:10px 20px 0 20px;
+      border-radius:20px;
     }
-
-    .product-text {
-      margin-top: 8px;
+    .product-text{
+      margin-top: 70px;
+      font-size: 28px;
+      color:#c9191d;
     }
-
     .product-text p:last-child {
       position: relative;
       top: 16px;
-      color: #E51C23;
+      color: #333;
+      float: right;
+      right:20px;
     }
 
     .status {
       position: relative;
-      top: -24px;
+      top: -60px;
+      font-size: 30px;
+      color:#c9191d;
+      right:20px;
     }
   }
-
   .van-tabs__wrap--scrollable .van-tab {
     flex: unset;
   }

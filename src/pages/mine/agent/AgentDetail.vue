@@ -1,26 +1,26 @@
 <template>
   <div class="detail">
     <div class="detail-address">
-      <img src="../../../assets/images/address.svg" alt="">
+      <img src="../../../assets/images/mechant-address.png" alt="">
       <span>
-        <p>收件人：{{detailAddress.name}} {{detailAddress.tel}}</p>
+        <p class="detail-people">{{detailAddress.name}}&nbsp;&nbsp;{{detailAddress.tel}}</p>
         <p>
-          收获地址：{{detailAddress.province}}{{detailAddress.city}}{{detailAddress.county}}{{detailAddress.addressDetail}}
+          {{detailAddress.province}}{{detailAddress.city}}{{detailAddress.county}}{{detailAddress.addressDetail}}
         </p>
       </span>
     </div>
     <div class="detail-product">
       <van-card :num="detailData.count" :price="detailData.currency" :title="detailData.sku_name"
         :thumb="detailData.sku_image" />
-    </div>
-    <div class="detail-status">
-      <p><span>总额:</span><span class="fr">￥0</span></p>
-      <p><span>订单编号:</span><span class="fr">{{detailData.order_id}}</span></p>
-      <p><span>交易时间:</span><span class="fr">{{detailData.transaction_time}}</span></p>
-      <p><span>订单状态:</span><span class="fr">{{detailData.status|orderStatus}}</span></p>
+      <div class="detail-status">
+        <p><span>总额:</span><span class="fr detail-status-black">￥0</span></p>
+        <p><span>订单状态:</span><span class="fr detail-status-red">{{detailData.status|orderStatus}}</span></p>
+        <p><span>订单编号:</span><span class="fr detail-status-black">{{detailData.order_id}}</span></p>
+        <p><span>交易时间:</span><span class="fr detail-status-black">{{detailData.transaction_time}}</span></p>
+      </div>
     </div>
     <router-link to="/agent">
-      <div class="merchant-button" v-show="showBtn">
+      <div class="order-button" v-show="showBtn">
         <mt-button size="large">返回</mt-button>
       </div>
     </router-link>
@@ -99,88 +99,82 @@
 </script>
 <style lang="scss">
   @import "../../../assets/scss/Global.scss";
-
-  .detail-address {
-    /* border-bottom: 2px solid #f2f2f2; */
-    padding: 10px 10px 10px 15px;
-
-    img {
-      display: inline-block;
-      float: left;
-      margin-right: 10px;
-      height: 30px;
-    }
-  }
-
-  .van-card {
-    background-color: #fff;
-  }
-
-  .van-card__content {
-    min-height: 5px;
-  }
-
-  .van-card__thumb {
-    height: 40px;
-    width: 40px;
-    margin-right: -5px;
-  }
-
-  .detail-product {
-    height: 70px;
-    padding: 10px 10px 0 15px;
-
-    img {
-      width: 60px;
-      position: relative;
-      left: -18px;
-    }
-  }
-
-  .detail-num {
-    border-top: 1px solid #f2f2f2;
-    border-bottom: 2px solid #f2f2f2;
-
-    .wl-num {
-      padding: 10px 10px 10px 15px;
-
-    }
-  }
-
-  .detail-status {
-    margin-top: 20px;
-    height: auto;
-
-    p {
-      border-bottom: 1px solid #f2f2f2;
-      padding: 10px 10px 10px 15px;
-    }
-
-    p span:first-child {
-      color: #A6A6A6;
-    }
-  }
-
-  .detail-button {
-    button {
-      width: 100%;
-      border-radius: 20px;
+  .detail {
+    .detail-address {
+      height: 190px;
       background-color: #fff;
-      color: #4ECD4D !important;
-      border: 1px solid #4ECD4D !important;
-      position: fixed;
-      bottom: 10px;
-    }
-  }
-
-  .merchant-button {
-    button {
+      margin: 10px 24px;
       border-radius: 20px;
-      background-color: #F9F9F9;
-      color: #4ECD4D !important;
-      border: 1px solid #4ECD4D !important;
-      position: fixed;
-      bottom: 10px;
+      overflow: hidden;
+
+      img {
+        float: left;
+        height: 40px;
+        margin: 70px 22px 0 30px;
+      }
+
+      span {
+        margin-top: 50px;
+        display: block;
+        font-size: 26px;
+        color: #999;
+
+        .detail-people {
+          font-size: 32px;
+          color: #333;
+          margin-bottom: 5px;
+        }
+      }
     }
+
+    .detail-product {
+      height: auto;
+      border-radius: 20px;
+      margin: 10px 24px;
+      background-color: #fff;
+
+      .van-card {
+        background-color: #fff;
+        border-radius: 20px;
+        .van-card__thumb {
+          img {
+            height: 90px;
+            width: 90px;
+          }
+        }
+
+        .van-card__title {
+          margin-top: 25px;
+          margin-bottom: 20px;
+          font-size: 14px;
+        }
+
+        .van-card__bottom {
+          font-size: 14px;
+
+          .van-card__num {
+            color: #999;
+          }
+        }
+      }
+
+      .detail-status {
+        p {
+          border-bottom: 1px solid #f2f2f2;
+          height: 90px;
+          line-height: 90px;
+          margin: 0 24px;
+          font-size: 29px;
+          color: #999;
+          .detail-status-red{
+            color:#ce0101;
+          }
+          .detail-status-black{
+            color:#333;
+          }
+        }
+      }
+    }
+
   }
 </style>

@@ -9,8 +9,17 @@ a {
   text-decoration: none;
   color:#333;
 }
+// tab栏颜色
+.van-tab.van-tab--active {
+  color: #c9191d !important;
+}
 
-
+.van-tabs__line {
+  background-color: #c9191d !important;
+}
+.van-tab {
+  color: #333;
+}
 .fr {
   float: right;
 }

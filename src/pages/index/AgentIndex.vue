@@ -2,8 +2,9 @@
   <div class="agent">
     <div class="agent-img">
       <router-link to="/memberstart">
-        <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt="">
-        <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt="">
+        <img src="../../assets/images/agentIndex.png" alt="">
+        <!-- <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt=""> -->
+        <!-- <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt=""> -->
       </router-link>
     </div>
     <!-- 千企会员 -->
@@ -232,12 +233,10 @@
     background-color: #f2f2f2;
 
     .agent-img {
-
-      /* overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: url("../../assets/images/index-bg.png")no-repeat; */
+      width: 100%;
+      background:url("../../assets/images/index-bg.png") no-repeat center center; 
+      background-size:100% 100%;
+      background-position:center center;
       img {
         width: 95%;
         margin: 0px auto 28px auto;
@@ -274,11 +273,13 @@
     /* 会员日特卖 */
     .member-timer {
       margin-top: 30px;
+
       .member-buy {
         font-size: 32px;
         color: #333;
         margin: 10px 24px 20px 24px;
         display: inline;
+
         span {
           font-size: 20px;
           color: #c9191d;
@@ -313,6 +314,7 @@
       .memberday-buy-list {
         width: 31%;
         margin-top: -70px;
+
         .super-points {
           height: 40px;
           background-color: #ce0101;
@@ -324,13 +326,15 @@
           position: relative;
           top: 90px;
           width: 88%;
-          margin:0 auto;
-          padding:2px;
-          b{
-          font-size: 36px;
-          font-weight:400;
+          margin: 0 auto;
+          padding: 2px;
+
+          b {
+            font-size: 36px;
+            font-weight: 400;
           }
         }
+
         .memberday-buy-market {
           font-size: 20px;
           color: #342f2c;

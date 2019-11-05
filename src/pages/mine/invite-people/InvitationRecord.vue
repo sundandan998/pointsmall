@@ -15,7 +15,6 @@
         <img src="../../../assets/images/left.svg" alt="">
         <!-- <i class="mint-cell-allow-left"></i> -->
         邀请人:{{this.people.query||this.$route.params.query}}</span>
-
       <!-- 在邀请记录页面点击电话列表展示的邀请人 -->
       <!-- <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{invitePeople.inviter}}</span> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"

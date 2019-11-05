@@ -12,6 +12,18 @@ a {
   color: #333;
 }
 
+.van-tab.van-tab--active {
+  color: #c9191d !important;
+}
+
+.van-tabs__line {
+  background-color: #c9191d !important;
+}
+
+.van-tab {
+  color: #333;
+}
+
 .fr {
   float: right;
 }
