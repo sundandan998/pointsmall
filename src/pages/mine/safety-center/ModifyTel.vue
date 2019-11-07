@@ -1,16 +1,19 @@
 <template>
   <div class="modify">
     <div class="modify-tel">
-      <mt-field label="手机号" class="tel-input" @blur.native.capture="sendCode" :state="CodeStatus" placeholder="请输入手机号"
+      <mt-field label="+86" class="tel-input" @blur.native.capture="sendCode" :state="CodeStatus" placeholder="请输入手机号"
         v-model="tel.mobile"></mt-field>
+    </div>
+    <div class="modify-code">
       <mt-field label="验证码" placeholder="请输入验证码" type="tel" v-model="tel.code">
         <input class="send-input" v-on:click="sendSmsCode" readonly="readonly" v-model="btnCode.btnContent" />
       </mt-field>
     </div>
-    <div class="modify-tel">
-      <mt-button size="large" class="modify-btn" @click="submit" :disabled="disabled">提交</mt-button>
+    <!-- 底部按钮 -->
+    <div class="bottom-button">
+      <van-button square size="large" type="danger" @click="submit" :disabled="disabled">提交</van-button>
       <router-link to="safety">
-        <mt-button size="large" class="modify-btn-cancel">取消</mt-button>
+        <van-button square size="large" type="warning">取消</van-button>
       </router-link>
     </div>
   </div>
@@ -127,6 +130,29 @@
   }
 </script>
 <style lang="scss">
+  @import "../../../assets/scss/Global.scss";
+
+  .modify {
+    .modify-tel {
+      margin: 10px 0;
+    }
+
+    .mint-field {
+      border-radius: 10px;
+    }
+    .modify-code {
+      .send-input {
+        border: 0.01333rem solid #a9a9a9;
+        float: right;
+        color: #a9a9a9;
+        padding: 2px 0;
+        text-align: center;
+        border-radius: 7px;
+        font-size: 28px;
+      }
+    }
+  }
+
   .tel-input {
     input.mint-field-core {
       width: 180px !important;
@@ -140,58 +166,16 @@
     width: 130px;
   }
 
-  body {
-    background-color: #fff;
-  }
-
   .mint-field-core input {
     width: 0 !important;
   }
 
-  .send-input {
-    border: none;
-    float: right;
-    width: 35%;
-  }
+
 
   .mint-field-other {
     top: 0;
     right: 25px;
     position: relative;
     width: 100px;
-  }
-
-  .modify {
-    margin-top: 150px;
-  }
-
-  .modify-tel {
-    width: 95%;
-    margin: 10px auto;
-    color: #333;
-
-    .mint-cell-wrapper {
-      border-bottom: 1px solid #d9d9d9;
-      background-image: none !important;
-    }
-  }
-
-  .modify-tel {
-
-    .modify-btn {
-      width: 95%;
-      background-color: #09bb07;
-      color: #fff;
-      margin: 50px auto;
-    }
-
-    .modify-btn-cancel {
-      width: 95%;
-      margin: 0px auto;
-      background-color: #fff;
-      color: #09bb07 !important;
-      border: 1px solid #09bb07;
-      margin-top: 20px;
-    }
   }
 </style>

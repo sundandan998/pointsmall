@@ -96,13 +96,6 @@ input.mint-field-core {
   left: 50% !important;
 }
 
-.bottom-button {
-  position: fixed;
-  width: 100%;
-  bottom: 10px;
-  text-align: center;
-}
-
 .order-button {
   width: 100%;
   position: fixed;

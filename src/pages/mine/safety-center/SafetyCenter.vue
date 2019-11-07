@@ -44,7 +44,6 @@
 </script>
 <style lang="scss">
   @import "../../../assets/scss/Global.scss";
-
   .safety-center {
     color:#333;
     font-size: 28px;

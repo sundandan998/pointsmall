@@ -1,10 +1,10 @@
 <template>
   <div class="pay">
     <div class="pay-title">
-      <mt-cell title="合计" :value="this.$route.params.total +'超级积分'"></mt-cell>
+      <mt-cell title="合计"> <b>{{this.$route.params.total}}</b> &nbsp;超级积分</mt-cell>
       <mt-cell v-if="integralToken.token_amount==undefined" title="支付通证" value="--"></mt-cell>
-      <mt-cell v-if="integralToken.token_amount!=undefined" title="支付通证">{{(integralToken.token_amount).toFixed(8)}}
-        ({{integralToken.token}}) </mt-cell>
+      <mt-cell v-if="integralToken.token_amount!=undefined" title="支付通证"><b>{{(integralToken.token_amount).toFixed(8)}}</b>
+        &nbsp;({{integralToken.token}}) </mt-cell>
     </div>
     <div class="pay-list">
       <van-radio-group v-model="radio">
@@ -33,7 +33,8 @@
       <mt-popup v-model="resevationModelModel" class="resevation-modal">
         <img class="fr" @click="modalHide" src="../../assets/images/cancel.svg" alt="" />
         <span>输入支付密码</span>
-        <p v-if="integralToken.token_amount!=undefined">{{(integralToken.token_amount).toFixed(8)}}({{integralToken.token}})</p>
+        <p v-if="integralToken.token_amount!=undefined">
+          {{(integralToken.token_amount).toFixed(8)}}({{integralToken.token}})</p>
         <van-password-input :value="pay_pwd" @focus="showKeyboard= true" />
       </mt-popup>
     </div>
@@ -215,30 +216,61 @@
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
 
-  .pay-list-content {
-    height: 50px;
-    border-bottom: 1px solid #f2f2f2;
-    padding-left: 15px;
-
-    img {
-      margin-right: 10px;
+  .pay {
+    .pay-title {
+      margin: 10px
+    }
+    .mint-cell-value{
+        color:#333;
+        b{
+          color:#c9191d;
+          font-weight:400;
+        }
+      }
+    .pay-title .mint-cell:first-child {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      
     }
 
-    p {
-      font-size: 0.076rem;
+    .pay-title .mint-cell:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
-  }
 
-  .mint-cell-wrapper {
-    background-image: none !important;
-    border-bottom: 1px solid #f2f2f2;
-  }
+    .pay-list-content {
+      height: 100px;
+      background-color: #fff;
+      margin: 0 12px;
+      border-radius: 10px;
 
-  .pay-list {
-    .van-radio {
-      position: relative;
-      top: -30px;
-      right: 10px;
+      img {
+        margin: 20px 30px 0 20px;
+      }
+
+      span {
+        margin-top: 20px;
+        display: inline-block;
+      }
+
+    }
+
+    .mint-cell-wrapper {
+      background-image: none !important;
+      border-bottom: 1px solid #f2f2f2;
+    }
+
+    .pay-list {
+      .van-radio {
+        position: relative;
+        top: 15px;
+        right: 10px;
+      }
+    }
+
+    .van-radio__icon--checked .van-icon {
+      background-color: #c9191d;
+      border: 1px solid #c9191d;
     }
   }
 </style>

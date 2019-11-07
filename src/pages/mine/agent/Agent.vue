@@ -217,17 +217,27 @@
       // },
       // 导出excel
       downloadFile() {
-        // debugger
-        api.export().then(res => {
-          if (res.code == 0) {
-            var url = res.url
-            var iframe = document.createElement("iframe")
-            iframe.style.display = "none"
-            iframe.src = url
-            document.body.appendChild(iframe)
-            // this.operateFile(res)
+        this.$messagebox({
+          title: '导出确认',
+          message: `将导出为"待付款"的订单至EXCEL,请注意保存`,
+          cancelButtonText: '取消',
+          confirmButtonText: '确定',
+          showCancelButton: true
+        }).then(action => {
+          if (action == 'confirm') {
+            api.export().then(res => {
+              if (res.code == 0) {
+                var url = res.url
+                var iframe = document.createElement("iframe")
+                iframe.style.display = "none"
+                iframe.src = url
+                document.body.appendChild(iframe)
+                // this.operateFile(res)
+              }
+            }).catch(err => { })
           }
-        }).catch(err => { })
+        })
+        // debugger
       },
 
       // tab栏展示列表

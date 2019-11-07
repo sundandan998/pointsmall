@@ -39,7 +39,6 @@
     },
     created() {
       document.title = '明细'
-      console.log(this.detailData)
     },
     methods: {
       // 上拉加载
