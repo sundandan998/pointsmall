@@ -13,13 +13,13 @@
       <div class="agent-member-img">
         <van-row>
           <router-link :to="{name:'Index',params:{position:0}}">
-            <van-col span="8"><img src="../../assets/images/index-680.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/redbag4@2x.png" alt=""></van-col>
           </router-link>
           <router-link :to="{name:'Index',params:{position:1}}">
-            <van-col span="8"><img src="../../assets/images/index-1380.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/redbag2@2x.png" alt=""></van-col>
           </router-link>
           <router-link :to="{name:'Index',params:{position:2}}">
-            <van-col span="8"><img src="../../assets/images/index-2580.png" alt=""></van-col>
+            <van-col span="8"><img src="../../assets/images/redbag3@2x.png" alt=""></van-col>
           </router-link>
         </van-row>
       </div>
@@ -49,7 +49,7 @@
     </div>
     <!-- 代理商专区 -->
     <div class="agent-area">
-      <p>代理商专区 <span class="fr" @click="more">更多></span></p>
+      <p>代理商专区 <span class="fr more" @click="more">更多></span></p>
       <div class="agent-area-list" v-for="(item,index) in agent" v-if="index<3">
         <div @click="more">
           <!-- <router-link :to="/product/+item.id"> -->
@@ -208,7 +208,6 @@
         }).catch(err => {
 
         })
-
       },
       // 购买按钮 判断是否是代理商
       buy(id) {
@@ -258,13 +257,16 @@
 
       .agent-member-img {
         overflow: hidden;
-        width: 100%;
+        /* width: 100%; */
         height: 100%;
-        background: url("../../assets/images/index-member.png")no-repeat center top;
+        margin:0 24px;
+        background: url("../../assets/images/index-member(2).png")no-repeat center center;
+        background-size: 100% 100%;
+        background-position: center center;
         /* background: url("../../assets/images/index-member(2).png")no-repeat center top; */
 
         img {
-          width: 70%;
+          width: 80%;
           display: block;
           margin: 36px auto 0px auto;
         }
@@ -273,8 +275,7 @@
 
     /* 会员日特卖 */
     .member-timer {
-      margin-top: 30px;
-
+      margin-top: 90px;
       .member-buy {
         font-size: 32px;
         color: #333;
@@ -373,6 +374,10 @@
       /* 最底部更多文字 */
       .agent-more {
         text-align: center;
+      }
+      .more{
+        font-size: 22px;
+        /* margin-right: 24px; */
       }
 
       /* 代理商专区/更多文字 */

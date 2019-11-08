@@ -45,11 +45,11 @@
 <style lang="scss">
   @import "../../../assets/scss/Global.scss";
   .safety-center {
+    margin: 10px 24px;
     color:#333;
     font-size: 28px;
     .safety-center-tel {
       margin: 10px 0;
-
       .mint-cell {
         border-radius: 10px;
       }
