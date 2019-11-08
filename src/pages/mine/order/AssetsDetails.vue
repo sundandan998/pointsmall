@@ -1,7 +1,10 @@
 <template>
   <div class="details">
     <div class="details-title">
-      <img src="../../../assets/images/shourang@2x.png" alt="">
+      <img src="../../../assets/images/shourang@2x.png" alt="" v-if="detailsData.detail_type=='受让'">
+      <img src="../../../assets/images/zhuanrang@2x.png" alt="" v-if="detailsData.detail_type=='转让'">
+      <img src="../../../assets/images/zengsong@2x.png" alt="" v-if="detailsData.detail_type=='赠送'">
+      <img src="../../../assets/images/xiaofei@2x.png" alt="" v-if="detailsData.detail_type=='消费'">
       <span class="detail-type">{{detailsData.detail_type}}</span>
       <p>{{detailsData.transaction_type==0?'+':'-'}}{{detailsData.amount|keepTwoNum}} <span>({{detailsData.token}})</span> </p>
     </div>

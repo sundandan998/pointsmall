@@ -5,12 +5,12 @@
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="detail-list-text" v-for="item in detailData">
           <router-link :to="/assetsdetails/+item.id">
-            <mt-cell :title="item.detail_type" :label="item.transaction_time" is-link>
+            <mt-cell v-if="item.detail_type!='冻结'&&item.detail_type!='解冻'" :title="item.detail_type" :label="item.transaction_time" is-link>
               <span>{{item.transaction_type==0?'+':'-'}}{{item.amount|keepTwoNum}}</span><b>({{item.token}})</b> 
-              <!-- <img  v-if="item.detail_type='转让'" slot="icon" src="../../../assets/images/zhuanrang@2x.png" width="20" height="20"> -->
-              <!-- <img v-if="item.detail_type='赠送'" slot="icon" src="../../../assets/images/zengsong@2x.png" width="20" height="20"> -->
-              <!-- <img slot="icon" src="../../../assets/images/zhuanrang@2x.png" width="20" height="20" v-if="item.detail_type=""> -->
-              <!-- <img slot="icon" src="../../../assets/images/zhuanrang@2x.png" width="20" height="20" v-if="item.detail_type=""> -->
+              <img v-if="item.detail_type=='转让'" slot="icon" src="../../../assets/images/zhuanrang@2x.png" width="20" height="20">
+              <img v-if="item.detail_type=='赠送'" slot="icon" src="../../../assets/images/zengsong@2x.png" width="20" height="20">
+              <img v-if="item.detail_type=='受让'" slot="icon" src="../../../assets/images/shourang@2x.png" width="20" height="20" >
+              <img v-if="item.detail_type=='消费'"slot="icon" src="../../../assets/images/xiaofei@2x.png" width="20" height="20">
             </mt-cell>
           </router-link>
         </div>

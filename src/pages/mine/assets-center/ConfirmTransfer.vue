@@ -6,9 +6,9 @@
       </van-notice-bar>
     </div>
     <div class="confirm-transfer-content">
-      <mt-cell title="接收方" :value="this.$route.params.transferParams.mobile"></mt-cell>
+      <mt-cell title="接收方" :value="this.$route.params.transferParams.mobile" class="confirm-tel"></mt-cell>
       <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
-      <mt-cell title="手续费" :value="this.$route.params.token">0</mt-cell>
+      <mt-cell title="手续费" :value="this.$route.params.token" class="confirm-free">0</mt-cell>
     </div>
     <div class="confirm-transfer-progress">
       <div class="confirm-transfer-num" v-if="this.$route.params.action=='freeze'">
@@ -186,48 +186,39 @@
   }
 
   .confirm-transfer-content {
-    .mint-cell {
-      margin-bottom: 0px;
-      min-height: 40px;
+    margin:10px 12px;
+    .confirm-tel{
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .confirm-free{
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
   }
 
   /* 冻结部分 */
   .confirm-transfer-progress {
-    border-bottom: 1px solid #f2f2f2;
-    margin-top: 10px;
-
+    background-color: #fff;
+    margin:10px 12px;
+    border-radius:10px;
     span {
-      margin: 0 30px 0 15px;
-      font-size: 0.078rem;
+      margin:20px;
+      display: inline-block;
+      font-size: 26px;
+      padding-bottom: 20px;
     }
-
-    .confirm-transfer-nums {
-      border-top: 1px solid #f2f2f2;
-      margin-top: 5px;
-
-      p {
-        margin-top: 5px;
-      }
-
-      img {
-        margin: -30px 10px 0 0;
-      }
+    img{
+      position: relative;
+      top:-30px;
+      right:20px;
     }
-
-    .confirm-transfer-num span:last-child {
-      display: block;
-      margin-bottom: 5px;
-    }
-
     .progress {
       width: 85%;
-      margin-left: 15px;
-
+      margin-left: 25px;
       .el-slider__runway {
         background-color: #409EFF;
       }
-
     }
   }
 </style>

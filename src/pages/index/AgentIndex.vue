@@ -234,9 +234,10 @@
 
     .agent-img {
       width: 100%;
-      background:url("../../assets/images/index-bg.png") no-repeat center center; 
-      background-size:100% 100%;
-      background-position:center center;
+      background: url("../../assets/images/index-bg.png") no-repeat center center;
+      background-size: 100% 100%;
+      background-position: center center;
+
       img {
         width: 95%;
         margin: 0px auto 28px auto;

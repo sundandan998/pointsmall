@@ -4,8 +4,8 @@
       <mt-switch v-model="transferParams.out"></mt-switch>
     </mt-cell>
     <div class="transfer-progress-name">
-      <span>接收人</span>
-      <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile"></mt-field>
+      <mt-cell title="接收人" class="transfer-people"></mt-cell>
+      <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile" class="transfer-tel"></mt-field>
     </div>
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
@@ -46,7 +46,7 @@
         transferParams: {
           mobile: '',
           amount: [],
-          out:false
+          out: false
         }
       }
     },
@@ -87,55 +87,79 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-  .transfer-title {
-    padding: 10px 0 10px 15px;
-    border-bottom: 1px solid #f2f2f2;
-
-    .fee {
-      font-size: 0.076rem;
-      color: #409EFF;
-    }
-  }
-
-  .transfer-progress {
-    height: 120px;
-    border-bottom: 2px solid #f2f2f2;
-
-    .block {
-      width: 85%;
-      margin: 0 auto;
+  .transfer {
+    .transfer-title {
+      margin: 0px 24px;
+      height: 90px;
+      background-color: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      line-height: 90px;
+      padding-left: 20px;
+      font-size: 30px;
+      .fee {
+        font-size: 24px;
+        color: #c9191d;
+      }
     }
 
-    .el-slider__runway.show-input {
-      margin-right: 0;
+    .transfer-progress-name {
+      margin: 10px 24px;
+      .transfer-people {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .transfer-tel {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
+    .transfer-progress {
+      height: 160px;
+      margin: 0px 24px;
+      background-color: #fff;
+      border-bottom-left-radius:10px;
+      border-bottom-right-radius:10px;
+
+      .block {
+        margin: 0 20px;
+      }
+
+      .el-slider__runway.show-input {
+        margin-right: 0;
+      }
+
+      .el-slider__input {
+        float: unset;
+        margin-top: 16px;
+        margin-bottom: 10px;
+        width: 200px;
+      }
+
+      .el-slider__marks .el-slider__marks-text:last-child {
+        left: 100% !important;
+      }
+
+      .el-slider__stop.el-slider__marks-stop {
+        left: 100% !important;
+      }
     }
 
-    .el-slider__input {
-      float: unset;
-      margin-top: 16px;
-      margin-bottom: 10px;
-      width: 130px;
+    .el-input-number--small .el-input-number__decrease, .el-input-number--small .el-input-number__increase{
+      height: 55px;
+      line-height: 55px;
+      font-size: 32px;
+      width: 50px;
+    }
+    .el-input--small .el-input__inner{
+      height: 55px;
+      font-size: 24px;
     }
 
-    .el-slider__marks .el-slider__marks-text:last-child {
-      left: 100% !important;
+    .transfer-code {
+      margin-top: 20px;
+      margin-right: 40px;
     }
-
-    .el-slider__stop.el-slider__marks-stop {
-      left: 100% !important;
-    }
-  }
-
-  .transfer-progress-name {
-    span {
-      margin-top: 10px;
-      display: block;
-      margin-left: 15px;
-    }
-  }
-
-  .transfer-code {
-    margin-top: 20px;
-    margin-right: 10px;
   }
 </style>

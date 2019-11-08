@@ -84,6 +84,18 @@ input.mint-field-core {
   right: 50%;
 }
 
+.van-button--primary {
+  color: #fff !important;
+  background-color: #333 !important;
+  height: 53px !important;
+  border: 1px solid #333;
+  line-height: 48px !important;
+  width: 50% !important;
+  position: fixed !important;
+  bottom: 5px !important;
+  right: 50%;
+}
+
 .van-button--danger {
   color: #fff !important;
   background-color: #c9191d !important;
