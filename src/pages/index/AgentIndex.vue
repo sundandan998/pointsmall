@@ -40,8 +40,8 @@
             <p class="super-points"><b>{{item.price|keepTwoNum}}</b> 超级积分</p>
             <span class="memberday-buy-market">市场价￥{{item.market_price|keepTwoNum}}</span>
             <div class="memberday-buy-list-img">
-              <!-- <img :src="item.default_image" alt=""> -->
-              <img src="../../assets/images/Memberimg.png" alt="" class="fl">
+              <img :src="item.default_image" alt="" class="fl">
+              <!-- <img src="../../assets/images/Memberimg.png" alt="" class="fl"> -->
             </div>
           </router-link>
         </div>
@@ -70,6 +70,17 @@
       </div>
       <!-- <p class="agent-more" @click="more">更多></p> -->
     </div>
+    <!-- 弹框部分 -->
+    <div class="agent-modal">
+      <van-popup v-model="show" position="top" @click.native="showPopup">
+        <div class="non-agent-img">
+          <img src="../../assets/images/close@2x.png" alt="" class="close fr">
+          <img src="../../assets/images/noagent.png" alt="">
+          <img src="../../assets/images/erweima@2x.png" alt="" class="qrcode">
+          <img src="../../assets/images/money.png" alt="" class="money">
+        </div>
+      </van-popup>
+    </div>
     <!-- 底部tabber -->
     <div>
       <tabber :message="selected"></tabber>
@@ -82,6 +93,7 @@
   export default {
     data() {
       return {
+        show: false,
         selected: 'index',
         message: 'index',
         goodsList: '',
@@ -200,9 +212,10 @@
                 name: 'AgentList'
               })
             } else {
-              this.$router.push({
-                name: 'NonAgent'
-              })
+              this.show=true
+              // this.$router.push({
+              //   name: 'NonAgent'
+              // })
             }
           }
         }).catch(err => {
@@ -217,11 +230,15 @@
             params: { id: id, path: 'index' }
           })
         } else {
-          this.$router.push({
-            name: 'NonAgent'
-          })
+          this.show = false
+          // this.$router.push({
+          //   name: 'NonAgent'
+          // })
         }
-      }
+      },
+      showPopup() {
+      this.show = !this.show;
+    }
     }
   }
 </script>
@@ -259,7 +276,7 @@
         overflow: hidden;
         /* width: 100%; */
         height: 100%;
-        margin:0 24px;
+        margin: 0 24px;
         background: url("../../assets/images/index-member(2).png")no-repeat center center;
         background-size: 100% 100%;
         background-position: center center;
@@ -276,6 +293,7 @@
     /* 会员日特卖 */
     .member-timer {
       margin-top: 90px;
+
       .member-buy {
         font-size: 32px;
         color: #333;
@@ -375,7 +393,10 @@
       .agent-more {
         text-align: center;
       }
-      .more{
+
+
+
+      .more {
         font-size: 22px;
         /* margin-right: 24px; */
       }
@@ -402,7 +423,7 @@
         background-color: #fff;
         border: 1px solid #DEDEDE;
         border-radius: 20px;
-        height: auto;
+        height: 160px;
 
         /* 列表标题 */
         b {
@@ -440,6 +461,7 @@
         }
 
         button {
+          width: 178px;
           font-size: 30px;
           background-color: #E51C23;
           color: #fff;
@@ -448,6 +470,41 @@
           right: 10px;
         }
       }
+    }
+
+    .agent-modal {
+      .non-agent-img {
+        width: 100%;
+        top: 0;
+        z-index: -1;
+
+        img {
+          display: block;
+          border: 0;
+          width: 100%;
+        }
+
+        .close {
+          width: 50px;
+          margin: 30px 30px 60px 0;
+        }
+
+        .qrcode {
+          height: 200px;
+          width: 165px;
+          margin: -165px auto 60px auto;
+        }
+
+        .money {
+          margin-top: 120px;
+        }
+      }
+
+      .van-popup {
+        width: 100%;
+        background-color: unset;
+      }
+
     }
   }
 </style>

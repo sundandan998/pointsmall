@@ -193,6 +193,7 @@
           height: 290px;
           width: 290px;
           margin-right: 10px;
+          border-radius:20px;
         }
       }
 
