@@ -116,10 +116,12 @@ input.mint-field-core {
 }
 
 .order-button button {
+  height: 96px;
   background-color: #C9191D;
   width: 100%;
   display: inline-block;
   color: #fff !important;
+  border-radius: unset;
 }
 
 .health-score {
@@ -176,30 +178,6 @@ input.mint-field-core {
   color: #82BFF4;
   margin-right: 15px;
   margin-top: 10px;
-}
-
-.health-score-details {
-  width: 100%;
-  height: 30px;
-}
-
-.health-score-btn {
-  margin-left: 10px;
-  margin-top: 20px;
-}
-
-.health-score-btn .turn-out {
-  background-color: #09bb07;
-}
-
-.health-score-btn .turn-into {
-  border: 1px solid #09bb07 !important;
-  color: #09bb07 !important;
-  background-color: #fff;
-}
-
-.health-information {
-  margin-top: 18px;
 }
 
 .reservation-title .mint-cell-value {

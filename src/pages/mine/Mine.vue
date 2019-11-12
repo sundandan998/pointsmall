@@ -102,23 +102,27 @@
   @import '../../assets/scss/Global.scss';
 
   .home {
+    .home-body{
+      margin-top: 10px;
+    }
     .mint-cell {
-      margin: 0 12px;
+      margin: 0px 12px;
       border-radius: 10px;
     }
 
     .home-body-list {
       margin-bottom: 10px;
     }
+    .center{
+      background-color: #fff;
+      margin: 0px 24px 10px 24px;
+      border-radius: 20px;
+    }
 
   }
-  .center .mint-cell:first-child {
-    border-bottom-right-radius: unset;
-    border-bottom-left-radius: unset;
-  }
-  .center .mint-cell:last-child {
-    border-top-right-radius: unset;
-    border-top-left-radius: unset;
+  .center .mint-cell:first-child{
+    border-bottom:0.1px solid #f2f2f2;
+    border-radius: unset;
   }
   .order .mint-cell:first-child{
     border-bottom-right-radius: unset;

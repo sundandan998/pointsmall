@@ -244,16 +244,13 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-
   .agent {
     background-color: #f2f2f2;
-
     .agent-img {
       width: 100%;
       background: url("../../assets/images/index-bg.png") no-repeat center center;
       background-size: 100% 100%;
       background-position: center center;
-
       img {
         width: 95%;
         margin: 0px auto 28px auto;
@@ -261,7 +258,6 @@
         border-radius: 7px;
       }
     }
-
     /* 会员权益包 */
     .agent-member {
       height: 300px;
@@ -393,9 +389,6 @@
       .agent-more {
         text-align: center;
       }
-
-
-
       .more {
         font-size: 22px;
         /* margin-right: 24px; */
@@ -409,22 +402,21 @@
           font-size: 24px;
         }
       }
-
-      /* 列表图片 */
-      img {
-        width: 160px;
-        height: 160px;
-        margin: 0 10px;
-      }
-
       .agent-area-list {
         margin: 20px 0;
-        padding: 20px 0px;
         background-color: #fff;
         border: 1px solid #DEDEDE;
         border-radius: 20px;
-        height: 160px;
-
+        height: 290px;
+        .member-day-list-img{
+          img{
+            height: 290px;
+            border-top-left-radius:20px;
+            border-bottom-left-radius:20px;
+            width: 290px;
+            margin-right: 10px;
+          }
+        }
         /* 列表标题 */
         b {
           display: block;
@@ -441,10 +433,14 @@
 
         /* 超级积分文字 */
         p {
-          margin-top: 30px;
+          margin:30px 0 48px 0px;
           font-size: 28px;
           color: #333;
           display: inline-block;
+          overflow: hidden;
+          white-space: nowrap;
+          width: 400px;
+          text-overflow: ellipsis;
         }
 
         /* 市场价文字 */
@@ -466,7 +462,7 @@
           background-color: #E51C23;
           color: #fff;
           position: relative;
-          top: -30px;
+          top:38px;
           right: 10px;
         }
       }

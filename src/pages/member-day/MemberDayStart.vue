@@ -1,7 +1,8 @@
 <template>
   <div class="member-day">
     <div class="member-day-title">
-      <span v-if="timeInfo.start==false">距开始 <b>{{day}}</b>天 <b>{{hour}}</b> 时 <b>{{min}}</b> 分 <b>{{second}}</b> 秒</span>
+      <span v-if="timeInfo.start==false">距开始 <b>{{day}}</b>天 <b>{{hour}}</b> 时 <b>{{min}}</b> 分 <b>{{second}}</b>
+        秒</span>
       <span v-if="timeInfo.start==true">距结束 <b>{{hour}}</b>
         <h6>:</h6><b>{{min}}</b>
         <h6>:</h6><b>{{second}}</b>
@@ -17,14 +18,16 @@
               <img :src="item.default_image" alt="" class="fl">
             </div>
             <span class="member-day-text">
-              <p>{{item.name}}</p>
+              <p class="member-day-name">{{item.name}}</p>
               <p class="member-day-price"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
               <span class="market-price">市场价￥{{item.market_price|keepTwoNum}}</span>
             </span>
             <div class="member-day-button fr">
-              <img src="../../assets/images/member-btn.png" alt="" class="fr" v-if="item.stock!=0&&timeInfo.start==true">
-              <img src="../../assets/images/member-btn (2).png" alt="" class="fr" v-if="item.stock==0&&timeInfo.start==true">
-              <img src="../../assets/images/member-btn3.png" alt=""  class="fr" v-if="timeInfo.start==false">
+              <img src="../../assets/images/member-btn.png" alt="" class="fr"
+                v-if="item.stock!=0&&timeInfo.start==true">
+              <img src="../../assets/images/member-btn (2).png" alt="" class="fr"
+                v-if="item.stock==0&&timeInfo.start==true">
+              <img src="../../assets/images/member-btn3.png" alt="" class="fr" v-if="timeInfo.start==false">
             </div>
           </div>
           <div v-if="item.stock<=10&&item.stock!=0">
@@ -179,64 +182,74 @@
       }
     }
 
-    /* 商品部分 */
-    .member-day-list {
-      background-color: #fff;
-      height: 290px;
-      margin: 10px 24px;
-      border: 1px solid #DEDEDE;
-      border-radius: 20px;
+    .index-body {
+      margin-bottom: 100px;
 
-      /* 商品图片 */
-      .member-day-list-img {
-        img {
-          height: 290px;
-          width: 290px;
-          margin-right: 10px;
-          border-radius:20px;
-        }
-      }
+      /* 商品部分 */
+      .member-day-list {
+        background-color: #fff;
+        height: 290px;
+        margin: 10px 24px;
+        border: 1px solid #DEDEDE;
+        border-radius: 20px;
 
-      /* 商品介绍 */
-      .member-day-text {
-        margin-top: 58px;
-        display: inline-block;
-
-        p {
-          font-size: 28px;
-          overflow: hidden;
-          white-space: nowrap;
-          width: 400px;
-          text-overflow: ellipsis;
-        }
-
-        .member-day-price {
-          font-size: 24px;
-          margin: 20px 0 0px 0;
-
-          span {
-            font-size: 32px;
-            color: #ce0101;
+        /* 商品图片 */
+        .member-day-list-img {
+          img {
+            height: 290px;
+            width: 290px;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            margin-right: 10px;
           }
         }
 
-        .market-price {
-          font-size: 22px;
-          color: #999;
+        /* 商品介绍 */
+        .member-day-text {
+          display: inline-block;
+
+          .member-day-name {
+            margin: 30px 0 48px 0;
+          }
+
+          p {
+            font-size: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 400px;
+            text-overflow: ellipsis;
+          }
+
+          .member-day-price {
+            font-size: 24px;
+
+            span {
+              font-size: 32px;
+              color: #ce0101;
+            }
+          }
+
+          .market-price {
+            font-size: 22px;
+            color: #999;
+          }
         }
       }
-    }
-    .remaining {
-      color: #7c4117;
-      position: relative;
-      top: -120px;
-      right: 10px;
-    }
 
-    .member-day-button {
-      img {
-        width: 60%;
-        margin-right: 10px;
+      .remaining {
+        color: #7c4117;
+        position: relative;
+        top: -50px;
+        display: inline;
+        right: -170px;
+      }
+
+      .member-day-button {
+        img {
+          width: 178px;
+          height: 60px;
+          margin-right: 10px;
+        }
       }
     }
   }

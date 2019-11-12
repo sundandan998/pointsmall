@@ -2,7 +2,7 @@
   <div class="detail">
     <div class="detail-list">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
-        :error.sync="error" error-text="请求失败，点击重新加载">
+        :error.sync="error" error-text="请求失败，点击重新加载" >
         <div class="detail-list-text" v-for="item in detailData">
           <router-link :to="/assetsdetails/+item.id">
             <mt-cell v-if="item.detail_type!='冻结'&&item.detail_type!='解冻'" :title="item.detail_type" :label="item.transaction_time" is-link>
@@ -67,7 +67,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
   .detail-list {
     margin:10px 24px 70px 24px;
     .mint-cell-label{
@@ -83,15 +82,13 @@
         color:#333;
       }
     }
-    .detail-list-text{
-    }
   }
   .detail-list .detail-list-text:first-child .mint-cell{
-    border-top-right-radius:20px;
-    border-top-left-radius:20px;
+    border-top-right-radius:20px !important;
+    border-top-left-radius:20px !important;
   }
-  /* .detail-list .detail-list-text:last-child .mint-cell{
-    border-top-right-radius:20px;
-    border-top-left-radius:20px;
-  } */
+  .detail-list-text:last-child .detail-list-text{
+    border-bottom-right-radius:20px;
+    border-bottom-left-radius:20px;
+  }
 </style>

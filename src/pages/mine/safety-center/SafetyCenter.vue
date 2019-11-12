@@ -45,25 +45,30 @@
 <style lang="scss">
   @import "../../../assets/scss/Global.scss";
   .safety-center {
-    margin: 10px 24px;
-    color:#333;
+    color: #333;
     font-size: 28px;
+
     .safety-center-tel {
-      margin: 10px 0;
+      margin: 10px 24px;
+
       .mint-cell {
         border-radius: 10px;
       }
-      .mint-cell-value{
-        span{
-          color:#999;
+
+      .mint-cell-value {
+        span {
+          color: #999;
         }
       }
     }
+
     .safety-center-pwd {
+      margin: 10px 24px;
       a.mint-cell.modify-pwd {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
       }
+
       a.mint-cell.modify-pay-pwd {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;

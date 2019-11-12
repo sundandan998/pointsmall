@@ -259,10 +259,11 @@
         }
 
         .el-slider__runway.disabled .el-slider__button {
-          height: 30px;
+          /* height: 30px;
           width: 30px;
           top: 4px;
-          position: relative;
+          position: relative; */
+          display: none;
         }
       }
     }
