@@ -140,8 +140,8 @@
           line-height: 26px;
           width: 26px;
           height: 26px;
-          position: relative;
-          left: -25px;
+          /* position: relative;
+          left: -25px; */
         }
 
       }

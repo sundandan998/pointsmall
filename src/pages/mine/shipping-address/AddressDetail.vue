@@ -1,10 +1,10 @@
 <template>
   <div class="address-detail">
     <div class="edit-address">
-      <van-address-edit :address-info="AddressInfo" :area-list="areaList" @delete="onDelete" show-delete id="text" show-set-default
-        @save="onSave"/>
+      <van-address-edit :address-info="AddressInfo" :area-list="areaList" @delete="onDelete" show-delete id="text"
+        show-set-default @save="onSave" delete-button-text="删除该收获地址" />
+      <img src="../../../assets/images/del.svg" alt="">
     </div>
-    <!-- <mt-cell title="删除该收获地址" @delete.native="onDelete" show-delete id="text"></mt-cell> -->
     <router-link :to="{name:'ShippingAddress',params:{id:this.$route.params.id}}">
       <div>
         <van-button square size="large" type="warning">取消</van-button>
@@ -42,7 +42,7 @@
           if (res.code == 0) {
             this.$router.push({
               name: 'ShippingAddress',
-              params: { id: this.$route.params.id,path:this.$route.params.path }
+              params: { id: this.$route.params.id, path: this.$route.params.path }
             })
             Toast({
               message: res.msg,
@@ -89,51 +89,47 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+
   .address-detail {
     .van-button--warning {
       width: 50%;
     }
+
     .van-address-edit__buttons .van-button {
       margin-bottom: 0px !important;
     }
-    .van-button--warning {
-      color: #09BB07 !important;
-      background-color: #fff !important;
-      border: 1px solid #09BB07 !important;
-      border-top-left-radius: 25px !important;
-      border-bottom-left-radius: 25px !important;
-      height: 40px !important;
-      line-height: 40px !important;
-      width: 50% !important;
-      bottom: 0px !important;
-      position: fixed !important;
-    }
+
     .edit-address {
-      .van-button--default {
-        color: #fff !important;
-        background-color: #E51C23 !important;
-        border: 1px solid #E51C23 !important;
-        width: 50% !important;
-        position: fixed !important;
-        left: 50% !important;
-        bottom: 0px !important;
-        height: 40px !important;
-        border-top-right-radius: 25px !important;
-        border-bottom-right-radius: 25px !important;
+      margin: 10px 24px;
+
+      .van-cell {
+        margin-bottom: 10px;
+        border-radius: 20px;
       }
 
-      .van-button--danger {
-        color: #fff !important;
-        background-color: #09BB07 !important;
-        height: 40px !important;
-        line-height: 40px !important;
-        width: 100% !important;
-        position: fixed !important;
-        margin: 0 auto !important;
-        bottom: 70px !important;
-        border-radius: 25px !important;
-        left: 0 !important;
+      .van-cell__value--alone {
+        height: 44px;
+      }
+
+      .van-button--default {
+        border-radius: 20px;
+
+        .van-button__text {
+          color: #c9191d;
+        }
+      }
+
+      .van-address-edit__buttons {
+        padding: 0;
+      }
+
+      img {
+        position: relative;
+        top: -60px;
+        left: 200px;
+        color:#c9191d;
       }
     }
+
   }
 </style>

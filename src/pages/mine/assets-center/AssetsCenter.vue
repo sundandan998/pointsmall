@@ -91,10 +91,11 @@
     margin: 10px 12px;
     border-radius: 10px;
     .assets-center-list-left {
+      width: 40%;
       display: -webkit-box;
       margin: 30px 0;
       img {
-        margin: 7px 30px 0 20px;
+        margin: 7px 20px 0 20px;
       }
     }
 
@@ -110,8 +111,11 @@
     }
 
     .assets-center-list-right {
+      width: 60%;
       p {
         color: #999;
+        margin-top: 40px;
+        text-align:right;
         margin-right: 20px;
       }
 
