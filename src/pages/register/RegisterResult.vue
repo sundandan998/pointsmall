@@ -25,8 +25,15 @@
   export default {
     data() {
       return {
-
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     created() {
       document.title = '千企联盟'
@@ -35,13 +42,10 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-  body{
-    background-color: #fff;
-  }
   .result {
     .result-header {
       background-color: #fff !important;
-      margin: 50px 0 80px 54px;
+      margin: 50px 0 80px 0px;
 
       label.mint-button-text {
         color: #333 !important;

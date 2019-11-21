@@ -9,13 +9,15 @@
           </mt-cell>
         </div>
         <div class="home-body-list center">
-          <mt-cell title="代理商中心" to="agent" is-link v-if="shops.is_agent==true">
-            <img slot="icon" src="../../assets/images/agent.svg">
-          </mt-cell>
           <mt-cell title="供货商中心" to="merchant" is-link v-if="shops.is_shops==true">
             <img slot="icon" src="../../assets/images/merchant.svg">
           </mt-cell>
         </div>
+        <div class="home-body-list center">
+            <mt-cell title="代理商中心" to="agent" is-link v-if="shops.is_agent==true">
+              <img slot="icon" src="../../assets/images/agent.svg">
+            </mt-cell>
+          </div>
         <div class="home-body-list order">
           <mt-cell title="资产中心" to="assets" is-link>
             <img slot="icon" src="../../assets/images/access.svg">
@@ -100,11 +102,11 @@
 </script>
 <style lang="scss">
   @import '../../assets/scss/Global.scss';
-
   .home {
-    .home-body{
+    .home-body {
       margin-top: 10px;
     }
+
     .mint-cell {
       margin: 0px 12px;
       border-radius: 10px;
@@ -113,25 +115,19 @@
     .home-body-list {
       margin-bottom: 10px;
     }
-    .center{
-      background-color: #fff;
-      margin: 0px 24px 10px 24px;
-      border-radius: 20px;
-    }
 
   }
-  .center .mint-cell:first-child{
-    border-bottom:0.1px solid #f2f2f2;
-    border-radius: unset;
-  }
-  .order .mint-cell:first-child{
+
+  .order .mint-cell:first-child {
     border-bottom-right-radius: unset;
     border-bottom-left-radius: unset;
   }
-  .order .mint-cell:nth-child(2){
+
+  .order .mint-cell:nth-child(2) {
     border-radius: unset;
   }
-  .order .mint-cell:last-child{
+
+  .order .mint-cell:last-child {
     border-top-right-radius: unset;
     border-top-left-radius: unset;
   }

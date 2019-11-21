@@ -5,11 +5,11 @@
       <p>未注册则将为您自动创建新账号</p>
     </div>
     <div class="register-tel">
-      <img src="../../assets/images/register-phone.png" width="14px" height="21px">
+      <img src="../../assets/images/register-phone.png" width="14px" height="21px" class="fl">
       <mt-field class="tel-input" @blur.native.capture="sendCode" placeholder="请填写手机号" v-model="registerParams.mobile">
         <img src="../../assets/images/register-delete.png" height="14px" width="14px" class="fr register-delete">
       </mt-field>
-      <img src="../../assets/images/register-code.png" width="15px" height="17px">
+      <img src="../../assets/images/register-code.png" width="15px" height="17px" class="fl">
       <mt-field placeholder="请输入验证码" type="number" v-model="registerParams.code">
         <input class="send-input" v-on:click="sendSmsCode" readonly="readonly" v-model="btnCode.btnContent" />
       </mt-field>
@@ -53,6 +53,14 @@
     },
     created() {
       document.title = '千企联盟'
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     methods: {
       // 注册
@@ -184,13 +192,9 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-  body{
-    background-color: #fff;
-  }
   .register {
     .register-title {
       margin: 118px 0px 10px 54px;
-
       span {
         font-size: 60px;
         color: #c9191D;
@@ -203,9 +207,7 @@
       }
     }
   }
-  .mint-field-core input {
-    /* width: 0 !important; */
-  }
+
   .send-input {
     border: none;
     float: right;
@@ -221,10 +223,11 @@
   .register-tel {
     margin: 0 54px 124px 54px;
 
-    img {
+    .fl {
       position: relative;
-      top: 80px;
+      top: 40px;
       z-index: 1;
+      left: 30px;
     }
 
     .register-delete {
@@ -239,6 +242,7 @@
 
     .mint-cell-wrapper {
       border-bottom: 1px solid #d9d9d9;
+
       .mint-field-clear {
         display: none;
       }
@@ -252,6 +256,7 @@
       font-size: 20px;
       color: #333;
       margin-bottom: 10px;
+
       span {
         color: #c9191D;
       }

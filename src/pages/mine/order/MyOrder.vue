@@ -7,7 +7,7 @@
           <van-tab title="全部">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p class="product-time">{{item.transaction_time}}<span class="fr status">{{item.status|orderStatus}}</span></p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
@@ -20,7 +20,7 @@
           <van-tab title="待发货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p class="product-time">{{item.transaction_time}}<span class="fr status">{{item.status|orderStatus}}</span></p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
@@ -32,7 +32,7 @@
           <van-tab title="待收货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p class="product-time">{{item.transaction_time}}<span class="fr status">{{item.status|orderStatus}}</span></p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
@@ -44,7 +44,7 @@
           <van-tab title="已完成">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p class="product-time">{{item.transaction_time}}<span class="fr status">{{item.status|orderStatus}}</span></p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
@@ -138,7 +138,6 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-
   .my-order {
     .product {
       background-color: #fff;
@@ -160,7 +159,7 @@
         margin-left: 20px;
         border-bottom: 1px solid #f2f2f2;
         span{
-          margin-right: 20px;
+          margin: 0px 20px 0 0;
           color:#c9191d;
         }
       }

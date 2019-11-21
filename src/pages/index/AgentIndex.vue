@@ -35,13 +35,11 @@
       </router-link>
       <div class="memberday-buy">
         <div class="memberday-buy-list  " v-for="(item,index) in goodsList" v-if="index<3">
-          <!-- <router-link :to="/product/+item.id"> -->
           <router-link to="memberstart">
             <p class="super-points"><b>{{item.price|keepTwoNum}}</b> 超级积分</p>
             <span class="memberday-buy-market">市场价￥{{item.market_price|keepTwoNum}}</span>
             <div class="memberday-buy-list-img">
               <img :src="item.default_image" alt="" class="fl">
-              <!-- <img src="../../assets/images/Memberimg.png" alt="" class="fl"> -->
             </div>
           </router-link>
         </div>
@@ -244,16 +242,13 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-
   .agent {
     background-color: #f2f2f2;
-
     .agent-img {
       width: 100%;
       background: url("../../assets/images/index-bg.png") no-repeat center center;
       background-size: 100% 100%;
       background-position: center center;
-
       img {
         width: 95%;
         margin: 0px auto 28px auto;
@@ -264,8 +259,6 @@
 
     /* 会员权益包 */
     .agent-member {
-      height: 300px;
-
       p {
         font-size: 32px;
         color: #333;
@@ -274,46 +267,40 @@
 
       .agent-member-img {
         overflow: hidden;
-        /* width: 100%; */
-        height: 100%;
         margin: 0 24px;
         background: url("../../assets/images/index-member(2).png")no-repeat center center;
         background-size: 100% 100%;
         background-position: center center;
-        /* background: url("../../assets/images/index-member(2).png")no-repeat center top; */
 
         img {
           width: 80%;
           display: block;
-          margin: 36px auto 0px auto;
+          margin: 36px auto 36px auto;
         }
       }
     }
 
     /* 会员日特卖 */
     .member-timer {
-      margin-top: 90px;
-
+      margin:0 24px;
       .member-buy {
         font-size: 32px;
         color: #333;
-        margin: 10px 24px 20px 24px;
-        display: inline;
-
+        margin: 30px 0px 20px 0px;
         span {
           font-size: 20px;
           color: #c9191d;
           margin-left: 30px;
-
           b {
             font-weight: 400;
             width: 30px;
             height: 30px;
+            line-height:30px;
             border-radius: 4px;
             background-color: #c9191d;
             color: #fff;
-            padding-left: 2px;
-            margin: 0 4px;
+            padding: 1px 4px;
+            margin: 0 5px;
           }
 
         }
@@ -323,11 +310,10 @@
     .member-timer span:last-child {
       font-size: 22px;
       color: #333;
-      margin-right: 24px;
     }
 
     .memberday-buy {
-      margin: 0 24px;
+      /* margin-left: 24px; */
       width: 100%;
       display: flex;
       height: 240px;
@@ -418,11 +404,11 @@
 
         .member-day-list-img {
           img {
-            height: 290px;
+            height: 288px;
             border-top-left-radius: 20px;
             border-bottom-left-radius: 20px;
             width: 290px;
-            margin-right: 10px;
+            padding-right: 10px;
           }
         }
 

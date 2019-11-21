@@ -2,8 +2,9 @@
   <div class="agent-list">
     <div class="agent-list-img">
       <router-link to="/memberstart">
-        <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt="">
-        <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt="">
+        <img src="../../assets/images/agentIndex.png" alt="">
+        <!-- <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt="">
+        <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt=""> -->
       </router-link>
     </div>
     <div class="agent-pro-list">
@@ -100,9 +101,8 @@
     .agent-list-img {
       img {
         width: 100%;
-        margin: 10px auto;
+        margin-bottom: 10px;
         display: block;
-        border-radius: 20px;
       }
     }
 

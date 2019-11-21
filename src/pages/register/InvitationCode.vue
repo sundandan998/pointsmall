@@ -31,6 +31,14 @@
         },
       }
     },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
+    },
     created() {
       document.title = '千企联盟'
       // console.log(this.$route.params.registerParams)
@@ -60,9 +68,6 @@
 </script>
 <style lang="scss">
   @import '../../assets/scss/Global.scss';
-  body{
-    background-color: #fff;
-  }
   .code {
     .code-title {
       margin: 180px 0 100px 54px;

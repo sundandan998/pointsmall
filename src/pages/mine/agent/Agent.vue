@@ -17,12 +17,12 @@
               </router-link>
               <div class="product-copy">
                 <span>{{item.currency}}</span>
-                <button class="status fr"
+                <button class="fr"
                   :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
                   @click="copy">复制
                 </button>
                 <router-link :to="/agentdetail/+item.id">
-                  <button class="status fr">详情</button>
+                  <button class="fr">详情</button>
                 </router-link>
               </div>
             </div>
@@ -40,12 +40,12 @@
               </router-link>
               <div class="product-copy">
                 <span>{{item.currency}}</span>
-                <button class="status fr"
+                <button class="fr"
                   :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
                   @click="copy">复制
                 </button>
                 <router-link :to="/agentdetail/+item.id">
-                  <button class="status fr">详情</button>
+                  <button class="fr">详情</button>
                 </router-link>
               </div>
             </div>
@@ -63,12 +63,12 @@
               </router-link>
               <div class="product-copy">
                 <span>{{item.currency}}</span>
-                <button class="status fr"
+                <button class="fr"
                   :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
                   @click="copy">复制
                 </button>
                 <router-link :to="/agentdetail/+item.id">
-                  <button class="status fr">详情</button>
+                  <button class="fr">详情</button>
                 </router-link>
               </div>
             </div>
@@ -86,12 +86,12 @@
               </router-link>
               <div class="product-copy">
                 <span>{{item.currency}}</span>
-                <button class="status fr"
+                <button class="fr"
                   :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
                   @click="copy">复制
                 </button>
                 <router-link :to="/agentdetail/+item.id">
-                  <button class="status fr">详情</button>
+                  <button class="fr">详情</button>
                 </router-link>
               </div>
             </div>
@@ -109,12 +109,12 @@
               </router-link>
               <div class="product-copy">
                 <span>{{item.currency}}</span>
-                <button class="status fr"
+                <button class="fr"
                   :data-clipboard-text="'订单编号:'+item.order_id+'价格:'+item.currency+'手机号:'+item.user+'商品名称:'+item.sku_name+'创建时间:'+item.transaction_time"
                   @click="copy">复制
                 </button>
                 <router-link :to="/agentdetail/+item.id">
-                  <button class="status fr">详情</button>
+                  <button class="fr">详情</button>
                 </router-link>
               </div>
             </div>
@@ -163,7 +163,7 @@
       }
     },
     created() {
-      document.title = '供货商中心'
+      document.title = '代理商中心'
       // this.downloadFile()
     },
     methods: {

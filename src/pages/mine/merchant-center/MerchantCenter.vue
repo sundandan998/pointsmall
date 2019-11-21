@@ -87,7 +87,7 @@
       }
     },
     created() {
-      document.title = '用户订单'
+      document.title = '供货商中心'
     },
     methods: {
       // 上拉加载
