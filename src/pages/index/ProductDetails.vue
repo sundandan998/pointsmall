@@ -11,17 +11,18 @@
       <img :src="detail.default_image" alt="">
     </div>
     <div class="produce-title">
-      <p>{{detail.name}} <span>超级会员</span></p>
+      <p v-if="detail.is_vip!=false">{{detail.name}}</p>
       <!-- <img src="../../assets/images/equitypackage.png" alt=""> -->
       <!-- <img src="../../assets/images/equitypackage2.png" alt=""> -->
-      <img src="../../assets/images/equitypackage3.png" alt="">
-      <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分</p>
+      <!-- <img src="../../assets/images/equitypackage3.png" alt=""> -->
+      <span v-if="detail.is_vip==false">{{detail.price|keepTwoNum}} <p>超级积分</p> <b>{{detail.name}} </b></span>
+
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
     <div class="detail-img">
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
-    <div class="bottom-button">
+    <div class="bottom-button" v-if="detail.is_vip!=false">
       <!-- v-on:click="$router.go(-1)" -->
       <router-link :to="{name:'Index',params:{position:this.$route.params.position}}">
         <van-button square size="large" type="warning"> 取消</van-button>
@@ -142,27 +143,46 @@
     }
 
     .produce-title {
-      height: 120px;
-      line-height: 120px;
-
+      margin: 10px 0px 0 24px;
       p {
         display: inline-block;
         font-size: 30px;
         color: #ce0101;
         font-weight: 700;
-
+        height: 120px;
+        line-height: 120px;
         span {
           font-size: 24px;
           color: #333;
           font-weight: 400;
         }
+        
+      }
+
+      span {
+        height: 120px;
+        color:#ce0101;
+        font-size: 30px;
+        font-weight: 700;
+        b {
+          display: block;
+          color: #333;
+          font-size: 30px;
+          margin: -30px 0 30px 0;
+        }
+        p{
+          display: inline;
+          color: #333;
+          font-size: 20px;
+        }
       }
 
     }
+
     .bottom-button {
       .van-button--default {
         color: #fff !important;
-        background-color: #ccc!important;
+        background-color: #ccc !important;
         border: 1px solid #ccc !important;
         height: 48px !important;
         line-height: 48px !important;
