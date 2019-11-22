@@ -1,6 +1,12 @@
 <template>
   <div class="address">
-    <van-address-list :list="list" @edit="onEdit" @add="onAdd" @select="selectAddress" />
+    <div class="address-list">
+      <van-address-list :list="list" @edit="onEdit" @add="onAdd" @select="selectAddress">
+        <!-- <img src="../../../assets/images/member.png" alt=""> -->
+        <img src="../../../assets/images/address.png" alt="">
+      </van-address-list>
+    </div>
+
     <div class="address-btn">
       <van-button square size="large" type="warning" @click="back">返回</van-button>
     </div>
@@ -58,12 +64,12 @@
         } else if (this.$route.params.path == 'is_vip') {
           this.$router.push({
             name: 'Order',
-            params: { index: index, item: item,id: this.$route.params.id}
+            params: { index: index, item: item, id: this.$route.params.id }
           })
         } else if (this.$route.params.path == 'memberday') {
           this.$router.push({
             name: 'MemberDayOrder',
-            params: { index: index, item: item}
+            params: { index: index, item: item }
           })
         }
       },
@@ -72,12 +78,12 @@
         if (this.$route.params.path == 'is_vip') {
           this.$router.push({
             name: 'Order',
-            params: { id: this.$route.params.id, item: item,}
+            params: { id: this.$route.params.id, item: item, }
           })
         } else if (this.$route.params.path == 'memberday') {
           this.$router.push({
             name: 'MemberDayOrder',
-            params: { id: this.$route.params.id,item: item}
+            params: { id: this.$route.params.id, item: item }
           })
         } else if (refpath == '/newaddress' || refpath == '/mine' || refpath == '/addressdetail') {
           this.$router.push({
@@ -95,6 +101,37 @@
   .address {
     .van-address-item .van-radio__icon {
       display: none !important;
+    }
+
+    .address-list {
+      position: relative;
+
+      img {
+        position: absolute;
+        width: 45px;
+        top: 40px;
+        left: 40px;
+        z-index: 1;
+      }
+
+      .van-address-list {
+        margin: 0px 12px;
+
+        .van-cell.van-cell--clickable.van-address-item {
+          border-radius: 20px;
+          margin-top: 10px;
+        }
+
+        /* 字体大小 */
+        .van-address-item__name {
+          font-size: 17px;
+        }
+
+        .van-address-item__address {
+          font-size: 13px;
+          color: #333;
+        }
+      }
     }
   }
 </style>

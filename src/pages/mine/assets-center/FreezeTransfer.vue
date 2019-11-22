@@ -1,6 +1,10 @@
 <template>
   <div class="transfer">
+<<<<<<< HEAD
     <mt-cell title="柏拉图兰账号">
+=======
+    <mt-cell title="柏拉图兰账号" class="transfer-switch">
+>>>>>>> style
       <mt-switch v-model="transferParams.out"></mt-switch>
     </mt-cell>
     <p class="transfer-prompt">
@@ -8,8 +12,13 @@
       请确认收款人账号已在柏拉图兰注册
     </p>
     <div class="transfer-progress-name">
+<<<<<<< HEAD
       <span>接收人</span>
       <mt-field placeholder="接收人账号" type="tel" v-model="transferParams.mobile" @blur.native.capture="check"></mt-field>
+=======
+      <mt-cell title="收款人" class="transfer-people"></mt-cell>
+      <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile" class="transfer-tel"></mt-field>
+>>>>>>> style
     </div>
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
@@ -48,11 +57,15 @@
           mobile: '',
           amount: [],
           out: false,
+<<<<<<< HEAD
         },
         verifyParams: {
           username: '',
           code: ''
         },
+=======
+        }
+>>>>>>> style
       }
     },
     created() {
@@ -90,6 +103,7 @@
             className: 'zZindex'
           })
         } else {
+<<<<<<< HEAD
           // 判断是不是往外部转账
           if (this.transferParams.out == true) {
             // 检测是否是第三方账号和通证是否合法
@@ -142,6 +156,17 @@
               }
             })
           }
+=======
+          this.$router.push({
+            name: 'ConfirmTransfer',
+            params: {
+              'transferParams': this.transferParams, 'order_id': this.detailData.order_id,
+              'action': this.$route.params.action, 'detailData': this.detailData,
+              'code': this.detailData.token, 'date': this.detailData.unfreeze_date,
+              'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay,
+            }
+          })
+>>>>>>> style
         }
       },
       // 邮箱手机号校验
@@ -171,6 +196,7 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
+<<<<<<< HEAD
   .transfer-prompt {
     background-color: #FFFBE6;
     width: 90%;
@@ -197,51 +223,100 @@
     .fee {
       font-size: 0.076rem;
       color: #409EFF;
-    }
-  }
+=======
+  .transfer {
 
-  .transfer-progress {
-    height: 110px;
-    border-bottom: 2px solid #f2f2f2;
-
-    .block {
-      width: 85%;
-      margin: 0 auto;
-    }
-  }
-
-  .transfer-progress-name {
-    span {
-      margin-top: 10px;
-      display: block;
-      margin-left: 15px;
-    }
-  }
-
-  .transfer-progress {
-    .el-slider__runway.show-input {
-      margin-right: 0;
+    /* 开关部分 */
+    .transfer-switch {
+      margin: 10px 24px;
+      border-radius: 10px;
+>>>>>>> style
     }
 
-    .el-slider__input {
-      float: unset;
-      margin-top: 16px;
-      margin-bottom: 10px;
-      width: 130px;
+    .transfer-prompt {
+      background-color: #FFFBE6;
+      color: #5A5951;
+      border-radius: 10px;
+      height: 60px;
+      line-height: 60px;
+      border: 1px solid #FFE58F;
+      margin: 20px 24px;
+
+      img {
+        width: 30px;
+        margin-left: 10px;
+        position: relative;
+        top: 5px;
+      }
     }
 
-    .el-slider__marks .el-slider__marks-text:last-child {
-      left: 100% !important;
+    .transfer-progress-name {
+      margin: 10px 24px;
+
+      .transfer-people {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .transfer-tel {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
     }
 
-    .el-slider__stop.el-slider__marks-stop {
-      left: 100% !important;
+    .transfer-title {
+      margin: 10px 24px 0 24px;
+      height: 90px;
+      background-color: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      line-height: 90px;
+      padding-left: 20px;
+      font-size: 30px;
+      .fee {
+        font-size: 24px;
+        color: #c9191d;
+      }
     }
 
-  }
+    .transfer-num {
+      margin: 20px 40px;
+    }
 
-  .transfer-num {
-    margin-top: 20px;
-    margin-right: 10px;
+    .transfer-progress {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      margin: 0px 24px 0 24px;
+      background-color: #fff;
+      height: 150px;
+
+      .el-slider__runway.show-input {
+        margin: 20px;
+      }
+
+      .el-slider__input {
+        float: unset;
+        width: 250px;
+        margin: 20px 0 20px 20px;
+      }
+
+      .el-slider__marks .el-slider__marks-text:last-child {
+        left: 100% !important;
+      }
+
+      .el-slider__stop.el-slider__marks-stop {
+        left: 100% !important;
+      }
+    }
+    .el-input-number--small .el-input-number__decrease, .el-input-number--small .el-input-number__increase{
+      height: 55px;
+      line-height: 55px;
+      font-size: 32px;
+      width: 50px;
+    }
+    .el-input--small .el-input__inner{
+      height: 55px;
+      font-size: 24px;
+    }
   }
 </style>

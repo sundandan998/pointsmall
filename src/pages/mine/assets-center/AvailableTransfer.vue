@@ -1,11 +1,20 @@
 <template>
   <div class="transfer">
+<<<<<<< HEAD
     <mt-cell title="柏拉图兰账号">
       <mt-switch v-model="transferParams.out"></mt-switch>
     </mt-cell>
     <div class="transfer-progress-name">
       <span>接收人</span>
       <mt-field placeholder="接收人账号" type="tel" v-model="transferParams.mobile" @blur.native.capture="check"></mt-field>
+=======
+    <mt-cell title="商城账户">
+      <mt-switch v-model="transferParams.out"></mt-switch>
+    </mt-cell>
+    <div class="transfer-progress-name">
+      <mt-cell title="接收人" class="transfer-people"></mt-cell>
+      <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile" class="transfer-tel"></mt-field>
+>>>>>>> style
     </div>
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
@@ -16,7 +25,11 @@
     <div class="transfer-progress">
       <div class="block">
         <!-- v-model=""  -->
+<<<<<<< HEAD
         <el-slider  v-model="transferParams.amount" :step="this.$route.params.amount/5" :marks="marks" show-input
+=======
+        <el-slider v-model="transferParams.amount" :step="this.$route.params.amount/5" :marks="marks" show-input
+>>>>>>> style
           :max="this.$route.params.amount|keepTwoNum">
         </el-slider>
         <!-- <el-slider  v-if="transferParams.amount!=NaN" v-model="transferParams.amount" :step="this.deail.available_amount/5" :marks="marks" show-input
@@ -39,6 +52,10 @@
     data() {
       return {
         value: 0,
+<<<<<<< HEAD
+=======
+        detailData: {},
+>>>>>>> style
         marks: {
           0: '0',
           100: ''
@@ -51,10 +68,13 @@
           mobile: '',
           amount: [],
           out: false
+<<<<<<< HEAD
         },
         verifyParams: {
           username: '',
           code: ''
+=======
+>>>>>>> style
         }
       }
     },
@@ -75,6 +95,10 @@
       }
     },
     methods: {
+<<<<<<< HEAD
+=======
+
+>>>>>>> style
       // 转让按钮
       transfer() {
         if (this.transferParams.amount == '' || this.transferParams.mobile == "") {
@@ -160,6 +184,7 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
+<<<<<<< HEAD
   .transfer-title {
     padding: 10px 0 10px 15px;
     border-bottom: 1px solid #f2f2f2;
@@ -167,48 +192,87 @@
     .fee {
       font-size: 0.076rem;
       color: #409EFF;
-    }
-  }
-
-  .transfer-progress {
-    height: 120px;
-    border-bottom: 2px solid #f2f2f2;
-
-    .block {
-      width: 85%;
-      margin: 0 auto;
-    }
-
-    .el-slider__runway.show-input {
-      margin-right: 0;
-    }
-
-    .el-slider__input {
-      float: unset;
-      margin-top: 16px;
-      margin-bottom: 10px;
-      width: 130px;
+=======
+  .transfer {
+    .transfer-title {
+      margin: 0px 24px;
+      height: 90px;
+      background-color: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      line-height: 90px;
+      padding-left: 20px;
+      font-size: 30px;
+      .fee {
+        font-size: 24px;
+        color: #c9191d;
+      }
+>>>>>>> style
     }
 
-    .el-slider__marks .el-slider__marks-text:last-child {
-      left: 100% !important;
+    .transfer-progress-name {
+      margin: 10px 24px;
+      .transfer-people {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .transfer-tel {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
     }
+    .transfer-progress {
+      height: 160px;
+      margin: 0px 24px;
+      background-color: #fff;
+      border-bottom-left-radius:10px;
+      border-bottom-right-radius:10px;
+
+      .block {
+        margin: 0 20px;
+      }
+
+      .el-slider__runway.show-input {
+        margin-right: 0;
+      }
+
+      .el-slider__input {
+        float: unset;
+        margin-top: 16px;
+        margin-bottom: 10px;
+        width: 200px;
+      }
+
+      .el-slider__marks .el-slider__marks-text:last-child {
+        left: 100% !important;
+      }
+
+      .el-slider__stop.el-slider__marks-stop {
+        left: 100% !important;
+      }
+    }
+
+    .el-input-number--small .el-input-number__decrease, .el-input-number--small .el-input-number__increase{
+      height: 55px;
+      line-height: 55px;
+      font-size: 32px;
+      width: 50px;
+    }
+<<<<<<< HEAD
 
     .el-slider__stop.el-slider__marks-stop {
       left: 100% !important;
+=======
+    .el-input--small .el-input__inner{
+      height: 55px;
+      font-size: 24px;
+>>>>>>> style
     }
-  }
 
-  .transfer-progress-name {
-    span {
-      margin-top: 10px;
-      display: block;
-      margin-left: 15px;
+    .transfer-code {
+      margin-top: 20px;
+      margin-right: 40px;
     }
-  }
-
-  .transfer-code {
-    margin-top: 20px;
-    margin-right: 10px;
   }
 </style>

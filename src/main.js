@@ -4,7 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
+<<<<<<< HEAD
 import Vuex from 'vuex';
+=======
+// font
+import font from './font/iconfont'
+>>>>>>> style
 // 适配
 import 'lib-flexible'
 // import Vant from 'vant'
@@ -20,6 +25,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 各种组件集合
 import external from './external-components/index'
 Vue.use(MintUI)
+Vue.use(font)
 // Vue.use(axios)
 Vue.use(external)
 // Vue.use(Vant)

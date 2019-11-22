@@ -1,27 +1,27 @@
 <template>
   <div class="invitation-record">
     <div class="search">
-      <!--  -->
-      <mt-search v-model="number" cancel-text="取消" placeholder="手机号">
-      </mt-search> <span class="fr search-btn" @click="search">搜索</span>
+      <mt-search v-model="number" placeholder="被邀请人手机号" @click.native="search"></mt-search>
     </div>
     <div class="invitation-list">
       <!-- 点击全部时展示小计总数 -->
-      <span class="total" v-if="this.invitePeople.inviter==null&&this.$route.params.query==undefined">小计:
-        {{total}}</span>
+      <mt-cell title="" :value="'小计:'+total+'人'"
+        v-if="this.invitePeople.inviter==null&&this.$route.params.query==undefined" class="invitation-record-num">
+      </mt-cell>
       <!-- 在带有搜索页面，点击电话列表展示的邀请人 -->
-      <span class="invite-people" v-if="this.invitePeople.inviter!=null||this.$route.params.query!=undefined"
-        @click="invite">
-        <img src="../../../assets/images/left.svg" alt="">
-        <!-- <i class="mint-cell-allow-left"></i> -->
-        邀请人:{{this.people.query||this.$route.params.query}}</span>
-
+      <mt-cell class="invite" v-if="this.invitePeople.inviter!=null||this.$route.params.query!=undefined">
+        <p class="invite-people"
+          @click="invite">
+          &nbsp;&nbsp;&lt;&nbsp;邀请人 | {{this.people.query||this.$route.params.query}}
+      </p>
+      </mt-cell>
       <!-- 在邀请记录页面点击电话列表展示的邀请人 -->
       <!-- <span class="invite-people" v-if="this.invitePeople.inviter!=null">邀请人: {{invitePeople.inviter}}</span> -->
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
         :error.sync="error" error-text="请求失败，点击重新加载">
         <div class="invitation-tel" v-for="(item,index) in invitationList">
-          <mt-cell v-if="item.count==0" :title="item.invitee" value="" :label="'注册于:'+ item.create_time" class="count">
+          <mt-cell v-if="item.count==0" :title="item.invitee" value="" :label="'注册于22:'+ item.create_time"
+            class="count">
           </mt-cell>
           <mt-cell v-if="item.count!=0" :title="item.invitee" :value="item.count" @click.native="tel(index)" is-link
             :label="'注册于:'+ item.create_time"></mt-cell>
@@ -29,8 +29,8 @@
       </van-list>
     </div>
     <!-- <router-link to="invite"> -->
-    <div v-show="showBtn">
-      <mt-button size="large" class="cancel" v-on:click="$router.go(-1)">返回</mt-button>
+    <div v-show="showBtn" class="order-button">
+      <mt-button size="large" v-on:click="$router.go(-1)">返回</mt-button>
     </div>
     <!-- </router-link> -->
   </div>
@@ -176,33 +176,28 @@
   @import '../../../assets/scss/Global.scss';
 
   .invitation-record {
-    .search {
-      .mint-searchbar-inner {
-        /* background-color: #f2f2f2; */
-      }
 
-      .search-btn {
-        position: relative;
-        right: 27px;
-        top: -32px;
-        z-index: 1;
-      }
+    /* 搜索部分 */
+    .mint-search {
+      height: 55px;
 
       .mint-searchbar {
-        background-color: #fff;
+        background-color: #f2f2f2;
+      }
+
+      .mint-searchbar-inner {
+        border-radius: 10px;
       }
 
       .mint-searchbar-inner .mintui-search {
-        position: relative;
-        left: 25px;
+        position: absolute;
+        right: 30px;
+        font-size: 20px;
+        color: #5d5a59;
       }
 
       .mint-searchbar-core {
-        background-color: #f2f2f2;
-        width: 83%;
-        border-radius: 20px;
-        text-indent: 2.5em;
-        height: 35px;
+        text-indent: 10px;
       }
 
       .mint-searchbar-cancel {
@@ -210,53 +205,45 @@
       }
     }
 
-    .mint-search {
-      height: 100%;
+    img {
+      width: 30px;
+      position: relative;
+      right: 0px;
     }
 
     .invitation-list {
-      .total {
-        margin-left: 15px;
-      }
+      margin: 0 24px;
 
-      img {
-        width: 16px;
-        position: relative;
-        top: 2px;
-
-      }
-
-   
-
-      .invitation-tel {
-        .count {
-          span {
-            margin-right: 20px;
-          }
-
+      .mint-cell-value {
+        span {
+          color: #c9191d;
         }
-
       }
 
+      .invitation-record-num:first-child {
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+
+        span {
+          color: #333;
+        }
+      }
+      .invite:first-child{
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+      }
       .invite-people {
-        font-size: 0.35rem;
-        /* margin-left: 15px; */
-        padding: 5px;
-        border-radius: 5px;
-        color: #333;
-        /* background-color: #009688; */
-        display: block;
-        width: 40%;
+        width: 330px;
+        height: 44px;
+        position: absolute;
+        left: 10px;
+        background-color: #f74347;
+        color: #fff;
+        border-radius: 10px;
+        font-size: 26px;
+        line-height: 44px;
+        margin-bottom: 10px;
       }
-    }
-
-    .cancel {
-      position: absolute;
-      bottom: 10px;
-      background-color: #fff !important;
-      color: #09bb07 !important;
-      border-radius: 20px;
-      border: 1px solid #09bb07;
     }
   }
 </style>

@@ -1,8 +1,12 @@
 <template>
   <div class="details">
     <div class="details-title">
-      <span>{{detailsData.detail_type}}</span>
-      <p>{{detailsData.transaction_type==0?'+':'-'}}{{detailsData.amount}} ({{detailsData.token}})</p>
+      <img src="../../../assets/images/shourang@2x.png" alt="" v-if="detailsData.detail_type=='受让'">
+      <img src="../../../assets/images/zhuanrang@2x.png" alt="" v-if="detailsData.detail_type=='转让'">
+      <img src="../../../assets/images/zengsong@2x.png" alt="" v-if="detailsData.detail_type=='赠送'">
+      <img src="../../../assets/images/xiaofei@2x.png" alt="" v-if="detailsData.detail_type=='消费'">
+      <span class="detail-type">{{detailsData.detail_type}}</span>
+      <p>{{detailsData.transaction_type==0?'+':'-'}}{{detailsData.amount|keepTwoNum}} <span>({{detailsData.token}})</span> </p>
     </div>
     <div class="details-information">
       <mt-cell title="流 水 号" :value="detailsData.serial_number"></mt-cell>
@@ -41,29 +45,52 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-  .details-title {
-    height: 60px;
-    text-align: center;
-    margin-top: 10px;
-    border-bottom: 1px solid #f2f2f2;
+  .details {
+    .details-title {
+      height: 400px;
+      margin: 10px 24px;
+      background-color: #fff;
+      border-radius: 20px;
+      overflow: hidden;
 
-    span {
-      margin: 10px 0;
-      display: block;
-    }
-  }
-
-  .details-information {
-    margin: 10px 0 10px 15px;
-
-    p {
-      margin-bottom: 5px;
-      color: #333;
-
-      span {
-        color: #333;
-        margin-left: 30px;
+      .detail-type {
+        display: block;
+        text-align: center;
       }
+
+      p {
+        text-align: center;
+        font-size: 50px;
+        color: #333;
+        margin-top: 40px;
+        span{
+        font-size: 26px;
+        }
+      }
+
+      img {
+        margin: 60px auto 10px auto;
+        display: block;
+      }
+    }
+
+    .details-information {
+      height: auto;
+      margin: 10px 24px;
+      background-color: #fff;
+      border-radius: 20px;
+
+      .mint-cell-text {
+        color: #999;
+      }
+    }
+
+    .details-information .mint-cell:first-child {
+      border-radius: 20px;
+    }
+
+    .details-information .mint-cell:last-child {
+      border-radius: 20px;
     }
   }
 </style>

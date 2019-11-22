@@ -10,8 +10,8 @@
     <!-- 数字键盘 -->
     <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
     <div class="set-pay-pwd">
-      <mt-button size="large" class="submit-btn" :disabled="disabled" @click="submit">提交</mt-button>
-      <mt-button size="large" class="submit-btn-cancel" @click.native="setPwd">取消</mt-button>
+      <van-button size="large" class="submit-btn" type="danger" :disabled="disabled" @click="submit">提交</van-button>
+      <van-button size="large" class="submit-btn-cancel" type="warning" @click.native="setPwd">取消</van-button>
     </div>
   </div>
 </template>
@@ -144,31 +144,17 @@
   }
 </script>
 <style lang="scss">
-  body {
-    background-color: #fff;
-  }
+  @import "../../../assets/scss/Global.scss";
 
-  .set-pwd-input {
-    margin: 100px auto;
-
-    span {
-      margin: 20px 0 10px 20px;
-      display: block;
+  .set-pwd {
+    .set-pwd-input {
+      margin: 138px auto;
+      span {
+        margin: 20px 30px;
+        display: block;
+        font-size: 30px;
+        color:#333;
+      }
     }
   }
-  .set-pay-pwd .submit-btn {
-      width: 90%;
-      margin: 0px auto;
-      background-color: #09bb07 !important;
-      color: #fff
-    }
-
-  .set-pay-pwd .submit-btn-cancel {
-      width: 90%;
-      margin: 0px auto;
-      background-color: #fff;
-      color: #09bb07 !important;
-      border: 1px solid #09bb07;
-      margin-top: 20px;
-    }
 </style>

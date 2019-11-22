@@ -7,53 +7,49 @@
           <van-tab title="全部">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p v-if="item.is_vip==true">￥{{item.currency|keepTwoNum}}</p>
-                  <p v-if="item.is_vip==false">{{item.total_amount|keepTwoNum}}({{item.token}})</p>
+                  <p v-if="item.is_vip==true" class="fr product-text-price">￥{{item.currency|keepTwoNum}}</p>
+                  <p v-if="item.is_vip==false" class="fr product-text-price">{{item.total_amount|keepTwoNum}}({{item.token}})</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
           <van-tab title="待发货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>￥{{item.currency|keepTwoNum}}</p>
+                  <p class="fr product-text-price">￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
           <van-tab title="待收货">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>￥{{item.currency|keepTwoNum}}</p>
+                  <p class="fr product-text-price">￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
           <van-tab title="已完成">
             <div class="product" v-for="(item,index) in orderList">
               <router-link :to="/orderdetail/+item.id">
-                <p>{{item.transaction_time}}</p>
+                <p class="product-time">{{item.transaction_time}}<span class="fr">{{item.status|orderStatus}}</span></p>
                 <img :src="item.sku_image" alt="" class="fl">
                 <div class="product-text">
                   <p>{{item.sku_name}}</p>
-                  <p>￥{{item.currency|keepTwoNum}}</p>
+                  <p class="fr product-text-price">￥{{item.currency|keepTwoNum}}</p>
                 </div>
-                <span class="fr status">{{item.status|orderStatus}}</span>
               </router-link>
             </div>
           </van-tab>
@@ -80,8 +76,8 @@
         finished: false,
         error: false,
         pageNum: 1,
-        order:{
-          page:''
+        order: {
+          page: ''
         }
       }
     },
@@ -116,7 +112,7 @@
         this.pageNum = 1
         this.orderList = []
         if (index === 0) {
-          if (this.order.status != undefined){
+          if (this.order.status != undefined) {
             delete this.order.status
           }
           this.onLoad()
@@ -142,38 +138,41 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+  .my-order {
+    .product {
+      background-color: #fff;
+      height: 350px;
+      margin: 10px 24px;
+      border-radius: 20px;
 
-  .product {
-    margin: 10px 15px 0 15px;
-    height: 106px;
+      img {
+        height: 180px;
+        margin: 20px;
+        border-radius: 20px;
+      }
 
-    p {
-      color: #333;
+      .product-time {
+        height: 90px;
+        line-height: 90px;
+        font-size: 28px;
+        color: #333;
+        margin-left: 20px;
+        border-bottom: 1px solid #f2f2f2;
+        span{
+          margin: 0px 20px 0 0;
+          color:#c9191d;
+        }
+      }
+      .product-text{
+        margin-top: 50px;
+        font-size: 28px;
+        .product-text-price{
+          margin-right: 20px;
+          margin-top: 60px;
+          color:#c9191d;
+        }
+      }
     }
 
-    span {
-      color: #333;
-    }
-
-    img {
-      width: 60px;
-      height: 80px;
-      margin-right: 10px;
-    }
-
-    .product-text {
-      margin-top: 8px;
-    }
-
-    .product-text p:last-child {
-      position: relative;
-      top: 16px;
-      color: #E51C23;
-    }
-
-    .status {
-      position: relative;
-      top: -24px;
-    }
   }
 </style>

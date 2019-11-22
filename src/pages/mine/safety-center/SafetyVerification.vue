@@ -1,14 +1,18 @@
 <template>
   <div class="safety-verification">
-    <div class="safety-verification-infomation">
-      <span>{{infor.mobile}}</span>
+    <div class="safety-verification-tel">
+      <mt-cell title="手机号" :value="infor.mobile"></mt-cell>
+    </div>
+    <div class="safety-verification-code">
       <mt-field placeholder="请输入验证码" type="number" v-model="verification.code">
         <input class="send-input" v-on:click="sendSmsCode" readonly="readonly" v-model="btnCode.btnContent" />
       </mt-field>
     </div>
-    <div class="safety-verification-protocol">
-      <mt-button size="large" class="submit-btn" :disabled="disabled" @click="safetyVerification">提交</mt-button>
-      <mt-button size="large" class="submit-btn-cancel" @click.native="cancel">取消</mt-button>
+    <div class="">
+      <van-button square size="large" type="danger" @click="safetyVerification" :disabled="disabled">提交</van-button>
+      <router-link to="safety">
+        <van-button square size="large" type="warning" @click.native="cancel">取消</van-button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -72,14 +76,14 @@
                 name: 'SetPwd',
                 params: { id: 'reservation' }
               })
-            }else if(this.$route.params.id == 'safetycenter'){
+            } else if (this.$route.params.id == 'safetycenter') {
               this.$router.push({
                 name: 'ModifyPwd',
               })
             }
           }
         }).catch(err => {
-          if(err.code!=0){
+          if (err.code != 0) {
             Toast({
               message: err.msg,
               position: 'top',
@@ -97,7 +101,7 @@
         // var userInfo = sessionStorage.getItem('userInfo')
         var userInfo = localStorage.getItem('userInfo')
         userInfo = JSON.parse(userInfo)
-        api.sendCode({ mobile: userInfo.data.mobile}).then(res => {
+        api.sendCode({ mobile: userInfo.data.mobile }).then(res => {
           if (res.code === 0) {
             Toast({
               message: res.msg,
@@ -176,51 +180,34 @@
   }
 </script>
 <style lang="scss">
-  body {
-    background-color: #fff;
-  }
+  @import "../../../assets/scss/Global.scss";
 
-  .send-input {
-    border: none;
-    float: right;
-    width: 35%;
-  }
+  .safety-verification {
 
-  .mint-field-other {
-    top: 0;
-    right: 25px;
-    position: relative;
-    width: 100px;
-  }
+    .safety-verification-code {
+      .send-input {
+        border: 0.01333rem solid #a9a9a9;
+        float: right;
+        color: #a9a9a9;
+        padding: 2px 0;
+        text-align: center;
+        border-radius: 7px;
+        font-size: 28px;
+        width: 100px;
+        height: 45px;
+      }
 
-  .safety-verification-infomation {
-    margin: 100px 20px 10px 20px;
-
-    span {
-      display: block;
-      margin: 20px 0 20px 10px;
+      i.mintui.mintui-field-error {
+        display: none;
+      }
     }
 
-    .mint-cell-wrapper {
-      background-image: none !important;
-    }
-  }
-
-  .safety-verification-protocol {
-    .submit-btn {
-      width: 90%;
-      margin: 0px auto;
-      background-color: #09bb07 !important;
-      color: #fff
+    .safety-verification-tel {
+      margin: 10px 0;
     }
 
-    .submit-btn-cancel {
-      width: 90%;
-      margin: 0px auto;
-      background-color: #fff;
-      color: #09bb07 !important;
-      border: 1px solid #09bb07;
-      margin-top: 20px;
+    .mint-cell {
+      border-radius: 10px;
     }
   }
 </style>

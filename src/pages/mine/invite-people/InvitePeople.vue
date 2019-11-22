@@ -1,32 +1,36 @@
 <template>
   <div class="invite-people">
     <div class="invitation-code">
-      <p>千企国际联盟商城</p>
+      <img src="../../../assets/images/logo-red.png" alt="">
       <span class="text">您的邀请码</span>
       <p class="code">{{invite_code}}</p>
-      <van-button class="inviteCode" type="primary" size="small" :data-clipboard-text="invite_code" @click="copy">复制
+      <van-button class="inviteCode" size="small" :data-clipboard-text="invite_code" @click="copy">复 制
       </van-button>
     </div>
     <!-- 邀请记录列表 -->
-    <div class="invitation-list">
+    <div class="invitation-list-title">
       <mt-cell title="邀请历史"></mt-cell>
-      <div v-for="(item,index) in recentlyList ">
-        <mt-cell  v-if="item.count==0" :title="item.invitee" value=""
-          :label="'注册于:'+item.create_time" class="count">
+    </div>
+    <div class="invitation-list">
+      <div v-for="(item,index) in recentlyList" class="invitation-list-tel">
+        <mt-cell v-if="item.count==0" :title="item.invitee" value="" :label="'注册于:'+item.create_time" class="count">
         </mt-cell>
         <router-link :to="{name:'InvitationRecord',params:{query:item.invitee}}">
           <mt-cell v-if="item.count!=0" :title="item.invitee" :value="item.count" is-link
             :label="'注册于:'+item.create_time"></mt-cell>
         </router-link>
       </div>
+    </div>
+    <div class="all">
       <router-link to="record">
         <span class="all">全部 >></span>
       </router-link>
     </div>
-
-    <router-link to="mine">
-      <mt-button size="large" class="cancel">返回</mt-button>
-    </router-link>
+    <div class="order-button">
+      <router-link to="mine">
+        <mt-button size="large">返回</mt-button>
+      </router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -90,50 +94,75 @@
 
   .invite-people {
     .invitation-code {
-
-      width: 95%;
-      height: auto;
+      height: 400px;
+      margin: 10px 24px;
       background-color: #fff;
-      margin: 30px auto;
+      border-radius: 20px;
       text-align: center;
+      color: #333;
 
-      p {
-        color: #FF686E;
-      }
-
-      .code {
-        font-size: 0.78rem;
-        margin-bottom: 20px;
+      img {
+        width: 90px;
+        margin: 40px 0 10px 0;
       }
 
       .text {
         display: block;
-        margin: 20px 0px;
+        font-size: 24px;
       }
 
-      .van-button--primary {
-        background-color: #009688;
+      .code {
+        font-size: 70px;
+        margin-top: 25px;
+      }
+
+      .van-button--default {
+        border: none;
+      }
+
+      .inviteCode {
+        width: 100px;
+        height: 50px;
+        border: 1px solid #ce0101;
+        color: #ce0101;
+        line-height: 50px;
+        margin-top: 25px;
+        border-radius: 8px;
+        font-size: 28px;
+      }
+    }
+
+    /* 邀请记录列表 */
+    .invitation-list-title {
+      margin: 10px 24px;
+
+      .mint-cell {
+        border-radius: 10px;
       }
     }
 
     .invitation-list {
-      .all {
-        display: block;
-        text-align: center;
-      }
-      .count{
+      margin: 10px 24px;
+      .mint-cell-value{
         span{
-          margin-right: 20px;
+          color:#ce0101;
         }
       }
     }
-    .cancel {
-      position: absolute;
-      bottom: 10px;
-      background-color: #fff !important;
-      color: #09bb07 !important;
-      border-radius: 20px;
-      border: 1px solid #09bb07;
+
+    .invitation-list .invitation-list-tel:first-child .mint-cell {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .mint-cell:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    /* 全部 */
+    .all{
+      text-align: center;
+      font-size: 24px;
     }
   }
 </style>

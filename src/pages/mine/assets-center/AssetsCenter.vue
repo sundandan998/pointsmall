@@ -5,7 +5,7 @@
     </div>
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
       :error.sync="error" error-text="请求失败，点击重新加载">
-      <div class="assets-center-list" v-for="item in assetsData">
+      <div v-for="item in assetsData" class="assets-center-list">
         <router-link :to="{name:'AssetDetail',params:{code:item.token.code}}">
           <div class="assets-center-list-left fl">
             <img :src="item.token.icon" alt="">
@@ -16,7 +16,7 @@
           </div>
           <div class="assets-center-list-right fr">
             <span>{{item.balance|keepTwoNum}}</span>
-            <p><img src="../../../assets/images/wait.png" alt="">{{item.integral|keepTwoNum}}(超级积分)</p>
+            <p> &asymp;{{item.integral|keepTwoNum}} 超级积分</p>
           </div>
         </router-link>
       </div>
@@ -72,6 +72,7 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
+<<<<<<< HEAD
   .assets-center-name {
     display: inline-block;
   }
@@ -80,23 +81,41 @@
     height: 70px;
     border-bottom: 1px solid #f2f2f2;
     font-size: 14px;
+=======
 
-    a {
-      color: #000;
+  .assets-center {
+    .assets-center-title {
+      margin: 10px 12px;
+>>>>>>> style
+
+      .mint-cell {
+        border-radius: 10px;
+      }
     }
+
   }
 
-  .assets-center-list-left {
-    margin-left: 15px;
-
-    img {
-      margin-right: 10px;
+  /* 列表 */
+  .assets-center-list {
+    background-color: #fff;
+    height: 150px;
+    margin: 10px 12px;
+    border-radius: 10px;
+    .assets-center-list-left {
+      width: 40%;
+      display: -webkit-box;
+      margin: 30px 0;
+      img {
+        margin: 7px 20px 0 20px;
+      }
     }
-  }
 
-  .assets-center-list-right {
-    margin-right: 10px;
+    .assets-center-name {
+      span {
+        font-size: 28px;
+      }
 
+<<<<<<< HEAD
     span {
       margin-left: 80px;
       font-size:12px;
@@ -106,6 +125,30 @@
     }
     img {
       width: 10px;
+=======
+      p {
+        font-size: 22px;
+        color: #999;
+      }
+    }
+
+    .assets-center-list-right {
+      width: 60%;
+      p {
+        color: #999;
+        margin-top: 40px;
+        text-align:right;
+        margin-right: 20px;
+      }
+
+      span {
+        display: block;
+        text-align: right;
+        font-size: 28px;
+        color: #c9191d;
+        margin:30px 20px 20px 0;
+      }
+>>>>>>> style
     }
   }
 </style>

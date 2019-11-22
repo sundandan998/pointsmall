@@ -3,9 +3,9 @@
     <div class="code-title">
       <span>填写邀请码</span>
     </div>
-    <mt-field label="邀请码" placeholder="请输入邀请码" v-model="registerParams.invite_code"></mt-field>
-    <div class="code-description">
-      <p class="fr">邀请码可向代理商索取</p>
+    <div class="invite-code">
+      <mt-field label="邀请码" placeholder="请输入邀请码" v-model="registerParams.invite_code"></mt-field>
+      <p>*邀请码可向代理商索取</p>
     </div>
     <div class="code-btn">
       <van-button square size="large" @click.native="submitCode">提交</van-button>
@@ -31,68 +31,75 @@
         },
       }
     },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
+    },
     created() {
-      document.title = '千企商城'
+      document.title = '千企联盟'
       // console.log(this.$route.params.registerParams)
     },
     methods: {
       submitCode() {
         this.registerParams.access_token = sessionStorage.getItem('access_token')
         // 判断是否是新用户，如果是新用户，跳转到邀请码页面，如果不是新用户，跳转到首页
-          this.$store.dispatch('loginByCode', this.registerParams).then(res => {
-            if (this.$store.getters.token !== '') {
-              // window.sessionStorage.setItem('info', info)
-              this.$store.commit('detail', res.data)
-              this.$router.push({
-                name: 'Result'
-              })
-            }
-          }).catch(err => {
-            Toast({
-              message: err.msg,
-              position: 'top',
-              className: 'zZindex'
+        this.$store.dispatch('loginByCode', this.registerParams).then(res => {
+          if (this.$store.getters.token !== '') {
+            // window.sessionStorage.setItem('info', info)
+            this.$store.commit('detail', res.data)
+            this.$router.push({
+              name: 'Result'
             })
+          }
+        }).catch(err => {
+          Toast({
+            message: err.msg,
+            position: 'top',
+            className: 'zZindex'
           })
-        }, 
+        })
+      },
     }
   }
 </script>
 <style lang="scss">
   @import '../../assets/scss/Global.scss';
-
   .code {
     .code-title {
-      margin: 20px 0 20px 10px;
+      margin: 180px 0 100px 54px;
+      font-size: 36px;
+      color: #333;
     }
 
-    .code-description {
+    .invite-code {
+      margin: 0 54px 20px 54px;
+
       p {
-        margin-right: 10px;
-        font-size: 0.076rem;
-        color: #ccc;
+        font-size: 24px;
+        color: #333;
       }
     }
 
     .code-btn {
-      width: 85%;
-      margin: 10px auto;
-      margin-top: 250px;
-
+      margin: 200px 54px 10px 54px;
       button {
-        background-color: #09bb07;
-        border-radius: 25px;
-        height: 40px;
-        line-height: 40px;
+        width: 100%;
+        height: 88px;
+        line-height:88px;
+        border-radius: 44px;
+        background-color: #c9191D;
         color: #fff;
         margin-bottom: 20px;
       }
     }
-
     .code-btn button:last-child {
       background-color: #fff;
-      border: 1px solid #09bb07;
-      color: #09bb07;
+      border: 1px solid #c9191D;
+      color: #c9191D;
     }
   }
 </style>

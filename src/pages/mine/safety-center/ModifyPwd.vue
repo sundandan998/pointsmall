@@ -11,10 +11,10 @@
     </div>
     <!-- 数字键盘 -->
     <van-number-keyboard :show="showKeyboard" @input="onInput" @delete="onDelete" @blur="showKeyboard = false" />
-    <div class="modify-pwd-btn">
-      <mt-button size="large" class="submit-btn" :disabled="disabled" @click.native=edit>提交</mt-button>
+    <div class="bottom-button">
+      <van-button size="large" type="danger" :disabled="disabled" @click.native=edit>提交</van-button>
       <router-link to="safety">
-        <mt-button size="large" class="submit-btn-cancel">取消</mt-button>
+        <van-button size="large" type="warning">取消</van-button>
       </router-link>
     </div>
   </div>
@@ -37,7 +37,7 @@
     },
     created() {
       document.title = '修改支付密码'
-      
+
     },
     methods: {
       passIndex1() {
@@ -59,7 +59,7 @@
           if (this.index === 2) {
             this.password.new_pay_pwd1 = (this.password.new_pay_pwd1 + key).slice(0, 6)
           } else {
-            if(this.index ===3){
+            if (this.index === 3) {
               this.password.new_pay_pwd2 = (this.password.new_pay_pwd2 + key).slice(0, 6)
             }
           }
@@ -71,8 +71,8 @@
         } else {
           if (this.index == 2) {
             this.password.new_pay_pwd1 = this.password.new_pay_pwd1.slice(0, this.password.new_pay_pwd1.length - 1)
-          }else{
-            if(this.index==3){
+          } else {
+            if (this.index == 3) {
               this.password.new_pay_pwd2 = this.password.new_pay_pwd2.slice(0, this.password.new_pay_pwd2.length - 1)
             }
           }
@@ -118,37 +118,17 @@
   }
 </script>
 <style lang="scss">
-  body{
-    background-color: #fff;
-  }
-  /* .modify-pwd {
-    background-color: #fff;
-  } */
+  @import "../../../assets/scss/Global.scss";
 
-  .modify-pwd-input {
-    margin: 0px auto;
-
-    span {
-      margin: 20px 0 10px 20px;
-      display: block;
-    }
-  }
-
-  .modify-pwd-btn {
-    .submit-btn {
-      width: 90%;
-      margin: 20px auto;
-      background-color: #09bb07;
-      color: #fff;
-    }
-
-    .submit-btn-cancel {
-      width: 90%;
-      margin: 0px auto;
-      background-color: #fff;
-      color: #09bb07 !important;
-      border: 1px solid #09bb07;
-      margin-top: 20px;
+  .modify-pwd {
+    .modify-pwd-input {
+      margin: 138px auto;
+      span{
+        font-size:30px;
+        color:#333;
+        display: block;
+        margin: 20px 30px;
+      }
     }
   }
 </style>

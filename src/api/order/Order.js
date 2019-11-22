@@ -130,6 +130,7 @@ export default {
       params: params
     })
   },
+<<<<<<< HEAD
   // 检测是否是第三方账号和通证是否合法---外部转让
   verify(params = {}) {
     return request({
@@ -146,4 +147,6 @@ export default {
       params: params
     })
   },
+=======
+>>>>>>> style
 }

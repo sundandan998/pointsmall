@@ -7,7 +7,7 @@ const packageConfig = require('../package.json')
 const px2remLoader = {
   loader: 'px2rem-loader',
   options: {
-  remUnit: 37.5 //设计稿的宽度 除以 10，现阶段一般设计稿的宽度都为750px。如果基于iPhone5设计则为32.0(320 / 10 = 32)
+  remUnit: 75
   }
  }
  // generate loader string to be used with extract text plugin

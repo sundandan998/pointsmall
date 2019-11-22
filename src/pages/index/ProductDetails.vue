@@ -1,17 +1,28 @@
 <template>
   <div class="product-detail">
-    <div class="produce-title">
+    <!-- <div class="produce-title">
       <img :src="detail.default_image" alt="" class="fl">
       <span>
         <p>{{detail.name}}</p>
         <p v-if="detail.is_vip==false">{{detail.price|keepTwoNum}}积分</p>
       </span>
+    </div> -->
+    <div class="produce-img">
+      <img :src="detail.default_image" alt="">
+    </div>
+    <div class="produce-title">
+      <p v-if="detail.is_vip!=false">{{detail.name}}</p>
+      <!-- <img src="../../assets/images/equitypackage.png" alt=""> -->
+      <!-- <img src="../../assets/images/equitypackage2.png" alt=""> -->
+      <!-- <img src="../../assets/images/equitypackage3.png" alt=""> -->
+      <span v-if="detail.is_vip==false">{{detail.price|keepTwoNum}} <p>超级积分</p> <b>{{detail.name}} </b></span>
+
     </div>
     <!-- <van-card :price="detail.price" :title="detail.name" origin-price="10.00" thumb="../../assets/images/680-80-2.jpg" /> -->
     <div class="detail-img">
       <span v-html="this.detail.desc" id="detail-img"></span>
     </div>
-    <div class="bottom-button">
+    <div class="bottom-button" v-if="detail.is_vip!=false">
       <!-- v-on:click="$router.go(-1)" -->
       <router-link :to="{name:'Index',params:{position:this.$route.params.position}}">
         <van-button square size="large" type="warning"> 取消</van-button>
@@ -43,7 +54,6 @@
       document.title = '商品详情'
       this.detailId = this.$route.params
       this.goods()
-      console.log()
     },
     methods: {
       // 商品详情
@@ -123,6 +133,7 @@
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
 
+<<<<<<< HEAD
 
   .produce-title {
     position: fixed;
@@ -141,37 +152,66 @@
       margin: 10px 0 10px 15px;
       font-size: 0.078rem;
       line-height: 20px;
+=======
+  .product-detail {
+    .produce-img {
+      img {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+      }
+>>>>>>> style
     }
 
-    .delete-line {
-      text-decoration: line-through;
-      color: #ccc;
-      font-size: 0.076rem;
-      margin-left: 5px;
+    .produce-title {
+      margin: 10px 0px 0 24px;
+      p {
+        display: inline-block;
+        font-size: 30px;
+        color: #ce0101;
+        font-weight: 700;
+        height: 120px;
+        line-height: 120px;
+        span {
+          font-size: 24px;
+          color: #333;
+          font-weight: 400;
+        }
+        
+      }
+
+      span {
+        height: 120px;
+        color:#ce0101;
+        font-size: 30px;
+        font-weight: 700;
+        b {
+          display: block;
+          color: #333;
+          font-size: 30px;
+          margin: -30px 0 30px 0;
+        }
+        p{
+          display: inline;
+          color: #333;
+          font-size: 20px;
+        }
+      }
+
     }
-  }
 
-  .detail-img {
-    margin-top: 60px;
-
-    img {
-      margin-top: 30px;
-    }
-  }
-
-  .bottom-button {
-    .van-button--default {
-      color: #fff !important;
-      background-color: #ccc !important;
-      border: 1px solid #ccc !important;
-      border-top-right-radius: 25px !important;
-      border-bottom-right-radius: 25px !important;
-      height: 40px !important;
-      line-height: 40px !important;
-      width: 48% !important;
-      position: fixed !important;
-      bottom: 10px !important;
-      left: 50% !important;
+    .bottom-button {
+      .van-button--default {
+        color: #fff !important;
+        background-color: #ccc !important;
+        border: 1px solid #ccc !important;
+        height: 48px !important;
+        line-height: 48px !important;
+        width: 50% !important;
+        position: fixed !important;
+        bottom: 10px !important;
+        left: 50% !important;
+      }
     }
   }
 </style>

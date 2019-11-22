@@ -2,27 +2,27 @@
   <div class="agent-list">
     <div class="agent-list-img">
       <router-link to="/memberstart">
-        <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt="">
-        <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt="">
+        <img src="../../assets/images/agentIndex.png" alt="">
+        <!-- <img v-if="memberDay.start==true" src="../../assets/images/start.png" alt="">
+        <img v-if="memberDay.start==false" src="../../assets/images/agent.png" alt=""> -->
       </router-link>
     </div>
     <div class="agent-pro-list">
-      <p>商品列表</p>
+      <p class="pro-list">商品列表</p>
       <div v-for="(item,index) in agent" class="agent-pro-list-text">
         <!-- <router-link :to="/product/+item.id"> -->
         <div @click="agentBtn(item.id,index)">
-          <div class="agent-pro-line"></div>
           <div class="agent-pro-list-img fl">
             <img :src="item.default_image" alt="">
           </div>
-          <span>
+          <span class="agent-pro-list-text-introduction">
             <p>{{item.name}}</p>
-            <p class="integral"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
-            <span>市场价￥{{item.market_price|keepTwoNum}}</span>
+            <p class="integral"><span>{{item.price|keepTwoNum}}</span> 超级积分</p>
+            <span class="maeket-price">市场价￥{{item.market_price|keepTwoNum}}</span>
           </span>
           <div class="agent-pro-list-btn fr">
-            <van-button round size="small" v-if="item.stock!=0">马上抢</van-button>
-            <van-button round size="small" v-if="item.stock==0" class="sold-out">已售罄
+            <van-button round size="small" v-if="item.stock!=0">马 上 抢</van-button>
+            <van-button round size="small" v-if="item.stock==0" class="sold-out">已 售 罄
             </van-button>
           </div>
         </div>
@@ -75,8 +75,8 @@
       // 购买
       agentBtn(id, index) {
         this.$router.push({
-          name:'Product',
-          params: { id: id,path:'agentList'}
+          name: 'Product',
+          params: { id: id, path: 'agentList' }
         })
         // 判断是否是售罄商品
         // if (this.agent[index].stock == 0) {
@@ -100,53 +100,85 @@
   .agent-list {
     .agent-list-img {
       img {
-        width: 95%;
-        margin: 20px auto;
+        width: 100%;
+        margin-bottom: 10px;
         display: block;
-        border-radius: 7px;
       }
     }
 
+    /* 商品列表 */
     .agent-pro-list {
-      p {
-        margin-left: 15px;
+      height: auto;
+      background-color: #fff;
+      border-radius: 20px;
+      margin-bottom: 100px;
+      .pro-list {
+        height: 80px;
+        line-height: 80px;
+        margin-left: 24px;
+        font-size: 32px;
+        color: #333;
       }
 
-      .agent-pro-list-img {
-        padding-left: 15px;
+      /* 商品列表文字 */
+      .agent-pro-list-text {
+        margin: 0 24px 10px 24px;
+        border: 1px solid #eaeaea;
+        border-radius: 20px;
+        height: 290px;
 
+<<<<<<< HEAD
         img {
           width:160px;
           height: 160px;
           margin-right: 10px;
         }
       }
+=======
+        .agent-pro-list-text-introduction {
+          font-size: 28px;
+          margin-top: 30px;
+          display: inline-block;
+>>>>>>> style
 
-      .agent-pro-line {
-        border-bottom: 1px solid #f2f2f2;
-        margin: 10px 0;
-      }
+          p {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 400px;
+            text-overflow: ellipsis;
+          }
 
+<<<<<<< HEAD
       .agent-pro-list-text {
         height: 180px;
+=======
+          /* 超级积分 */
+          .integral {
+            margin: 30px 0;
+            font-size: 24px;
+>>>>>>> style
 
-        span {
-          font-size: 0.078rem;
+            span {
+              font-size: 32px;
+              color: #ce0101;
+            }
+          }
+
+          /* 市场价 */
+          .maeket-price {
+            font-size: 22px;
+            color: #999;
+          }
+        }
+
+        img {
+          width: 290px;
+          height: 290px;
+          margin-right: 10px;
         }
       }
 
-      .integral {
-        margin: 5px 0 5px 0;
-
-        span {
-          font-size: 0.1rem;
-          color: #E51C23;
-        }
-      }
-
-      /* span {
-        font-size: 0.78rem;
-      } */
+      /* 显示剩余件数 */
       .remaining {
         color: #E51C23;
         background-color: #FFF0D9;
@@ -156,13 +188,14 @@
         right: -45px;
       }
 
+      /* 按钮 */
       .agent-pro-list-btn {
         .sold-out {
           background-color: #ccc;
         }
 
         button {
-          background-color: #E51C23;
+          background-color: #ca1b1e;
           color: #fff;
           position: relative;
           top: 0px;

@@ -1,15 +1,12 @@
 <template>
   <div class="member-day">
     <div class="member-day-title">
-      <p>会员日,买啥都值</p>
-      <span v-if="timeInfo.start==false">距开始 {{day}} 天 {{hour}} 时 {{min}} 分 {{second}} 秒</span>
+      <span v-if="timeInfo.start==false">距开始 <b>{{day}}</b>天 <b>{{hour}}</b> 时 <b>{{min}}</b> 分 <b>{{second}}</b>
+        秒</span>
       <span v-if="timeInfo.start==true">距结束 <b>{{hour}}</b>
         <h6>:</h6><b>{{min}}</b>
         <h6>:</h6><b>{{second}}</b>
       </span>
-    </div>
-    <div class="member-day-buy">
-      <p>会员日特卖<span>白菜价,抢不到,就是亏</span></p>
     </div>
     <div class="index-body">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad" :offset="100"
@@ -17,22 +14,24 @@
         <div class="member-day-list" v-for="(item,index) in goodsData">
           <!-- <router-link :to="/product/+item.id"> -->
           <div @click="memberBuy(item.id,index)">
-            <div class="member-day-list-img fl">
-              <img :src="item.default_image" alt="">
+            <div class="member-day-list-img">
+              <img :src="item.default_image" alt="" class="fl">
             </div>
-            <span>
-              <p>{{item.name}}</p>
-              <p class="member-day-price">{{item.price|keepTwoNum}}超级积分</p>
-              <span>市场价￥{{item.market_price|keepTwoNum}}</span>
+            <span class="member-day-text">
+              <p class="member-day-name">{{item.name}}</p>
+              <p class="member-day-price"><span>{{item.price|keepTwoNum}}</span>超级积分</p>
+              <span class="market-price">市场价￥{{item.market_price|keepTwoNum}}</span>
             </span>
             <div class="member-day-button fr">
-              <!-- v-if="item.stock==0" -->
-              <van-button round size="small" :disabled="disabled" v-if="item.stock!=0">马上抢</van-button>
-              <van-button round size="small" v-if="item.stock==0" class="sold-out">已售罄</van-button>
+              <img src="../../assets/images/member-btn.png" alt="" class="fr"
+                v-if="item.stock!=0&&timeInfo.start==true">
+              <img src="../../assets/images/member-btn (2).png" alt="" class="fr"
+                v-if="item.stock==0&&timeInfo.start==true">
+              <img src="../../assets/images/member-btn3.png" alt="" class="fr" v-if="timeInfo.start==false">
             </div>
-            <div v-if="item.stock<=10&&item.stock!=0">
-              <span class="remaining fr">剩余{{item.stock}}件</span>
-            </div>
+          </div>
+          <div v-if="item.stock<=10&&item.stock!=0">
+            <span class="remaining fr">| 剩 余{{item.stock}} 件 |</span>
           </div>
           <!-- </router-link> -->
         </div>
@@ -83,6 +82,7 @@
           api.goods({ 'page': this.pageNum }).then(res => {
             if (res.code == 0) {
               this.timeInfo = res.info
+              // console.log(this.timeInfo)
               // this.timeInfo = { start: true, end_time: 1569859200000, now: 1569772800000 }
               if (this.timeInfo.start == true) {
                 this.disabled = false
@@ -136,8 +136,8 @@
       // 会员日特卖列表
       memberBuy(id, index) {
         this.$router.push({
-          name:'Product',
-          params: { id: id,path:'memberDay',start:this.timeInfo.start}
+          name: 'Product',
+          params: { id: id, path: 'memberDay', start: this.timeInfo.start }
         })
       }
     }
@@ -146,56 +146,65 @@
 <style lang="scss">
   @import '../../assets/scss/Global.scss';
 
-  .member-day-title {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #f2f2f2;
+  .member-day {
 
-    p {
-      color: #E51C23;
-      font-size: 0.11rem;
-    }
-
-    span {
-      font-size: 0.076rem;
-      display: block;
-      margin: 10px 0;
-
-      b {
-        background-color: #E51C23;
-        color: #fff;
-        width: 10px;
-        height: 10px;
-        margin-left: 3px;
-        padding: 2px;
-        border-radius: 3px;
-      }
-
-      h6 {
-        color: #E51C23;
-        font-size: 0.078rem;
-        display: inline-block;
-      }
-    }
-  }
-
-  .member-day-buy {
-    border-bottom: 1px solid #f2f2f2;
-
-    p {
-      font-size: 0.078rem;
-      margin-left: 15px;
-      margin-bottom: 10px;
+    /* 背景图片 */
+    .member-day-title {
+      background: url('../../assets/images/member-banner.png')center;
+      height: 474px;
+      width: 100%;
+      overflow: hidden;
+      background-size: cover;
+      margin-top: 10px;
+      text-align: center;
 
       span {
-        margin-left: 5px;
-        font-size: 0.070rem;
-        color: #ccc;
+        font-size: 24px;
+        position: relative;
+        top: 212px;
+        color: #292929;
+
+        b {
+          background-color: #000;
+          color: #fff;
+          width: 34px;
+          height: 34px;
+          padding: 0 3px;
+          border-radius: 4px;
+        }
+
+        h6 {
+          color: #000;
+          font-size: 28px;
+          margin-right: 10px;
+          display: inline-block;
+        }
       }
     }
-  }
 
+    .index-body {
+      margin-bottom: 100px;
+
+      /* 商品部分 */
+      .member-day-list {
+        background-color: #fff;
+        height: 290px;
+        margin: 10px 24px;
+        border: 1px solid #DEDEDE;
+        border-radius: 20px;
+
+        /* 商品图片 */
+        .member-day-list-img {
+          img {
+            height: 290px;
+            width: 290px;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+            margin-right: 10px;
+          }
+        }
+
+<<<<<<< HEAD
   .member-day-list {
     margin-top: 16px;
     padding-left: 15px;
@@ -216,12 +225,34 @@
       width: 160px;
       height: 160px;
     }
+=======
+        /* 商品介绍 */
+        .member-day-text {
+          display: inline-block;
 
-    .member-day-price {
-      color: #E51C23;
-    }
-  }
+          .member-day-name {
+            margin: 30px 0 48px 0;
+          }
 
+          p {
+            font-size: 28px;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 400px;
+            text-overflow: ellipsis;
+          }
+
+          .member-day-price {
+            font-size: 24px;
+>>>>>>> style
+
+            span {
+              font-size: 32px;
+              color: #ce0101;
+            }
+          }
+
+<<<<<<< HEAD
   .remaining {
     color: #E51C23;
     background-color: #FFF0D9;
@@ -230,18 +261,30 @@
     top: -110px;
     right: -90px;
   }
+=======
+          .market-price {
+            font-size: 22px;
+            color: #999;
+          }
+        }
+      }
+>>>>>>> style
 
-  .member-day-button {
-    .sold-out {
-      background-color: #ccc;
-    }
+      .remaining {
+        color: #7c4117;
+        position: relative;
+        top: -50px;
+        display: inline;
+        right: -170px;
+      }
 
-    button {
-      background-color: #E51C23;
-      color: #fff;
-      position: relative;
-      top: -10px;
-      right: 10px;
+      .member-day-button {
+        img {
+          width: 178px;
+          height: 60px;
+          margin-right: 10px;
+        }
+      }
     }
   }
 </style>

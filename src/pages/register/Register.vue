@@ -1,26 +1,24 @@
 <template>
   <div class="register">
     <div class="register-title">
-      <span>注册 / 登录</span>
+      <span>登录</span>
+      <p>未注册则将为您自动创建新账号</p>
     </div>
     <div class="register-tel">
-      <!-- type="number" -->
-      <!-- :state="CodeStatus"  -->
-      <mt-field label="手机号" class="tel-input" @blur.native.capture="sendCode" placeholder="请输入手机号"
-        v-model="registerParams.mobile">
+      <img src="../../assets/images/register-phone.png" width="14px" height="21px" class="fl">
+      <mt-field class="tel-input" @blur.native.capture="sendCode" placeholder="请填写手机号" v-model="registerParams.mobile">
+        <img src="../../assets/images/register-delete.png" height="14px" width="14px" class="fr register-delete">
       </mt-field>
-      <mt-field label="验证码" placeholder="请输入验证码" type="number" v-model="registerParams.code">
+      <img src="../../assets/images/register-code.png" width="15px" height="17px" class="fl">
+      <mt-field placeholder="请输入验证码" type="number" v-model="registerParams.code">
         <input class="send-input" v-on:click="sendSmsCode" readonly="readonly" v-model="btnCode.btnContent" />
       </mt-field>
-      <!-- <mt-field label="验证码" placeholder="请输入验证码" type="number" v-model="registerParams.code">
-        <input class="send-input" v-on:click="sendSmsCode" readonly="readonly" v-model="btnCode.btnContent" />
-      </mt-field> -->
     </div>
     <div class="register-button">
-      <p>如果该手机号未曾注册过,将为您自动注册</p>
+      <!-- <p>如果该手机号未曾注册过,将为您自动注册</p> -->
       <p>点击注册即表示同意 <span>《用户协议》</span> </p>
       <!-- <router-link to=""> -->
-      <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">登录/注册</mt-button>
+      <mt-button size="large" class="register-btn" @click.native="register" :disabled="disabled">登录</mt-button>
       <!-- </router-link> -->
       <router-link to="/">
         <mt-button size="large" class="register-btn-cancel">取消</mt-button>
@@ -48,13 +46,21 @@
         },
         // 发送验证码
         btnCode: {
-          btnContent: '发送',
+          btnContent: '发  送',
           mobile: ''
         },
       }
     },
     created() {
-      document.title = '千企商城'
+      document.title = '千企联盟'
+    },
+    beforeRouteEnter(to, from, next) {
+      window.document.body.style.backgroundColor = "#fff"
+      next()
+    },
+    beforeRouteLeave(to, from, next) {
+      window.document.body.style.backgroundColor = ""
+      next()
     },
     methods: {
       // 注册
@@ -185,82 +191,93 @@
   }
 </script>
 <style lang="scss">
-  .tel-input {
-    input.mint-field-core {
-      width: 170px !important;
+  @import "../../assets/scss/Global.scss";
+  .register {
+    .register-title {
+      margin: 118px 0px 10px 54px;
+      span {
+        font-size: 60px;
+        color: #c9191D;
+      }
+
+      p {
+        font-size: 26px;
+        color: #9999;
+        margin-bottom: 152px;
+      }
     }
-  }
-
-  body {
-    background-color: #fff;
-  }
-
-  .mint-field-other {
-    top: 0;
-    right: 25px;
-    position: relative;
-    width: 100px;
-  }
-
-  .mint-field-core input {
-    width: 0 !important;
   }
 
   .send-input {
     border: none;
     float: right;
-    width: 35%;
-  }
-
-  .register {
-    margin-top: 100px;
-  }
-
-  .register-title {
-    margin: 20px 0px 20px 20px;
-
-    span {
-      font-size: 0.60rem;
-    }
+    width: 120px;
+    height: 60px;
+    background-color: #999;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 26px;
   }
 
   .register-tel {
-    width: 95%;
-    margin: 10px auto;
-    color: #333;
+    margin: 0 54px 124px 54px;
+
+    .fl {
+      position: relative;
+      top: 40px;
+      z-index: 1;
+      left: 30px;
+    }
+
+    .register-delete {
+      position: relative;
+      top: 0px;
+      z-index: 1;
+    }
+
+    .mint-field .mint-cell-value {
+      margin-left: 20px;
+    }
 
     .mint-cell-wrapper {
       border-bottom: 1px solid #d9d9d9;
-      background-image: none !important;
+
+      .mint-field-clear {
+        display: none;
+      }
     }
   }
 
   .register-button {
+    margin: 32px 54px 10px 54px;
+
     p {
-      margin-top: 10px;
-      margin-left: 20px;
-      /* font-size: 0.78rem; */
+      font-size: 20px;
+      color: #333;
       margin-bottom: 10px;
 
       span {
-        color: red;
+        color: #c9191D;
       }
     }
 
     .register-btn {
-      width: 95%;
-      background-color: #09bb07 !important;
+      width: 100%;
+      height: 88px;
+      border-radius: 44px;
+      background-color: #c9191D !important;
       color: #fff;
-      margin: 5px auto;
+      margin-bottom: 20px;
     }
 
     .register-btn-cancel {
-      width: 95%;
-      margin: 0px auto;
+      width: 100%;
+      border-radius: 44px;
+      height: 88px;
       background-color: #fff;
-      color: #09bb07 !important;
-      border: 1px solid #09bb07;
-      margin-top: 20px;
+      color: #c9191D !important;
+      border: 1px solid #c9191D;
 
     }
   }

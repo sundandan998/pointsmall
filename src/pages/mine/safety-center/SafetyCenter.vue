@@ -1,14 +1,18 @@
 <template>
   <div class="safety-center">
-    <div class="safety-center-information">
+    <div class="safety-center-tel">
       <mt-cell title="手机号" to="tel" :value="this.infor.mobile" is-link></mt-cell>
+    </div>
+    <div class="safety-center-pwd">
       <router-link :to="{name:'SafetyVerification',params:{id:'safetycenter'}}">
         <mt-cell title="修改支付密码" is-link class="modify-pwd"></mt-cell>
       </router-link>
-      <mt-cell title="忘记支付密码" to="forget" is-link></mt-cell>
+      <mt-cell title="忘记支付密码" to="forget" is-link class="modify-pay-pwd"></mt-cell>
     </div>
     <router-link to="mine">
-      <mt-button size="large" class="cancel">返回</mt-button>
+      <div class="order-button">
+        <mt-button size="large">返回</mt-button>
+      </div>
     </router-link>
   </div>
 </template>
@@ -39,17 +43,36 @@
   }
 </script>
 <style lang="scss">
-  .modify-pwd {
-    span {
-      color: #333;
+  @import "../../../assets/scss/Global.scss";
+  .safety-center {
+    color: #333;
+    font-size: 28px;
+
+    .safety-center-tel {
+      margin: 10px 24px;
+
+      .mint-cell {
+        border-radius: 10px;
+      }
+
+      .mint-cell-value {
+        span {
+          color: #999;
+        }
+      }
     }
-  }
-  .safety-center .cancel{
-    position: absolute;
-    bottom: 10px;
-    background-color: #fff !important;
-    color: #09bb07 !important;
-    border-radius: 20px;
-    border:1px solid #09bb07;
+
+    .safety-center-pwd {
+      margin: 10px 24px;
+      a.mint-cell.modify-pwd {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      a.mint-cell.modify-pay-pwd {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+    }
   }
 </style>

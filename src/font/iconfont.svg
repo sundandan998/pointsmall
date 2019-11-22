@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="chenggong" unicode="&#58883;" d="M9.386553 330.032751c-11.667253 12.489546-12.582635 33.527836-2.047975 47.010339l14.273766 18.245597a31.340226 31.340226 0 0 0 43.736682 5.507812l349.629702-267.974448c20.355632-15.592538 52.781906-14.956425 72.610028 1.551496L1392.53003 888.261136c13.172204 10.969079 33.698501 10.193331 46.079441-1.93937l7.959177-7.804027c12.287851-12.039612 12.349911-31.541921 0.06206-43.628077L485.059817-110.980085a45.101999 45.101999 0 0 0-65.116301 1.396347L9.386553 330.048266z"  horiz-adv-x="1458" />
+
+    
+
+
+  </font>
+</defs></svg>
