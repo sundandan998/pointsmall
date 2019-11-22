@@ -245,10 +245,6 @@
   .agent {
     background-color: #f2f2f2;
     .agent-img {
-<<<<<<< HEAD
-      height: 100%;
-=======
->>>>>>> style
       width: 100%;
       background: url("../../assets/images/index-bg.png") no-repeat center center;
       background-size: 100% 100%;
@@ -317,12 +313,8 @@
     }
 
     .memberday-buy {
-<<<<<<< HEAD
-      height: auto;
-=======
       /* margin-left: 24px; */
       width: 100%;
->>>>>>> style
       display: flex;
       height: 240px;
 
@@ -344,16 +336,9 @@
           margin: 0 auto;
           padding: 2px;
 
-<<<<<<< HEAD
-          img {
-            width: 180px;
-            height: 160px;
-            margin-left: 12px;
-=======
           b {
             font-size: 36px;
             font-weight: 400;
->>>>>>> style
           }
         }
 
@@ -410,27 +395,12 @@
         }
       }
 
-<<<<<<< HEAD
-      img {
-        width: 160px;
-        height: 160px;
-        margin-right: 10px;
-      }
-
-      .agent-area-list {
-        height: 180px;
-        padding-left: 15px;
-        margin-top: 10px;
-        padding-top: 15px;
-        border-top: 1px solid #f2f2f2;
-=======
       .agent-area-list {
         margin: 20px 0;
         background-color: #fff;
         border: 1px solid #DEDEDE;
         border-radius: 20px;
         height: 290px;
->>>>>>> style
 
         .member-day-list-img {
           img {

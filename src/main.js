@@ -4,12 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import MintUI from 'mint-ui'
-<<<<<<< HEAD
 import Vuex from 'vuex';
-=======
 // font
 import font from './font/iconfont'
->>>>>>> style
 // 适配
 import 'lib-flexible'
 // import Vant from 'vant'

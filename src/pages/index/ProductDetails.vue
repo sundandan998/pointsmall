@@ -132,27 +132,6 @@
 </script>
 <style lang="scss">
   @import "../../assets/scss/Global.scss";
-
-<<<<<<< HEAD
-
-  .produce-title {
-    position: fixed;
-    top: 0px;
-    background-color: #fff;
-    width: 100%;
-
-    img {
-      width: 160px;
-      height: 160px;
-      display: inline-block;
-      margin: 10px;
-    }
-
-    span {
-      margin: 10px 0 10px 15px;
-      font-size: 0.078rem;
-      line-height: 20px;
-=======
   .product-detail {
     .produce-img {
       img {
@@ -160,7 +139,6 @@
         height: 100%;
         margin: 0 auto;
       }
->>>>>>> style
     }
 
     .produce-title {

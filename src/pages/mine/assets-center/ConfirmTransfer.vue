@@ -8,11 +8,7 @@
     <div class="confirm-transfer-content">
       <mt-cell title="接收方" :value="this.$route.params.transferParams.mobile" class="confirm-tel"></mt-cell>
       <mt-cell title="数量" :value="this.$route.params.transferParams.amount"></mt-cell>
-<<<<<<< HEAD
-      <mt-cell title="手续费" :value="this.$route.params.token">退换期暂免手续费</mt-cell>
-=======
       <mt-cell title="手续费" :value="this.$route.params.token" class="confirm-free">0</mt-cell>
->>>>>>> style
     </div>
     <div class="confirm-transfer-progress">
       <div class="confirm-transfer-num" v-if="this.$route.params.action=='freeze'">
@@ -102,11 +98,7 @@
         })
       },
       // 检查是否设置支付密码
-<<<<<<< HEAD
-      setPwd() {
-=======
       setPwd(){
->>>>>>> style
         if (this.add.pay_pwd_active == true) {
           this.resevationModelModel = true
         } else {
@@ -128,11 +120,7 @@
       },
       //转让
       transfer() {
-<<<<<<< HEAD
-        if (this.$route.params.transferParams.out == true) {
-=======
         if(this.$route.params.transferParams.out==true){
->>>>>>> style
           this.$messagebox({
             title: '提示',
             message: `将转让至收款人柏拉图兰账号是否继续?`,
@@ -145,11 +133,7 @@
               this.setPwd()
             }
           })
-<<<<<<< HEAD
-        } else {
-=======
         }else{
->>>>>>> style
           this.setPwd()
         }
       }
@@ -163,11 +147,7 @@
           this.transferParams.code = this.$route.params.code
           this.transferParams.pay_pwd = this.pay_pwd
           this.transferParams.order_id = this.$route.params.order_id,
-<<<<<<< HEAD
-            this.transferParams.out = this.$route.params.transferParams.out
-=======
           this.transferParams.out = this.$route.params.transferParams.out
->>>>>>> style
           api.transfer(this.transferParams).then(res => {
             if (res.code === 0) {
               Toast({
@@ -225,15 +205,10 @@
     margin:10px 12px;
     border-radius:10px;
     span {
-<<<<<<< HEAD
-      margin: 0 30px 0 15px;
-      font-size: 0.078rem;
-=======
       margin:20px;
       display: inline-block;
       font-size: 26px;
       padding-bottom: 20px;
->>>>>>> style
     }
     img{
       position: relative;

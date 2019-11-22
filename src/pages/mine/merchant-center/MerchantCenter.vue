@@ -143,12 +143,6 @@
   @import '../../../assets/scss/Global.scss';
 
   .product {
-<<<<<<< HEAD
-    margin: 20px 15px 0 30px;
-    height: 180px;
-
-    p {
-=======
     margin: 10px 24px;
     height: 310px;
     background-color: #fff;
@@ -156,7 +150,6 @@
     .product-time{
       width: 94%;
       font-size: 28px;
->>>>>>> style
       color: #333;
       height: 90px;
       line-height:90px;
@@ -164,15 +157,6 @@
       border-bottom:1px solid #f2f2f2;
     }
     img {
-<<<<<<< HEAD
-      width: 120px;
-      height: 150px;
-      margin-right: 10px;
-    }
-
-    .product-text {
-      margin-top: 16px;
-=======
       width: 180px;
       height: 180px;
       margin:10px 20px 0 20px;
@@ -182,7 +166,6 @@
       margin-top: 70px;
       font-size: 28px;
       color:#c9191d;
->>>>>>> style
     }
     .product-text p:last-child {
       position: relative;

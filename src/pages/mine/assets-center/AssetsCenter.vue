@@ -72,21 +72,10 @@
 </script>
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
-<<<<<<< HEAD
-  .assets-center-name {
-    display: inline-block;
-  }
-
-  .assets-center-list {
-    height: 70px;
-    border-bottom: 1px solid #f2f2f2;
-    font-size: 14px;
-=======
 
   .assets-center {
     .assets-center-title {
       margin: 10px 12px;
->>>>>>> style
 
       .mint-cell {
         border-radius: 10px;
@@ -115,17 +104,6 @@
         font-size: 28px;
       }
 
-<<<<<<< HEAD
-    span {
-      margin-left: 80px;
-      font-size:12px;
-    }
-    p{
-      font-size:12px;
-    }
-    img {
-      width: 10px;
-=======
       p {
         font-size: 22px;
         color: #999;
@@ -148,7 +126,6 @@
         color: #c9191d;
         margin:30px 20px 20px 0;
       }
->>>>>>> style
     }
   }
 </style>

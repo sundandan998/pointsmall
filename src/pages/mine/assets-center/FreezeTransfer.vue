@@ -1,10 +1,6 @@
 <template>
   <div class="transfer">
-<<<<<<< HEAD
-    <mt-cell title="柏拉图兰账号">
-=======
     <mt-cell title="柏拉图兰账号" class="transfer-switch">
->>>>>>> style
       <mt-switch v-model="transferParams.out"></mt-switch>
     </mt-cell>
     <p class="transfer-prompt">
@@ -12,13 +8,8 @@
       请确认收款人账号已在柏拉图兰注册
     </p>
     <div class="transfer-progress-name">
-<<<<<<< HEAD
-      <span>接收人</span>
-      <mt-field placeholder="接收人账号" type="tel" v-model="transferParams.mobile" @blur.native.capture="check"></mt-field>
-=======
       <mt-cell title="收款人" class="transfer-people"></mt-cell>
       <mt-field placeholder="接收人手机号" type="tel" v-model="transferParams.mobile" class="transfer-tel"></mt-field>
->>>>>>> style
     </div>
     <div class="transfer-title">
       <p>数量 <span class="fee">(暂免手续费)</span></p>
@@ -57,15 +48,7 @@
           mobile: '',
           amount: [],
           out: false,
-<<<<<<< HEAD
-        },
-        verifyParams: {
-          username: '',
-          code: ''
-        },
-=======
         }
->>>>>>> style
       }
     },
     created() {
@@ -103,60 +86,6 @@
             className: 'zZindex'
           })
         } else {
-<<<<<<< HEAD
-          // 判断是不是往外部转账
-          if (this.transferParams.out == true) {
-            // 检测是否是第三方账号和通证是否合法
-            this.verifyParams.code = this.detailData.token
-            this.verifyParams.username = this.transferParams.mobile
-            api.verify(this.verifyParams).then(res => {
-              if (res.code == 0) {
-                this.$router.push({
-                  name: 'ConfirmTransfer',
-                  params: {
-                    'transferParams': this.transferParams, 'order_id': this.detailData.order_id,
-                    'action': this.$route.params.action||'freeze', 'detailData': this.detailData,
-                    'code': this.detailData.token, 'date': this.detailData.unfreeze_date,
-                    'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay,
-                  }
-                })
-              }
-            }).catch(err => {
-              if (err.code == 4001) {
-                Toast({
-                  message: err.msg,
-                  className: 'zZindex'
-                })
-              }
-            })
-          } else {
-            api.internal({ mobile: this.transferParams.mobile }).then(res => {
-              if (res.is_use == true) {
-                this.$router.push({
-                  name: 'ConfirmTransfer',
-                  params: {
-                    'transferParams': this.transferParams, 'order_id': this.detailData.order_id,
-                    'action': this.$route.params.action||'freeze', 'detailData': this.detailData,
-                    'code': this.detailData.token, 'date': this.detailData.unfreeze_date,
-                    'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay,
-                  }
-                })
-              } else {
-                Toast({
-                  message: res.msg,
-                  className: 'zZindex'
-                })
-              }
-            }).catch(err => {
-              if (err.code == 4001) {
-                Toast({
-                  message: err.msg,
-                  className: 'zZindex'
-                })
-              }
-            })
-          }
-=======
           this.$router.push({
             name: 'ConfirmTransfer',
             params: {
@@ -166,7 +95,6 @@
               'day': this.$route.params.day, 'freezeDay': this.$route.params.freezeDay,
             }
           })
->>>>>>> style
         }
       },
       // 邮箱手机号校验
@@ -196,41 +124,12 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-<<<<<<< HEAD
-  .transfer-prompt {
-    background-color: #FFFBE6;
-    width: 90%;
-    color: #5A5951;
-    border-radius: 5px;
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #FFE58F;
-    margin-left: 20px;
-    margin-bottom: 10px;
-
-    img {
-      width: 20px;
-      margin-left: 10px;
-      position: relative;
-      top: 5px;
-    }
-  }
-
-  .transfer-title {
-    padding: 10px 0 10px 15px;
-    border-bottom: 1px solid #f2f2f2;
-
-    .fee {
-      font-size: 0.076rem;
-      color: #409EFF;
-=======
   .transfer {
 
     /* 开关部分 */
     .transfer-switch {
       margin: 10px 24px;
       border-radius: 10px;
->>>>>>> style
     }
 
     .transfer-prompt {

@@ -130,23 +130,4 @@ export default {
       params: params
     })
   },
-<<<<<<< HEAD
-  // 检测是否是第三方账号和通证是否合法---外部转让
-  verify(params = {}) {
-    return request({
-      url: 'system/verify/third/username/',
-      method: 'post',
-      data: params
-    })
-  },
-  // 检测用户名是否注册过---内部转让
-  internal(params = {}) {
-    return request({
-      url: 'user/username/check/',
-      method: 'get',
-      params: params
-    })
-  },
-=======
->>>>>>> style
 }

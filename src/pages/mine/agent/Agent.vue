@@ -278,18 +278,12 @@
 <style lang="scss">
   @import '../../../assets/scss/Global.scss';
 
-<<<<<<< HEAD
-  .product {
-    margin: 10px 15px 0 15px;
-    height: 160px;
-=======
   .my-order {
     .product {
       background-color: #fff;
       margin: 10px 24px 10px 24px;
       height: 430px;
       border-radius: 10px;
->>>>>>> style
 
       /* 时间 */
       .product-time {

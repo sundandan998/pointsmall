@@ -107,39 +107,11 @@
       border-radius: 20px;
       overflow: hidden;
 
-<<<<<<< HEAD
-  .detail-address {
-    /* border-bottom: 2px solid #f2f2f2; */
-    padding: 10px 10px 10px 15px;
-
-    img {
-      display: inline-block;
-      float: left;
-      margin-right: 10px;
-      height: 60px;
-    }
-  }
-
-  .van-card {
-    background-color: #fff;
-  }
-
-  .van-card__content {
-    min-height: 5px;
-  }
-
-  .van-card__thumb {
-    height: 40px;
-    width: 40px;
-    margin-right: -5px;
-  }
-=======
       img {
         float: left;
         height: 40px;
         margin: 70px 22px 0 30px;
       }
->>>>>>> style
 
       span {
         margin-top: 50px;
@@ -171,16 +143,6 @@
           }
         }
 
-<<<<<<< HEAD
-  .detail-status {
-    margin-top: 40px;
-    height: auto;
-
-    p {
-      border-bottom: 1px solid #f2f2f2;
-      padding: 20px 10px 20px 15px;
-    }
-=======
         .van-card__title {
           margin-top: 25px;
           margin-bottom: 20px;
@@ -189,7 +151,6 @@
 
         .van-card__bottom {
           font-size: 14px;
->>>>>>> style
 
           .van-card__num {
             color: #999;

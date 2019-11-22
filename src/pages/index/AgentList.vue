@@ -127,19 +127,10 @@
         border-radius: 20px;
         height: 290px;
 
-<<<<<<< HEAD
-        img {
-          width:160px;
-          height: 160px;
-          margin-right: 10px;
-        }
-      }
-=======
         .agent-pro-list-text-introduction {
           font-size: 28px;
           margin-top: 30px;
           display: inline-block;
->>>>>>> style
 
           p {
             overflow: hidden;
@@ -148,15 +139,10 @@
             text-overflow: ellipsis;
           }
 
-<<<<<<< HEAD
-      .agent-pro-list-text {
-        height: 180px;
-=======
           /* 超级积分 */
           .integral {
             margin: 30px 0;
             font-size: 24px;
->>>>>>> style
 
             span {
               font-size: 32px;

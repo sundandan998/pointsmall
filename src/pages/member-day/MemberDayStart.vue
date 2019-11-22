@@ -204,28 +204,6 @@
           }
         }
 
-<<<<<<< HEAD
-  .member-day-list {
-    margin-top: 16px;
-    padding-left: 15px;
-    height: 190px;
-    border-bottom: 1px solid #f2f2f2;
-
-    p {
-      font-size: 20px;
-      padding-top: 5px;
-    }
-
-    span {
-      font-size:16px;
-    }
-
-    img {
-      margin-right: 10px;
-      width: 160px;
-      height: 160px;
-    }
-=======
         /* 商品介绍 */
         .member-day-text {
           display: inline-block;
@@ -244,7 +222,6 @@
 
           .member-day-price {
             font-size: 24px;
->>>>>>> style
 
             span {
               font-size: 32px;
@@ -252,23 +229,12 @@
             }
           }
 
-<<<<<<< HEAD
-  .remaining {
-    color: #E51C23;
-    background-color: #FFF0D9;
-    padding: 2px 7px;
-    position: relative;
-    top: -110px;
-    right: -90px;
-  }
-=======
           .market-price {
             font-size: 22px;
             color: #999;
           }
         }
       }
->>>>>>> style
 
       .remaining {
         color: #7c4117;
