@@ -1,21 +1,20 @@
-# hv
+# 积分商城
 
 > A Vue.js project
+## 上手指南
+以下指南将帮助你在本地机器上安装和运行该项目，进行开发和测试，请参考
 
-## Build Setup
+## 安装要求
 
 ``` bash
-# install dependencies
+# 首先 install 项目
 npm install
 
-# serve with hot reload at localhost:8080
+# 其次启动项目
 npm run dev
 
-# build for production with minification
+# 打包项目
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 使用到的框架
+mintui 
+vant
